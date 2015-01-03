@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Museum interior
-  m_Shader: {fileID: 4800000, guid: 4fa37a82238b5ac4fafff7138fe8c42e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 836f93cb8510f0d479f3c1df6fd7f654, type: 3}
   m_ShaderKeywords:
   - PIXELSNAP_ON
   m_CustomRenderQueue: -1
@@ -26,6 +26,10 @@ Material:
         first:
           name: PixelSnap
         second: 1
+      data:
+        first:
+          name: Tint
+        second: 0
     m_Colors:
       data:
         first:

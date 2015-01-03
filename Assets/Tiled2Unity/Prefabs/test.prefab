@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &163498
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 463498}
+  - 60: {fileID: 6063498}
+  m_Layer: 0
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &196698
 GameObject:
   m_ObjectHideFlags: 1
@@ -67,6 +83,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &463498
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 496702}
+  m_RootOrder: 2
 --- !u!4 &496698
 Transform:
   m_ObjectHideFlags: 1
@@ -103,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 496700}
   - {fileID: 496698}
+  - {fileID: 463498}
   m_Father: {fileID: 496704}
   m_RootOrder: 0
 --- !u!4 &496704
@@ -113,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 196704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children:
   - {fileID: 496702}
   m_Father: {fileID: 0}
@@ -172,6 +201,151 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196700}
   m_Mesh: {fileID: 4300002, guid: 7d7eacd153715a342b76d418ba5faa8e, type: 3}
+--- !u!60 &6063498
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163498}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Poly:
+    m_Paths:
+    - - {x: 608, y: 0}
+      - {x: 576, y: 0}
+      - {x: 576, y: -32}
+      - {x: 608, y: -32}
+    - - {x: 544, y: -96}
+      - {x: 512, y: -96}
+      - {x: 512, y: -128}
+      - {x: 544, y: -128}
+    - - {x: 1088, y: -320}
+      - {x: 1056, y: -320}
+      - {x: 1056, y: -352}
+      - {x: 1088, y: -352}
+    - - {x: 608, y: -320}
+      - {x: 576, y: -320}
+      - {x: 576, y: -352}
+      - {x: 608, y: -352}
+    - - {x: 1152, y: -352}
+      - {x: 1120, y: -352}
+      - {x: 1120, y: -384}
+      - {x: 1152, y: -384}
+    - - {x: 544, y: -384}
+      - {x: 512, y: -384}
+      - {x: 512, y: -416}
+      - {x: 544, y: -416}
+    - - {x: 512, y: -416}
+      - {x: 480, y: -416}
+      - {x: 480, y: -448}
+      - {x: 512, y: -448}
+    - - {x: 320, y: -448}
+      - {x: 288, y: -448}
+      - {x: 288, y: -480}
+      - {x: 320, y: -480}
+    - - {x: 640, y: -448}
+      - {x: 576, y: -448}
+      - {x: 576, y: -480}
+      - {x: 640, y: -480}
+    - - {x: 416, y: -480}
+      - {x: 352, y: -480}
+      - {x: 352, y: -512}
+      - {x: 416, y: -512}
+    - - {x: 128, y: -416}
+      - {x: 256, y: -416}
+      - {x: 256, y: -448}
+      - {x: 288, y: -448}
+      - {x: 288, y: -384}
+      - {x: 96, y: -384}
+      - {x: 96, y: -544}
+      - {x: 352, y: -544}
+      - {x: 352, y: -512}
+      - {x: 128, y: -512}
+    - - {x: 1312, y: -672}
+      - {x: 1376, y: -672}
+      - {x: 1376, y: -640}
+      - {x: 1408, y: -640}
+      - {x: 1408, y: -608}
+      - {x: 1344, y: -608}
+      - {x: 1344, y: -640}
+      - {x: 1312, y: -640}
+    - - {x: 1248, y: -736}
+      - {x: 1216, y: -736}
+      - {x: 1216, y: -768}
+      - {x: 1184, y: -768}
+      - {x: 1184, y: -800}
+      - {x: 1248, y: -800}
+      - {x: 1248, y: -768}
+      - {x: 1280, y: -768}
+      - {x: 1280, y: -736}
+      - {x: 1312, y: -736}
+      - {x: 1312, y: -672}
+      - {x: 1280, y: -672}
+      - {x: 1280, y: -704}
+      - {x: 1248, y: -704}
+    - - {x: 256, y: -704}
+      - {x: 224, y: -704}
+      - {x: 224, y: -736}
+      - {x: 256, y: -736}
+    - - {x: 736, y: -704}
+      - {x: 640, y: -704}
+      - {x: 640, y: -736}
+      - {x: 736, y: -736}
+    - - {x: 800, y: -576}
+      - {x: 800, y: -544}
+      - {x: 768, y: -544}
+      - {x: 768, y: -576}
+      - {x: 736, y: -576}
+      - {x: 736, y: -544}
+      - {x: 544, y: -544}
+      - {x: 544, y: -512}
+      - {x: 576, y: -512}
+      - {x: 576, y: -480}
+      - {x: 480, y: -480}
+      - {x: 480, y: -448}
+      - {x: 416, y: -448}
+      - {x: 416, y: -480}
+      - {x: 448, y: -480}
+      - {x: 448, y: -512}
+      - {x: 480, y: -512}
+      - {x: 480, y: -544}
+      - {x: 448, y: -544}
+      - {x: 448, y: -672}
+      - {x: 480, y: -672}
+      - {x: 480, y: -640}
+      - {x: 544, y: -640}
+      - {x: 544, y: -704}
+      - {x: 512, y: -704}
+      - {x: 512, y: -672}
+      - {x: 480, y: -672}
+      - {x: 480, y: -704}
+      - {x: 512, y: -704}
+      - {x: 512, y: -736}
+      - {x: 608, y: -736}
+      - {x: 608, y: -704}
+      - {x: 640, y: -704}
+      - {x: 640, y: -640}
+      - {x: 608, y: -640}
+      - {x: 608, y: -672}
+      - {x: 576, y: -672}
+      - {x: 576, y: -640}
+      - {x: 704, y: -640}
+      - {x: 704, y: -672}
+      - {x: 736, y: -672}
+      - {x: 736, y: -704}
+      - {x: 768, y: -704}
+      - {x: 768, y: -672}
+      - {x: 832, y: -672}
+      - {x: 832, y: -576}
+    - - {x: 672, y: -608}
+      - {x: 608, y: -608}
+      - {x: 608, y: -576}
+      - {x: 672, y: -576}
+    - - {x: 768, y: -608}
+      - {x: 800, y: -608}
+      - {x: 800, y: -640}
+      - {x: 768, y: -640}
 --- !u!114 &11496698
 MonoBehaviour:
   m_ObjectHideFlags: 1

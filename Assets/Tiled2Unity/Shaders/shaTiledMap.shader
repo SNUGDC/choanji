@@ -4,8 +4,7 @@
     {
         [PerRendererData] _MainTex ("Tiled Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        _AlphaColorKey ("Alpha Color Key", Color) = (0,0,0,0)
-        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 1
+        [MaterialToggle] Tint ("Use tint", Float) = 1
     }
 
     SubShader
@@ -14,7 +13,7 @@
         { 
             "Queue"="Transparent" 
             "IgnoreProjector"="True" 
-            "RenderType"="Transparent" 
+            "RenderType"="TransparentCutout" 
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
@@ -23,42 +22,47 @@
         Lighting Off
         ZWrite Off
         Fog { Mode Off }
-        Blend SrcAlpha OneMinusSrcAlpha
+        Blend One OneMinusSrcAlpha
 
         Pass
         {
         CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile DUMMY PIXELSNAP_ON
+            #pragma multi_compile DUMMY TINT_ON
             #include "UnityCG.cginc"
 
             struct appdata_t
             {
                 float4 vertex   : POSITION;
+				#ifdef TINT_ON
                 float4 color    : COLOR;
+				#endif
                 float2 texcoord : TEXCOORD0;
             };
 
             struct v2f
             {
                 float4 vertex   : SV_POSITION;
+				#ifdef TINT_ON
                 fixed4 color    : COLOR;
+				#endif
                 half2 texcoord  : TEXCOORD0;
             };
 
-
+            #ifdef TINT_ON
             fixed4 _Color;
+			#endif
 
             v2f vert(appdata_t IN)
             {
                 v2f OUT;
                 OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
                 OUT.texcoord = IN.texcoord;
+				#ifdef TINT_ON
                 OUT.color = IN.color * _Color;
-                #ifdef PIXELSNAP_ON
+				#endif
                 OUT.vertex = UnityPixelSnap (OUT.vertex);
-                #endif
 
                 // Supports animations through z-component of tile
                 if (IN.vertex.z < 0)
@@ -75,25 +79,13 @@
             }
 
             sampler2D _MainTex;
-            float4 _AlphaColorKey;
 
             fixed4 frag(v2f IN) : COLOR
             {
                 half4 texcol = tex2D(_MainTex, IN.texcoord);
-
-                // The alpha color key is 'enabled' if it has solid alpha
-                if (_AlphaColorKey.a == 1 &&
-                    _AlphaColorKey.r == texcol.r &&
-                    _AlphaColorKey.g == texcol.g &&
-                    _AlphaColorKey.b == texcol.b)
-                {
-                    texcol.a = 0;
-                }
-                else
-                {
-                    texcol = texcol * IN.color;
-                }
-
+				#ifdef TINT_ON
+                texcol = texcol * IN.color;
+				#endif
                 return texcol;
             }
         ENDCG
