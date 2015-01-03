@@ -6,4 +6,3 @@ using System.Text;
 public struct ItemIdx
 {
 }
-z

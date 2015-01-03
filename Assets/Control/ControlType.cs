@@ -1,4 +1,6 @@
-﻿[Flags()]
+﻿using System;
+
+[Flags()]
 public enum ControlType
 {
 	/// <summary>

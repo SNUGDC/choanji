@@ -1,4 +1,4 @@
-﻿public struct MapMeta
+﻿public class MapMeta
 {
 	/// <summary>
 	/// enable day/night tinting, hidden move Fly.
@@ -14,8 +14,8 @@
 	/// <summary>
 	/// If this is TRUE, a location signpost stating the map's name will be displayed at the top left of the screen when it is entered.
 	/// </summary>
-	public int showMilestone = false;
-	public WeatherSampler weather;
+	public bool showMilestone = false;
+	public DiscreteSampler<WeatherType> weather;
 	public bool cameraBounded = false;
 	public BGMList wildBattleBGM;
 	public BGMList trainerBattleBGM;
