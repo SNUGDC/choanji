@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Item">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAFAABAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Item\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ItemIdx">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Item\ItemIdx.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ItemType">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAQQAIAAAAAAIAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Item\ItemType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ItemAction">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAIACAEAAAAAAAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\Item\ItemAction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>

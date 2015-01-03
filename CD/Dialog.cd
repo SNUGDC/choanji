@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DialogSkin">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\DialogSkin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DialogManager">
+    <Position X="3" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\DialogManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputDialogManager">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\DialogInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IInputDialog">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\IInputDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dialog">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\Dialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputDialog">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\InputDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DialogSkinType">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAABAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Dialog\DialogSkinType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="GetDialogInput">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Dialog\GetInputDialog.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>
