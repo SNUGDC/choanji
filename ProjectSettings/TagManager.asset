@@ -37,7 +37,31 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: Floor
+    userID: 1
+    uniqueID: 1242646333
+    locked: 0
+  - name: Attach
+    userID: 4
+    uniqueID: 1591310037
+    locked: 0
+  - name: StandLower
+    userID: 2
+    uniqueID: 3616876747
+    locked: 0
+  - name: ObjectLower
+    userID: 5
+    uniqueID: 3419500507
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: StandUpper
+    userID: 3
+    uniqueID: 2748561257
+    locked: 0
+  - name: ObjectUpper
+    userID: 6
+    uniqueID: 3401937839
     locked: 0
