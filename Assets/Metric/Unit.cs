@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
+using Unit = PreciseFloat;
 
-public struct Unit
+public static class UnitHelper
 {
+	public const int METER = 1;
 }
