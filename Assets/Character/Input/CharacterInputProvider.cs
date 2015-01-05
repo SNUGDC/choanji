@@ -7,7 +7,7 @@ public class CharacterInputProvider
 	{
 		if (delegate_.CanMove())
 		{
-			var _dir = InputHelper.GetDirection();
+			var _dir = In.Helper.GetDirection();
 			if (_dir != 0) delegate_.Move(_dir);
 		}
 	}
