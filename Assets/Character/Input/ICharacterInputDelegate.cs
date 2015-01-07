@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gem;
+using UnityEngine;
 using System.Collections;
 
 public interface ICharacterInputDelegate

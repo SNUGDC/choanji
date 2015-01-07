@@ -1,20 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Gem.In;
+using UnityEngine;
 
 public class CharacterInputProviderTest : MonoBehaviour
 {
-	public void Awake()
+	void Start()
 	{
-		provider.delegate_ = character;
+		provider = new CharacterInputProvider(gem.input) {delegate_ = character};
 	}
 
-	private void Update()
-	{
-		provider.Process();	
-	}
-
+	public Gem.Gem gem;
 	public Character character;
-
-	public CharacterInputProvider provider = new CharacterInputProvider();
+	public CharacterInputProvider provider;
 
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gem;
+using UnityEngine;
 using System.Collections;
 
 public partial class Character : ICharacterInputDelegate
@@ -20,7 +21,7 @@ public partial class Character : ICharacterInputDelegate
 	{
 		if (!CanMove())
 		{
-			D.Log(2, "Check before call.");
+			L.Log(2, "Check before call.");
 			return;
 		}
 
