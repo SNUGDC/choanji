@@ -1,5 +1,4 @@
-﻿using System;
-using Gem;
+﻿using Gem;
 using Gem.In;
 
 public class CharacterInputProvider
@@ -23,8 +22,8 @@ public class CharacterInputProvider
 
 	public void Process(Direction _dir)
 	{
-		if (delegate_.CanMove())
-			delegate_.Move(_dir);
+		L.Log(0, "Process " + _dir);
+		delegate_.ProcessInput(_dir);
 	}
 
 	public InputHandler DirHandler(Direction _dir)
@@ -34,8 +33,12 @@ public class CharacterInputProvider
 			down = delegate
 			{
 				Process(_dir);
-				return false;
-			}
+				return true;
+			},
+
+			listen = true,
+
+			update = () => Process(_dir)
 		};
 	}
 

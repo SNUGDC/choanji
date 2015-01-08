@@ -388,7 +388,8 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6136824, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   m_RootGameObject: {fileID: 803985244}
   m_IsPrefabParent: 0
@@ -453,7 +454,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 803985245}
-  - 61: {fileID: 803985247}
   - 114: {fileID: 803985246}
   m_Layer: 0
   m_Name: Character
@@ -486,18 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60c496aaf95a424fb79ae5c8fdcabb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &803985247
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6136824, guid: 5240f5d24bfc28e4fb282a6197e0c153,
-    type: 2}
-  m_PrefabInternal: {fileID: 589295520}
-  m_GameObject: {fileID: 803985244}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: .899999976, y: .899999976}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &915470550
 GameObject:
   m_ObjectHideFlags: 0

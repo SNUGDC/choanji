@@ -4,31 +4,23 @@ using System.Collections;
 
 public partial class Character : ICharacterInputDelegate
 {
-	private const float INPUT_DELAY = 0.1f;
-	private float mInputEllapsed = 0;
+	private const float MOVE_INPUT_DELAY = 0.1f;
+
+	private SewValue<float, ArithmeticFloat> mMoveTimer
+		= new SewValue<float, ArithmeticFloat>(MOVE_INPUT_DELAY);
 
 	private void UpdateInput()
 	{
-		mInputEllapsed += Time.deltaTime;
+		if (!mMoveTimer.isDefault)
+			mMoveTimer.Add(Time.deltaTime);
 	}
 
-	public bool CanMove()
+	public void ProcessInput(Direction _dir)
 	{
-		return mInputEllapsed > INPUT_DELAY;
-	}
-
-	public void Move(Direction _dir)
-	{
-		if (!CanMove())
-		{
-			L.Log(2, "Check before call.");
-			return;
-		}
-
-		if (_dir == 0)
+		if (!mMoveTimer.isDefault)
 			return;
 
-		mInputEllapsed = 0;
-		transform.Translate(DirectionHelper.ToVector2(_dir));
+		mMoveTimer.Add(float.Epsilon);
+		transform.localPosition += (Vector3) DirectionHelper.ToVector2(_dir);
 	}
 }

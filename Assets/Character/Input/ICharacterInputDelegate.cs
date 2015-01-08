@@ -4,7 +4,5 @@ using System.Collections;
 
 public interface ICharacterInputDelegate
 {
-	bool CanMove();
-
-	void Move(Direction _dir);
+	void ProcessInput(Direction _dir);
 }
