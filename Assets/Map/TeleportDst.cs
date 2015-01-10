@@ -1,8 +1,11 @@
 ﻿using Gem;
 
-public struct TeleportDst
+namespace Choanji
 {
-	public MapID id;
-	public Coor coor;
-	public Direction dir;
+	public struct TeleportDst
+	{
+		public MapID id;
+		public Point coor;
+		public Direction dir;
+	}
 }

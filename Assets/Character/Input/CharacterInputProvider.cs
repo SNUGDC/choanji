@@ -22,7 +22,7 @@ public class CharacterInputProvider
 
 	public void Process(Direction _dir)
 	{
-		L.Log(0, "Process " + _dir);
+		L.D("Process " + _dir);
 		delegate_.ProcessInput(_dir);
 	}
 

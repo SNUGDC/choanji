@@ -1,11 +1,12 @@
-﻿using Gem;
-
-public struct GlobalMeta
+﻿namespace Choanji
 {
-	public Player[] players;
-	public TeleportDst home;
-	public BGMList bicycleBGM;
-	public BGMList surfBGM;
-	public BGMList wildBattleBGM;
-	public BGMList trainerBattleBGM;
+	public static class GlobalMeta
+	{
+		public static Player[] players;
+		public static TeleportDst home;
+		public static BGMList bicycleBGM;
+		public static BGMList surfBGM;
+		public static BGMList wildBattleBGM;
+		public static BGMList trainerBattleBGM;
+	}
 }
