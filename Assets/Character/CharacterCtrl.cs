@@ -56,11 +56,16 @@ namespace Choanji
 
 		public bool TryMove(Direction _dir)
 		{
-			var _pos = position + new Point(_dir);
-			var _state = TryGetTileState(_pos);
-			if ((_state == null) || _state.occupied || !_state.IsPassable(_dir)) 
+			var _curTile = TryGetTileState(position);
+			if ((_curTile != null) && !_curTile.IsHole(_dir))
 				return false;
-			SetPosition(_pos, _state);
+
+			var _pos = position + new Point(_dir);
+			var _tile = TryGetTileState(_pos);
+			if ((_tile == null) || _tile.occupied || !_tile.IsHole(_dir.Neg())) 
+				return false;
+
+			SetPosition(_pos, _tile);
 			return true;
 		}
 

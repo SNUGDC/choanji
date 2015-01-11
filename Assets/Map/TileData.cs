@@ -20,7 +20,7 @@ namespace Choanji
 			}
 		}
 
-		public void MergeData(MapLayerType _layer, JsonData _data)
+		public void Merge(MapLayerType _layer, JsonData _data)
 		{
 			if (mDatas == null)
 				mDatas = new JsonData[(int) MapLayerType._COUNT];
@@ -43,7 +43,7 @@ namespace Choanji
 				JsonData _wall;
 				if (!_data.TryGet("wall", out _wall))
 					break;
-				// todo: wall
+				wall = DirectionHelper.MakeWithAbbr((string) _wall);
 			} while (false);
 		}
 	}

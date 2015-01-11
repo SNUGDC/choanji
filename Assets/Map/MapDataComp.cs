@@ -4,6 +4,7 @@ namespace Choanji
 {
 	public class MapDataComp : MonoBehaviour
 	{
+		[HideInInspector]
 		public string binName;
 		public MapData data { get; private set; }
 

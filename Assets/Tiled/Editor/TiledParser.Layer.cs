@@ -208,7 +208,7 @@ namespace Choanji
 						_tile = new TileData();
 
 					if (_layerTile.json != null)
-						_tile.MergeData(_layerKV.Key, _layerTile.json);
+						_tile.Merge(_layerKV.Key, _layerTile.json);
 				}
 				_ret[p] = _tile;
 			}

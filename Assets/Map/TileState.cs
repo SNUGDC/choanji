@@ -26,9 +26,9 @@ namespace Choanji
 				L.E(L.M.SHOULD_POS("occupied", mOccupied));
 		}
 
-		public bool IsPassable(Direction _dir)
+		public bool IsHole(Direction _dir)
 		{
-			return !occupied && data.wall.No(_dir);
+			return data.wall.No(_dir);
 		}
 
 		public readonly TileData data;
