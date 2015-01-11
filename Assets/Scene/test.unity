@@ -262,26 +262,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 608955706}
-  - 114: {fileID: 608955705}
   - 114: {fileID: 608955707}
   m_Layer: 0
-  m_Name: InputTest
+  m_Name: InputLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &608955705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 608955704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c3b89848f6bce479b90b64bd9cfdd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &608955706
 Transform:
   m_ObjectHideFlags: 0
@@ -305,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d641e7a8a98715d4999015de746d727c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gem: {fileID: 608955705}
+  inputFile: Config/input.json
 --- !u!1 &616549830
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1663af120969a643b21d1fe9a71525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gem: {fileID: 608955705}
   character: {fileID: 803985247}
 --- !u!1 &1038101390
 GameObject:

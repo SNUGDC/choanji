@@ -66,10 +66,12 @@ namespace Choanji
 			return SerializeHelper.DeserializeFile<MapData>(BinPath(_name));
 		}
 
+#if UNITY_EDITOR
 		public void Save(string _name)
 		{
 			this.SerializeToFile(BinPath(_name));
 		}
+#endif
 
 	}
 }

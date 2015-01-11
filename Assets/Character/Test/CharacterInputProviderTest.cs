@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -6,10 +7,9 @@ namespace Choanji
 	{
 		void Start()
 		{
-			provider = new CharacterInputProvider(gem.input) { delegate_ = character };
+			provider = new CharacterInputProvider(TheGem.g.input) { delegate_ = character };
 		}
 
-		public Gem.Gem gem;
 		public CharacterCtrl character;
 		public CharacterInputProvider provider;
 
