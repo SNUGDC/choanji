@@ -1,28 +1,40 @@
 ﻿using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
-	public class MapData
+	public class MapData : MonoBehaviour
 	{
-		public MapData(MapMeta _meta, Grid<TileData> _grid)
-		{
-			meta = _meta;
-			grid = _grid;
-			states = new Grid<TileState>(grid.size);
+		public MapMeta meta;
 
-			for (var _x = 0; _x != grid.w; ++_x)
+		private Grid<TileData> mGrid;
+		public Grid<TileData> grid
+		{
+			get { return mGrid; }
+
+			set
 			{
-				for (var _y = 0; _y != grid.h; ++_y)
+				if (value == null) 
+					return;
+
+				if ((grid != null) || (states != null))
 				{
-					var _data = grid[new Point(_x, _y)];
+					L.E(L.M.CALL_RETRY("set grid"));
+					return;
+				}
+
+				mGrid = value;
+
+				states = new Grid<TileState>(grid.size);
+
+				foreach (var p in grid.size.Range())
+				{
+					var _data = grid[p];
 					if (_data == null) continue;
-					states[new Point(_x, _y)] = new TileState(_data);
+					states[p] = new TileState(_data);
 				}
 			}
 		}
-
-		public readonly MapMeta meta;
-		public readonly Grid<TileData> grid;
-		public readonly Grid<TileState> states;
+		public Grid<TileState> states { get; private set; }
 	}
 }

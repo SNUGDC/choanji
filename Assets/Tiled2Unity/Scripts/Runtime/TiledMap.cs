@@ -1,6 +1,4 @@
-﻿using Choanji;
-using Gem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tiled2Unity
 {
@@ -10,7 +8,6 @@ namespace Tiled2Unity
         public int NumTilesHigh = 0;
         public int TileWidth = 0;
         public int TileHeight = 0;
-	    public Grid<TileData> tileDatas;
 
         public float GetMapWidthInPixels()
         {

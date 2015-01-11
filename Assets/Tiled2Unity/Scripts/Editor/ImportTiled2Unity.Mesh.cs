@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Choanji;
+
 using UnityEditor;
 using UnityEngine;
 
@@ -31,9 +31,8 @@ namespace Tiled2Unity
             string prefabName = xmlPrefab.Attribute("name").Value;
             float prefabScale = ImportUtils.GetAttributeAsFloat(xmlPrefab, "scale", 1.0f);
             GameObject tempPrefab = new GameObject(prefabName);
-            var _tiledMap = HandleTiledAttributes(tempPrefab, xmlPrefab);
-			_tiledMap.tileDatas = TiledHelper.ImportData(prefabName + ".tmx");
-			HandleCustomProperties(tempPrefab, xmlPrefab, customImporters);
+            HandleTiledAttributes(tempPrefab, xmlPrefab);
+            HandleCustomProperties(tempPrefab, xmlPrefab, customImporters);
 
             // Part 2: Build out the prefab
             // We may have an 'isTrigger' attribute that we want our children to obey
@@ -299,7 +298,7 @@ namespace Tiled2Unity
             }
         }
 
-        private TiledMap HandleTiledAttributes(GameObject gameObject, XElement goXml)
+        private void HandleTiledAttributes(GameObject gameObject, XElement goXml)
         {
             // Add the TiledMap component
             TiledMap map = gameObject.AddComponent<TiledMap>();
@@ -315,7 +314,6 @@ namespace Tiled2Unity
                 Debug.LogWarning(String.Format("Error adding TiledMap component. Are you using an old version of Tiled2Unity in your Unity project?"));
                 GameObject.DestroyImmediate(map);
             }
-	        return map;
         }
 
         private void HandleCustomProperties(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers)

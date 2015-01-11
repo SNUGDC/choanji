@@ -5,6 +5,7 @@ namespace Choanji
 {
 	public partial class CharacterCtrl : MonoBehaviour
 	{
+		[HideInInspector]
 		public MapData curMap;
 
 		public Coor position

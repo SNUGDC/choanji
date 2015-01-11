@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 using Gem;
 using LitJson;
-using Tiled2Unity;
-using UnityEngine;
 
 namespace Choanji
 {
@@ -17,11 +13,9 @@ namespace Choanji
 
 	public enum TileGID {}
 
-	public static class TiledHelper
+	public static partial class TiledParser
 	{
-		private const string TMX_PATH = "./TMX/";
-
-		public class TileDatas
+		class TileDatas
 		{
 			private readonly List<JsonData> mList = new List<JsonData>();
 
@@ -39,7 +33,7 @@ namespace Choanji
 			}
 		}
 
-		public class TilesetData
+		class TilesetData
 		{
 			public TileGID firstGID;
 			public TileGID endGID { get { return firstGID + count; } }
@@ -66,7 +60,7 @@ namespace Choanji
 			}
 		}
 
-		public class TilesetDatas
+		class TilesetDatas
 		{
 			public void Add(TilesetData _tileset)
 			{
@@ -96,13 +90,8 @@ namespace Choanji
 			private readonly List<TilesetData> mList = new List<TilesetData>();
 		}
 
-		public static Grid<TileData> ImportData(string _xmlName)
+		public static Grid<TileData> ImportData(XmlNode _tmxRoot)
 		{
-			var _tmxPath = TMX_PATH + _xmlName;
-			var _tmxRoot = new XmlDocument();
-			using (var _f = new FileStream(_tmxPath, FileMode.Open, FileAccess.Read))
-				_tmxRoot.Load(_f);
-
 			var _tmx = _tmxRoot["map"];
 			var _tiles = new TileDatas();
 			var _tilesets = new TilesetDatas();
@@ -162,59 +151,15 @@ namespace Choanji
 			{
 				var _tile = (XmlElement)_tileObj;
 				if (_tile.Name != "tile") continue;
+
 				var _tileID = (TileID) int.Parse(_tile.Attributes["id"].Value);
-				_datas[_ret.ToGID(_tileID)] = ParseTile(_tile);
+
+				var _props = _tile["properties"];
+				if (_props != null) 
+					_datas[_ret.ToGID(_tileID)] = ParseProps(_props);
 			}
 
 			return _ret;
-		}
-
-		private static KeyValuePair<string, string>? ParseProp(XmlNode _node)
-		{
-			var _attrs = _node.Attributes;
-
-			string _name = null;
-			string _val = null;
-
-			foreach (var _attrObj in _attrs)
-			{
-				var _attr = (XmlAttribute)_attrObj;
-				if (_attr.Name == "name")
-					_name = _attr.Value;
-				else if (_attr.Name == "value")
-					_val = _attr.Value;
-			}
-
-			if ((_name == null) || (_val == null))
-			{
-				L.E(L.M.KEY_NOT_EXISTS("name or value"));
-				return null;
-			}
-
-			return new KeyValuePair<string, string>(_name, _val);
-		}
-
-		private static JsonData ParseTile(XmlNode _tile)
-		{
-			var _propsNode = _tile["properties"];
-			if (_propsNode == null) return null;
-
-			var _props = new JsonData();
-
-			foreach (var _propObj in _propsNode)
-			{
-				var _propCheck = ParseProp((XmlNode) _propObj);
-				if (_propCheck == null) continue;
-
-				var _prop = _propCheck.Value;
-				var _propName = _prop.Key;
-
-				object _parsed;
-				XmlHelper.ParseValue(_prop.Value, out _parsed);
-				_props.AssignPrimitive(_propName, _parsed);
-			}
-
-			return _props;
 		}
 
 		private static Grid<JsonData> MakeGrid(XmlNode _xml, Point _size, TileDatas _tiles)
