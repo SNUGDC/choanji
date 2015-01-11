@@ -1,8 +1,9 @@
-﻿using Gem;
+﻿using System;
+using Gem;
 
 namespace Choanji
 {
-
+	[Serializable]
 	public class MapMeta
 	{
 		public MapMeta(string _name)

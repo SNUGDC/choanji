@@ -109,3 +109,5 @@ output_log.txt
 
 /Binary
 /Assets/UnityVS
+/Assets/Tiled2Unity/Imported/*.bin
+/Assets/Tiled2Unity/Imported/*.bin.meta

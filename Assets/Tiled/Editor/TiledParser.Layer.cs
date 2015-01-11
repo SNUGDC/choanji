@@ -6,15 +6,21 @@ using LitJson;
 
 namespace Choanji
 {
-	public enum TileID
-	{
-		FIRST = 0,
-	}
+	public enum TileID { }
 
-	public enum TileGID {}
+	public enum TileGID
+	{
+		NONE = 0,
+	}
 
 	public static partial class TiledParser
 	{
+		struct TileAndJson
+		{
+			public TileGID id;
+			public JsonData json;
+		}
+
 		class TileDatas
 		{
 			private readonly List<JsonData> mList = new List<JsonData>();
@@ -108,7 +114,7 @@ namespace Choanji
 			}
 
 			// parse layer
-			var _layers = new Dictionary<MapLayerType, Grid<JsonData>>();
+			var _layers = new Dictionary<MapLayerType, Grid<TileAndJson>>();
 
 			foreach (var _nodeObj in _tmx)
 			{
@@ -162,24 +168,25 @@ namespace Choanji
 			return _ret;
 		}
 
-		private static Grid<JsonData> MakeGrid(XmlNode _xml, Point _size, TileDatas _tiles)
+		private static Grid<TileAndJson> MakeGrid(XmlNode _xml, Point _size, TileDatas _tiles)
 		{
-			var _ret = new Grid<JsonData>(_size);
-			var _idx = 0;
+			var _ret = new Grid<TileAndJson>(_size);
+			var _idx = -1;
 
 			foreach (var _tileObj in _xml)
 			{
-				var _tileNode = (XmlNode) _tileObj;
-				var _gid = (TileGID) _tileNode.Attributes["gid"].AsInt();
-				var _pos = new Point(_idx%_size.x, _size.y - 1 - _idx/_size.y);
-				_ret[_pos] = _tiles[_gid];
 				++_idx;
+				var _tileNode = (XmlNode)_tileObj;
+				var _gid = (TileGID) _tileNode.Attributes["gid"].AsInt();
+				if (_gid == TileGID.NONE) continue;
+				var _pos = new Point(_idx%_size.x, _size.y - 1 - _idx/_size.x);
+				_ret[_pos] = new TileAndJson {id = _gid, json = _tiles[_gid]};
 			}
 
 			return _ret;
 		}
 		
-		private static Grid<TileData> MergeLayers(Dictionary<MapLayerType, Grid<JsonData>> _layers)
+		private static Grid<TileData> MergeLayers(Dictionary<MapLayerType, Grid<TileAndJson>> _layers)
 		{
 			if (_layers.Count == 0) 
 				return null;
@@ -193,14 +200,20 @@ namespace Choanji
 				foreach (var _layerKV in _layers)
 				{
 					var _layerTile = _layerKV.Value[p];
-					if (_layerTile == null) continue;
-					if (_tile == null) _tile = new TileData();
-					_tile.MergeData(_layerKV.Key, _layerTile);
+
+					if (_layerTile.id == TileGID.NONE) 
+						continue;
+
+					if (_tile == null) 
+						_tile = new TileData();
+
+					if (_layerTile.json != null)
+						_tile.MergeData(_layerKV.Key, _layerTile.json);
 				}
 				_ret[p] = _tile;
 			}
 
-			return null;
+			return _ret;
 		}
 	}
 }

@@ -10,7 +10,10 @@ namespace Choanji
 	[CustomTiledImporter]
 	public class TiledImporter : ICustomTiledImporter
 	{
-		private const string TMX_PATH = "./TMX/";
+		private static string GetTMXPath(string _name)
+		{
+			return "./TMX/" + _name + ".tmx";
+		}
 
 		public void HandleCustomProperties(GameObject _go, IDictionary<string, string> _props)
 		{
@@ -19,7 +22,7 @@ namespace Choanji
 		public void CustomizePrefab(GameObject _prefab)
 		{
 			var _name = _prefab.name;
-			var _tmxPath = TMX_PATH + _name + ".tmx";
+			var _tmxPath = GetTMXPath(_name);
 			var _tmxRoot = new XmlDocument();
 
 			try
@@ -33,9 +36,12 @@ namespace Choanji
 				return;
 			}
 
-			var _mapData = _prefab.AddComponent<MapData>();
+			var _mapData = new MapData();
 			_mapData.meta = TiledParser.ParseMeta(_tmxRoot, _name);
 			_mapData.grid = TiledParser.ImportData(_tmxRoot);
+			_mapData.Save(_name);
+
+			_prefab.AddComponent<MapDataComp>().binName = _name;
 		}
 	}
 

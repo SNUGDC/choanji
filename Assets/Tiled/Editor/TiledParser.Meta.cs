@@ -17,7 +17,8 @@ namespace Choanji
 			}
 
 			// todo: meta properties.
-			var _propsJson = ParseProps(_props);
+			// var _propsJson = ParseProps(_props);
+
 			return _meta;
 		}
 	}

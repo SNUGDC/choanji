@@ -1,9 +1,10 @@
-﻿using Gem;
-using UnityEngine;
+﻿using System;
+using Gem;
 
 namespace Choanji
 {
-	public class MapData : MonoBehaviour
+	[Serializable]
+	public class MapData 
 	{
 		public MapMeta meta;
 
@@ -17,24 +18,58 @@ namespace Choanji
 				if (value == null) 
 					return;
 
-				if ((grid != null) || (states != null))
+				if (grid != null)
 				{
 					L.E(L.M.CALL_RETRY("set grid"));
 					return;
 				}
 
 				mGrid = value;
+			}
+		}
 
-				states = new Grid<TileState>(grid.size);
+		[NonSerialized]
+		private Grid<TileState> mStates;
+		public Grid<TileState> states
+		{
+			get
+			{
+				if (grid == null)
+				{
+					L.E(L.M.SHOULD_NOT_NULL("grid"));
+					return mStates;
+				}
+
+				if (mStates != null)
+					return mStates;
+
+				mStates = new Grid<TileState>(grid.size);
 
 				foreach (var p in grid.size.Range())
 				{
 					var _data = grid[p];
 					if (_data == null) continue;
-					states[p] = new TileState(_data);
+					mStates[p] = new TileState(_data);
 				}
+
+				return mStates;
 			}
 		}
-		public Grid<TileState> states { get; private set; }
+
+		private static string BinPath(string _name)
+		{
+			return "Assets/Tiled2Unity/Imported/" + _name + ".mapData.bin";
+		}
+
+		public static MapData Load(string _name)
+		{
+			return SerializeHelper.DeserializeFile<MapData>(BinPath(_name));
+		}
+
+		public void Save(string _name)
+		{
+			this.SerializeToFile(BinPath(_name));
+		}
+
 	}
 }

@@ -9,6 +9,41 @@
    <terrain name="RugGreen" tile="-1"/>
    <terrain name="TableBlue" tile="-1"/>
   </terraintypes>
+  <tile id="32">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
   <tile id="158">
    <properties>
     <property name="occupied" value="true"/>
@@ -86,14 +121,38 @@
     <property name="occupied" value="true"/>
    </properties>
   </tile>
-  <tile id="1699" terrain=",,,1"/>
-  <tile id="1700" terrain=",,1,1"/>
-  <tile id="1701" terrain=",,1,"/>
-  <tile id="1707" terrain=",1,,"/>
-  <tile id="1708" terrain="1,1,,"/>
-  <tile id="1709" terrain="1,,,"/>
+  <tile id="1699" terrain=",,,1">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1700" terrain=",,1,1">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1701" terrain=",,1,">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1707" terrain=",1,,">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1708" terrain="1,1,,">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1709" terrain="1,,,">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="FLOOR" width="32" height="48">
+ <layer name="FLR" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="Floor"/>
   </properties>

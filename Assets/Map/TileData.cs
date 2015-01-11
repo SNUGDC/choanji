@@ -4,6 +4,7 @@ using LitJson;
 
 namespace Choanji
 {
+	[Serializable]
 	public class TileData
 	{
 		public bool occupied;

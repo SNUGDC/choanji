@@ -7,7 +7,7 @@ namespace Gem
 	public class MapTest : MonoBehaviour
 	{
 		public CharacterCtrl ch;
-		public MapData map;
+		public MapDataComp map;
 
 		void Awake()
 		{
