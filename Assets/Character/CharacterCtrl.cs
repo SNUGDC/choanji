@@ -5,8 +5,22 @@ namespace Choanji
 {
 	public partial class CharacterCtrl : MonoBehaviour
 	{
+		private MapData mCurMap;
+		private TileOccupy mOccupy;
+
 		[HideInInspector]
-		public MapData curMap;
+		public MapData curMap
+		{
+			get { return mCurMap; }
+
+			set
+			{
+				if (curMap == value)
+					return;
+				mCurMap = value;
+				mOccupy = new TileOccupy(mCurMap.states);
+			}
+		}
 
 		public Coor position
 		{
@@ -36,7 +50,7 @@ namespace Choanji
 		private void SetPosition(Coor _pos, TileState _state)
 		{
 			D.Assert(_state != null);
-			_state.occupied = true;
+			mOccupy.Occupy(_pos);
 			transform.localPosition = (Vector2) _pos;
 		}
 

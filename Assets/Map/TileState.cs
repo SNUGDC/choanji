@@ -9,24 +9,29 @@ namespace Choanji
 			data = _data;
 		}
 
-		public bool mOccupied = false;
+		public int mOccupied = 0;
 		public bool occupied
 		{
-			get { return mOccupied && data.occupied; }
-			set
-			{
-				if (occupied && value)
-					L.W(L.M.CALL_RETRY("occupy"));
-				mOccupied = value;
-			}
+			get { return (mOccupied > 0) || data.occupied; }
 		}
 
-		public readonly TileData data;
+		public void Occupy()
+		{
+			++mOccupied;
+		}
+
+		public void Unoccupy()
+		{
+			if (--mOccupied < 0)
+				L.E(L.M.SHOULD_POS("occupied", mOccupied));
+		}
 
 		public bool IsPassable(Direction _dir)
 		{
 			return !occupied && data.wall.No(_dir);
 		}
+
+		public readonly TileData data;
 	}
 
 }
