@@ -5,7 +5,7 @@ namespace Choanji
 
 	public class MapMeta
 	{
-		MapMeta(string _name)
+		public MapMeta(string _name)
 		{
 			name = _name;
 			id = (MapID) name.GetHashCode();

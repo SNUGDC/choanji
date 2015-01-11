@@ -1,16 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Gem;
+using UnityEngine;
 
-public partial class Character : MonoBehaviour {
+namespace Choanji
+{
+	public partial class Character : MonoBehaviour
+	{
+		void Start()
+		{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		UpdateInput();
+		}
 	}
 
 }

@@ -1,15 +1,17 @@
-﻿using Gem.In;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CharacterInputProviderTest : MonoBehaviour
+namespace Choanji
 {
-	void Start()
+	public class CharacterInputProviderTest : MonoBehaviour
 	{
-		provider = new CharacterInputProvider(gem.input) {delegate_ = character};
+		void Start()
+		{
+			provider = new CharacterInputProvider(gem.input) { delegate_ = character };
+		}
+
+		public Gem.Gem gem;
+		public CharacterCtrl character;
+		public CharacterInputProvider provider;
+
 	}
-
-	public Gem.Gem gem;
-	public Character character;
-	public CharacterInputProvider provider;
-
 }

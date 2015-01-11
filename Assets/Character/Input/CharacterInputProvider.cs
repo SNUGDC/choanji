@@ -1,47 +1,41 @@
 ﻿using Gem;
 using Gem.In;
 
-public class CharacterInputProvider
+namespace Choanji
 {
-	public CharacterInputProvider(InputManager _input)
+	public class CharacterInputProvider
 	{
-		mInput = new InputGroup(_input);
+		private readonly InputGroup mInput;
+		public ICharacterInputDelegate delegate_;
 
-		var _map = new[]
+		public CharacterInputProvider(InputManager _input)
 		{
-			new { code = InputCode.U, dir = Direction.U },
-			new { code = InputCode.D, dir = Direction.D },
-			new { code = InputCode.R, dir = Direction.R },
-			new { code = InputCode.L, dir = Direction.L },
-		};
+			mInput = new InputGroup(_input);
+			foreach (var _dir in EnumHelper.GetValues<Direction>())
+				mInput.Add(_dir.ToInputCode(), DirHandler(_dir));
+			mInput.Reg();
+		}
 
-		foreach (var _bind in _map)
-			mInput.Add(_bind.code, DirHandler(_bind.dir));
-		mInput.Reg();
-	}
-
-	public void Process(Direction _dir)
-	{
-		L.D("Process " + _dir);
-		delegate_.ProcessInput(_dir);
-	}
-
-	public InputHandler DirHandler(Direction _dir)
-	{
-		return new InputHandler
+		public void Process(Direction _dir)
 		{
-			down = delegate
+			L.D("process " + _dir);
+			delegate_.ProcessInput(_dir);
+		}
+
+		public InputHandler DirHandler(Direction _dir)
+		{
+			return new InputHandler
 			{
-				Process(_dir);
-				return true;
-			},
+				down = delegate
+				{
+					Process(_dir);
+					return true;
+				},
 
-			listen = true,
+				listen = true,
 
-			update = () => Process(_dir)
-		};
+				update = () => Process(_dir)
+			};
+		}
 	}
-
-	private readonly InputGroup mInput;
-	public ICharacterInputDelegate delegate_;
 }
