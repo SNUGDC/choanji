@@ -9,10 +9,10 @@
    <terrain name="RugGreen" tile="-1"/>
    <terrain name="TableBlue" tile="-1"/>
   </terraintypes>
-  <tile id="40">
-   <objectgroup draworder="index">
-    <object id="0" x="0" y="0" width="16" height="16"/>
-   </objectgroup>
+  <tile id="158">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
   </tile>
   <tile id="784" terrain=",,,0"/>
   <tile id="785" terrain=",,0,0"/>
@@ -23,12 +23,68 @@
   <tile id="800" terrain=",0,,"/>
   <tile id="801" terrain="0,0,,"/>
   <tile id="802" terrain="0,,,"/>
+  <tile id="869">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="870">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="871">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
   <tile id="1290">
-   <objectgroup draworder="index">
-    <object id="0" x="0" y="0">
-     <polyline points="0,0 0,16"/>
-    </object>
-   </objectgroup>
+   <objectgroup draworder="index"/>
+  </tile>
+  <tile id="1385">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1392">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1393">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1394">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1395">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1396">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1397">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1398">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1399">
+   <properties>
+    <property name="occupied" value="true"/>
+   </properties>
   </tile>
   <tile id="1699" terrain=",,,1"/>
   <tile id="1700" terrain=",,1,1"/>
@@ -37,7 +93,7 @@
   <tile id="1708" terrain="1,1,,"/>
   <tile id="1709" terrain="1,,,"/>
  </tileset>
- <layer name="Floor" width="32" height="48">
+ <layer name="FLOOR" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="Floor"/>
   </properties>
@@ -1580,7 +1636,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Rug" width="32" height="48">
+ <layer name="RUG" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="Floor"/>
   </properties>
@@ -3123,7 +3179,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Wall" width="32" height="48">
+ <layer name="WALL" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="Floor"/>
   </properties>
@@ -4666,7 +4722,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Attach" width="32" height="48">
+ <layer name="ATTACH" width="32" height="48">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6206,7 +6262,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="StandLower" width="32" height="48">
+ <layer name="STD_LOW" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="StandLower"/>
   </properties>
@@ -7749,7 +7805,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="StandUpper" width="32" height="48">
+ <layer name="STD_UP" width="32" height="48">
   <properties>
    <property name="unity:sortingLayerName" value="StandUpper"/>
   </properties>
@@ -9292,7 +9348,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="ObjectUpper">
+ <objectgroup name="OBJ_UP">
   <properties>
    <property name="dialog" value="manual_control"/>
   </properties>

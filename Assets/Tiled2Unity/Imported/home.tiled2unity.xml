@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-01-04 오후 6:18:08-->
+<!--Last exported: 2015-01-11 오후 5:43:46-->
 <Tiled2Unity version="0.9.7.4">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="Floor" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Interior general" sortingLayerName="Floor" sortingOrder="1" />
@@ -10,35 +10,25 @@
   <AssignMaterial mesh="mesh_[04]_[00]" material="Interior general" sortingLayerName="StandLower" sortingOrder="4" />
   <AssignMaterial mesh="mesh_[05]_[00]" material="Interior general" sortingLayerName="StandUpper" sortingOrder="5" />
   <Prefab name="home" numTilesWide="32" numTilesHigh="48" tileWidth="16" tileHeight="16" scale="0.0625">
-    <GameObject name="Floor_00">
+    <GameObject name="FLOOR_00">
       <GameObject copy="mesh_[00]_[00]" />
     </GameObject>
-    <GameObject name="Rug_01">
+    <GameObject name="RUG_01">
       <GameObject copy="mesh_[01]_[00]" />
     </GameObject>
-    <GameObject name="Wall_02">
+    <GameObject name="WALL_02">
       <GameObject copy="mesh_[02]_[00]" />
-      <GameObject name="Collision">
-        <PolygonCollider2D>
-          <Path>128,-64 304,-64 304,-48 128,-48</Path>
-        </PolygonCollider2D>
-      </GameObject>
     </GameObject>
-    <GameObject name="Attach_03">
+    <GameObject name="ATTACH_03">
       <GameObject copy="mesh_[03]_[00]" />
     </GameObject>
-    <GameObject name="StandLower_04">
+    <GameObject name="STD_LOW_04">
       <GameObject copy="mesh_[04]_[00]" />
-      <GameObject name="Collision">
-        <EdgeCollider2D>
-          <Points>176,-144 176,-112</Points>
-        </EdgeCollider2D>
-      </GameObject>
     </GameObject>
-    <GameObject name="StandUpper_05">
+    <GameObject name="STD_UP_05">
       <GameObject copy="mesh_[05]_[00]" />
     </GameObject>
-    <GameObject name="ObjectUpper">
+    <GameObject name="OBJ_UP">
       <Property name="dialog" value="manual_control" />
       <GameObject name="Book1" x="208" y="-128" />
     </GameObject>
