@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-public struct BGMList
+﻿namespace Choanji
 {
-	public string[] list;
+	public struct BGMList
+	{
+		public string[] list;
+	}
+
 }
