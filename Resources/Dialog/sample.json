@@ -1,0 +1,30 @@
+{
+	"meta": {
+		"skin": "default",
+		"rich": false,
+	},
+	
+	"txts": [
+		"aaa $pl.name$",
+		"bbb $pl.gold$",
+		"ccc",
+		
+		{
+			"type": "CHOOSE",
+			"header": "choose something.",
+			"case": [
+				{
+					"txt": "c1", 
+					"data": { "action": "OpenDialog", "dialog": "sample_c1.json" }
+				},
+				{
+					"txt": "c2", 
+				},
+				{
+					"txt": "c3", 
+					"data": {}
+				}
+			]
+		}
+	]
+}

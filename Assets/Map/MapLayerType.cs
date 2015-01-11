@@ -2,12 +2,12 @@
 {
 	public enum MapLayerType
 	{
-		FLR,
+		FLR = 1,
 		RUG,
 		WALL,
 		ATTACH,
 		STD_UP,
 		STD_LOW,
-		_COUNT,
+		_COUNT = 6,
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Choanji
 {
-	public interface IInspectorable
+	public interface IInspectable
 	{
 		bool Inspect(InspectData _data);
 	}
