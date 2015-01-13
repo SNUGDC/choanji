@@ -12,33 +12,17 @@ namespace Choanji
 		void Start()
 		{
 			mInput = new InputGroup(InputManager.g);
-			foreach (var _dir in EnumHelper.GetValues<Direction>())
-				mInput.Add(_dir.ToInputCode(), DirHandler(_dir));
-			mInput.Reg();
+			mInput.DecorateDirection(ProcessDir, _dir => ProcessDir(_dir));
 
 			mDelegate = GetComponent<CharacterCtrl>();
 		}
 
-		public void Process(Direction _dir)
+		private bool ProcessDir(Direction _dir)
 		{
-			if (!enabled) return;
-			mDelegate.ProcessInput(_dir);
+			if (enabled) 
+				mDelegate.ProcessInput(_dir);
+			return true;
 		}
 
-		public InputHandler DirHandler(Direction _dir)
-		{
-			return new InputHandler
-			{
-				down = delegate
-				{
-					Process(_dir);
-					return true;
-				},
-
-				listen = true,
-
-				update = () => Process(_dir)
-			};
-		}
 	}
 }
