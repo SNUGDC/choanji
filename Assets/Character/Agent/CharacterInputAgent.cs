@@ -1,25 +1,28 @@
 ﻿using Gem;
 using Gem.In;
+using UnityEngine;
 
 namespace Choanji
 {
-	public class CharacterInputProvider
+	public class CharacterInputAgent : MonoBehaviour
 	{
-		private readonly InputGroup mInput;
-		public ICharacterInputDelegate delegate_;
+		private InputGroup mInput;
+		private ICharacterInputDelegate mDelegate;
 
-		public CharacterInputProvider(InputManager _input)
+		void Start()
 		{
-			mInput = new InputGroup(_input);
+			mInput = new InputGroup(InputManager.g);
 			foreach (var _dir in EnumHelper.GetValues<Direction>())
 				mInput.Add(_dir.ToInputCode(), DirHandler(_dir));
 			mInput.Reg();
+
+			mDelegate = GetComponent<CharacterCtrl>();
 		}
 
 		public void Process(Direction _dir)
 		{
-			L.D("process " + _dir);
-			delegate_.ProcessInput(_dir);
+			if (!enabled) return;
+			mDelegate.ProcessInput(_dir);
 		}
 
 		public InputHandler DirHandler(Direction _dir)

@@ -1,8 +1,8 @@
 ﻿using Gem;
-using UnityEngine;
-using System.Collections;
-
-public interface ICharacterInputDelegate
+namespace Choanji 
 {
-	void ProcessInput(Direction _dir);
+	public interface ICharacterInputDelegate
+	{
+		void ProcessInput(Direction _dir);
+	}
 }
