@@ -1,10 +1,13 @@
-﻿using Gem;
+﻿using System;
+using Gem;
 using UnityEngine;
 
 namespace Choanji
 {
 	public partial class CharacterCtrl : MonoBehaviour
 	{
+		public Character ch { get; private set; }
+
 		private MapData mCurMap;
 		private TileOccupy mOccupy;
 
@@ -22,12 +25,12 @@ namespace Choanji
 			}
 		}
 
-		public Coor position
+		public ActionWrap<Coor, TileState> doTileRetain
+			= new ActionWrap<Coor, TileState>();
+
+		void Start()
 		{
-			get
-			{
-				return new Coor(transform.localPosition);
-			}
+			ch = GetComponent<Character>();
 		}
 
 		private TileState TryGetTileState(Coor _pos)
@@ -47,25 +50,37 @@ namespace Choanji
 			return true;
 		}
 
-		private void SetPosition(Coor _pos, TileState _state)
+		private void BeforeSetPosition(Coor _pos, TileState _state)
 		{
 			D.Assert(_state != null);
-			mOccupy.Occupy(_pos);
-			transform.localPosition = (Vector2) _pos;
+			mOccupy.Retain(_pos);
+			if (doTileRetain.val != null) 
+				doTileRetain.val(_pos, _state);
+		}
+
+		private void SetPosition(Coor _pos, TileState _state)
+		{
+			BeforeSetPosition(_pos, _state);
+			ch.position = _pos;
 		}
 
 		public bool TryMove(Direction _dir)
 		{
-			var _curTile = TryGetTileState(position);
+			var _curTile = TryGetTileState(ch.position);
 			if ((_curTile != null) && !_curTile.IsHole(_dir))
 				return false;
 
-			var _pos = position + new Point(_dir);
-			var _tile = TryGetTileState(_pos);
-			if ((_tile == null) || _tile.occupied || !_tile.IsHole(_dir.Neg())) 
+			var _pos = ch.position + _dir;
+			var _state = TryGetTileState(_pos);
+			if ((_state == null) || _state.occupied || !_state.IsHole(_dir.Neg())) 
 				return false;
 
-			SetPosition(_pos, _tile);
+			if (!ch.CanMove(_dir))
+				return false;
+
+			BeforeSetPosition(_pos, _state);
+			ch.Move(_dir);
+			
 			return true;
 		}
 

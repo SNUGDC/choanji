@@ -15,31 +15,31 @@ namespace Choanji
 			get { return (mOccupied > 0) || data.occupied; }
 		}
 
-		private IInspectable mInspectable;
-		public IInspectable inspectable
+		private IInspectee mInspectee;
+		public IInspectee inspectee
 		{
 			get
 			{
-				if (mInspectable != null)
-					return mInspectable;
+				if (mInspectee != null)
+					return mInspectee;
 
 				var _inspData = data.GetInspectableData();
 				if (_inspData == null)
 					return null;
 
-				mInspectable = InspectorFactory.Make(_inspData);
-				return mInspectable; 
+				mInspectee = InspecteeFactory.Make(_inspData);
+				return mInspectee; 
 			}
 
 			set
 			{
-				if (inspectable == value)
+				if (inspectee == value)
 					return;
 
-				if ((mInspectable != null) && (value != null))
+				if ((mInspectee != null) && (value != null))
 					L.E(L.DO.REPLACE("inspectable"), L.M.CALL_RETRY("set inspectable"));
 				
-				mInspectable = value;
+				mInspectee = value;
 			}
 		}
 

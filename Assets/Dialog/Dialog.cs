@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
 
-public class Dialog
+namespace Choanji
 {
+
+	public class Dialog : MonoBehaviour
+	{
+	}
+
 }

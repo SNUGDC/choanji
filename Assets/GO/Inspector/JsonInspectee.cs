@@ -4,18 +4,18 @@ using LitJson;
 
 namespace Choanji
 {
-	public class JsonInspectable : IInspectable
+	public sealed class JsonInspectee : IInspectee
 	{
-		public JsonInspectable(JsonData _data)
+		public JsonInspectee(JsonData _data)
 		{
 			data = _data;
 		}
 
 		public readonly JsonData data;
 
-		public Action<InspectData> onInspect;
+		public Action<InspectRequest> onInspect;
 
-		public bool Inspect(InspectData _data)
+		protected override bool DoStart(InspectRequest _data)
 		{
 			if (onInspect == null)
 				return false;

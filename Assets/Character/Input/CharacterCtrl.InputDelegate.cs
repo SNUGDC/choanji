@@ -17,6 +17,12 @@ namespace Choanji
 				mMoveTimer.Add(Time.deltaTime);
 		}
 
+		public void ProcessInputYes()
+		{
+			if (!isInspecting)
+				Inspect();
+		}
+
 		public void ProcessInput(Direction _dir)
 		{
 			if (!mMoveTimer.isDefault)

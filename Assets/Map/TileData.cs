@@ -11,13 +11,13 @@ namespace Choanji
 	{
 		public bool occupied;
 		public Direction wall;
-		public MapLayerType inspectable;
+		public MapLayerType inspectee;
 		private JsonData[] mDatas;
 
 		public JsonData GetInspectableData()
 		{
-			if (inspectable.IsDefault()) return null;
-			return mDatas[(int) inspectable - 1];
+			if (inspectee.IsDefault()) return null;
+			return mDatas[(int) inspectee - 1];
 		}
 
 		public JsonData this[MapLayerType _layer]
@@ -56,18 +56,18 @@ namespace Choanji
 			} while (false);
 
 #if !UNITY_EDITOR
-			if (!inspectable)
+			if (!inspectee.IsDefault())
 #endif
 			{
 				JsonData _inspJson;
-				if (_data.TryGet("inspectable", out _inspJson))
+				if (_data.TryGet("inspectee", out _inspJson))
 				{
 					var _insp = (bool) _inspJson;
 #if UNITY_EDITOR
-					if (inspectable != default(MapLayerType) && _insp)
-						L.W(L.M.CALL_RETRY("set inspectable"));
+					if (!inspectee.IsDefault() && _insp)
+						L.W(L.M.CALL_RETRY("set inspectee"));
 #endif
-					if (_insp) inspectable = _layer;
+					if (_insp) inspectee = _layer;
 				}
 			}
 		}

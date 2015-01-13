@@ -3,11 +3,42 @@ using UnityEngine;
 
 namespace Choanji
 {
-	public partial class Character : MonoBehaviour
+	public class Character : MonoBehaviour
 	{
-		void Start()
+		public Coor position
 		{
+			get
+			{
+				return new Coor(transform.localPosition);
+			}
 
+			set
+			{
+				transform.localPosition = (Vector2) value;
+			}
+		}
+
+		private Direction mDirection = Direction.D;
+		public Direction direction {
+			get { return mDirection; }
+			private set { mDirection = value; } 
+		}
+
+		public Coor front
+		{
+			get { return position + direction; }
+		}
+
+		public bool CanMove(Direction _dir)
+		{
+			return true;
+		}
+
+		public void Move(Direction _dir)
+		{
+			D.Assert(CanMove(_dir));
+			direction = _dir;
+			position += _dir;
 		}
 	}
 

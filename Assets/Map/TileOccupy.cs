@@ -1,57 +1,26 @@
-﻿using System.Xml.Serialization;
-using Gem;
+﻿using Gem;
 
 namespace Choanji
 {
 
-	public class TileOccupy
+	public sealed class TileOccupy : TileOwnership
 	{
-		private static readonly Point INVALID = new Point(-1, -1);
 		private readonly Grid<TileState> mStates;
-		private Point mPosition = INVALID;
 
 		public TileOccupy(Grid<TileState> _states)
 		{
 			mStates = _states;
 		}
 
-		public TileOccupy(Grid<TileState> _states, Point _p)
-			: this(_states)
+		protected override bool DoRetain(Point _p)
 		{
-			Occupy(_p);
+			mStates[_p].Occupy();
+			return true;
 		}
 
-		~TileOccupy()
+		protected override void DoRelease()
 		{
-			Unoccupy();
-		}
-
-		public bool isOccupied { get { return mPosition.x >= 0; } }
-
-		public void Occupy(Point _p)
-		{
-			if (mPosition == _p)
-				return;
-
-			Unoccupy();
-
-			if (_p.x < 0)
-			{
-				L.E(L.M.SHOULD_POS("position x", _p.x));
-				return;
-			}
-
-			mPosition = _p;
-			mStates[mPosition].Occupy();
-		}
-
-		public void Unoccupy()
-		{
-			if (isOccupied)
-			{
-				mStates[mPosition].Unoccupy();
-				mPosition = INVALID;
-			}
+			mStates[position.Value].Unoccupy();
 		}
 	}
 

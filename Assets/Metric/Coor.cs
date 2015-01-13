@@ -38,6 +38,26 @@ namespace Choanji
 #endif
 		}
 
+		public static Coor operator +(Coor a, Coor b)
+		{
+			return new Coor(a.x + b.x, a.y + b.y);
+		}
+
+		public static Coor operator -(Coor _this)
+		{
+			return new Coor(-_this.x, -_this.y);
+		}
+
+		public static Coor operator -(Coor a, Coor b)
+		{
+			return a + (-b);
+		}
+
+		public static Coor operator +(Coor _this, Direction _dir)
+		{
+			return _this + (Coor) new Point(_dir);
+		}
+
 		public static implicit operator Coor(Vector2 _v)
 		{
 			return new Coor(_v);
