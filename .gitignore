@@ -108,4 +108,5 @@ output_log.txt
 *.dwlt
 
 /Binary
+/Assets/UnityVS.meta
 /Assets/UnityVS
