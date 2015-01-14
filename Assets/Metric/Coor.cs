@@ -38,6 +38,11 @@ namespace Choanji
 #endif
 		}
 
+		public override string ToString()
+		{
+			return "(" + x + ", " + y + ")";
+		}
+
 		public static Coor operator +(Coor a, Coor b)
 		{
 			return new Coor(a.x + b.x, a.y + b.y);

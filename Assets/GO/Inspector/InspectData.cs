@@ -1,17 +1,13 @@
-﻿using Gem;
-
-namespace Choanji
+﻿namespace Choanji
 {
 	public class InspectRequest
-	{
-		public Connection<InspectResponse, IInspectee> onDone;
-	}
+	{}
 
 	public class InspectResponse
 	{
-		public InspectResponse(bool _sucess)
+		public InspectResponse(bool _success)
 		{
-			success = _sucess;
+			success = _success;
 		}
 
 		public readonly bool success;

@@ -19,11 +19,16 @@ namespace Choanji
 
 			var _state = TryGetTileState(ch.front);
 
-			if (_state.inspectee != null)
+			if ((_state != null) && (_state.inspectee != null)
+				&& _state.inspectee.CanStart())
 			{
+				isInspecting = true;
+
 				if (mOnInspectDone == null)
-					mOnInspectDone = new Connection<InspectResponse, IInspectee>(delegate { isInspecting = false; });
-				isInspecting = _state.inspectee.Start(new InspectRequest { onDone = mOnInspectDone });
+					mOnInspectDone = new Connection<InspectResponse, IInspectee>(
+					delegate { isInspecting = false; });
+
+				_state.inspectee.Start(new InspectRequest(), mOnInspectDone);
 			}
 		}
 	}

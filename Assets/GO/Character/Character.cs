@@ -21,7 +21,13 @@ namespace Choanji
 		private Direction mDirection = Direction.D;
 		public Direction direction {
 			get { return mDirection; }
-			private set { mDirection = value; } 
+			set
+			{
+				if (direction == value)
+					return;
+				mDirection = value;
+				renderer_.transform.SetEulerZ(mDirection.ToDeg());
+			} 
 		}
 
 		public Coor front
@@ -29,12 +35,7 @@ namespace Choanji
 			get { return position + direction; }
 		}
 
-		public GameObject renderer;
-
-		public void LookAt(Direction _dir)
-		{
-			renderer.transform.SetEulerZ(_dir.ToDeg());
-		}
+		public GameObject renderer_;
 
 		public bool CanMove(Direction _dir)
 		{
@@ -46,7 +47,6 @@ namespace Choanji
 			D.Assert(CanMove(_dir));
 			direction = _dir;
 			position += _dir;
-			LookAt(_dir);
 		}
 	}
 

@@ -22,20 +22,26 @@ namespace Choanji
 					return;
 				mCurMap = value;
 				mOccupy = new TileOccupy(mCurMap.states);
+				TrySetPosition(ch.position);
 			}
 		}
 
 		public ActionWrap<Coor, TileState> doTileRetain
 			= new ActionWrap<Coor, TileState>();
 
-		void Start()
+		void Awake()
 		{
 			ch = GetComponent<Character>();
 		}
 
 		private TileState TryGetTileState(Coor _pos)
 		{
-			D.Assert(curMap != null);
+			if (curMap == null)
+			{
+				L.E(L.M.SHOULD_NOT_NULL("curMap"));
+				return null;
+			}
+
 			TileState _state;
 			curMap.states.TryGet(_pos, out _state);
 			return _state;

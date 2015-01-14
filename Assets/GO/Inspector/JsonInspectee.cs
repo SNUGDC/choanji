@@ -15,12 +15,14 @@ namespace Choanji
 
 		public Action<InspectRequest> onInspect;
 
-		protected override bool DoStart(InspectRequest _data)
+		public override bool CanStart()
 		{
-			if (onInspect == null)
-				return false;
-			onInspect.CheckAndCall(_data);
-			return true;
+			return base.CanStart() && (onInspect != null);
+		}
+
+		protected override void DoStart(InspectRequest _request)
+		{
+			onInspect.CheckAndCall(_request);
 		}
 	}
 }

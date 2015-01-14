@@ -5,11 +5,11 @@ namespace Choanji
 
 	public sealed class DialogInspectee : IInspectee
 	{
-		protected override bool DoStart(InspectRequest _data)
+		protected override void DoStart(InspectRequest _request)
 		{
 			L.W("start!");
 			TheDialog.g.Play(new DialogDef());
-			return true;
+			Done(new InspectResponse(true));
 		}
 
 
