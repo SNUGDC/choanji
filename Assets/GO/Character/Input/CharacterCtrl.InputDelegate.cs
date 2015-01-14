@@ -31,7 +31,9 @@ namespace Choanji
 			D.Assert(curMap != null);
 
 			mMoveTimer.Add(float.Epsilon);
-			TryMove(_dir);
+
+			if (!TryMove(_dir))
+				ch.LookAt(_dir);
 		}
 	}
 }

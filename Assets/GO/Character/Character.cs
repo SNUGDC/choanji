@@ -29,6 +29,13 @@ namespace Choanji
 			get { return position + direction; }
 		}
 
+		public GameObject renderer;
+
+		public void LookAt(Direction _dir)
+		{
+			renderer.transform.SetEulerZ(_dir.ToDeg());
+		}
+
 		public bool CanMove(Direction _dir)
 		{
 			return true;
@@ -39,6 +46,7 @@ namespace Choanji
 			D.Assert(CanMove(_dir));
 			direction = _dir;
 			position += _dir;
+			LookAt(_dir);
 		}
 	}
 
