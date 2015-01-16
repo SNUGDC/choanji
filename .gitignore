@@ -107,6 +107,7 @@ output_log.txt
 *.*~
 *.dwlt
 
+sysinfo.txt
 /Binary
 /Assets/UnityVS.meta
 /Assets/UnityVS
