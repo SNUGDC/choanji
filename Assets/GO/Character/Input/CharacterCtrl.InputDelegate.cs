@@ -33,7 +33,10 @@ namespace Choanji
 			mMoveTimer.Add(float.Epsilon);
 
 			if (!TryMove(_dir))
-				ch.direction = _dir;
+			{
+				if (!blockMove)
+					ch.direction = _dir;
+			}
 		}
 	}
 }

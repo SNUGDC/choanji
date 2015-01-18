@@ -20,7 +20,8 @@ namespace Choanji
 			{
 				if (mStroller.isSetuped)
 				{
-					L.W("trying to set orgText while strolling.");
+					if (!mStroller.isEnded)
+						L.W("trying to set orgText while strolling.");
 					mStroller.StopAndReset();
 					events.onRebase.CheckAndCall();
 				}
