@@ -6,7 +6,28 @@ namespace Choanji
 
 	public partial class CharacterCtrl
 	{
-		public bool isInspecting { get; private set; }
+		private bool mIsInspecting;
+
+		public bool isInspecting
+		{
+			get { return mIsInspecting; }
+			private set
+			{
+				if (isInspecting == value)
+				{
+					L.W(L.M.CALL_RETRY("set inspecting"));
+					return;
+				}
+
+				mIsInspecting = value;
+
+				if (isInspecting)
+					blockMove.Add(CharacterMoveBlock.INSPECT);
+				else
+					blockMove.Remove(CharacterMoveBlock.INSPECT);
+			}
+		}
+
 		private Connection<InspectResponse, IInspectee> mOnInspectDone;
 
 		public void Inspect()

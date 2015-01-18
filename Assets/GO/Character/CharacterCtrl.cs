@@ -8,6 +8,9 @@ namespace Choanji
 	{
 		public Character ch { get; private set; }
 
+		public SetBool<CharacterMoveBlock> blockMove 
+			= new SetBool<CharacterMoveBlock>();
+
 		private MapData mCurMap;
 		private TileOccupy mOccupy;
 
@@ -72,6 +75,12 @@ namespace Choanji
 
 		public bool TryMove(Direction _dir)
 		{
+			if (!ch.CanMove(_dir))
+				return false;
+
+			if (blockMove)
+				return false;
+
 			var _curTile = TryGetTileState(ch.position);
 			if ((_curTile != null) && !_curTile.IsHole(_dir))
 				return false;
@@ -79,9 +88,6 @@ namespace Choanji
 			var _pos = ch.position + _dir;
 			var _state = TryGetTileState(_pos);
 			if ((_state == null) || _state.occupied || !_state.IsHole(_dir.Neg())) 
-				return false;
-
-			if (!ch.CanMove(_dir))
 				return false;
 
 			BeforeSetPosition(_pos, _state);
