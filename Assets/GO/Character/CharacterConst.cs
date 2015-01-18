@@ -3,6 +3,7 @@
 	public enum CharacterMoveBlock
 	{
 		INSPECT,
+		INSPECTEE,
 	}
 
 }

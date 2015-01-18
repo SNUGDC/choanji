@@ -3,6 +3,15 @@ using Gem;
 
 namespace Choanji
 {
+	public class CharacterInspectRequest : InspectRequest
+	{
+		public CharacterInspectRequest(Character _ch)
+		{
+			ch = _ch;
+		}
+
+		public readonly Character ch;
+	}
 
 	public partial class CharacterCtrl
 	{
@@ -28,7 +37,7 @@ namespace Choanji
 			}
 		}
 
-		private Connection<InspectResponse, IInspectee> mOnInspectDone;
+		private ActionWrap<InspectResponse, IInspectee> mOnInspectDone;
 
 		public void Inspect()
 		{
@@ -46,10 +55,10 @@ namespace Choanji
 				isInspecting = true;
 
 				if (mOnInspectDone == null)
-					mOnInspectDone = new Connection<InspectResponse, IInspectee>(
-					delegate { isInspecting = false; });
+					mOnInspectDone = new ActionWrap<InspectResponse, IInspectee>
+					{ val = delegate { isInspecting = false; } };
 
-				_state.inspectee.Start(new InspectRequest(), mOnInspectDone);
+				_state.inspectee.Start(new CharacterInspectRequest(ch), mOnInspectDone);
 			}
 		}
 	}

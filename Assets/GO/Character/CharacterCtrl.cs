@@ -96,6 +96,14 @@ namespace Choanji
 			return true;
 		}
 
+		public bool TryTurn(Direction _dir)
+		{
+			if (blockMove)
+				return false;
+			ch.direction = _dir;
+			return true;
+		}
+
 		void Update()
 		{
 			UpdateInput();

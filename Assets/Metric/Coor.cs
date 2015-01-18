@@ -63,6 +63,11 @@ namespace Choanji
 			return _this + (Coor) new Point(_dir);
 		}
 
+		public static explicit operator Direction(Coor _c)
+		{
+			return (Direction) (Point) _c;
+		}
+
 		public static implicit operator Coor(Vector2 _v)
 		{
 			return new Coor(_v);

@@ -6,7 +6,13 @@ namespace Choanji
 	{
 		public bool isRunning { get; private set; }
 
-		private ActionWrap<InspectResponse, IInspectee> mOnDone;
+		public ActionWrap<InspectRequest> onStart 
+			= new ActionWrap<InspectRequest>();
+
+		public ActionWrap<InspectResponse, IInspectee> onDone
+			= new ActionWrap<InspectResponse, IInspectee>();
+
+		private ActionWrap<InspectResponse, IInspectee> mDoneCallback;
 	
 		~IInspectee()
 		{
@@ -20,31 +26,33 @@ namespace Choanji
 		}
 
 		public void Start(
-			InspectRequest _request, 
-			Connection<InspectResponse, IInspectee> _conn = null)
+			InspectRequest _request,
+			ActionWrap<InspectResponse, IInspectee> _conn = null)
 		{
 #if UNITY_EDITOR
 			D.Assert(CanStart());
 #endif
 
-			if (_conn != null)
-			{
-				mOnDone = new ActionWrap<InspectResponse, IInspectee>();
-				_conn.Conn(mOnDone);
-			}
+			mDoneCallback = _conn;
+
+			onStart.val.CheckAndCall(_request);
 
 			DoStart(_request);
 		}
 
 		protected abstract void DoStart(InspectRequest _data);
 
-		protected virtual void Done(InspectResponse _response)
+		protected void Done(InspectResponse _response)
 		{
-			if (mOnDone != null)
+			if (mDoneCallback != null)
 			{
-				mOnDone.val(_response, this);
-				mOnDone = null;
+				mDoneCallback.val(_response, this);
+				mDoneCallback = null;
 			}
+
+			onDone.val.CheckAndCall(_response, this);
 		}
+
+		protected virtual void DoDone(InspectResponse _response) { }
 	}
 }
