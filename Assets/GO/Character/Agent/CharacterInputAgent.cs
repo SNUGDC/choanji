@@ -12,21 +12,21 @@ namespace Choanji
 		void Start()
 		{
 			mInput = new InputGroup(InputManager.g);
-			mInput.Add(InputCode.Y, MakeYesHandler());
+			mInput.Add(MakeYesBind());
 			mInput.DecorateDirection(ProcessDir, _dir => ProcessDir(_dir));
 			mDelegate = GetComponent<CharacterCtrl>();
 		}
 
-		private InputHandler MakeYesHandler()
+		private InputBind MakeYesBind()
 		{
-			return new InputHandler()
+			return new InputBind(InputCode.Y, new InputHandler()
 			{
 				down = () =>
 				{
 					mDelegate.ProcessInputYes();
 					return true;
 				}
-			};
+			});
 		}
 
 		private bool ProcessDir(Direction _dir)
