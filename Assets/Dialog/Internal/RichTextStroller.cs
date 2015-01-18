@@ -9,8 +9,8 @@ namespace Choanji
 		private readonly int mMaxLen;
 
 		public bool isSetuped { get { return orgText != null; } }
-		public bool isStrollDone { get { return length == mMaxLen; } }
-		public bool isEnded { get { return mIdx == orgText.Length; } }
+		public bool isStrollDone { get { return (length == mMaxLen) || isEnded; } }
+		public bool isEnded { get { return (orgText == null) || (mIdx == orgText.Length); } }
 
 		public string orgText { get; private set; }
 		private int mIdx;
@@ -43,7 +43,7 @@ namespace Choanji
 		public void StopAndReset()
 		{
 #if UNITY_EDITOR
-			if (isSetuped)
+			if (!isSetuped)
 			{
 				L.E(L.M.CALL_RETRY("StopAndReset"));
 				return;
@@ -51,10 +51,12 @@ namespace Choanji
 #endif
 
 			mIdx = 0;
-			mBase = 0;
 			orgText = null;
-			text = "";
-			length = 0;
+
+			mTagHeads.Clear();
+			mTagTails.Clear();
+
+			Rebase();
 		}
 
 		public bool Next()
@@ -80,9 +82,6 @@ namespace Choanji
 
 		public bool Rebase()
 		{
-			if (isEnded)
-				return false;
-
 			mBase = mIdx;
 			text = "";
 			length = 0;

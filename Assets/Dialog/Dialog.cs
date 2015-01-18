@@ -6,8 +6,8 @@ namespace Choanji
 {
 	public class Dialog : MonoBehaviour
 	{
-		private const int MAX_LEN = 10;
-		private const float STROLL_DELAY = 0.01f;
+		private const int MAX_LEN = 100;
+		private const float STROLL_DELAY = 0.02f;
 		
 		public Text uiText;
 
@@ -15,10 +15,16 @@ namespace Choanji
 
 		public string orgText
 		{
+			get { return mStroller.orgText; }
 			set
 			{
-				if (mStroller.isSetuped) 
+				if (mStroller.isSetuped)
+				{
+					L.W("trying to set orgText while strolling.");
 					mStroller.StopAndReset();
+					events.onRebase.CheckAndCall();
+				}
+
 				if (value != null)
 					mStroller.Start(value);
 			}
