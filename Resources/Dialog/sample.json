@@ -1,13 +1,14 @@
 {
 	"meta": {
-		"skin": "default",
-		"rich": false,
+		"skin": "default"
 	},
 	
 	"txts": [
+		"aaa",
+		"bbb",
 		"aaa $pl.name$",
 		"bbb $pl.gold$",
-		"ccc",
+		"ccc"/*,
 		
 		{
 			"type": "CHOOSE",
@@ -25,6 +26,6 @@
 					"data": {}
 				}
 			]
-		}
+		}*/
 	]
 }

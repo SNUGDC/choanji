@@ -2,18 +2,19 @@
 
 namespace Choanji
 {
-
 	public sealed class DialogInspectee : IInspectee
 	{
+		public DialogProvider dialog;
+
 		protected override void DoStart(InspectRequest _request)
 		{
-			L.W("start!");
-			TheDialog.g.Play(new DialogDef());
-			Done(new InspectResponse(true));
+			TheDialog.g.Open(dialog, new DialogHandler
+			{
+				onDone = delegate {
+					Done(new InspectResponse(true));
+				}
+			});
 		}
-
-
 	}
-
 
 }
