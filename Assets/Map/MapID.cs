@@ -1,6 +1,6 @@
-﻿using Gem;
-
-namespace Choanji
+﻿namespace Choanji
 {
 	public enum MapID {}
+
+	public enum WorldID {}
 }

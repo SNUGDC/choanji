@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using Gem;
+using LitJson;
 
 namespace Choanji
 {
@@ -9,15 +10,18 @@ namespace Choanji
 		{
 			var _meta = new MapMeta(_name);
 
-			var _props = _tmxRoot["map"]["properties"];
-			if (_props == null)
+			var _propsNode = _tmxRoot["map"]["properties"];
+			if (_propsNode == null)
 			{
 				L.W(L.M.KEY_NOT_EXISTS("properties"));
 				return _meta;
 			}
 
-			// todo: meta properties.
-			// var _propsJson = ParseProps(_props);
+			var _props = ParseProps(_propsNode);
+
+			JsonData _prop;
+			if (_props.TryGet("world", out _prop))
+				_meta.SetWorld((string) _prop);
 
 			return _meta;
 		}
