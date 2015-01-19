@@ -58,7 +58,7 @@ namespace Choanji
 
 		private static string BinPath(string _name)
 		{
-			return "Assets/Tiled2Unity/Imported/" + _name + ".mapData.bin";
+			return "Resources/Map/" + _name + ".bin";
 		}
 
 		public static MapData Load(string _name)
