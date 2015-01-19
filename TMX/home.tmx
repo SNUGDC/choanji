@@ -2,6 +2,7 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="4">
  <properties>
   <property name="unity:scale" value="0.0625"/>
+  <property name="world" value="house_01"/>
  </properties>
  <tileset firstgid="1" name="Interior general" tilewidth="16" tileheight="16">
   <image source="../Assets/Tileset/Interior general.PNG" width="128" height="4016"/>
