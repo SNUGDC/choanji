@@ -38,7 +38,7 @@ namespace Choanji
 
 			var _mapData = new MapData();
 			_mapData.meta = TiledParser.ParseMeta(_tmxRoot, _name);
-			_mapData.grid = TiledParser.ImportData(_tmxRoot);
+			_mapData.grid = TiledParser.ParseData(_tmxRoot);
 			_mapData.Save(_name);
 
 			_prefab.AddComponent<MapDataComp>().binName = _name;

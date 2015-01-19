@@ -96,7 +96,7 @@ namespace Choanji
 			private readonly List<TilesetData> mList = new List<TilesetData>();
 		}
 
-		public static Grid<TileData> ImportData(XmlNode _tmxRoot)
+		public static Grid<TileData> ParseData(XmlNode _tmxRoot)
 		{
 			var _tmx = _tmxRoot["map"];
 			var _tiles = new TileDatas();
