@@ -8,7 +8,7 @@ namespace Choanji
 	{
 		public MapMeta(string _name)
 		{
-			id = (MapID) _name.GetHashCode();
+			id = MapIDHelper.Make(_name);
 			name = _name;
 		}
 
@@ -17,6 +17,8 @@ namespace Choanji
 
 		private WorldID mWorld;
 		public WorldID world { get { return mWorld; } }
+
+		public Point size;
 
 		public bool outdoor;
 		public Point regionMapPosition;
@@ -32,6 +34,8 @@ namespace Choanji
 			D.Assert(world == 0);
 			mWorld = (WorldID) _world.GetHashCode();
 		}
+
+		public static implicit operator MapID(MapMeta _this) { return _this.id; }
 	}
 
 }

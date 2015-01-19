@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -6,21 +7,31 @@ namespace Choanji
 	{
 		[HideInInspector]
 		public string binName;
-		public MapData data { get; private set; }
+
+		public bool isLoaded { get { return data != null; } }
+		public MapMetaAndGrid data { get; private set; }
 
 		void Awake()
 		{
 			Load();
 		}
 
-		public void Load()
+		private void Load()
 		{
-			data = MapData.Load(binName);
-		}
+			if (isLoaded)
+			{
+				L.W(L.M.CALL_RETRY("Load"));
+				return;
+			}
 
-		public static implicit operator MapData(MapDataComp _this)
-		{
-			return _this.data;
+			MapMetaAndGrid _data;
+
+			if (MapDB.TryGet(MapIDHelper.Make(binName), out _data))
+			{
+				if (_data.grid == null) 
+					_data.grid = MapUtil.LoadTileGrid(binName);
+				data = _data;
+			}
 		}
 	}
 }

@@ -1,22 +1,82 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gem;
 
 namespace Choanji
 {
+	using DB = Dictionary<MapID, MapMetaAndGrid>;
+	
+	[Serializable]
+	public class MapMetaAndGrid
+	{
+		public MapMeta meta;
+		[NonSerialized]
+		public Grid<TileData> grid;
+	}
+
 	public static class MapDB
 	{
-		public static void Add(MapData _data)
+		private static readonly Path_ BIN_PATH = new Path_("Resources/DB/map.db");
+
+		private static DB sDB;
+
+		public static bool isLoaded { get { return sDB != null; } }
+
+		public static bool TryGet(MapID _id, out MapMetaAndGrid _data)
 		{
-			sMaps.TryAdd(_data.meta.id, _data);
+			if (!isLoaded) Load();
+			return sDB.TryGet(_id, out _data);
 		}
 
-		public static void Remove(MapID _id)
+		public static MapMetaAndGrid Get(MapID _id)
 		{
-			sMaps.Remove(_id);
+			return sDB[_id];
 		}
 
-		public static readonly Dictionary<MapID, MapData> sMaps 
-			= new Dictionary<MapID, MapData>();
+		public static bool Add(MapMeta _meta)
+		{
+			D.Assert(isLoaded);
+			return sDB.TryAdd(_meta, new MapMetaAndGrid { meta =_meta });
+		}
+
+		public static bool Remove(MapID _id)
+		{
+			D.Assert(isLoaded);
+			return sDB.TryRemove(_id);
+		}
+
+		public static void Replace(MapMeta _meta)
+		{
+			Remove(_meta);
+			Add(_meta);
+		}
+
+		public static void Save()
+		{
+			if (!isLoaded)
+			{
+				L.W(L.M.CALL_INVALID);
+				return;
+			}
+
+			sDB.Enc(BIN_PATH);
+		}
+
+		public static bool TryLoad()
+		{
+			if (isLoaded) 
+				return false;
+
+			Load();
+			return true;
+		}
+
+		public static void Load()
+		{
+			D.Assert(!isLoaded);
+			if (!SerializeHelper.Dec(BIN_PATH, out sDB))
+				sDB = new DB();
+		}
 	}
 
 }

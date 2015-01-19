@@ -32,14 +32,17 @@ namespace Choanji
 			}
 			catch (Exception e)
 			{
-				Debug.Log(e.Message);
+				Debug.LogException(e);
 				return;
 			}
 
-			var _mapData = new MapData();
-			_mapData.meta = TiledParser.ParseMeta(_tmxRoot, _name);
-			_mapData.grid = TiledParser.ParseData(_tmxRoot);
-			_mapData.Save(_name);
+			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
+			MapDB.TryLoad();
+			MapDB.Replace(_meta);
+			MapDB.Save();
+
+			var _mapData = TiledParser.ParseData(_tmxRoot);
+			MapUtil.SaveTileGrid(_meta.name, _mapData);
 
 			_prefab.AddComponent<MapDataComp>().binName = _name;
 		}

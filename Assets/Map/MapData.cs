@@ -3,13 +3,23 @@ using Gem;
 
 namespace Choanji
 {
-	[Serializable]
+	using TileGrid = Grid<TileData>;
+	using StateGrid = Grid<TileState>;
+
 	public class MapData 
 	{
+		public MapData() { }
+
+		public MapData(MapMetaAndGrid _data)
+		{
+			meta = _data.meta;
+			grid = _data.grid;
+		}
+
 		public MapMeta meta;
 
-		private Grid<TileData> mGrid;
-		public Grid<TileData> grid
+		private TileGrid mGrid;
+		public TileGrid grid
 		{
 			get { return mGrid; }
 
@@ -28,9 +38,8 @@ namespace Choanji
 			}
 		}
 
-		[NonSerialized]
-		private Grid<TileState> mStates;
-		public Grid<TileState> states
+		private StateGrid mStates;
+		public StateGrid states
 		{
 			get
 			{
@@ -43,7 +52,7 @@ namespace Choanji
 				if (mStates != null)
 					return mStates;
 
-				mStates = new Grid<TileState>(grid.size);
+				mStates = new StateGrid(grid.size);
 
 				foreach (var p in grid.size.Range())
 				{
@@ -55,23 +64,6 @@ namespace Choanji
 				return mStates;
 			}
 		}
-
-		private static string BinPath(string _name)
-		{
-			return "Resources/Map/" + _name + ".bin";
-		}
-
-		public static MapData Load(string _name)
-		{
-			return SerializeHelper.DeserializeFile<MapData>(BinPath(_name));
-		}
-
-#if UNITY_EDITOR
-		public void Save(string _name)
-		{
-			this.SerializeToFile(BinPath(_name));
-		}
-#endif
 
 	}
 }

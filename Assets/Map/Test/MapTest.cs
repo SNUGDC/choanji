@@ -10,9 +10,10 @@ namespace Gem
 
 		void Awake()
 		{
-			MapManager.cur = map;
+			MapManager.cur = new MapData(map.data);
+
 			foreach (var _ch in chs)
-				_ch.curMap = map;
+				_ch.curMap = MapManager.cur;
 		}
 	}
 }
