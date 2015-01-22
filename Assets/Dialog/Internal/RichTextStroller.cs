@@ -118,6 +118,8 @@ namespace Choanji
 				}
 
 				_offset += _tag.offset;
+				if (orgText.Length == mIdx + _offset)
+					break;
 
 			} while (true);
 

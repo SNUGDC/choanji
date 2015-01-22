@@ -8,7 +8,9 @@
 		"bbb",
 		"aaa $pl.name$",
 		"bbb $pl.gold$",
-		"ccc"/*,
+		"<b>bold</b><i>italic</i><color=#ff0000>color</color>"
+		
+		/*,
 		
 		{
 			"type": "CHOOSE",
