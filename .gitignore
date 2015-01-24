@@ -103,7 +103,6 @@ output_log.txt
 *.zip
 *.rtf
 *.pdf
-*.DotSettings
 *.*~
 *.dwlt
 
