@@ -114,14 +114,14 @@ namespace Choanji
 			}
 
 			// parse layer
-			var _layers = new Dictionary<MapLayerType, Grid<TileAndJson>>();
+			var _layers = new Dictionary<TiledLayerType, Grid<TileAndJson>>();
 
 			foreach (var _nodeObj in _tmx)
 			{
 				var _node = (XmlNode) _nodeObj;
 				if (_node.Name != "layer") continue;
 
-				MapLayerType _layerType;
+				TiledLayerType _layerType;
 				var _attrs = _node.Attributes;
 
 				if (!EnumHelper.TryParse(_attrs["name"].Value, out _layerType))
@@ -186,7 +186,7 @@ namespace Choanji
 			return _ret;
 		}
 		
-		private static Grid<TileData> MergeLayers(Dictionary<MapLayerType, Grid<TileAndJson>> _layers)
+		private static Grid<TileData> MergeLayers(Dictionary<TiledLayerType, Grid<TileAndJson>> _layers)
 		{
 			if (_layers.Count == 0) 
 				return null;

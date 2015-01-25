@@ -43,13 +43,11 @@ namespace Choanji
 			_prefab.transform.SetPosY(_tiledMap.TileHeight);
 
 			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
-			_meta.size = new Point(_tiledMap.TileWidth, _tiledMap.TileHeight);
-
 			MapDB.Replace(new MapStatic(_meta));
 			MapDB.Save();
 
-			var _mapData = TiledParser.ParseData(_tmxRoot);
-			MapUtil.SaveTileGrid(_meta.name, _mapData);
+			var _grid = TiledParser.ParseData(_tmxRoot);
+			MapUtil.SaveTileGrid(_meta.name, _grid);
 
 			_prefab.AddComponent<MapStaticComp>().binName = _name;
 		}

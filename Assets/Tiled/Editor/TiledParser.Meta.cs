@@ -1,6 +1,5 @@
 ﻿using System.Xml;
 using Gem;
-using LitJson;
 
 namespace Choanji
 {
@@ -8,7 +7,13 @@ namespace Choanji
 	{
 		public static MapMeta ParseMeta(XmlNode _tmxRoot, string _name)
 		{
-			var _meta = new MapMeta(_name);
+			var _mapAttrs = _tmxRoot["map"].Attributes;
+
+			var _size = new Point(
+				_mapAttrs["width"].AsInt(), 
+				_mapAttrs["height"].AsInt());
+
+			var _meta = new MapMeta(_name, _size);
 
 			var _propsNode = _tmxRoot["map"]["properties"];
 			if (_propsNode == null)

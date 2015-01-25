@@ -1,6 +1,6 @@
 ﻿namespace Choanji
 {
-	public enum MapLayerType
+	public enum TiledLayerType
 	{
 		FLR = 1,
 		RUG,
@@ -10,7 +10,7 @@
 		STD_LOW,
 	}
 
-	public static class MapLayerTypeHelper
+	public static class TiledLayerHelper
 	{
 		public const int COUNT = 6;
 	}

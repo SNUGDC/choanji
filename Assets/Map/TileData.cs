@@ -11,7 +11,7 @@ namespace Choanji
 	{
 		public bool occupied;
 		public Direction wall;
-		public MapLayerType inspectee;
+		public TiledLayerType inspectee;
 		private JsonData[] mDatas;
 
 		public JsonData GetInspectableData()
@@ -20,7 +20,7 @@ namespace Choanji
 			return mDatas[(int) inspectee - 1];
 		}
 
-		public JsonData this[MapLayerType _layer]
+		public JsonData this[TiledLayerType _layer]
 		{
 			get
 			{
@@ -29,10 +29,10 @@ namespace Choanji
 			}
 		}
 
-		public void Merge(MapLayerType _layer, JsonData _data)
+		public void Merge(TiledLayerType _layer, JsonData _data)
 		{
 			if (mDatas == null)
-				mDatas = new JsonData[MapLayerTypeHelper.COUNT];
+				mDatas = new JsonData[TiledLayerHelper.COUNT];
 
 #if UNITY_EDITOR
 			var _layerData = mDatas[(int) _layer - 1];

@@ -5,6 +5,12 @@ namespace Choanji
 {
 	public static class TheWorld
 	{
+		static TheWorld()
+		{
+			// note: avoid null pointer exception.
+			g = new World(new WorldBluePrint());
+		}
+
 #if UNITY_EDITOR
 		private static Vector2? mPosition;
 #endif
@@ -19,13 +25,13 @@ namespace Choanji
 			{
 				mBluePrint = value;
 
-				if (world != null)
+				if (g != null)
 				{
 					L.W(L.M.SHOULD_NULL("world"));
-					world.Purge();
+					g.Purge();
 				}
 
-				world = new World(bluePrint);
+				g = new World(bluePrint);
 
 #if UNITY_EDITOR
 				mPosition = null;
@@ -33,11 +39,11 @@ namespace Choanji
 			}
 		}
 
-		public static World world { get; private set; }
+		public static World g { get; private set; }
 
 		public static void Update()
 		{
-			if (world == null)
+			if (g == null)
 			{
 				L.W(L.M.CALL_INVALID);
 				return;
@@ -63,8 +69,8 @@ namespace Choanji
 			}
 #endif
 
-			world.Construct(_rect);
-			world.Destruct(_rect);
+			g.Construct(_rect);
+			g.Destruct(_rect);
 		}
 	}
 

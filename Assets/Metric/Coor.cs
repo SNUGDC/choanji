@@ -9,8 +9,7 @@ namespace Choanji
 		public static readonly Coor ZERO = new Coor(0, 0);
 		public static readonly Coor ONE = new Coor(1, 1);
 		public static readonly Coor NULL = new Coor(-94578348, -89348975);
-
-		private const float OFFSET = 0.5f;
+		public static readonly Vector2 OFFSET = new Vector2(0.5f, 0.5f);
 
 		public int x;
 		public int y;
@@ -27,8 +26,7 @@ namespace Choanji
 
 		public Coor(Vector2 _v)
 		{
-			_v.x = _v.x - OFFSET;
-			_v.y = _v.y - OFFSET;
+			_v = _v - OFFSET;
 
 			x = (int) _v.x;
 			y = (int) _v.y;
@@ -49,16 +47,12 @@ namespace Choanji
 
 		public static Coor Ceiling(Vector2 v)
 		{
-			return new Coor(
-				(int) Math.Ceiling(v.x - OFFSET), 
-				(int) Math.Ceiling(v.y - OFFSET));
+			return new Coor((v - OFFSET).Ceiling());
 		}
 
 		public static Coor Floor(Vector2 v)
 		{
-			return new Coor(
-				(int)Math.Floor(v.x - OFFSET),
-				(int)Math.Floor(v.y - OFFSET));
+			return new Coor((v - OFFSET).Floor());
 		}
 
 		#region equality operator
@@ -127,7 +121,7 @@ namespace Choanji
 
 		public static implicit operator Vector2(Coor _c)
 		{
-			return new Vector2(_c.x + OFFSET, _c.y + OFFSET);
+			return new Vector2(_c.x + OFFSET.x, _c.y + OFFSET.y);
 		}
 
 		public static implicit operator Coor(Point _p)

@@ -28,8 +28,6 @@ namespace Choanji
 			if (!mMoveTimer.isDefault)
 				return;
 
-			D.Assert(curMap != null);
-
 			mMoveTimer.Add(float.Epsilon);
 
 			if (!TryMove(_dir))

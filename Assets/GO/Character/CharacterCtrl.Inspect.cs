@@ -47,7 +47,11 @@ namespace Choanji
 				return;
 			}
 
-			var _state = TryGetTileState(ch.front);
+			var _mapAndTile = TheWorld.g.SearchMapAndTile(new WorldCoor(ch.front));
+			if (_mapAndTile == null)
+				return;
+
+			var _state = _mapAndTile.Value.FindState();
 
 			if ((_state != null) && (_state.inspectee != null)
 				&& _state.inspectee.CanStart())

@@ -43,6 +43,11 @@ namespace Choanji
 			mRectGroup.Add(_room.rect);
 		}
 
+		public Room Contains(Point _rect)
+		{
+			return mRectGroup.Contains(_rect).Select(_idx => mRooms[_idx]).FirstOrDefault();
+		}
+
 		public List<Room> Overlaps(PRect _rect)
 		{
 			return mRectGroup.Overlaps(_rect).Select(_idx => mRooms[_idx]).ToList();

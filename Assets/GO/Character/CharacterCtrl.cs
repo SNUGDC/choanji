@@ -1,5 +1,4 @@
-﻿using System;
-using Gem;
+﻿using Gem;
 using UnityEngine;
 
 namespace Choanji
@@ -11,66 +10,36 @@ namespace Choanji
 		public SetBool<CharacterMoveBlock> blockMove 
 			= new SetBool<CharacterMoveBlock>();
 
-		private MapData mCurMap;
-		private TileOccupy mOccupy;
+		private readonly TileOccupy mOccupy = new TileOccupy();
 
-		[HideInInspector]
-		public MapData curMap
-		{
-			get { return mCurMap; }
-
-			set
-			{
-				if (curMap == value)
-					return;
-				mCurMap = value;
-				mOccupy = new TileOccupy(mCurMap.states);
-				TrySetPosition(ch.position);
-			}
-		}
-
-		public ActionWrap<Coor, TileState> doTileRetain
-			= new ActionWrap<Coor, TileState>();
+		public ActionWrap<LocalCoor> doTileRetain
+			= new ActionWrap<LocalCoor>();
 
 		void Awake()
 		{
 			ch = GetComponent<Character>();
 		}
 
-		private TileState TryGetTileState(Coor _pos)
+		public bool TrySetPosition(LocalCoor p)
 		{
-			if (curMap == null)
-			{
-				L.E(L.M.SHOULD_NOT_NULL("curMap"));
-				return null;
-			}
-
-			TileState _state;
-			curMap.states.TryGet(_pos, out _state);
-			return _state;
-		}
-
-		public bool TrySetPosition(Coor _pos)
-		{
-			var _state = TryGetTileState(_pos);
+			var _state = p.FindState();
 			if ((_state == null) || _state.occupied) 
 				return false;
-			SetPosition(_pos, _state);
+			SetPosition(p);
 			return true;
 		}
 
-		private void BeforeSetPosition(Coor _pos, TileState _state)
+		private void BeforeSetPosition(LocalCoor p)
 		{
-			D.Assert(_state != null);
-			mOccupy.Retain(_pos);
-			if (doTileRetain.val != null) 
-				doTileRetain.val(_pos, _state);
+			mOccupy.Retain(p);
+			if (doTileRetain.val != null)
+				doTileRetain.val(p);
 		}
 
-		private void SetPosition(Coor _pos, TileState _state)
+		private void SetPosition(LocalCoor p)
 		{
-			BeforeSetPosition(_pos, _state);
-			ch.position = _pos;
+			BeforeSetPosition(p);
+			ch.position = ((WorldCoor) p).val;
 		}
 
 		public bool TryMove(Direction _dir)
@@ -81,16 +50,25 @@ namespace Choanji
 			if (blockMove)
 				return false;
 
-			var _curTile = TryGetTileState(ch.position);
-			if ((_curTile != null) && !_curTile.IsHole(_dir))
+			var _world = TheWorld.g;
+
+			var _hasCur = _world.SearchMapAndTile(new WorldCoor(ch.position));
+			if (_hasCur == null)
+				return false;
+			var _cur = _hasCur.Value.FindState();
+			if (_cur == null || !_cur.IsHole(_dir))
 				return false;
 
-			var _pos = ch.position + _dir;
-			var _state = TryGetTileState(_pos);
-			if ((_state == null) || _state.occupied || !_state.IsHole(_dir.Neg())) 
+			var _pos = new WorldCoor(ch.position + _dir);
+			var _hasMove = _world.SearchMapAndTile(_pos);
+			if (_hasMove == null)
+				return false;
+			var _move = _hasMove.Value.FindState();
+			if (_move == null || _move.occupied || !_move.IsHole(_dir.Neg()))
 				return false;
 
-			BeforeSetPosition(_pos, _state);
+			var _map = _hasMove.Value.map;
+			BeforeSetPosition(_map.Convert(_pos));
 			ch.Move(_dir);
 			
 			return true;

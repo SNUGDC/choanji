@@ -1,49 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Gem;
-using UnityEditor;
-using UnityEngine;
 
 namespace Choanji
 {
 	using DB = Dictionary<MapID, MapStatic>;
 	
-	[Serializable]
-	public class MapStatic
-	{
-		public MapStatic(MapMeta _meta)
-		{
-			meta = _meta;
-		}
-
-		public readonly MapMeta meta;
-
-		[NonSerialized]
-		public Grid<TileData> grid;
-
-		[NonSerialized] 
-		private Prefab mPrefab;
-
-		public Prefab prefab
-		{
-			get
-			{
-				if (mPrefab.go == null)
-				{
-					var _prefab = Resources.Load<GameObject>(PrefabPath());
-					mPrefab = new Prefab(_prefab);
-				}
-
-				return mPrefab;
-			}
-		}
-
-		private string PrefabPath()
-		{
-			return meta.name;
-		}
-	}
-
 	public static class MapDB
 	{
 		private static readonly Path_ BIN_PATH = new Path_("Resources/DB/map.db");

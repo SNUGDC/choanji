@@ -17,7 +17,7 @@ namespace Choanji
 		{
 			base.OnInspectorGUI();
 
-			if (TheWorld.world == null)
+			if (TheWorld.g == null)
 				return;
 
 			if (GUILayout.Button("update"))

@@ -25,24 +25,20 @@ namespace Choanji
 					return;
 				}
 
-
-				if (ch.curMap != null)
-				{
-					mInspectee = new TileInspectee(value) {states = ch.curMap.states};
-					mOnStart.Conn(value.onStart);
-					mOnDone.Conn(value.onDone);
-				}
+				mInspectee = new TileInspectee(value);
+				mOnStart.Conn(value.onStart);
+				mOnDone.Conn(value.onDone);
 			}
 		}
 
 		private TileInspectee mInspectee;
-		private Connection<Coor, TileState> mOnTileRetain;
+		private Connection<LocalCoor> mOnTileRetain;
 		private Connection<InspectRequest> mOnStart;
 		private Connection<InspectResponse, IInspectee> mOnDone;
 
 		void Awake()
 		{
-			mOnTileRetain = new Connection<Coor, TileState>((_pos, _state) =>
+			mOnTileRetain = new Connection<LocalCoor>((_pos) =>
 			{
 				if (mInspectee != null) mInspectee.Retain(_pos);
 			});

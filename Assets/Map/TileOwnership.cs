@@ -4,41 +4,26 @@ namespace Choanji
 {
 	public abstract class TileOwnership
 	{
-		private static readonly Point INVALID = new Point(-1, -1);
-		private Point mPosition = INVALID;
-
-		public Point? position
-		{
-			get { return (mPosition != INVALID) ? mPosition : default(Point?); }
-			set
-			{
-				if (value.HasValue) Retain(value.Value);
-				else Release();
-			}
-		}
+		public LocalCoor? position { get; private set; }
 
 		~TileOwnership()
 		{
 			Release();
 		}
 
-		public bool isRetained { get { return mPosition.x >= 0; } }
+		public bool isRetained { get { return position.HasValue; } }
 
-		public void Retain(Point _p)
+		public void Retain(LocalCoor p)
 		{
-			if (mPosition == _p)
+			if (position == p)
 				return;
 
 			Release();
 
-			if (_p.x < 0)
-			{
-				L.E(L.M.SHOULD_POS("position x", _p.x));
-				return;
-			}
-
-			if (DoRetain(_p))
-				mPosition = _p;
+			if (DoRetain(p))
+				position = p;
+			else
+				D.Assert(false);
 		}
 
 
@@ -47,11 +32,11 @@ namespace Choanji
 			if (isRetained)
 			{
 				DoRelease();
-				mPosition = INVALID;
+				position = null;
 			}
 		}
 
-		protected abstract bool DoRetain(Point _p);
+		protected abstract bool DoRetain(LocalCoor p);
 		protected abstract void DoRelease();
 	}
 

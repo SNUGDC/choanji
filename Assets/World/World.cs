@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Choanji
 {
-	using Rooms = Dictionary<WorldBluePrint.Room, GameObject>;
+	using Rooms = Dictionary<WorldBluePrint.Room, Map>;
 
 	public class World
 	{
@@ -20,7 +20,7 @@ namespace Choanji
 		public void Purge()
 		{
 			foreach (var _kv in mRooms)
-				Object.Destroy(_kv.Value);
+				Object.Destroy(_kv.Value.go);
 			mRooms.Clear();
 		}
 
@@ -31,9 +31,10 @@ namespace Choanji
 			{
 				if (mRooms.ContainsKey(_room))
 					continue;
-				var _roomGO = MapDB.Get(_room.id).prefab.Instantiate();
+				var _static = MapDB.Get(_room.id);
+				var _roomGO = _static.prefab.Instantiate();
 				_roomGO.transform.SetPos(_room.worldPos);
-				mRooms.Add(_room, _roomGO);
+				mRooms.Add(_room, new Map(_static, _roomGO));
 			}
 		}
 
@@ -45,7 +46,7 @@ namespace Choanji
 			{
 				if (_rect.Overlaps(_kv.Key.rect))
 					continue;
-				Object.Destroy(_kv.Value);
+				Object.Destroy(_kv.Value.go);
 				_removes.Add(_kv.Key);
 			}
 
@@ -53,5 +54,24 @@ namespace Choanji
 				mRooms.Remove(_room);
 		}
 
+		public Map Contains(WorldCoor p)
+		{
+			var _room = mBluePrint.Contains(p.val);
+			if (_room == null) 
+				return null;
+
+			Map _ret;
+			mRooms.TryGet(_room, out _ret);
+			return _ret;
+		}
+
+		public LocalCoor? SearchMapAndTile(WorldCoor _pos)
+		{
+			var _map = Contains(_pos);
+			if (_map != null)
+				return _map.Convert(_pos);
+			else
+				return null;
+		}
 	}
 }
