@@ -17,11 +17,9 @@ namespace Choanji
 				return _meta;
 			}
 
-			var _props = ParseProps(_propsNode);
-
-			JsonData _prop;
-			if (_props.TryGet("world", out _prop))
-				_meta.SetWorld((string) _prop);
+// 			var _props = ParseProps(_propsNode);
+// 
+// 			JsonData _prop;
 
 			return _meta;
 		}

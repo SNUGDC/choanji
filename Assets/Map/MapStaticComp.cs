@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Choanji
 {
-	public class MapDataComp : MonoBehaviour
+	public class MapStaticComp : MonoBehaviour
 	{
 		[HideInInspector]
 		public string binName;
 
 		public bool isLoaded { get { return data != null; } }
-		public MapMetaAndGrid data { get; private set; }
+		public MapStatic data { get; private set; }
 
 		void Awake()
 		{
@@ -24,8 +24,7 @@ namespace Choanji
 				return;
 			}
 
-			MapMetaAndGrid _data;
-
+			MapStatic _data;
 			if (MapDB.TryGet(MapIDHelper.Make(binName), out _data))
 			{
 				if (_data.grid == null) 

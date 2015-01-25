@@ -44,7 +44,7 @@ namespace Choanji
 			var _mapData = TiledParser.ParseData(_tmxRoot);
 			MapUtil.SaveTileGrid(_meta.name, _mapData);
 
-			_prefab.AddComponent<MapDataComp>().binName = _name;
+			_prefab.AddComponent<MapStaticComp>().binName = _name;
 		}
 	}
 

@@ -8,6 +8,10 @@
 		ATTACH,
 		STD_UP,
 		STD_LOW,
-		_COUNT = 6,
+	}
+
+	public static class MapLayerTypeHelper
+	{
+		public const int COUNT = 6;
 	}
 }

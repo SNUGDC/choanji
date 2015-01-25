@@ -15,9 +15,6 @@ namespace Choanji
 		public readonly MapID id;
 		public readonly string name;
 
-		private WorldID mWorld;
-		public WorldID world { get { return mWorld; } }
-
 		public Point size;
 
 		public bool outdoor;
@@ -29,13 +26,12 @@ namespace Choanji
 		public BGMList wildVictoryBGM;
 		public BGMList trainerVictoryBGM;
 
-		public void SetWorld(string _world)
-		{
-			D.Assert(world == 0);
-			mWorld = (WorldID) _world.GetHashCode();
-		}
-
 		public static implicit operator MapID(MapMeta _this) { return _this.id; }
+
+		public override int GetHashCode()
+		{
+			return (int) id;
+		}
 	}
 
 }

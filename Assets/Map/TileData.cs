@@ -32,7 +32,7 @@ namespace Choanji
 		public void Merge(MapLayerType _layer, JsonData _data)
 		{
 			if (mDatas == null)
-				mDatas = new JsonData[(int) MapLayerType._COUNT];
+				mDatas = new JsonData[MapLayerTypeHelper.COUNT];
 
 #if UNITY_EDITOR
 			var _layerData = mDatas[(int) _layer - 1];

@@ -10,7 +10,7 @@ namespace Choanji
 	{
 		public MapData() { }
 
-		public MapData(MapMetaAndGrid _data)
+		public MapData(MapStatic _data)
 		{
 			meta = _data.meta;
 			grid = _data.grid;

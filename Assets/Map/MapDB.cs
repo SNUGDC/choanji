@@ -4,14 +4,16 @@ using Gem;
 
 namespace Choanji
 {
-	using DB = Dictionary<MapID, MapMetaAndGrid>;
+	using DB = Dictionary<MapID, MapStatic>;
 	
 	[Serializable]
-	public class MapMetaAndGrid
+	public class MapStatic
 	{
 		public MapMeta meta;
 		[NonSerialized]
 		public Grid<TileData> grid;
+		[NonSerialized]
+		public Prefab prefab;
 	}
 
 	public static class MapDB
@@ -22,13 +24,13 @@ namespace Choanji
 
 		public static bool isLoaded { get { return sDB != null; } }
 
-		public static bool TryGet(MapID _id, out MapMetaAndGrid _data)
+		public static bool TryGet(MapID _id, out MapStatic _data)
 		{
 			if (!isLoaded) Load();
 			return sDB.TryGet(_id, out _data);
 		}
 
-		public static MapMetaAndGrid Get(MapID _id)
+		public static MapStatic Get(MapID _id)
 		{
 			return sDB[_id];
 		}
@@ -36,7 +38,7 @@ namespace Choanji
 		public static bool Add(MapMeta _meta)
 		{
 			D.Assert(isLoaded);
-			return sDB.TryAdd(_meta, new MapMetaAndGrid { meta =_meta });
+			return sDB.TryAdd(_meta, new MapStatic { meta =_meta });
 		}
 
 		public static bool Remove(MapID _id)
