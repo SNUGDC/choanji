@@ -41,7 +41,7 @@ namespace Tiled2Unity
 
         public static string GetPrefabPathFromName(string objName)
         {
-            return String.Format("Assets/Tiled2Unity/Prefabs/{0}.prefab", objName);
+            return String.Format("Assets/Tiled2Unity/Prefabs/Resources/{0}.prefab", objName);
         }
 
         public static string GetAttributeAsString(XElement elem, string attrName)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gem;
+using UnityEditor;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -9,11 +11,37 @@ namespace Choanji
 	[Serializable]
 	public class MapStatic
 	{
-		public MapMeta meta;
+		public MapStatic(MapMeta _meta)
+		{
+			meta = _meta;
+		}
+
+		public readonly MapMeta meta;
+
 		[NonSerialized]
 		public Grid<TileData> grid;
-		[NonSerialized]
-		public Prefab prefab;
+
+		[NonSerialized] 
+		private Prefab mPrefab;
+
+		public Prefab prefab
+		{
+			get
+			{
+				if (mPrefab.go == null)
+				{
+					var _prefab = Resources.Load<GameObject>(PrefabPath());
+					mPrefab = new Prefab(_prefab);
+				}
+
+				return mPrefab;
+			}
+		}
+
+		private string PrefabPath()
+		{
+			return meta.name;
+		}
 	}
 
 	public static class MapDB

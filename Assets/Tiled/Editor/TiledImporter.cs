@@ -45,7 +45,7 @@ namespace Choanji
 			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
 			_meta.size = new Point(_tiledMap.TileWidth, _tiledMap.TileHeight);
 
-			MapDB.Replace(new MapStatic { meta = _meta });
+			MapDB.Replace(new MapStatic(_meta));
 			MapDB.Save();
 
 			var _mapData = TiledParser.ParseData(_tmxRoot);
