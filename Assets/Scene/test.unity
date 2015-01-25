@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d641e7a8a98715d4999015de746d727c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFile: Config/input.json
+  inputFile: input.json
 --- !u!1 &616549830
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 814777543}
-  dialog: Dialog/sample.json
+  dialog: sample.json
 --- !u!1 &688829876
 GameObject:
   m_ObjectHideFlags: 0

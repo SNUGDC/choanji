@@ -33,8 +33,9 @@ namespace Choanji
 		public static WorldBluePrint Read(string _world)
 		{
 			var _ret = new WorldBluePrint();
+			var _path = new FullPath(JSON_PATH/(_world + ".json"));
 
-			var _roomsJs = JsonHelper.DataWithRaw(JSON_PATH / (_world + ".json"));
+			var _roomsJs = JsonHelper.DataWithRaw(_path);
 			if (_roomsJs == null) return null;
 			foreach (var _roomJs in _roomsJs.GetListEnum())
 			{

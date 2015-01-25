@@ -12,7 +12,7 @@ namespace Choanji
 		public DialogProvider()
 		{}
 
-		public DialogProvider(Path_ _path)
+		public DialogProvider(FullPath _path)
 		{
 			var _json = JsonHelper.DataWithRaw(_path);
 
