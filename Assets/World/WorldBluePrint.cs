@@ -8,12 +8,18 @@ namespace Choanji
 	{
 		public class Room
 		{
-			public MapMeta meta;
-			public Point pos;
+			public readonly MapID id;
+			public readonly PRect rect;
+
+			public Room(MapID _id, PRect _rect)
+			{
+				id = _id;
+				rect = _rect;
+			}
 
 			public override int GetHashCode()
 			{
-				return ((int) meta.id) * pos.GetHashCode();
+				return ((int)id) * rect.GetHashCode();
 			}
 		}
 
@@ -22,9 +28,8 @@ namespace Choanji
 
 		public void Add(Room _room)
 		{
-			D.Assert(_room.meta != null);
 			mRooms.Add(_room);
-			mRectGroup.Add(new PRect { org = _room.pos, size = _room.meta.size });
+			mRectGroup.Add(_room.rect);
 		}
 
 		public List<Room> Overlaps(PRect _rect)
@@ -53,8 +58,9 @@ namespace Choanji
 				Point _pos;
 				if (!Point.TryParse(_roomJs["pos"], out _pos))
 					continue;
-				
-				_ret.Add(new Room { meta = _map.meta, pos = _pos });
+
+				var _rect = new PRect {org = _pos, size = _map.meta.size};
+				_ret.Add(new Room(_mapID, _rect));
 			}
 
 			return _ret;

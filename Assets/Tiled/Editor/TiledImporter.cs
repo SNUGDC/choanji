@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Gem;
 using Tiled2Unity;
 using UnityEngine;
 
@@ -36,9 +37,15 @@ namespace Choanji
 				return;
 			}
 
-			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
 			MapDB.TryLoad();
-			MapDB.Replace(_meta);
+
+			var _tiledMap = _prefab.GetComponent<TiledMap>();
+			_prefab.transform.SetPosY(_tiledMap.TileHeight);
+
+			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
+			_meta.size = new Point(_tiledMap.TileWidth, _tiledMap.TileHeight);
+
+			MapDB.Replace(new MapStatic { meta = _meta });
 			MapDB.Save();
 
 			var _mapData = TiledParser.ParseData(_tmxRoot);

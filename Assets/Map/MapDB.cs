@@ -35,10 +35,10 @@ namespace Choanji
 			return sDB[_id];
 		}
 
-		public static bool Add(MapMeta _meta)
+		public static bool Add(MapStatic _static)
 		{
 			D.Assert(isLoaded);
-			return sDB.TryAdd(_meta, new MapStatic { meta =_meta });
+			return sDB.TryAdd(_static.meta, _static);
 		}
 
 		public static bool Remove(MapID _id)
@@ -47,10 +47,10 @@ namespace Choanji
 			return sDB.TryRemove(_id);
 		}
 
-		public static void Replace(MapMeta _meta)
+		public static void Replace(MapStatic _data)
 		{
-			Remove(_meta);
-			Add(_meta);
+			Remove(_data.meta);
+			Add(_data);
 		}
 
 		public static void Save()

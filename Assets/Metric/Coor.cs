@@ -6,6 +6,10 @@ namespace Choanji
 {
 	public struct Coor
 	{
+		public static readonly Coor ZERO = new Coor(0, 0);
+		public static readonly Coor ONE = new Coor(1, 1);
+		public static readonly Coor NULL = new Coor(-94578348, -89348975);
+
 		private const float OFFSET = 0.5f;
 
 		public int x;
@@ -43,6 +47,52 @@ namespace Choanji
 			return "(" + x + ", " + y + ")";
 		}
 
+		public static Coor Ceiling(Vector2 v)
+		{
+			return new Coor(
+				(int) Math.Ceiling(v.x - OFFSET), 
+				(int) Math.Ceiling(v.y - OFFSET));
+		}
+
+		public static Coor Floor(Vector2 v)
+		{
+			return new Coor(
+				(int)Math.Floor(v.x - OFFSET),
+				(int)Math.Floor(v.y - OFFSET));
+		}
+
+		#region equality operator
+		public static bool operator ==(Coor a, Coor b)
+		{
+			return (a.x == b.x) && (a.y == b.y);
+		}
+
+		public static bool operator !=(Coor a, Coor b)
+		{
+			return !(a == b);
+		}
+
+		public bool Equals(Coor _other)
+		{
+			return x == _other.x && y == _other.y;
+		}
+
+		public override bool Equals(object _obj)
+		{
+			if (ReferenceEquals(null, _obj)) return false;
+			return _obj is Coor && Equals((Coor)_obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (x * 397) ^ y;
+			}
+		}
+		#endregion
+
+		#region arithmetic operator
 		public static Coor operator +(Coor a, Coor b)
 		{
 			return new Coor(a.x + b.x, a.y + b.y);
@@ -62,7 +112,9 @@ namespace Choanji
 		{
 			return _this + (Coor) new Point(_dir);
 		}
+		#endregion
 
+		#region conversion operator
 		public static explicit operator Direction(Coor _c)
 		{
 			return (Direction) (Point) _c;
@@ -87,5 +139,6 @@ namespace Choanji
 		{
 			return new Point(_c.x, _c.y);
 		}
+		#endregion
 	}
 }
