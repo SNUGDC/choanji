@@ -4,12 +4,17 @@ using Gem;
 
 namespace Choanji
 {
-	class WorldBluePrint
+	public class WorldBluePrint
 	{
 		public class Room
 		{
 			public MapMeta meta;
 			public Point pos;
+
+			public override int GetHashCode()
+			{
+				return ((int) meta.id) * pos.GetHashCode();
+			}
 		}
 
 		private readonly List<Room> mRooms = new List<Room>();
@@ -39,7 +44,7 @@ namespace Choanji
 			if (_roomsJs == null) return null;
 			foreach (var _roomJs in _roomsJs.GetListEnum())
 			{
-				MapMetaAndGrid _map;
+				MapStatic _map;
 				var _mapID = MapIDHelper.Make((string) _roomJs["map"]);
 
 				if (!MapDB.TryGet(_mapID, out _map))
