@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -15,6 +16,16 @@ namespace Choanji
 			{
 				id = _id;
 				rect = _rect;
+			}
+
+			public Vector2 worldPos
+			{
+				get
+				{
+					var _pos = (Vector2) rect.org;
+					_pos.y += rect.h;
+					return _pos;
+				}
 			}
 
 			public override int GetHashCode()
