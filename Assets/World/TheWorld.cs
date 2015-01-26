@@ -8,22 +8,23 @@ namespace Choanji
 		static TheWorld()
 		{
 			// note: avoid null pointer exception.
-			g = new World(new WorldBluePrint());
+			bluePrint = new WorldBluePrint();
 		}
 
-#if UNITY_EDITOR
-		private static Vector2? mPosition;
-#endif
+		public static World g { get; private set; }
 
-		private static WorldBluePrint mBluePrint;
+		private static readonly Vector2 NULL = new Vector2(-34873453, -34537804);
+		private static Vector2 sPosition = NULL;
+
+		private static WorldBluePrint sBluePrint;
 
 		public static WorldBluePrint bluePrint
 		{
-			get { return mBluePrint; }
+			get { return sBluePrint; }
 
 			set
 			{
-				mBluePrint = value;
+				sBluePrint = value;
 
 				if (g != null)
 				{
@@ -32,28 +33,16 @@ namespace Choanji
 				}
 
 				g = new World(bluePrint);
-
-#if UNITY_EDITOR
-				mPosition = null;
-#endif
+				sPosition = NULL;
 			}
 		}
 
-		public static World g { get; private set; }
-
 		public static void Update()
 		{
-			if (g == null)
-			{
-				L.W(L.M.CALL_INVALID);
-				return;
-			}
-
 			var _cam = Cameras.game;
 			D.Assert(_cam);
 
 			var _camPos = _cam.transform.position;
-
 			var _camHSize = _cam.OrthoHSize();
 
 			var _rect = new PRect
@@ -62,15 +51,16 @@ namespace Choanji
 				dst = Coor.Ceiling((Vector2) _camPos + _camHSize),
 			};
 
-#if UNITY_EDITOR
+			if (sPosition == _rect.c)
 			{
-				D.Assert(!mPosition.HasValue || mPosition != _rect.c);
-				mPosition = _rect.c;
+				L.W(L.M.CALL_RETRY("update"));
+				return;
 			}
-#endif
+
+			sPosition = _rect.c;
 
 			g.Construct(_rect);
-			g.Destruct(_rect);
+			g.Scissor(_rect);
 		}
 	}
 

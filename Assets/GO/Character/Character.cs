@@ -5,6 +5,7 @@ namespace Choanji
 {
 	public class Character : MonoBehaviour
 	{
+		public Coor lastPosition { get; private set; }
 		public Coor position
 		{
 			get
@@ -14,7 +15,10 @@ namespace Choanji
 
 			set
 			{
-				transform.localPosition = (Vector2) value;
+				var _orgPos = position;
+				if (_orgPos == lastPosition) return;
+				lastPosition = _orgPos;
+				transform.localPosition = (Vector2)value;
 			}
 		}
 
@@ -26,7 +30,7 @@ namespace Choanji
 				if (direction == value)
 					return;
 				mDirection = value;
-				renderer_.transform.SetEulerZ(mDirection.ToDeg());
+				renderer_.transform.SetLocalEulerZ(mDirection.ToDeg());
 			} 
 		}
 

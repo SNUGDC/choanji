@@ -4,18 +4,14 @@ using UnityEngine;
 namespace Choanji
 {
 	[CustomEditor(typeof(WorldTest))]
-	public class WorldTestEditor : Editor
+	public class WorldTestEditor : Gem.Editor<WorldTest>
 	{
-		private WorldTest mThis;
-
-		void OnEnabled()
-		{
-			mThis = (WorldTest) target;
-		}
-
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
+
+			if (!Application.isPlaying)
+				return;
 
 			if (TheWorld.g == null)
 				return;

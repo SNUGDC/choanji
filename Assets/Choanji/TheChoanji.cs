@@ -4,6 +4,13 @@
 	{
 		void Update()
 		{
+			WorldProgress.Update();
 		}
+
+		void LateUpdate()
+		{
+			WorldProgress.LateUpdate();
+		}
+
 	}
 }

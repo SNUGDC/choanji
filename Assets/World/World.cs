@@ -38,7 +38,7 @@ namespace Choanji
 			}
 		}
 
-		public void Destruct(PRect _rect)
+		public void Scissor(PRect _rect)
 		{
 			var _removes = new List<WorldBluePrint.Room>();
 
