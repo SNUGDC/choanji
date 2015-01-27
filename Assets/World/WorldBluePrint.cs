@@ -40,6 +40,10 @@ namespace Choanji
 		public void Add(Room _room)
 		{
 			mRooms.Add(_room);
+#if UNITY_EDITOR
+			if (!mRectGroup.Overlaps(_room.rect).Empty())
+				L.E("overlap detected.");
+#endif
 			mRectGroup.Add(_room.rect);
 		}
 
