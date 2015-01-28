@@ -1,0 +1,63 @@
+라이브러리:
+
+SimpleRNG: Random Number Generator.
+LitJson: json serialization, deserialization.
+PriorityQueue: 
+NvvCSVClasses: CSV 파일 읽기.
+
+
+
+Unity 플러그인:
+
+Tiled2Unity: tmx 임포터.
+Cartoon FX Pack 1 ~ 4: 이펙트.
+
+
+
+
+편집기: 
+
+json: Notepad++
+style에서 json을 javascript로 설정.
+json을 notepad++로 편집하도록 file association.
+
+xml: Notepad++
+json을 notepad++로 편집하도록 file association.
+
+csv: Ron's Editor
+png: Paint.Net
+
+tmx: Tiled
+
+
+
+
+IDE: vs2013 + Update 4
+Update 4를 하고하면 좋음.
+
+
+Visual Studio 플러그인
+
+Hide Main Menu:
+메인 메뉴를 안보이게함.
+
+UnityVS2013:
+디버깅, 파일탐색기, 메소드구현
+
+Visual Assist: 
+메소드이름 변경, 파일이름 변경
+
+Resharper:
+ctrl + left click 비활성화 하고 사용.
+alt + Enter로 콘텍스트 메뉴 이용.
+탐색기에서 폴더열기.
+code cleaner.
+
+Productivity Power Tools:
+enchanced scrollbar.
+ctrl + left click 비활성화 하고 사용.
+
+
+
+기타:
+탐색기: clover, 탐색기를 크롬과 동일하게 변형해줌.
