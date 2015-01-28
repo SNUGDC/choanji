@@ -1,3 +1,10 @@
+svn:
+TortoiseGit: 
+git client. (GitHub, SmartGit 보다 유저 친화적인듯?)
+clone 할 때 depth 1을 옵션으로 주고 받아야함.
+
+
+
 라이브러리:
 
 SimpleRNG: Random Number Generator.
