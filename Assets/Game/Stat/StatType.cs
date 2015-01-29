@@ -8,11 +8,23 @@
 		RST,
 	}
 
-	public enum StatRstID {}
-
-	public struct Stat
+	public struct StatKey
 	{
-		public StatType type;
-		public int sub1;
+		public StatKey(StatType _type, int _sub1 = 0)
+		{
+			type = _type;
+			sub1 = _sub1;
+		}
+
+		public readonly StatType type;
+		public readonly int sub1;
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return 347 * (int) type + 123 * sub1;
+			}
+		}
 	}
 }
