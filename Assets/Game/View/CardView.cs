@@ -36,7 +36,7 @@ namespace Choanji
 				return;
 			}
 
-			iconMode.sprite = Resources.Load<Sprite>();
+			iconMode.sprite = Resources.Load<Sprite>(R.Game.Spr.CardIcon(_mode));
 		}
 	}
 }
