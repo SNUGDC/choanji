@@ -1,30 +1,32 @@
-﻿namespace Choanji
+﻿using System.Collections.Generic;
+
+namespace Choanji
 {
 	public enum StatType
 	{
 		STR,
 		DEF,
 		SPD,
-		RST,
 	}
 
-	public struct StatKey
+	public struct StatRst
 	{
-		public StatKey(StatType _type, int _sub1 = 0)
+		public StatRst(ElementID _elem )
 		{
-			type = _type;
-			sub1 = _sub1;
+			element = _elem;
 		}
 
-		public readonly StatType type;
-		public readonly int sub1;
+		public readonly ElementID element;
 
 		public override int GetHashCode()
 		{
-			unchecked
-			{
-				return 347 * (int) type + 123 * sub1;
-			}
+			return (int) element;
+		}
+
+		public static IEnumerable<StatRst> GetEnum()
+		{
+			foreach (var _elem in ElementDB.GetEnum())
+				yield return new StatRst(_elem);
 		}
 	}
 }

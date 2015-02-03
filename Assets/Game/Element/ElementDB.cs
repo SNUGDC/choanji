@@ -54,8 +54,15 @@ namespace Choanji
 			sStash.Clear();
 		}
 
+		public static IEnumerable<ElementData> GetEnum()
+		{
+			D.Assert(isLoaded);
+			return sDB;
+		}
+
 		public static ElementData Search(string _key)
 		{
+			D.Assert(isLoaded);
 			ElementData _data;
 			sDic.TryGet(_key, out _data);
 			return _data;

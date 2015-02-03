@@ -10,6 +10,9 @@ namespace Choanji
 
 	public class StatSet
 	{
+		public StatSet()
+		{}
+
 		public StatSet(JsonData _json)
 		{
 			str = _json.IntOrDefault(StatType.STR.ToString());
@@ -17,13 +20,13 @@ namespace Choanji
 			spd = _json.IntOrDefault(StatType.SPD.ToString());
 
 			JsonData _rstData;
-			if (_json.TryGet(StatType.RST.ToString(), out _rstData))
+			if (_json.TryGet("RST", out _rstData))
 			{
 				mRst = new Rst();
 				foreach (var _elemRst in _rstData.GetDictEnum())
 				{
 					var _elemData = ElementDB.Search(_elemRst.Key);
-					mRst.Add(_elemData.id, (int)_elemRst.Value);
+					mRst.Add(_elemData, (int)_elemRst.Value);
 				}
 			}
 		}
@@ -31,6 +34,44 @@ namespace Choanji
 		public int str;
 		public int def;
 		public int spd;
+
+		public int this[StatType _stat]
+		{
+			get
+			{
+				switch (_stat)
+				{
+					case StatType.STR:
+						return str;
+					case StatType.DEF:
+						return def;
+					case StatType.SPD:
+						return spd;
+					default:
+						L.E(L.M.CASE_INVALID(_stat));
+						return 0;
+				}
+			}
+
+			set
+			{
+				switch (_stat)
+				{
+					case StatType.STR:
+						str = value;
+						return;
+					case StatType.DEF:
+						def = value;
+						return;
+					case StatType.SPD:
+						spd = value;
+						return;
+					default:
+						L.E(L.M.CASE_INVALID(_stat));
+						return;
+				}
+			}
+		}
 
 		private Rst mRst;
 
@@ -50,6 +91,22 @@ namespace Choanji
 		public IEnumerable<ElemAndValue> GetRstEnum()
 		{
 			return mRst ?? Enumerable.Empty<ElemAndValue>();
+		}
+
+		public static StatSet operator +(StatSet a, StatSet b)
+		{
+			var _ret = new StatSet();
+
+			foreach (var _stat in EnumHelper.GetValues<StatType>())
+				_ret[_stat] = a[_stat] + b[_stat];
+
+			foreach (var _elem in ElementDB.GetEnum())
+			{
+				var _rst = a.GetRst(_elem) + b.GetRst(_elem);
+				if (_rst != 0) _ret.SetRst(_elem, _rst);
+			}
+
+			return _ret;
 		}
 	}
 

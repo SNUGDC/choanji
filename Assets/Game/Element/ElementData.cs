@@ -56,5 +56,10 @@ namespace Choanji
 			}
 			return _elements;
 		}
+
+		public static implicit operator ElementID(ElementData _this)
+		{
+			return _this.id;
+		}
 	}
 }
