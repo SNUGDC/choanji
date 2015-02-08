@@ -30,7 +30,7 @@ namespace Choanji
 				if (direction == value)
 					return;
 				mDirection = value;
-				renderer_.transform.SetLocalEulerZ(mDirection.ToDeg());
+				renderer_.transform.SetLEulerZ(mDirection.ToDeg());
 			} 
 		}
 

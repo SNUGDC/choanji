@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -11,14 +12,16 @@ namespace Choanji
 	{
 		public readonly string key;
 		public readonly string name;
+		public readonly string theme;
 		public readonly List<string> weak;
 		public readonly List<string> resist;
 		public readonly List<string> immune;
-		
+
 		public ElementRaw(CSVRow _row)
 		{
 			key = _row.Read();
 			name = _row.Read();
+			theme = _row.Read();
 			_row.Read().Parse(out weak);
 			_row.Read().Parse(out resist);
 			_row.Read().Parse(out immune);
@@ -33,6 +36,7 @@ namespace Choanji
 			_map.TryGet(_raw.key, out id);
 			key = _raw.key;
 			name = _raw.name;
+			UnityHelper.TryParse(_raw.theme, out theme);
 			weak = Map(_raw.weak, _map);
 			resist = Map(_raw.resist, _map);
 			immune = Map(_raw.immune, _map);
@@ -41,6 +45,7 @@ namespace Choanji
 		public readonly ElementID id;
 		public readonly string key;
 		public readonly string name;
+		public readonly Color32 theme;
 		public readonly Elements weak;
 		public readonly Elements resist;
 		public readonly Elements immune;

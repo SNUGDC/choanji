@@ -41,7 +41,7 @@ namespace Choanji
 		public static void Commit()
 		{
  			D.Assert(!isLoaded);
-			sDB.Resize(sStash.Count);
+			sDB.Capacity = sStash.Count;
 
 			foreach (var _raw in sStash)
 			{
@@ -58,6 +58,12 @@ namespace Choanji
 		{
 			D.Assert(isLoaded);
 			return sDB;
+		}
+
+		public static ElementData Get(ElementID _key)
+		{
+			D.Assert(isLoaded);
+			return sDB[(int)_key - 1];
 		}
 
 		public static ElementData Search(string _key)

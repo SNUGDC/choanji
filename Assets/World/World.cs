@@ -33,7 +33,7 @@ namespace Choanji
 					continue;
 				var _static = MapDB.Get(_room.id);
 				var _roomGO = _static.prefab.Instantiate();
-				_roomGO.transform.SetPos(_room.worldPos);
+				_roomGO.transform.position = _room.worldPos;
 				mRooms.Add(_room, new Map(_static, _roomGO));
 			}
 		}
