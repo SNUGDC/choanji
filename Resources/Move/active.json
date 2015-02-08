@@ -1,0 +1,19 @@
+{
+	"SPARK": {
+		"name": "스파크",
+		"type": "ATK",
+		"detail": "적을 짜릿하게 놀래켜주자. 하... 하앙!",
+		"cost": 15,
+		"perform": {
+			"key": "DMG",
+			"ele": "ELE",
+			"val": 50
+		}
+	},
+	
+	"DMG_POI": {
+		"name": "독침발사",
+		"detail": "독침을 발사해 공격한다.",
+		"cost": 10
+	}
+}

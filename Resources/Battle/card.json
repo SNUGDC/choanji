@@ -8,16 +8,7 @@
 				"FIRE": 10
 			}
 		},
-		"passive": {
-			"key": "SC_POI",
-			"name": "중독",
-			"detail": "접촉한 상대를 독상태로 만든다."
-		},
-		"active": {
-			"key": "DMG_POI",
-			"name": "독침발사",
-			"detail": "독침을 발사해 공격한다.",
-			"cost": 10
-		}
+		"passive": "SC_POI",
+		"active": "DMG_POI"
 	}
 }

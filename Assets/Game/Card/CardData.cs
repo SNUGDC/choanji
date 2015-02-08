@@ -17,7 +17,7 @@ namespace Choanji
 			key = _key;	
 		}
 
-		CardData(string _key, string _name, string _detail, StatSet _stat, PassiveData _passive, ActiveData _active)
+		public CardData(string _key, string _name, string _detail, StatSet _stat, PassiveData _passive, ActiveData _active)
 			: this(_key)
 		{
 			name = _name;
@@ -27,7 +27,7 @@ namespace Choanji
 			active = _active;
 		}
 
-		CardData(string _key, JsonData _data)
+		public CardData(string _key, JsonData _data)
 			: this(_key)
 		{
 			name = (string) _data["name"];

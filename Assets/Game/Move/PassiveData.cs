@@ -5,7 +5,7 @@ namespace Choanji
 {
 	public class PassiveData
 	{
-		PassiveData(string _key, string _name, string _detail)
+		public PassiveData(string _key, string _name, string _detail)
 		{
 			id = (PassiveID)HashEnsure.Do(_key);
 			key = _key;

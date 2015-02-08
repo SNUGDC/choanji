@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1bdf3704c91f40746a3a74f9b7f1c6b2
+guid: 0aba91290f76d024d8cf129f8534aec4
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -25,7 +25,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: -1
   nPOTScale: 0
@@ -43,5 +43,5 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites: []
-  spritePackingTag: 
+  spritePackingTag: battle_ui
   userData: 
