@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gem;
+using LitJson;
 using UnityEngine;
 
 namespace Choanji
@@ -9,13 +10,22 @@ namespace Choanji
 	{
 		public class Room
 		{
-			public readonly MapID id;
-			public readonly PRect rect;
+			public enum Key {}
 
-			public Room(MapID _id, PRect _rect)
+			public readonly Key key;
+			public readonly MapID map;
+			public readonly PRect rect;
+			
+			public Room(MapID _map, PRect _rect)
 			{
-				id = _id;
+				map = _map;
 				rect = _rect;
+			}
+
+			public Room(string _key, MapID _map, PRect _rect)
+				: this(_map, _rect)
+			{
+				key = MakeKey(_key);
 			}
 
 			public Vector2 worldPos
@@ -30,12 +40,23 @@ namespace Choanji
 
 			public override int GetHashCode()
 			{
-				return ((int)id) * rect.GetHashCode();
+				return ((int)map) * rect.GetHashCode();
+			}
+
+			public static Key MakeKey(string _key)
+			{
+				return (Key)HashEnsure.Do(_key);
+			}
+
+			public static implicit operator Key(Room _this)
+			{
+				return _this.key;
 			}
 		}
 
 		private readonly List<Room> mRooms = new List<Room>();
 		private readonly PRectGroup mRectGroup = new PRectGroup();
+		private readonly Dictionary<Room.Key, Room> mDic = new Dictionary<Room.Key, Room>();
 
 		public void Add(Room _room)
 		{
@@ -45,6 +66,16 @@ namespace Choanji
 				L.E("overlap detected.");
 #endif
 			mRectGroup.Add(_room.rect);
+
+			if (_room != default(Room.Key))
+				mDic.Add(_room, _room);
+		}
+
+		public Room Find(Room.Key _key)
+		{
+			Room _ret;
+			mDic.TryGet(_key, out _ret);
+			return _ret;
 		}
 
 		public Room Contains(Point _rect)
@@ -70,8 +101,8 @@ namespace Choanji
 			foreach (var _roomJs in _roomsJs.GetListEnum())
 			{
 				MapStatic _map;
-				var _mapID = MapIDHelper.Make((string) _roomJs["map"]);
 
+				var _mapID = MapIDHelper.Make((string)_roomJs["map"]);
 				if (!MapDB.TryGet(_mapID, out _map))
 					continue;
 
@@ -80,7 +111,11 @@ namespace Choanji
 					continue;
 
 				var _rect = new PRect {org = _pos, size = _map.meta.size};
-				_ret.Add(new Room(_mapID, _rect));
+
+				JsonData _key;
+				_ret.Add(_roomJs.TryGet("key", out _key) 
+					? new Room((string) _key, _mapID, _rect) 
+					: new Room(_mapID, _rect));
 			}
 
 			return _ret;

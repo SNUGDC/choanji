@@ -31,7 +31,7 @@ namespace Choanji
 			{
 				if (mRooms.ContainsKey(_room))
 					continue;
-				var _static = MapDB.Get(_room.id);
+				var _static = MapDB.Get(_room.map);
 				var _roomGO = _static.prefab.Instantiate();
 				_roomGO.transform.position = _room.worldPos;
 				mRooms.Add(_room, new Map(_static, _roomGO));
