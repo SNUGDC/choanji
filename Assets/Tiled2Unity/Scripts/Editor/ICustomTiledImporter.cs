@@ -10,7 +10,7 @@ namespace Tiled2Unity
 
         void CustomizeMap(GameObject prefab);
 
-		void CustomizeGO(GameObject go, IDictionary<string, string> customProperties, TileData _tileData);
+		bool CustomizeGO(GameObject go, IDictionary<string, string> customProperties, TileData _tileData);
 	}
 }
 

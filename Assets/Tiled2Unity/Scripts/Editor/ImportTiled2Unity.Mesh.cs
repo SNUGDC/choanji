@@ -133,7 +133,12 @@ namespace Tiled2Unity
 						_tileData = new TileData();
 						_mapStatic.grid.Set(p, _tileData);
 					}
-					CustomizeGO(child, goXml, customImporters, _tileData);
+
+		            if (!CustomizeGO(child, goXml, customImporters, _tileData))
+		            {
+						child.transform.parent = null;
+			            UnityEngine.Object.DestroyImmediate(child);
+		            }
 	            }
             }
         }
@@ -357,19 +362,23 @@ namespace Tiled2Unity
             }
         }
 
-		private void CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, TileData _tileData)
+		private bool CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, TileData _tileData)
 		{
 			var props = from p in goXml.Elements("Property")
 						select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
+
+			var _ret = false;
 
 			if (props.Count() > 0)
 			{
 				var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
 				foreach (ICustomTiledImporter importer in importers)
 				{
-					importer.CustomizeGO(gameObject, dictionary, _tileData);
+					_ret |= importer.CustomizeGO(gameObject, dictionary, _tileData);
 				}
 			}
+
+			return _ret;
 		}
 
         private IList<ICustomTiledImporter> GetCustomImporterInstances()
