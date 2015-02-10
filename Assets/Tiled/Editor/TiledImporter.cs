@@ -67,18 +67,55 @@ namespace Choanji
 			_prefab.transform.SetPosY(_tiledMap.TileHeight);
 
 			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
-			MapDB.Replace(new MapStatic(_meta));
-			MapDB.Save();
+			var _mapStatic = new MapStatic(_meta);
+			_mapStatic.grid = TiledParser.ParseData(_tmxRoot);
+			MapDB.Replace(_mapStatic);
 
-			var _grid = TiledParser.ParseData(_tmxRoot);
-			MapUtil.SaveTileGrid(_meta.name, _grid);
-
-			_prefab.AddComponent<MapStaticComp>().binName = _name;
+			var _mapStaticComp = _prefab.AddComponent<MapStaticComp>();
+			_mapStaticComp.binName = _name;
+			_mapStaticComp.data = _mapStatic;
 		}
 
-		public bool CustomizeGO(GameObject _go, IDictionary<string, string> _props, MapStatic _map, TileData _tile)
+		public bool CustomizeGO(
+			GameObject _go, IDictionary<string, string> _props, 
+			MapStatic _map, Coor _coor, TileData _tile)
 		{
+			string _type;
+			if (!_props.TryGet("type", out _type))
+				return false;
+
+			switch (_type)
+			{
+				case "Door":
+					return CustomizeDoor(_go, _props, _map, _coor, _tile);
+
+				default:
+					return false;
+			}
+		}
+
+		private bool CustomizeDoor(
+			GameObject _go, IDictionary<string, string> _props, 
+			MapStatic _map, Coor _coor, TileData _tile)
+		{
+			if (_map.meta.doors == null)
+				_map.meta.doors = new Dictionary<TileDoorKey, Coor>();
+
+			var _key = TileDataHelper.MakeDoorKey(_props["key"]);
+			_map.meta.doors.Add(_key, _coor);
+
+			D.Assert(_tile.door == null);
+			_tile.door = new TileDoorData(_key, _props["exit_world"], _props["exit_map"], 
+				TileDataHelper.MakeDoorKey(_props["exit_door"]));
+
 			return false;
+		}
+
+		public void BeforeSave(GameObject _prefab)
+		{
+			MapDB.Save();
+			var _mapStaticComp = _prefab.GetComponent<MapStaticComp>();
+			MapUtil.SaveTileGrid(_mapStaticComp.binName, _mapStaticComp.data.grid);
 		}
 	}
 }

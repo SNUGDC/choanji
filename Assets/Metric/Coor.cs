@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Choanji
 {
+	[Serializable]
 	public struct Coor
 	{
 		public static readonly Coor ZERO = new Coor(0, 0);

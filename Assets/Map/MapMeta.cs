@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Gem;
 
 namespace Choanji
@@ -16,6 +17,8 @@ namespace Choanji
 		public readonly MapID id;
 		public readonly string name;
 		public readonly Point size;
+
+		public Dictionary<TileDoorKey, Coor> doors;
 
 		public static implicit operator MapID(MapMeta _this) { return _this.id; }
 

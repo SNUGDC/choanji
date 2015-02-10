@@ -47,6 +47,8 @@ namespace Tiled2Unity
             // Part 3.5: Apply the scale only after all children have been added
             tempPrefab.transform.localScale = new Vector3(prefabScale, prefabScale, prefabScale);
 
+	        BeforeSave(tempPrefab, customImporters);
+
             // Part 4: Save the prefab, keeping references intact.
             string prefabPath = ImportUtils.GetPrefabPathFromName(prefabName);
             UnityEngine.Object finalPrefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
@@ -134,10 +136,15 @@ namespace Tiled2Unity
 						_map.grid.Set(p, _tile);
 					}
 
-		            if (!CustomizeGO(child, goXml, customImporters, _map, _tile))
+		            try
 		            {
-						child.transform.parent = null;
-			            UnityEngine.Object.DestroyImmediate(child);
+						if (!CustomizeGO(child, goXml, customImporters, _map, p, _tile))
+							UnityEngine.Object.DestroyImmediate(child);
+		            }
+		            catch (Exception e)
+		            {
+						Debug.LogException(e);
+						UnityEngine.Object.DestroyImmediate(child);
 		            }
 	            }
             }
@@ -362,7 +369,7 @@ namespace Tiled2Unity
             }
         }
 
-		private bool CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, MapStatic _map, TileData _tile)
+		private bool CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, MapStatic _map, Coor _coor, TileData _tile)
 		{
 			var props = from p in goXml.Elements("Property")
 						select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
@@ -374,11 +381,19 @@ namespace Tiled2Unity
 				var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
 				foreach (ICustomTiledImporter importer in importers)
 				{
-					_ret |= importer.CustomizeGO(gameObject, dictionary, _map, _tile);
+					_ret |= importer.CustomizeGO(gameObject, dictionary, _map, _coor, _tile);
 				}
 			}
 
 			return _ret;
+		}
+
+		private void BeforeSave(GameObject prefab, IList<ICustomTiledImporter> importers)
+		{
+			foreach (ICustomTiledImporter importer in importers)
+			{
+				importer.BeforeSave(prefab);
+			}
 		}
 
         private IList<ICustomTiledImporter> GetCustomImporterInstances()

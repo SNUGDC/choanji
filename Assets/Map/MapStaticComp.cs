@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -16,6 +17,14 @@ namespace Choanji
 				MapDB.TryGet(MapIDHelper.Make(binName), out mData);
 				return mData;
 			}
+
+#if UNITY_EDITOR
+			set
+			{
+				D.Assert(mData == null);
+				mData = value;
+			}
+#endif
 		}
 	}
 }

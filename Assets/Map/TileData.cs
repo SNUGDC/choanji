@@ -12,6 +12,7 @@ namespace Choanji
 		public bool occupied;
 		public Direction wall;
 		public TiledLayerType inspectee;
+		public TileDoorData door;
 		private JsonData[] mDatas;
 
 		public JsonData GetInspectableData()
@@ -82,4 +83,5 @@ namespace Choanji
 			return GetEnumerator();
 		}
 	}
+
 }

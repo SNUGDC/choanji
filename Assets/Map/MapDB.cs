@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -65,8 +67,16 @@ namespace Choanji
 		public static void Load()
 		{
 			D.Assert(!isLoaded);
-			if (!SerializeHelper.Dec(BIN_PATH, out sDB))
+			try
+			{
+				if (!SerializeHelper.Dec(BIN_PATH, out sDB))
+					sDB = new DB();
+			}
+			catch (Exception e)
+			{
+				Debug.LogException(e);
 				sDB = new DB();
+			}
 		}
 	}
 
