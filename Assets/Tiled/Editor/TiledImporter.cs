@@ -16,6 +16,30 @@ namespace Choanji
 			return "./TMX/" + _name + ".tmx";
 		}
 
+		public static string MapSortingLayerName(string _objName)
+		{
+			switch (_objName)
+			{
+				case "FLR":
+				case "RUG":
+				case "WALL":
+					return "Floor";
+				case "ATTACH":
+					return "Attach";
+				case "STD_LOW":
+					return "StandLower";
+				case "STD_UP":
+					return "StandUpper";
+				case "OBJ_LOW":
+					return "ObjectLower";
+				case "OBJ_UP":
+					return "ObjectUpper";
+				default:
+					L.W("no matching layerName for " + _objName);
+					return null;
+			}
+		}
+
 		public void HandleCustomProperties(GameObject _go, IDictionary<string, string> _props)
 		{
 		}

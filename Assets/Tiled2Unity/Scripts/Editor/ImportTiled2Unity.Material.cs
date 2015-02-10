@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
-
+using Choanji;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,17 +60,33 @@ namespace Tiled2Unity
             }
             renderer.sharedMaterial = material;
 
-            // Set the sorting layer for the mesh
-            string sortingLayer = match.Attribute("sortingLayerName").Value;
-            if (!String.IsNullOrEmpty(sortingLayer) && !SortingLayerExposedEditor.GetSortingLayerNames().Contains(sortingLayer))
-            {
-                Debug.LogError(string.Format("Sorting Layer \"{0}\" does not exist. Check your Project Settings -> Tags and Layers", sortingLayer));
-                renderer.sortingLayerName = "Default";
-            }
-            else
-            {
-                renderer.sortingLayerName = sortingLayer;
-            }
+			// Get layer name
+			var _layers =  xml.Root.Element("Prefab").Elements("GameObject");
+			string _layerName = null;
+			foreach (var _layer in _layers)
+			{
+				var _meshName = (string) _layer.Element("GameObject").Attribute("copy");
+				if (_meshName == meshName)
+				{
+					_layerName = (string) _layer.Attribute("name");
+					_layerName = _layerName.Remove(_layerName.Length - 3);
+					break;
+				}
+			}
+
+			// Set the sorting layer for the mesh
+			string sortingLayer = match.Attribute("sortingLayerName").Value;
+			if (!String.IsNullOrEmpty(sortingLayer) && !SortingLayerExposedEditor.GetSortingLayerNames().Contains(sortingLayer))
+			{
+				Debug.LogError(string.Format("Sorting Layer \"{0}\" does not exist. Check your Project Settings -> Tags and Layers", sortingLayer));
+				renderer.sortingLayerName = "Default";
+			}
+			else
+			{
+				var _customLayerName = TiledImporter.MapSortingLayerName(_layerName);
+				renderer.sortingLayerName = !string.IsNullOrEmpty(_customLayerName)
+					? _customLayerName : sortingLayer;
+			}
 
             // Set the sorting order
             renderer.sortingOrder = ImportUtils.GetAttributeAsInt(match, "sortingOrder");

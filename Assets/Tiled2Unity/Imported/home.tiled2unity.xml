@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-01-27 오후 8:37:13-->
+<!--Last exported: 2015-02-10 오후 11:32:17-->
 <Tiled2Unity version="0.9.7.4">
-  <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="Floor" sortingOrder="0" />
-  <AssignMaterial mesh="mesh_[01]_[00]" material="Interior general" sortingLayerName="Floor" sortingOrder="1" />
-  <AssignMaterial mesh="mesh_[02]_[00]" material="Interior general" sortingLayerName="Floor" sortingOrder="2" />
+  <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="" sortingOrder="0" />
+  <AssignMaterial mesh="mesh_[01]_[00]" material="Interior general" sortingLayerName="" sortingOrder="1" />
+  <AssignMaterial mesh="mesh_[02]_[00]" material="Interior general" sortingLayerName="" sortingOrder="2" />
   <AssignMaterial mesh="mesh_[03]_[00]" material="Interior general" sortingLayerName="" sortingOrder="3" />
-  <AssignMaterial mesh="mesh_[04]_[00]" material="Interior general" sortingLayerName="StandLower" sortingOrder="4" />
-  <AssignMaterial mesh="mesh_[05]_[00]" material="Interior general" sortingLayerName="StandUpper" sortingOrder="5" />
+  <AssignMaterial mesh="mesh_[04]_[00]" material="Interior general" sortingLayerName="" sortingOrder="4" />
+  <AssignMaterial mesh="mesh_[05]_[00]" material="Interior general" sortingLayerName="" sortingOrder="5" />
   <Prefab name="home" numTilesWide="16" numTilesHigh="16" tileWidth="16" tileHeight="16" scale="0.0625">
     <Property name="world" value="house_01" />
     <GameObject name="FLR_00">
@@ -30,7 +30,6 @@
       <GameObject copy="mesh_[05]_[00]" />
     </GameObject>
     <GameObject name="OBJ_UP">
-      <Property name="dialog" value="manual_control" />
       <GameObject name="Book1" x="112" y="-128" />
     </GameObject>
   </Prefab>

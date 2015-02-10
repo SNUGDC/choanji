@@ -162,9 +162,6 @@
   </tile>
  </tileset>
  <layer name="FLR" width="16" height="16">
-  <properties>
-   <property name="unity:sortingLayerName" value="Floor"/>
-  </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -425,9 +422,6 @@
   </data>
  </layer>
  <layer name="RUG" width="16" height="16">
-  <properties>
-   <property name="unity:sortingLayerName" value="Floor"/>
-  </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -688,9 +682,6 @@
   </data>
  </layer>
  <layer name="WALL" width="16" height="16">
-  <properties>
-   <property name="unity:sortingLayerName" value="Floor"/>
-  </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1211,9 +1202,6 @@
   </data>
  </layer>
  <layer name="STD_LOW" width="16" height="16">
-  <properties>
-   <property name="unity:sortingLayerName" value="StandLower"/>
-  </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1474,9 +1462,6 @@
   </data>
  </layer>
  <layer name="STD_UP" width="16" height="16">
-  <properties>
-   <property name="unity:sortingLayerName" value="StandUpper"/>
-  </properties>
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1737,9 +1722,6 @@
   </data>
  </layer>
  <objectgroup name="OBJ_UP">
-  <properties>
-   <property name="dialog" value="manual_control"/>
-  </properties>
   <object id="1" name="Book1" type="Book" gid="1333" x="112" y="128"/>
  </objectgroup>
 </map>
