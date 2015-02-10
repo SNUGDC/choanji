@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Gem;
@@ -110,7 +111,8 @@ namespace Choanji
 			{
 				var _node = (XmlNode) _nodeObj;
 				if (_node.Name != "tileset") continue;
-				_tilesets.Add(ParseTileset(_node, ref _tiles));
+				var _firstGID = (TileGID) _node.Attributes["firstgid"].AsInt();
+				_tilesets.Add(ParseTileset(_firstGID, _node.Attributes["source"].Value, ref _tiles));
 			}
 
 			// parse layer
@@ -136,12 +138,22 @@ namespace Choanji
 			return MergeLayers(_layers);
 		}
 
-		private static TilesetData ParseTileset(XmlNode _tileset, ref TileDatas _datas)
+		private static string TMXPath(string _source)
 		{
-			var _ret = new TilesetData();
-			var _attrs = _tileset.Attributes;
+			return "TMX/" + _source;
+		}
 
-			_ret.firstGID = (TileGID) _attrs["firstgid"].AsInt();
+		private static TilesetData ParseTileset(TileGID _firstGID, string _source, ref TileDatas _datas)
+		{
+			var _tileXml = new XmlDocument();
+			using (var _f = new FileStream(TMXPath(_source), FileMode.Open, FileAccess.Read))
+				_tileXml.Load(_f);
+
+			var _tileset = _tileXml["tileset"];
+
+			var _ret = new TilesetData();
+			_ret.firstGID = _firstGID;
+			var _attrs = _tileset.Attributes;
 
 			_ret.tileSize = _attrs["tilewidth"].AsInt();
 			D.Assert(_ret.tileSize == _attrs["tileheight"].AsInt());
