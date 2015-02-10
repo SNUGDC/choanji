@@ -76,7 +76,7 @@ namespace Choanji
 			_prefab.AddComponent<MapStaticComp>().binName = _name;
 		}
 
-		public bool CustomizeGO(GameObject _go, IDictionary<string, string> _props, TileData _tileData)
+		public bool CustomizeGO(GameObject _go, IDictionary<string, string> _props, MapStatic _map, TileData _tile)
 		{
 			return false;
 		}

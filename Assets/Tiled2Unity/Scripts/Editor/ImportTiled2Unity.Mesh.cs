@@ -122,19 +122,19 @@ namespace Tiled2Unity
 					var w = int.Parse(goXml.Parent.Parent.Attribute("tileWidth").Value);
 					var h = int.Parse(goXml.Parent.Parent.Attribute("tileHeight").Value);
 
-					var _mapStatic = parent.transform.parent.GetComponent<MapStaticComp>().data;
+					var _map = parent.transform.parent.GetComponent<MapStaticComp>().data;
 					var _px = (int)(x + float.Epsilon) / w;
-					var _size = _mapStatic.meta.size;
+					var _size = _map.meta.size;
 					var _py = _size.y + (int)(y + float.Epsilon) / h;
 					var p = new Point(_px, _py);
-					TileData _tileData;
-					if (_mapStatic.grid.TryGet(p, out _tileData))
+					TileData _tile;
+					if (_map.grid.TryGet(p, out _tile))
 					{
-						_tileData = new TileData();
-						_mapStatic.grid.Set(p, _tileData);
+						_tile = new TileData();
+						_map.grid.Set(p, _tile);
 					}
 
-		            if (!CustomizeGO(child, goXml, customImporters, _tileData))
+		            if (!CustomizeGO(child, goXml, customImporters, _map, _tile))
 		            {
 						child.transform.parent = null;
 			            UnityEngine.Object.DestroyImmediate(child);
@@ -362,7 +362,7 @@ namespace Tiled2Unity
             }
         }
 
-		private bool CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, TileData _tileData)
+		private bool CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, MapStatic _map, TileData _tile)
 		{
 			var props = from p in goXml.Elements("Property")
 						select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
@@ -374,7 +374,7 @@ namespace Tiled2Unity
 				var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
 				foreach (ICustomTiledImporter importer in importers)
 				{
-					_ret |= importer.CustomizeGO(gameObject, dictionary, _tileData);
+					_ret |= importer.CustomizeGO(gameObject, dictionary, _map, _tile);
 				}
 			}
 
