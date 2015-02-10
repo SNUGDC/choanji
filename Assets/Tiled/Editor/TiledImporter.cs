@@ -40,11 +40,11 @@ namespace Choanji
 			}
 		}
 
-		public void HandleCustomProperties(GameObject _go, IDictionary<string, string> _props)
+		public void HandleMapProperties(GameObject _go, IDictionary<string, string> _props)
 		{
 		}
 
-		public void CustomizePrefab(GameObject _prefab)
+		public void CustomizeMap(GameObject _prefab) 
 		{
 			var _name = _prefab.name;
 			var _tmxPath = GetTMXPath(_name);
@@ -75,7 +75,9 @@ namespace Choanji
 
 			_prefab.AddComponent<MapStaticComp>().binName = _name;
 		}
+
+		public void CustomizeGO(GameObject _go, IDictionary<string, string> _props, TileData _tileData)
+		{
+		}
 	}
-
-
 }

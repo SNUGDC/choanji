@@ -18,7 +18,7 @@ namespace Choanji
 			var _propsNode = _tmxRoot["map"]["properties"];
 			if (_propsNode == null)
 			{
-				L.W(L.M.KEY_NOT_EXISTS("properties"));
+				L.D(L.M.KEY_NOT_EXISTS("properties"));
 				return _meta;
 			}
 

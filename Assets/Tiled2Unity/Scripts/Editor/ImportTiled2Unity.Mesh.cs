@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-
+using Choanji;
+using Gem;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,16 +33,16 @@ namespace Tiled2Unity
             float prefabScale = ImportUtils.GetAttributeAsFloat(xmlPrefab, "scale", 0.0625f);
             GameObject tempPrefab = new GameObject(prefabName);
             HandleTiledAttributes(tempPrefab, xmlPrefab);
-            HandleCustomProperties(tempPrefab, xmlPrefab, customImporters);
+            HandleMapProperties(tempPrefab, xmlPrefab, customImporters);
 
-            // Part 2: Build out the prefab
+			// Part 2: Allow for customization from other editor scripts to be made on the prefab
+			// (These are generally for game-specific needs)
+			CustomizeMap(tempPrefab, customImporters);
+
+            // Part 3: Build out the prefab
             // We may have an 'isTrigger' attribute that we want our children to obey
             bool isTrigger = ImportUtils.GetAttributeAsBoolean(xmlPrefab, "isTrigger", false);
             AddGameObjectsTo(tempPrefab, xmlPrefab, isTrigger, objPath, customImporters);
-
-            // Part 3: Allow for customization from other editor scripts to be made on the prefab
-            // (These are generally for game-specific needs)
-            CustomizePrefab(tempPrefab, customImporters);
 
             // Part 3.5: Apply the scale only after all children have been added
             tempPrefab.transform.localScale = new Vector3(prefabScale, prefabScale, prefabScale);
@@ -115,8 +116,25 @@ namespace Tiled2Unity
                 // Does this game object have a layer?
                 AssignLayerTo(child, goXml);
 
-                // Are there any custom properties?
-                HandleCustomProperties(child, goXml, customImporters);
+				// Are there any custom properties?
+	            if (goXml.Attribute("x") != null)
+	            {
+					var w = int.Parse(goXml.Parent.Parent.Attribute("tileWidth").Value);
+					var h = int.Parse(goXml.Parent.Parent.Attribute("tileHeight").Value);
+
+					var _mapStatic = parent.transform.parent.GetComponent<MapStaticComp>().data;
+					var _px = (int)(x + float.Epsilon) / w;
+					var _size = _mapStatic.meta.size;
+					var _py = _size.y + (int)(y + float.Epsilon) / h;
+					var p = new Point(_px, _py);
+					TileData _tileData;
+					if (_mapStatic.grid.TryGet(p, out _tileData))
+					{
+						_tileData = new TileData();
+						_mapStatic.grid.Set(p, _tileData);
+					}
+					CustomizeGO(child, goXml, customImporters, _tileData);
+	            }
             }
         }
 
@@ -316,7 +334,7 @@ namespace Tiled2Unity
             }
         }
 
-        private void HandleCustomProperties(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers)
+        private void HandleMapProperties(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers)
         {
             var props = from p in goXml.Elements("Property")
                         select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
@@ -326,18 +344,33 @@ namespace Tiled2Unity
                 var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
                 foreach (ICustomTiledImporter importer in importers)
                 {
-                    importer.HandleCustomProperties(gameObject, dictionary);
+                    importer.HandleMapProperties(gameObject, dictionary);
                 }
             }
         }
 
-        private void CustomizePrefab(GameObject prefab, IList<ICustomTiledImporter> importers)
+        private void CustomizeMap(GameObject prefab, IList<ICustomTiledImporter> importers)
         {
             foreach (ICustomTiledImporter importer in importers)
             {
-                importer.CustomizePrefab(prefab);
+                importer.CustomizeMap(prefab);
             }
         }
+
+		private void CustomizeGO(GameObject gameObject, XElement goXml, IList<ICustomTiledImporter> importers, TileData _tileData)
+		{
+			var props = from p in goXml.Elements("Property")
+						select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
+
+			if (props.Count() > 0)
+			{
+				var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
+				foreach (ICustomTiledImporter importer in importers)
+				{
+					importer.CustomizeGO(gameObject, dictionary, _tileData);
+				}
+			}
+		}
 
         private IList<ICustomTiledImporter> GetCustomImporterInstances()
         {
