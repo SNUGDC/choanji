@@ -29,7 +29,7 @@ namespace Tiled2Unity
 
             // Part 1: Create the prefab
             string prefabName = xmlPrefab.Attribute("name").Value;
-            float prefabScale = ImportUtils.GetAttributeAsFloat(xmlPrefab, "scale", 1.0f);
+            float prefabScale = ImportUtils.GetAttributeAsFloat(xmlPrefab, "scale", 0.0625f);
             GameObject tempPrefab = new GameObject(prefabName);
             HandleTiledAttributes(tempPrefab, xmlPrefab);
             HandleCustomProperties(tempPrefab, xmlPrefab, customImporters);
