@@ -6,12 +6,21 @@ namespace Choanji
 	public static class TheWorld
 	{
 		static TheWorld()
-		{
-			// note: avoid null pointer exception.
-			bluePrint = new WorldBluePrint();
-		}
+		{}
 
 		public static World g { get; private set; }
+
+		private static Transform sParent;
+		public static Transform parent
+		{
+			get { return sParent; }
+			set
+			{
+				if (sBluePrint != null)
+					L.W("trying to change parent after set blueprint.");
+				sParent = value;
+			}
+		}
 
 		private static readonly Vector2 NULL = new Vector2(-34873453, -34537804);
 		private static Vector2 sPosition = NULL;
@@ -28,11 +37,16 @@ namespace Choanji
 
 				if (g != null)
 				{
-					L.W(L.M.SHOULD_NULL("world"));
 					g.Purge();
+					g = null;
 				}
 
-				g = new World(bluePrint);
+				if (value == null)
+					return;
+
+				D.Assert(parent != null);
+
+				g = new World(bluePrint, parent);
 				sPosition = NULL;
 			}
 		}

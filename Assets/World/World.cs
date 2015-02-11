@@ -9,12 +9,14 @@ namespace Choanji
 	public class World
 	{
 		private readonly WorldBluePrint mBluePrint;
+		private readonly Transform mParent;
 
 		private readonly Rooms mRooms = new Rooms();
 
-		public World(WorldBluePrint _bluePrint)
+		public World(WorldBluePrint _bluePrint, Transform _parent)
 		{
 			mBluePrint = _bluePrint;
+			mParent = _parent;
 		}
 
 		public void Purge()
@@ -22,6 +24,18 @@ namespace Choanji
 			foreach (var _kv in mRooms)
 				Object.Destroy(_kv.Value.go);
 			mRooms.Clear();
+		}
+
+		public KeyValuePair<WorldBluePrint.Room, Map>? Search(WorldBluePrint.Room.Key _key)
+		{
+			foreach (var _kv in mRooms)
+			{
+				if (_kv.Key == _key)
+					return _kv;
+			}
+
+			L.W(L.M.KEY_NOT_EXISTS(_key));
+			return null;
 		}
 
 		public void Construct(PRect _rect)
@@ -33,6 +47,7 @@ namespace Choanji
 					continue;
 				var _static = MapDB.Get(_room.map);
 				var _roomGO = _static.prefab.Instantiate();
+				_roomGO.transform.SetParent(mParent);
 				_roomGO.transform.position = _room.worldPos;
 				mRooms.Add(_room, new Map(_static, _roomGO));
 			}

@@ -4,6 +4,8 @@
 	{
 		public static void Update()
 		{
+			TheCharacter.Update();
+
 			if (TheCharacter.camDirty)
 				TheWorld.Update();
 		}

@@ -6,6 +6,7 @@ namespace Choanji
 	public static class TheCharacter
 	{
 		private static Character sG;
+		private static CharacterCtrl sCtrl;
 
 		public static Character g
 		{
@@ -19,10 +20,28 @@ namespace Choanji
 				}
 
 				sG = value;
+				sCtrl = sG.GetComponent<CharacterCtrl>();
+				D.Assert(sCtrl != null);
+
 				D.Assert(g.GetComponent<CharacterInputAgent>() == null);
 				g.gameObject.AddComponent<CharacterInputAgent>();
 
 				Cameras.gameMani.default_ = DefaultCam;
+			}
+		}
+
+		public static WorldCoor worldCoor
+		{
+			get { return new WorldCoor(sG.position); }
+		}
+
+		public static void Update()
+		{
+			if (mTeleportAddress.HasValue)
+			{
+				var _address = mTeleportAddress;
+				mTeleportAddress = null;
+				TeleportImmediate(_address.Value);
 			}
 		}
 
@@ -48,6 +67,33 @@ namespace Choanji
 			}
 
 			return new TransformManipulator.Result();
+		}
+
+		private static WorldAddress? mTeleportAddress;
+		public static void TeleportNextUpdate(WorldAddress _address)
+		{
+			D.Assert(!mTeleportAddress.HasValue);
+			mTeleportAddress = _address;
+			camDirty = true;
+		}
+
+		public static void TeleportImmediate(WorldAddress _address)
+		{
+			D.Assert(!mTeleportAddress.HasValue);
+
+			var _bluePrint = WorldBluePrint.Read(_address.world);
+			if (_bluePrint == null) return;
+			TheWorld.bluePrint = _bluePrint;
+			TheWorld.Update();
+
+			var _hasRoomAndMap = TheWorld.g.Search(_address.map);
+			if (_hasRoomAndMap == null)
+				return;
+
+			var _map = _hasRoomAndMap.Value.Value;
+			
+			if (!sCtrl.TrySetPosition(new LocalCoor(_map, _address.coor)))
+				L.E("cannot set position to " + _address);
 		}
 
 	}
