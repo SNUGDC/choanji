@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-02-11 오전 12:28:54-->
+<!--Last exported: 2015-02-12 오전 12:31:25-->
 <Tiled2Unity version="0.9.7.4">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="" sortingOrder="0" />
   <Prefab name="field" numTilesWide="16" numTilesHigh="16" tileWidth="16" tileHeight="16">

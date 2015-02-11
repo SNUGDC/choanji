@@ -30,7 +30,9 @@ namespace Choanji
 
 		public static explicit operator WorldCoor(LocalCoor _this)
 		{
-			return new WorldCoor(new Coor(_this.map.go.transform.position) + _this.val);
+			var _mapPos = _this.map.go.transform.position;
+			_mapPos.y = _this.map.size.y - _mapPos.y;
+			return new WorldCoor(new Coor(_mapPos) + _this.val);
 		}
 
 		#region equality operator

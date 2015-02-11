@@ -63,8 +63,8 @@ namespace Choanji
 
 			MapDB.TryLoad();
 
-			var _tiledMap = _prefab.GetComponent<TiledMap>();
-			_prefab.transform.SetPosY(_tiledMap.TileHeight);
+			// var _tiledMap = _prefab.GetComponent<TiledMap>();
+			// _prefab.transform.SetPosY(_tiledMap.TileHeight);
 
 			var _meta = TiledParser.ParseMeta(_tmxRoot, _name);
 			var _mapStatic = new MapStatic(_meta);
