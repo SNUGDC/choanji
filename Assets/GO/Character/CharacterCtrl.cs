@@ -70,7 +70,13 @@ namespace Choanji
 			var _map = _hasMove.Value.map;
 			BeforeSetPosition(_map.Convert(_pos));
 			ch.Move(_dir);
-			
+
+			if (_move.data.door != null)
+			{
+				if (onEnterDoor != null)
+					onEnterDoor(_move.data.door);
+			}
+
 			return true;
 		}
 

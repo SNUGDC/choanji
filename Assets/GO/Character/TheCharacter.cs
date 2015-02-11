@@ -20,8 +20,10 @@ namespace Choanji
 				}
 
 				sG = value;
+
 				sCtrl = sG.GetComponent<CharacterCtrl>();
 				D.Assert(sCtrl != null);
+				sCtrl.onEnterDoor += TeleportNextUpdate;
 
 				D.Assert(g.GetComponent<CharacterInputAgent>() == null);
 				g.gameObject.AddComponent<CharacterInputAgent>();
@@ -75,6 +77,19 @@ namespace Choanji
 			D.Assert(!mTeleportAddress.HasValue);
 			mTeleportAddress = _address;
 			camDirty = true;
+		}
+
+		private static void TeleportNextUpdate(TileDoorData _door)
+		{
+			MapStatic _exitMap;
+			if (!MapDB.TryGet(_door.exitMap, out _exitMap))
+				return;
+
+			Coor _coor;
+			if (!_exitMap.meta.doors.TryGet(_door.exitDoor, out _coor))
+				return;
+
+			TeleportNextUpdate(new WorldAddress(_door.exitWorld, _door.exitRoom, _coor));
 		}
 
 		public static void TeleportImmediate(WorldAddress _address)

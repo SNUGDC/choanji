@@ -105,8 +105,9 @@ namespace Choanji
 			_map.meta.doors.Add(_key, _coor);
 
 			D.Assert(_tile.door == null);
-			_tile.door = new TileDoorData(_key, _props["exit_world"], _props["exit_map"], 
-				TileDataHelper.MakeDoorKey(_props["exit_door"]));
+			_tile.door = new TileDoorData(_key, 
+				_props["exit_world"], _props["exit_room"], 
+				_props["exit_map"], TileDataHelper.MakeDoorKey(_props["exit_door"]));
 
 			return false;
 		}

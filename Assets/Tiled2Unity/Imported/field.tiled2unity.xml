@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-02-12 오전 12:31:25-->
+<!--Last exported: 2015-02-12 오전 12:52:35-->
 <Tiled2Unity version="0.9.7.4">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="" sortingOrder="0" />
   <Prefab name="field" numTilesWide="16" numTilesHigh="16" tileWidth="16" tileHeight="16">
@@ -11,7 +11,8 @@
     <GameObject name="OBJ_UP">
       <GameObject name="Door1" x="128" y="-144">
         <Property name="exit_door" value="door_01" />
-        <Property name="exit_map" value="home_01" />
+        <Property name="exit_map" value="home" />
+        <Property name="exit_room" value="home_01" />
         <Property name="exit_world" value="home" />
         <Property name="key" value="door_01" />
         <Property name="type" value="Door" />

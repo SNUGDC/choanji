@@ -17,17 +17,19 @@ namespace Choanji
 	[Serializable]
 	public class TileDoorData
 	{
-		public TileDoorData(TileDoorKey _key, string _exitWorld, string _exitMap, TileDoorKey _exitDoor)
+		public TileDoorData(TileDoorKey _key, string _exitWorld, string _exitRoom, string _exitMap, TileDoorKey _exitDoor)
 		{
 			key = _key;
 			exitWorld = _exitWorld;
-			exitMap = _exitMap;
+			exitRoom = WorldBluePrint.Room.MakeKey(_exitRoom);
+			exitMap = MapIDHelper.Make(_exitMap);
 			exitDoor = _exitDoor;
 		}
 
 		public TileDoorKey key;
 		public string exitWorld;
-		public string exitMap;
+		public WorldBluePrint.Room.Key exitRoom;
+		public MapID exitMap;
 		public TileDoorKey exitDoor;
 	}
 }

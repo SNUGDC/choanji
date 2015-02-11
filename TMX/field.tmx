@@ -265,7 +265,8 @@
   <object id="4" name="Door1" type="Door" gid="5" x="128" y="144">
    <properties>
     <property name="exit_door" value="door_01"/>
-    <property name="exit_map" value="home_01"/>
+    <property name="exit_map" value="home"/>
+    <property name="exit_room" value="home_01"/>
     <property name="exit_world" value="home"/>
     <property name="key" value="door_01"/>
     <property name="type" value="Door"/>
