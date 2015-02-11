@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="23">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="25">
  <tileset firstgid="1" source="Interior general.tsx"/>
  <layer name="FLR" width="16" height="16">
   <data>
@@ -1562,6 +1562,11 @@
   </data>
  </layer>
  <objectgroup name="OBJ_UP">
+  <properties>
+   <property name="agent" value="Random"/>
+   <property name="key" value="mom"/>
+   <property name="type" value="NPC"/>
+  </properties>
   <object id="1" name="book_01" type="Book" gid="1333" x="112" y="128"/>
   <object id="21" name="door_01" type="Door" gid="5" x="112" y="208">
    <properties>
@@ -1573,5 +1578,6 @@
     <property name="type" value="Door"/>
    </properties>
   </object>
+  <object id="24" name="mom" type="NPC" gid="5" x="96" y="176"/>
  </objectgroup>
 </map>
