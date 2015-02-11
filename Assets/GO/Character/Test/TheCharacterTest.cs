@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 
 namespace Choanji
 {
@@ -12,6 +14,6 @@ namespace Choanji
 			TheCharacter.g = ch;
 		}
 	}
-
-
 }
+
+#endif
