@@ -47,19 +47,13 @@ namespace Choanji
 			}
 		}
 
-		public static void LateUpdate()
-		{
-			camDirty = false;
-		}
-
-		public static bool camDirty { get; private set; }
 		private static Coor sLastCamCoor;
 
 		private static TransformManipulator.Result DefaultCam(GameObject _go, float _dt)
 		{
 			if (g && (sLastCamCoor != g.position))
 			{
-				camDirty = true;
+				WorldProgress.SetCamDirty();
 				sLastCamCoor = g.position;
 
 				return new TransformManipulator.Result
@@ -76,7 +70,7 @@ namespace Choanji
 		{
 			D.Assert(!mTeleportAddress.HasValue);
 			mTeleportAddress = _address;
-			camDirty = true;
+			WorldProgress.SetCamDirty();
 		}
 
 		private static void TeleportNextUpdate(TileDoorData _door)
