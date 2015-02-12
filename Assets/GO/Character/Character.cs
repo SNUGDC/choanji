@@ -10,7 +10,7 @@ namespace Choanji
 		{
 			get
 			{
-				return new Coor(transform.localPosition);
+				return new Coor(transform.position);
 			}
 
 			set
@@ -18,7 +18,7 @@ namespace Choanji
 				var _orgPos = position;
 				if (_orgPos == lastPosition) return;
 				lastPosition = _orgPos;
-				transform.localPosition = (Vector2)value;
+				transform.position = (Vector2)value;
 			}
 		}
 

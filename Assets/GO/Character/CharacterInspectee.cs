@@ -38,6 +38,9 @@ namespace Choanji
 
 		void Awake()
 		{
+			if (!ch)
+				ch = GetComponent<CharacterCtrl>();
+
 			mOnTileRetain = new Connection<LocalCoor>((_pos) =>
 			{
 				if (mInspectee != null) mInspectee.Retain(_pos);

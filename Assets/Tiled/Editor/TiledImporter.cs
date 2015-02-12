@@ -40,6 +40,13 @@ namespace Choanji
 			}
 		}
 
+		public void BeforeSave(GameObject _prefab)
+		{
+			MapDB.Save();
+			var _mapStaticComp = _prefab.GetComponent<MapStaticComp>();
+			MapUtil.SaveTileGrid(_mapStaticComp.binName, _mapStaticComp.data.grid);
+		}
+
 		public void HandleMapProperties(GameObject _go, IDictionary<string, string> _props)
 		{
 		}
@@ -87,15 +94,18 @@ namespace Choanji
 			switch (_type)
 			{
 				case "Door":
-					return CustomizeDoor(_go, _props, _map, _coor, _tile);
+					return CustomizeDoor(_props, _map, _coor, _tile);
 
+				case "NPC":
+					return CustomizeNPC(_go, _props);
+					
 				default:
 					return false;
 			}
 		}
 
-		private bool CustomizeDoor(
-			GameObject _go, IDictionary<string, string> _props, 
+		private static bool CustomizeDoor(
+			IDictionary<string, string> _props, 
 			MapStatic _map, Coor _coor, TileData _tile)
 		{
 			if (_map.meta.doors == null)
@@ -112,11 +122,31 @@ namespace Choanji
 			return false;
 		}
 
-		public void BeforeSave(GameObject _prefab)
+		private static bool CustomizeNPC(
+			GameObject _go, IDictionary<string, string> _props)
 		{
-			MapDB.Save();
-			var _mapStaticComp = _prefab.GetComponent<MapStaticComp>();
-			MapUtil.SaveTileGrid(_mapStaticComp.binName, _mapStaticComp.data.grid);
+			var _data = new TileNPCData(_props["key"]);
+			string _str;
+
+			if (_props.TryGetValue("dialog", out _str))
+			{
+				Direction _dir;
+				if (EnumHelper.TryParse(_str, out _dir))
+					_data.dir = _dir;
+			}
+
+			if (_props.TryGet("agent", out _str))
+			{
+				CharacterAgentType _agent;
+				if (EnumHelper.TryParse(_str, out _agent))
+					_data.agent = _agent;
+			}
+
+			_data.dialog = _props.GetOrDefault("dialog");
+
+			var _spawner = _go.AddComponent<TileNPCSpawner>();
+			_spawner.data = _data;
+			return true;
 		}
 	}
 }

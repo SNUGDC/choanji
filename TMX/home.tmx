@@ -1578,6 +1578,13 @@
     <property name="type" value="Door"/>
    </properties>
   </object>
-  <object id="24" name="mom" type="NPC" gid="5" x="96" y="176"/>
+  <object id="24" name="mom" type="NPC" gid="5" x="96" y="176">
+   <properties>
+    <property name="agent" value="RAND"/>
+    <property name="dialog" value="mom_01"/>
+    <property name="key" value="mom"/>
+    <property name="type" value="NPC"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

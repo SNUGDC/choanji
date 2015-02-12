@@ -1,10 +1,11 @@
-﻿using Gem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Choanji
 {
     public class TileDB : MonoBehaviour
     {
-        public Prefab<Character> ch;
+	    public static TileDB g;
+
+        public Character ch;
     }
 }

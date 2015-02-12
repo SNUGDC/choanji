@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-02-12 오전 12:52:39-->
+<!--Last exported: 2015-02-12 오후 11:10:47-->
 <Tiled2Unity version="0.9.7.4">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Interior general" sortingLayerName="" sortingOrder="1" />
@@ -29,6 +29,9 @@
       <GameObject copy="mesh_[05]_[00]" />
     </GameObject>
     <GameObject name="OBJ_UP">
+      <Property name="agent" value="Random" />
+      <Property name="key" value="mom" />
+      <Property name="type" value="NPC" />
       <GameObject name="book_01" x="112" y="-128" />
       <GameObject name="door_01" x="112" y="-208">
         <Property name="exit_door" value="door_01" />
@@ -37,6 +40,12 @@
         <Property name="exit_world" value="field" />
         <Property name="key" value="door_01" />
         <Property name="type" value="Door" />
+      </GameObject>
+      <GameObject name="mom" x="96" y="-176">
+        <Property name="agent" value="RAND" />
+        <Property name="dialog" value="mom_01" />
+        <Property name="key" value="mom" />
+        <Property name="type" value="NPC" />
       </GameObject>
     </GameObject>
   </Prefab>
