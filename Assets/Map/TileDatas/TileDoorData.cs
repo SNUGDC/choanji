@@ -26,10 +26,10 @@ namespace Choanji
 			exitDoor = _exitDoor;
 		}
 
-		public TileDoorKey key;
-		public string exitWorld;
-		public WorldBluePrint.Room.Key exitRoom;
-		public MapID exitMap;
-		public TileDoorKey exitDoor;
+		public readonly TileDoorKey key;
+		public readonly string exitWorld;
+		public readonly WorldBluePrint.Room.Key exitRoom;
+		public readonly MapID exitMap;
+		public readonly TileDoorKey exitDoor;
 	}
 }
