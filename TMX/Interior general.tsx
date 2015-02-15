@@ -59,11 +59,6 @@
    <property name="occupied" value="true"/>
   </properties>
  </tile>
- <tile id="870">
-  <properties>
-   <property name="occupied" value="true"/>
-  </properties>
- </tile>
  <tile id="871">
   <properties>
    <property name="occupied" value="true"/>
