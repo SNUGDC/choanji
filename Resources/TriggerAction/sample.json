@@ -1,0 +1,6 @@
+{
+	"action": {
+		"type": "OPEN_DIALOG",
+		"dialog": "manual_01"
+	}
+}

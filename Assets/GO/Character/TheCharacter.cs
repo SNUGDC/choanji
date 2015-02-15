@@ -6,8 +6,6 @@ namespace Choanji
 	public static class TheCharacter
 	{
 		private static Character sG;
-		private static CharacterCtrl sCtrl;
-
 		public static Character g
 		{
 			get { return sG; }
@@ -21,9 +19,9 @@ namespace Choanji
 
 				sG = value;
 
-				sCtrl = sG.GetComponent<CharacterCtrl>();
-				D.Assert(sCtrl != null);
-				sCtrl.onEnterDoor += TeleportNextUpdate;
+				ctrl = sG.GetComponent<CharacterCtrl>();
+				D.Assert(ctrl != null);
+				ctrl.onEnterDoor += TeleportNextUpdate;
 
 				D.Assert(g.GetComponent<CharacterInputAgent>() == null);
 				g.gameObject.AddComponent<CharacterInputAgent>();
@@ -31,6 +29,8 @@ namespace Choanji
 				Cameras.gameMani.default_ = DefaultCam;
 			}
 		}
+
+		public static CharacterCtrl ctrl { get; private set; }
 
 		public static WorldCoor worldCoor
 		{
@@ -104,7 +104,7 @@ namespace Choanji
 				return;
 
 			var _localCoor = new LocalCoor(_hasRoomAndMap.Value.Value, _address.coor);
-			if (!sCtrl.TrySetPosition(_localCoor))
+			if (!ctrl.TrySetPosition(_localCoor))
 				L.E("cannot set position to " + _address);
 		}
 

@@ -14,14 +14,7 @@ namespace Choanji
 
         private void SpawnAndDestroy()
         {
-	        var _coor = new Coor(((Vector2) transform.position) + Coor.OFFSET);
-
-	        var _pos = TheWorld.g.SearchMapAndTile(new WorldCoor(_coor));
-	        if (_pos == null)
-	        {
-		        L.W("coor not exists. cannot spawn.");
-		        return;
-	        }
+	        var _pos = TileHelper.GetLocalCoor(transform);
 
 	        var _ch = TileDB.g.ch.Instantiate();
 			_ch.transform.SetParent(transform.parent.parent);
@@ -44,7 +37,7 @@ namespace Choanji
 				_inspectee.inspectee = new DialogInspectee { dialog = new DialogProvider(DialogHelper.FullPath(data.dialog)) };   
 	        }
 
-			if (!_ctrl.TrySetPosition(_pos.Value))
+			if (!_ctrl.TrySetPosition(_pos))
 				D.Assert(false);
 
 			Destroy(gameObject);

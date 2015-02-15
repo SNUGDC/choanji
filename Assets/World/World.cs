@@ -49,7 +49,11 @@ namespace Choanji
 				var _roomGO = _static.prefab.Instantiate();
 				_roomGO.transform.SetParent(mParent);
 				_roomGO.transform.position = _room.worldPos;
-				mRooms.Add(_room, new Map(_static, _roomGO));
+				var _map = new Map(_static, _roomGO);
+				var _roomComp = _roomGO.AddComponent<WorldRoomComp>();
+				_roomComp.room = _room;
+				_roomComp.map = _map;
+				mRooms.Add(_room, _map);
 			}
 		}
 

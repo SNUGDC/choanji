@@ -91,16 +91,27 @@ namespace Choanji
 			if (!_props.TryGet("type", out _type))
 				return false;
 
-			switch (_type)
+			try
 			{
-				case "Door":
-					return CustomizeDoor(_props, _map, _coor, _tile);
+				switch (_type)
+				{
+					case "Door":
+						return CustomizeDoor(_props, _map, _coor, _tile);
 
-				case "NPC":
-					return CustomizeNPC(_go, _props);
-					
-				default:
-					return false;
+					case "NPC":
+						return CustomizeNPC(_go, _props);
+
+					case "TA":
+						return CustomizeTA(_go, _props);
+
+					default:
+						return false;
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.LogException(e);
+				return false;
 			}
 		}
 
@@ -146,6 +157,14 @@ namespace Choanji
 
 			var _spawner = _go.AddComponent<TileNPCSpawner>();
 			_spawner.data = _data;
+			return true;
+		}
+
+		private static bool CustomizeTA(
+			GameObject _go, IDictionary<string, string> _props)
+		{
+			var _spawner = _go.AddComponent<TileTASpawner>();
+			_spawner.data = _props["data"];
 			return true;
 		}
 	}
