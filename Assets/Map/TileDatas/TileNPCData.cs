@@ -8,6 +8,7 @@ namespace Choanji
     {
         public TileNPCData(string _key)
         {
+	        id = NPCHelper.MakeID(_key);
             key = _key;
             dir = null;
             agent = CharacterAgentType.NONE;
@@ -15,7 +16,8 @@ namespace Choanji
             battle = null;
         }
 
-        public readonly string key;
+		public NPCID id;
+		public string key;
         public Direction? dir;
         public CharacterAgentType agent;
 	    public string dialog;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="Interior general" tilewidth="16" tileheight="16">
- <image source="../Assets/Tileset/Interior general.PNG" width="128" height="4016"/>
+ <image source="../Assets/R/Tileset/Interior general.PNG" width="128" height="4016"/>
  <terraintypes>
   <terrain name="RugGreen" tile="-1"/>
   <terrain name="TableBlue" tile="-1"/>

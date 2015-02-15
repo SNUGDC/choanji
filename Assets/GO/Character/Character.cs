@@ -15,9 +15,8 @@ namespace Choanji
 
 			set
 			{
-				var _orgPos = position;
-				if (_orgPos == lastPosition) return;
-				lastPosition = _orgPos;
+				lastPosition = position;
+				if (lastPosition == value) return;
 				transform.position = (Vector2)value;
 			}
 		}

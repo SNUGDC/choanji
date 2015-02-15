@@ -24,6 +24,10 @@ namespace Choanji
 	        var _ch = TileDB.g.ch.Instantiate();
 			_ch.transform.SetParent(transform.parent.parent);
 
+	        var _npcData = NPCDB.Get(data.id);
+			if (_npcData != null) 
+				_ch.renderer_.Set(_npcData.skin);
+
 	        var _ctrl = _ch.GetComponent<CharacterCtrl>();
 
 	        if (data.dir.HasValue)

@@ -14,6 +14,7 @@ namespace Choanji
 			TileDB.g = tile;
 			CharacterSkins.g = skin;
 			Battle.SCDB.g = sc;
+			NPCDB.Load();
 			var _choanjiAwake = TheChoanji.g;
 		}
 	}
