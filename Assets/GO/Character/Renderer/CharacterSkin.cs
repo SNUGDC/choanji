@@ -19,7 +19,7 @@ namespace Choanji
 				mClips[(int)_key] = _anim.GetClipByName(_key.ToString());
 		}
 
-		public readonly tk2dSpriteAnimation anim;
+		public tk2dSpriteAnimation anim;
 
 		[SerializeField]
 		[HideInInspector]

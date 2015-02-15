@@ -12,7 +12,8 @@ namespace Choanji
 
 		public const int COUNT = 29;
 
-		[SerializeField][HideInInspector]
+		[SerializeField]
+		[HideInInspector]
 		private List<CharacterSkin> mSkins = new List<CharacterSkin>();
 
 		public void Load(Key _key, tk2dSpriteAnimation _anim)
