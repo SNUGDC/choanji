@@ -130,7 +130,7 @@ namespace Tiled2Unity
 					var _py = _size.y + (int)(y + float.Epsilon) / h;
 					var p = new Point(_px, _py);
 					TileData _tile;
-					if (_map.grid.TryGet(p, out _tile))
+					if (!_map.grid.TryGet(p, out _tile))
 					{
 						_tile = new TileData();
 						_map.grid.Set(p, _tile);
