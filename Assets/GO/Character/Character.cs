@@ -30,7 +30,7 @@ namespace Choanji
 				if (direction == value)
 					return;
 				mDirection = value;
-				renderer_.transform.SetLEulerZ(mDirection.ToDeg());
+				renderer_.Play(CharacterAnimHelper.ToKey(value));
 			} 
 		}
 
@@ -39,7 +39,7 @@ namespace Choanji
 			get { return position + direction; }
 		}
 
-		public GameObject renderer_;
+		public CharacterRenderer renderer_;
 
 		public bool CanMove(Direction _dir)
 		{
