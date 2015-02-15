@@ -8,10 +8,17 @@ namespace Choanji
 		public tk2dSprite sprite;
 		public tk2dSpriteAnimator animator;
 
+		private CharacterSkins.Key mSkinKey;
 		private CharacterSkin mSkin;
 
-		public void Set(CharacterSkins.Key _key)
+		public CharacterSkins.Key GetSkinKey()
 		{
+			return mSkinKey;
+		}
+
+		public void SetSkin(CharacterSkins.Key _key)
+		{
+			mSkinKey = _key;
 			mSkin = CharacterSkins.g[_key];
 			Play(CharacterAnimKey.DOWN);
 		}

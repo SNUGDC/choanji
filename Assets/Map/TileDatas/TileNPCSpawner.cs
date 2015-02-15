@@ -21,7 +21,7 @@ namespace Choanji
 
 	        var _npcData = NPCDB.Get(data.id);
 			if (_npcData != null) 
-				_ch.renderer_.Set(_npcData.skin);
+				_ch.renderer_.SetSkin(_npcData.skin);
 
 	        var _ctrl = _ch.GetComponent<CharacterCtrl>();
 

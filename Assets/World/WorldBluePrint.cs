@@ -54,9 +54,15 @@ namespace Choanji
 			}
 		}
 
+		public readonly string name;
 		private readonly List<Room> mRooms = new List<Room>();
 		private readonly PRectGroup mRectGroup = new PRectGroup();
 		private readonly Dictionary<Room.Key, Room> mDic = new Dictionary<Room.Key, Room>();
+
+		public WorldBluePrint(string _name)
+		{
+			name = _name;
+		}
 
 		public void Add(Room _room)
 		{
@@ -93,7 +99,7 @@ namespace Choanji
 		// todo: Read binary when release.
 		public static WorldBluePrint Read(string _world)
 		{
-			var _ret = new WorldBluePrint();
+			var _ret = new WorldBluePrint(_world);
 			var _path = new FullPath(JSON_PATH/(_world + ".json"));
 
 			var _roomsJs = JsonHelper.DataWithRaw(_path);
