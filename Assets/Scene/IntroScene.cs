@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Choanji
 {
-	public class Intro : MonoBehaviour
+	public class IntroScene : MonoBehaviour
 	{
 		private InputBind mBind;
 
@@ -30,7 +30,7 @@ namespace Choanji
 		private bool OnPressYes()
 		{
 			InputManager.g.Unreg(mBind);
-			Application.LoadLevel("disket");
+			Application.LoadLevel("load");
 			return true;
 		}
 	}

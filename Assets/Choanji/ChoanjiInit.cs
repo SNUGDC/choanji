@@ -14,7 +14,12 @@ namespace Choanji
 		
 		void Start()
 		{
-			if (sIsInited) return;
+			if (sIsInited)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			sIsInited = true;
 
 			PrefabDB.g = prefab;
@@ -25,7 +30,7 @@ namespace Choanji
 
 			var _choanjiAwake = TheChoanji.g;
 
-			Destroy(gameObject);
+			Destroy(gameObject, 0.1f);
 		}
 	}
 }

@@ -33,6 +33,13 @@ namespace Choanji
 
 			set
 			{
+				if (parent == null)
+				{
+					L.W("no parent. create one.");
+					parent = new GameObject().transform;
+					parent.name = "World";
+				}
+
 				sBluePrint = value;
 
 				if (g != null)
@@ -41,10 +48,8 @@ namespace Choanji
 					g = null;
 				}
 
-				if (value == null)
+				if (sBluePrint == null)
 					return;
-
-				D.Assert(parent != null);
 
 				g = new World(bluePrint, parent);
 				sPosition = NULL;
@@ -53,6 +58,9 @@ namespace Choanji
 
 		public static void UpdateCam()
 		{
+			if (g == null)
+				return;
+
 			var _cam = Cameras.game;
 			D.Assert(_cam);
 
@@ -76,6 +84,9 @@ namespace Choanji
 
 		public static void UpdateRect(PRect _rect)
 		{
+			if (g == null) 
+				return;
+
 			if (sPosition == _rect.c)
 			{
 				L.W(L.M.CALL_RETRY("update"));
