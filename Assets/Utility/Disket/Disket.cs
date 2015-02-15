@@ -59,8 +59,8 @@ namespace Choanji
 
 			data = new SaveData(
 				new SaveData.User { gold = Wallet.gold },
-				new SaveData.Character { skin = TheCharacter.g.renderer_.GetSkinKey() },
-				new SaveData.World { key = TheWorld.bluePrint.name, pos = TheCharacter.g.position });
+				new SaveData.Character { skin = TheCharacter.ch.renderer_.GetSkinKey() },
+				new SaveData.World { key = TheWorld.bluePrint.name, pos = TheCharacter.ch.position });
 
 			try
 			{

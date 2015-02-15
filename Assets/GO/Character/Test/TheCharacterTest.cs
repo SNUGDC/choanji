@@ -12,7 +12,7 @@ namespace Choanji
 
 		void Start()
 		{
-			TheCharacter.g = ch;
+			TheCharacter.ch = ch;
 			ch.renderer_.SetSkin((CharacterSkins.Key)skin);
 		}
 	}

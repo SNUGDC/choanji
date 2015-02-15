@@ -5,26 +5,26 @@ namespace Choanji
 {
 	public static class TheCharacter
 	{
-		private static Character sG;
-		public static Character g
+		private static Character sCh;
+		public static Character ch
 		{
-			get { return sG; }
+			get { return sCh; }
 			set
 			{
-				if (g != null)
+				if (ch != null)
 				{
 					L.W(L.M.SHOULD_NULL("g"));
-					Object.Destroy(g.GetComponent<CharacterInputAgent>());
+					Object.Destroy(ch.GetComponent<CharacterInputAgent>());
 				}
 
-				sG = value;
+				sCh = value;
 
-				ctrl = sG.GetComponent<CharacterCtrl>();
+				ctrl = sCh.GetComponent<CharacterCtrl>();
 				D.Assert(ctrl != null);
 				ctrl.onEnterDoor += TeleportNextUpdate;
 
-				D.Assert(g.GetComponent<CharacterInputAgent>() == null);
-				g.gameObject.AddComponent<CharacterInputAgent>();
+				D.Assert(ch.GetComponent<CharacterInputAgent>() == null);
+				ch.gameObject.AddComponent<CharacterInputAgent>();
 
 				Cameras.gameMani.default_ = DefaultCam;
 			}
@@ -34,7 +34,7 @@ namespace Choanji
 
 		public static WorldCoor worldCoor
 		{
-			get { return new WorldCoor(sG.position); }
+			get { return new WorldCoor(sCh.position); }
 		}
 
 		public static void Update()
@@ -51,14 +51,14 @@ namespace Choanji
 
 		private static TransformManipulator.Result DefaultCam(GameObject _go, float _dt)
 		{
-			if (g && (sLastCamCoor != g.position))
+			if (ch && (sLastCamCoor != ch.position))
 			{
 				WorldProgress.SetCamDirty();
-				sLastCamCoor = g.position;
+				sLastCamCoor = ch.position;
 
 				return new TransformManipulator.Result
 				{
-					pos = g.transform.position
+					pos = ch.transform.position
 				};
 			}
 

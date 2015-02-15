@@ -18,10 +18,10 @@ namespace Choanji
 				Wallet.gold = _data.user.gold;
 				TheWorld.bluePrint = WorldBluePrint.Read(_data.world.key);
 
-				if (TheCharacter.g)
+				if (TheCharacter.ch)
 				{
-					var _chOld = TheCharacter.g;
-					TheCharacter.g = null;
+					var _chOld = TheCharacter.ch;
+					TheCharacter.ch = null;
 					Destroy(_chOld.gameObject);
 				}
 
@@ -29,10 +29,8 @@ namespace Choanji
 				_ch.position = _data.world.pos;
 				_ch.renderer_.SetSkin(_data.ch.skin);
 
-				TheCharacter.g = _ch;
+				TheCharacter.ch = _ch;
 				TheWorld.UpdateRect(new PRect(_data.world.pos));
-
-				Disket.Save();
 			}
 		}
 	}
