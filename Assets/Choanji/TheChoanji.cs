@@ -5,15 +5,32 @@ namespace Choanji
 {
 	public class TheChoanji : Singleton<TheChoanji>
 	{
+		public ContextType context;
+
 		void Update()
 		{
 			Timer.g.Update(Time.deltaTime);
-			WorldProgress.Update();
+			
+			switch (context)
+			{
+				case ContextType.INTRO:
+					break;
+				case ContextType.WORLD:
+					WorldProgress.Update();
+					break;
+			}
 		}
 
 		void LateUpdate()
 		{
-			WorldProgress.LateUpdate();
+			switch (context)
+			{
+				case ContextType.INTRO:
+					break;
+				case ContextType.WORLD:
+					WorldProgress.LateUpdate();
+					break;
+			}
 		}
 
 	}

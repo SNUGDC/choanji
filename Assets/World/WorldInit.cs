@@ -8,6 +8,7 @@ namespace Choanji
 
 		void Start () {
 			TheWorld.parent = parent;
+			TheChoanji.g.context = ContextType.WORLD;
 		}
 	}
 }
