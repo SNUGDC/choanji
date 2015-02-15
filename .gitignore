@@ -107,8 +107,10 @@ output_log.txt
 *.dwlt
 
 *.swp
+*.columns
 sysinfo.txt
 /Binary
 /Assets/UnityVS.meta
 /Assets/UnityVS
-/Resources/DB/*.columns
+/Assets/-tk2d.asset
+/Assets/-tk2d.asset.meta
