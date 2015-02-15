@@ -17,6 +17,26 @@ namespace Choanji.R
 
 	}
 
+	public static class Snd
+	{
+		private static AudioClip Clip(string _name)
+		{
+			var _clip = Resources.Load<AudioClip>(_name);
+			if (!_clip) L.E("clip not found " + _name);
+			return _clip;
+		}
+
+		public static AudioClip BGM(string _name)
+		{
+			return Clip(_name);
+		}
+
+		public static AudioClip SFX(string _name)
+		{
+			return Clip(_name);
+		}
+	}
+
 	namespace BattleUI
 	{
 		public static class Spr

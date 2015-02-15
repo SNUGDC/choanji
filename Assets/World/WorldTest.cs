@@ -10,7 +10,7 @@ public class WorldTest : MonoBehaviour
 	private void Start()
 	{
 		TheWorld.parent = parent;
-		TheWorld.bluePrint = WorldBluePrint.Read(world);
+		TheWorld.Read(world);
 	}
 }
 

@@ -1,4 +1,5 @@
 ﻿using Gem;
+using LitJson;
 using UnityEngine;
 
 namespace Choanji
@@ -24,6 +25,8 @@ namespace Choanji
 
 		private static readonly Vector2 NULL = new Vector2(-34873453, -34537804);
 		private static Vector2 sPosition = NULL;
+
+		public static WorldMeta meta { get; private set; }
 
 		private static WorldBluePrint sBluePrint;
 
@@ -53,6 +56,31 @@ namespace Choanji
 
 				g = new World(bluePrint, parent);
 				sPosition = NULL;
+			}
+		}
+
+		private static readonly Path_ JSON_PATH = new Path_("Resources/World");
+
+		public static void Read(string _world)
+		{
+			var _path = new FullPath(JSON_PATH / (_world + ".json"));
+			var _data = JsonHelper.DataWithRaw(_path);
+			if (_data == null) return;
+
+			meta = JsonMapper.ToObject<WorldMeta>(_data["meta"].ToReader());
+			bluePrint = new WorldBluePrint(_world, _data["bluePrint"]);
+
+			if (string.IsNullOrEmpty(meta.bgm))
+			{
+				SoundManager.StopMusic();
+			}
+			else
+			{
+				var _clip = R.Snd.BGM(meta.bgm);
+				if (_clip) 
+					SoundManager.Play(_clip, true);
+				else 
+					SoundManager.StopMusic();
 			}
 		}
 

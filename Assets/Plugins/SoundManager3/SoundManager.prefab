@@ -159,8 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helpOn: 0
   showInfo: 1
-  showDev: 0
-  showList: 0
+  showDev: 1
+  showList: 1
   showAdd: 0
   showSFX: 0
   showSFXDetails: 
@@ -177,10 +177,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 53b5f2069260b394ba70412aae209c6a, type: 3}
     baseVolumes:
     - 1
-    playMethod: 0
+    playMethod: 1
     minDelay: 0
     maxDelay: 0
     delay: 5
+  - level: load
+    isCustomLevel: 0
+    soundsToPlay:
+    - {fileID: 8300000, guid: 1c011228dffa9824eb08ea9bb5faa9f6, type: 3}
+    baseVolumes:
+    - 1
+    playMethod: 0
+    minDelay: 0
+    maxDelay: 0
+    delay: 0
   audios:
   - {fileID: 8200002}
   - {fileID: 8200000}
@@ -194,8 +204,8 @@ MonoBehaviour:
     minDelay: 0
     maxDelay: 0
     delay: 0
-  crossDuration: 1
-  showDebug: 0
+  crossDuration: 2
+  showDebug: 1
   offTheBGM: 0
   isPaused: 0
   movingOnFromSong: 0

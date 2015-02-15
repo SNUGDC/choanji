@@ -18,7 +18,7 @@ namespace Choanji
 			D.Assert(Disket.isLoaded);
 			var _data = Disket.data;
 
-			TheWorld.bluePrint = WorldBluePrint.Read(_data.world.key);
+			TheWorld.Read(_data.world.key);
 
 			if (TheCharacter.ch)
 			{

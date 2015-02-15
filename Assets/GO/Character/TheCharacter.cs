@@ -90,13 +90,12 @@ namespace Choanji
 		{
 			D.Assert(!mTeleportAddress.HasValue);
 
-			var _bluePrint = WorldBluePrint.Read(_address.world);
-			if (_bluePrint == null) return;
+			TheWorld.Read(_address.world);
 
+			var _bluePrint = TheWorld.bluePrint;
 			var _room = _bluePrint.Find(_address.map);
 			var _coor = new Coor(_room.rect.org) + _address.coor;
 
-			TheWorld.bluePrint = _bluePrint;
 			TheWorld.UpdateRect(new PRect(_coor));
 
 			var _hasRoomAndMap = TheWorld.g.Search(_address.map);

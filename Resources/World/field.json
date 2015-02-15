@@ -1,7 +1,13 @@
-[
-	{
-		"key": "field_01",
-		"map": "field",
-		"pos": [0, 0]
-	}
-]
+{
+	"meta": {
+		"bgm": "village"
+	},
+	
+	"bluePrint": [
+		{
+			"key": "field_01",
+			"map": "field",
+			"pos": [0, 0]
+		}
+	]
+}
