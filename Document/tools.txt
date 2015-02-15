@@ -23,6 +23,7 @@ Cartoon FX Pack 1 ~ 4: 이펙트.
 툴:
 pngyu: png 압축.
 Caesium: jpeg 압축. (문서는 품질 40정도까지 해도 됩니다.)
+JetAudio: 사운드 포맷변경/압축.
 
 
 편집기: 
