@@ -614,6 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    id: 108299
+    key: mom
     agent: 2
     dialog: mom_01
     battle: 

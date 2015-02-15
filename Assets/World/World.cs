@@ -71,7 +71,7 @@ namespace Choanji
 
 		public Map Contains(WorldCoor p)
 		{
-			var _room = mBluePrint.Contains(p.val);
+			var _room = mBluePrint.Contains((Coor)p);
 			if (_room == null) 
 				return null;
 

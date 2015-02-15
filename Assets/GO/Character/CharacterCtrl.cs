@@ -39,7 +39,7 @@ namespace Choanji
 		private void SetPosition(LocalCoor p)
 		{
 			BeforeSetPosition(p);
-			ch.position = ((WorldCoor) p).val;
+			ch.position = (WorldCoor) p;
 		}
 
 		public bool TryMove(Direction _dir)

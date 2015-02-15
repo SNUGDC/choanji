@@ -13,6 +13,7 @@ namespace Choanji
 		public void Set(CharacterSkins.Key _key)
 		{
 			mSkin = CharacterSkins.g[_key];
+			Play(CharacterAnimKey.DOWN);
 		}
 
 		public void Play(CharacterAnimKey _key)

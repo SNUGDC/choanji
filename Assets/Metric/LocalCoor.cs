@@ -1,4 +1,5 @@
 ﻿using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -30,9 +31,9 @@ namespace Choanji
 
 		public static explicit operator WorldCoor(LocalCoor _this)
 		{
-			var _mapPos = _this.map.go.transform.position;
+			var _mapPos = (Vector2)_this.map.go.transform.position;
 			_mapPos.y = _this.map.size.y - _mapPos.y;
-			return new WorldCoor(new Coor(_mapPos) + _this.val);
+			return new WorldCoor(new Coor(_mapPos + Coor.OFFSET) + _this.val);
 		}
 
 		#region equality operator

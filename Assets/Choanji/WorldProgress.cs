@@ -11,7 +11,7 @@
 
 			if (sCamDirty)
 			{
-				TheWorld.Update();
+				TheWorld.UpdateCam();
 				sCamDirty = false;
 			}
 		}

@@ -4,15 +4,20 @@
 	{
 		public WorldCoor(Coor _val)
 		{
-			val = _val;
+			mVal = _val;
 		}
 
-		public Coor val;
+		private readonly Coor mVal;
+
+		public static implicit operator Coor(WorldCoor _this)
+		{
+			return _this.mVal;
+		}
 
 		#region equality operator
 		public static bool operator ==(WorldCoor a, WorldCoor b)
 		{
-			return a.val == b.val;
+			return a.mVal == b.mVal;
 		}
 
 		public static bool operator !=(WorldCoor a, WorldCoor b)
@@ -22,7 +27,7 @@
 
 		public bool Equals(WorldCoor _other)
 		{
-			return val.Equals(_other.val);
+			return mVal.Equals(_other.mVal);
 		}
 
 		public override bool Equals(object _obj)
@@ -33,7 +38,7 @@
 
 		public override int GetHashCode()
 		{
-			return val.GetHashCode();
+			return mVal.GetHashCode();
 		}
 		#endregion
 

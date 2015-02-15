@@ -14,7 +14,9 @@ namespace Choanji
 
         private void SpawnAndDestroy()
         {
-	        var _pos = TheWorld.g.SearchMapAndTile(new WorldCoor((Vector2)transform.position));
+	        var _coor = new Coor(((Vector2) transform.position) + Coor.OFFSET);
+
+	        var _pos = TheWorld.g.SearchMapAndTile(new WorldCoor(_coor));
 	        if (_pos == null)
 	        {
 		        L.W("coor not exists. cannot spawn.");

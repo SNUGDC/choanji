@@ -92,16 +92,19 @@ namespace Choanji
 
 			var _bluePrint = WorldBluePrint.Read(_address.world);
 			if (_bluePrint == null) return;
+
+			var _room = _bluePrint.Find(_address.map);
+			var _coor = new Coor(_room.rect.org) + _address.coor;
+
 			TheWorld.bluePrint = _bluePrint;
-			TheWorld.Update();
+			TheWorld.UpdateRect(new PRect(_coor));
 
 			var _hasRoomAndMap = TheWorld.g.Search(_address.map);
 			if (_hasRoomAndMap == null)
 				return;
 
-			var _map = _hasRoomAndMap.Value.Value;
-			
-			if (!sCtrl.TrySetPosition(new LocalCoor(_map, _address.coor)))
+			var _localCoor = new LocalCoor(_hasRoomAndMap.Value.Value, _address.coor);
+			if (!sCtrl.TrySetPosition(_localCoor))
 				L.E("cannot set position to " + _address);
 		}
 

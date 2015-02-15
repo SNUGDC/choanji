@@ -51,7 +51,7 @@ namespace Choanji
 			}
 		}
 
-		public static void Update()
+		public static void UpdateCam()
 		{
 			var _cam = Cameras.game;
 			D.Assert(_cam);
@@ -65,6 +65,17 @@ namespace Choanji
 				dst = Coor.Ceiling((Vector2) _camPos + _camHSize),
 			};
 
+			UpdateRect(_rect);
+
+			g.Scissor(new PRect
+			{
+				org = _rect.org - new Point(5, 5),
+				dst = _rect.dst + new Point(5, 5)
+			});
+		}
+
+		public static void UpdateRect(PRect _rect)
+		{
 			if (sPosition == _rect.c)
 			{
 				L.W(L.M.CALL_RETRY("update"));
@@ -74,7 +85,6 @@ namespace Choanji
 			sPosition = _rect.c;
 
 			g.Construct(_rect);
-			g.Scissor(_rect);
 		}
 	}
 

@@ -17,7 +17,7 @@ namespace Choanji
 				return;
 
 			if (GUILayout.Button("update"))
-				TheWorld.Update();
+				TheWorld.UpdateCam();
 		}
 	}
 

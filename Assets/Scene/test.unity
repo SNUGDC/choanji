@@ -156,6 +156,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11420280, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
+      propertyPath: library
+      value: 
+      objectReference: {fileID: 11434738, guid: 2c6d3d5cc6db4634089c776983c3a4d3,
+        type: 2}
+    - target: {fileID: 2333780, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    - target: {fileID: 436824, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436824, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3333780, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   m_RootGameObject: {fileID: 803985244}
@@ -839,6 +860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 803985246}
+  skin: 28
 --- !u!1 &1316291368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,7 +1111,6 @@ GameObject:
   - 114: {fileID: 1904670900}
   - 114: {fileID: 1904670899}
   - 114: {fileID: 1904670904}
-  - 114: {fileID: 1904670903}
   m_Layer: 0
   m_Name: renderer
   m_TagString: Untagged
@@ -1103,9 +1124,9 @@ Transform:
   m_PrefabParentObject: {fileID: 436824, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   m_PrefabInternal: {fileID: 379970465}
   m_GameObject: {fileID: 1904670897}
-  m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .239999995, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 803985245}
   m_RootOrder: 0
@@ -1121,7 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  library: {fileID: 0}
+  library: {fileID: 11434738, guid: 2c6d3d5cc6db4634089c776983c3a4d3, type: 2}
   defaultClipId: 0
   playAutomatically: 0
 --- !u!114 &1904670900
@@ -1169,7 +1190,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1177,19 +1198,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!114 &1904670903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1904670897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd343e556016c94eb6e2c7690742f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  animator: {fileID: 0}
 --- !u!114 &1904670904
 MonoBehaviour:
   m_ObjectHideFlags: 0

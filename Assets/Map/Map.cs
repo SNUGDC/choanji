@@ -40,7 +40,7 @@ namespace Choanji
 
 		public LocalCoor Convert(WorldCoor _coor)
 		{
-			return new LocalCoor(this, _coor.val - position);
+			return new LocalCoor(this, _coor - position);
 		}
 
 	}
