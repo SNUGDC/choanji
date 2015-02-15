@@ -1,18 +1,11 @@
 ﻿using Gem;
 using UnityEngine;
-using System.Collections;
 
 namespace Choanji
 {
 	public class LoadScene : MonoBehaviour
 	{
-		void Start()
-		{
-			// todo: load scene 기획에 맞추어 제작.
-			Invoke("TransferToWorld", 1);
-		}
-
-		void TransferToWorld()
+		public void TransferToWorld()
 		{
 			Disket.LoadOrDefault("test");
 			DisketHelper.SetupCommon();
