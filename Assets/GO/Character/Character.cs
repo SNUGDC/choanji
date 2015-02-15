@@ -17,7 +17,9 @@ namespace Choanji
 			{
 				lastPosition = position;
 				if (lastPosition == value) return;
-				transform.position = (Vector2)value;
+				var _pos = (Vector3)(Vector2) value;
+				_pos.z = value.y*0.01f;
+				transform.position = _pos;
 			}
 		}
 
