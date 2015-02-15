@@ -16,7 +16,13 @@ namespace Choanji
 			var _keys = Enum.GetValues(typeof (CharacterAnimKey));
 			mClips.Resize(_keys.GetLength(0));
 			foreach (var _key in _keys)
-				mClips[(int)_key] = _anim.GetClipByName(_key.ToString());
+			{
+				var _clip = _anim.GetClipByName(_key.ToString());
+				if (_clip != null && !_clip.Empty)
+				{
+					mClips[(int) _key] = _clip;
+				}
+			}
 		}
 
 		public tk2dSpriteAnimation anim;

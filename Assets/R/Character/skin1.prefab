@@ -1,39 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &115986
+--- !u!1 &171002
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 415986}
-  - 114: {fileID: 11482252}
+  - 4: {fileID: 471002}
+  - 114: {fileID: 11471002}
   m_Layer: 0
-  m_Name: skin28
+  m_Name: skin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 0
---- !u!4 &415986
+--- !u!4 &471002
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115986}
+  m_GameObject: {fileID: 171002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11482252
+--- !u!114 &11471002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115986}
+  m_GameObject: {fileID: 171002}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84c7a4b4ee15890498f818262bca0312, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
     splitMethod: 0
     version: 1
     colliderType: 0
-  - texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+  - texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     tilesX: 0
     tilesY: 0
     numTiles: 0
@@ -96,18 +96,18 @@ MonoBehaviour:
   forcedTextureWidth: 2048
   forcedTextureHeight: 2048
   textureCompression: 1
-  atlasWidth: 32
-  atlasHeight: 64
+  atlasWidth: 64
+  atlasHeight: 128
   forceSquareAtlas: 0
-  atlasWastage: 31.3476562
+  atlasWastage: 54.4921875
   allowMultipleAtlases: 0
   removeDuplicates: 1
   textureParams:
-  - name: NPC 28/0
+  - name: boy_run/0
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -144,11 +144,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/1
+  - name: boy_run/1
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -185,11 +185,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/2
+  - name: boy_run/2
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -226,11 +226,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/3
+  - name: boy_run/3
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -267,11 +267,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/4
+  - name: boy_run/4
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -308,11 +308,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/5
+  - name: boy_run/5
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -349,11 +349,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/6
+  - name: boy_run/6
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -390,11 +390,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/7
+  - name: boy_run/7
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -431,11 +431,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/8
+  - name: boy_run/8
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -472,11 +472,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/9
+  - name: boy_run/9
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -513,11 +513,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/10
+  - name: boy_run/10
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -554,11 +554,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/11
+  - name: boy_run/11
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -595,11 +595,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/12
+  - name: boy_run/12
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -636,11 +636,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/13
+  - name: boy_run/13
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -677,11 +677,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/14
+  - name: boy_run/14
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -718,11 +718,11 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  - name: NPC 28/15
+  - name: boy_run/15
     disableTrimming: 0
     additive: 0
     scale: {x: 1, y: 1, z: 1}
-    texture: {fileID: 2800000, guid: bf74825f95f705944a05a025b2c3dc65, type: 3}
+    texture: {fileID: 2800000, guid: 1d391be88406cc346a8c06252f46a308, type: 3}
     materialId: 0
     anchor: 4
     anchorX: 0
@@ -759,14 +759,14 @@ MonoBehaviour:
     colliderSmoothSphereCollisions: 0
     colliderColor: 0
     attachPoints: []
-  spriteCollection: {fileID: 11425090, guid: 19ba4689ebadb3945a79185eccdcb7ff, type: 2}
+  spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3, type: 2}
   premultipliedAlpha: 0
   altMaterials:
-  - {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+  - {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
   atlasMaterials:
-  - {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+  - {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
   atlasTextures:
-  - {fileID: 2800000, guid: 8372320b07a25864fb9d285c066c1d9b, type: 3}
+  - {fileID: 2800000, guid: fcdb51aa7b9768847ae8810cf786197b, type: 3}
   atlasTextureFiles: []
   useTk2dCamera: 0
   targetHeight: 640
@@ -783,7 +783,7 @@ MonoBehaviour:
   pixelPerfectPointSampled: 0
   filterMode: 0
   wrapMode: 1
-  userDefinedTextureSettings: 1
+  userDefinedTextureSettings: 0
   mipmapEnabled: 0
   anisoLevel: 1
   physicsEngine: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
   normalGenerationMode: 0
   padAmount: -1
   autoUpdate: 1
-  editorDisplayScale: 1
+  editorDisplayScale: 2.07999992
   version: 4
   assetName: 
   linkedSpriteCollections: []
@@ -806,6 +806,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 115986}
+  m_RootGameObject: {fileID: 171002}
   m_IsPrefabParent: 1
   m_IsExploded: 1

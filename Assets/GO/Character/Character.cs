@@ -29,7 +29,7 @@ namespace Choanji
 				if (direction == value)
 					return;
 				mDirection = value;
-				renderer_.Play(CharacterAnimHelper.ToKey(value));
+				renderer_.LookAt(value);
 			} 
 		}
 
@@ -50,6 +50,7 @@ namespace Choanji
 			D.Assert(CanMove(_dir));
 			direction = _dir;
 			position += _dir;
+			renderer_.Walk(_dir);
 		}
 	}
 

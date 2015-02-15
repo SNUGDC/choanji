@@ -25,13 +25,35 @@ namespace Choanji
 			}
 
 			var _clip = mSkin[_key];
-			if (_clip == null)
+			if (_clip == null || _clip.Empty)
 			{
-				L.W("anim is not exists.");
+				L.D("anim is not exists.");
 				return;
 			}
 
 			animator.Play(_clip);
+		}
+
+		public void LookAt(Direction _dir)
+		{
+			switch (_dir)
+			{
+				case Direction.L: Play(CharacterAnimKey.LEFT); break;
+				case Direction.R: Play(CharacterAnimKey.RIGHT); break;
+				case Direction.U: Play(CharacterAnimKey.UP); break;
+				case Direction.D: Play(CharacterAnimKey.DOWN); break;
+			}
+		}
+
+		public void Walk(Direction _dir)
+		{
+			switch (_dir)
+			{
+				case Direction.L: Play(CharacterAnimKey.WALK_LEFT); break;
+				case Direction.R: Play(CharacterAnimKey.WALK_RIGHT); break;
+				case Direction.U: Play(CharacterAnimKey.WALK_UP); break;
+				case Direction.D: Play(CharacterAnimKey.WALK_DOWN); break;
+			}
 		}
 	}
 }

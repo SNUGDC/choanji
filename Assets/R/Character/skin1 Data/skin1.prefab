@@ -1,39 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &125090
+--- !u!1 &157894
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 425090}
-  - 114: {fileID: 11425090}
+  - 4: {fileID: 457894}
+  - 114: {fileID: 11457894}
   m_Layer: 0
-  m_Name: skin28
+  m_Name: skin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &425090
+--- !u!4 &457894
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 125090}
+  m_GameObject: {fileID: 157894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11425090
+--- !u!114 &11457894
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 125090}
+  m_GameObject: {fileID: 157894}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
@@ -43,36 +43,36 @@ MonoBehaviour:
   materialIdsValid: 1
   needMaterialInstance: 0
   spriteDefinitions:
-  - name: NPC 28/0
+  - name: boy_run/0
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.0312500149, z: 0}
+    - {x: .875, y: 1.0625, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.5625, z: 0}
+    - {x: .4375, y: -.5625, z: 0}
+    - {x: -.4375, y: .49999997, z: 0}
+    - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: 1.56250007e-05}
-    - {x: .499968737, y: 1.56250007e-05}
-    - {x: 3.12500015e-05, y: .296859384}
-    - {x: .499968737, y: .296859384}
+    - {x: .500015616, y: .468757808}
+    - {x: .500015616, y: .578117192}
+    - {x: .765609384, y: .468757808}
+    - {x: .765609384, y: .578117192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 0
     regionY: 72
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -85,36 +85,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/1
+  - name: boy_run/1
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: -.03125, y: -.124999985, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
     - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: .4375, y: -.6875, z: 0}
+    - {x: -.5, y: .43750003, z: 0}
+    - {x: .4375, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: 1.56250007e-05}
-    - {x: .499968737, y: 1.56250007e-05}
-    - {x: 3.12500015e-05, y: .296859384}
-    - {x: .499968737, y: .296859384}
+    - {x: .562515616, y: 7.81250037e-06}
+    - {x: .562515616, y: .117179684}
+    - {x: .843734384, y: 7.81250037e-06}
+    - {x: .843734384, y: .117179684}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 16
     regionY: 72
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -127,36 +127,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/2
+  - name: boy_run/2
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.0312500149, z: 0}
+    - {x: .875, y: 1.0625, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.5625, z: 0}
+    - {x: .4375, y: -.5625, z: 0}
+    - {x: -.4375, y: .49999997, z: 0}
+    - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: 1.56250007e-05}
-    - {x: .499968737, y: 1.56250007e-05}
-    - {x: 3.12500015e-05, y: .296859384}
-    - {x: .499968737, y: .296859384}
+    - {x: .500015616, y: .468757808}
+    - {x: .500015616, y: .578117192}
+    - {x: .765609384, y: .468757808}
+    - {x: .765609384, y: .578117192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 32
     regionY: 72
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -169,72 +169,72 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/3
+  - name: boy_run/3
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
-    untrimmedBoundsData:
-    - {x: 0, y: 0, z: 0}
-    - {x: 1, y: 1.5, z: 0}
-    texelSize: {x: .0625, y: .0625}
-    positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
-    normals: []
-    tangents: []
-    uvs:
-    - {x: 3.12500015e-05, y: 1.56250007e-05}
-    - {x: .499968737, y: 1.56250007e-05}
-    - {x: 3.12500015e-05, y: .296859384}
-    - {x: .499968737, y: .296859384}
-    indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
-    materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
-    extractRegion: 1
-    regionX: 48
-    regionY: 72
-    regionW: 16
-    regionH: 24
-    flipped: 0
-    complexGeometry: 0
-    physicsEngine: 0
-    colliderType: 0
-    customColliders: []
-    colliderVertices: []
-    colliderIndicesFwd: 
-    colliderIndicesBack: 
-    colliderConvex: 0
-    colliderSmoothSphereCollisions: 0
-    polygonCollider2D: []
-    edgeCollider2D: []
-    attachPoints: []
-  - name: NPC 28/4
-    boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: .03125, y: -.124999985, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
     - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
+    - {x: .5, y: -.6875, z: 0}
+    - {x: -.4375, y: .43750003, z: 0}
+    - {x: .5, y: .43750003, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: .562515616, y: .117195316}
+    - {x: .562515616, y: .234367192}
+    - {x: .843734384, y: .117195316}
+    - {x: .843734384, y: .234367192}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
+    materialId: 0
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
+    extractRegion: 1
+    regionX: 48
+    regionY: 72
+    regionW: 16
+    regionH: 24
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: boy_run/4
+    boundsData:
+    - {x: -.03125, y: -.0625000149, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 1, y: 1.5, z: 0}
+    texelSize: {x: .0625, y: .0625}
+    positions:
+    - {x: -.5, y: -.625, z: 0}
+    - {x: .4375, y: -.625, z: 0}
+    - {x: -.5, y: .49999997, z: 0}
     - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: .593765616}
-    - {x: 3.12500015e-05, y: .812484384}
-    - {x: .593718767, y: .593765616}
-    - {x: .593718767, y: .812484384}
+    - {x: 1.56250007e-05, y: .125007808}
+    - {x: 1.56250007e-05, y: .242179692}
+    - {x: .281234384, y: .125007808}
+    - {x: .281234384, y: .242179692}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 0
     regionY: 48
@@ -253,36 +253,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/5
+  - name: boy_run/5
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: 0, y: -.124999985, z: 0}
+    - {x: 1, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: -.5, y: -.6875, z: 0}
+    - {x: .5, y: -.6875, z: 0}
+    - {x: -.5, y: .43750003, z: 0}
+    - {x: .5, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: 1.56250007e-05}
-    - {x: .937468767, y: 1.56250007e-05}
-    - {x: .500031233, y: .296859384}
-    - {x: .937468767, y: .296859384}
+    - {x: 1.56250007e-05, y: 7.81250037e-06}
+    - {x: 1.56250007e-05, y: .124992184}
+    - {x: .281234384, y: 7.81250037e-06}
+    - {x: .281234384, y: .124992184}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 16
     regionY: 48
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -295,36 +295,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/6
+  - name: boy_run/6
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: -.03125, y: -.0625000149, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
+    - {x: -.5, y: -.625, z: 0}
+    - {x: .4375, y: -.625, z: 0}
+    - {x: -.5, y: .49999997, z: 0}
     - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: 1.56250007e-05}
-    - {x: .937468767, y: 1.56250007e-05}
-    - {x: .500031233, y: .296859384}
-    - {x: .937468767, y: .296859384}
+    - {x: .281265616, y: .125007808}
+    - {x: .281265616, y: .242179692}
+    - {x: .562484384, y: .125007808}
+    - {x: .562484384, y: .242179692}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 32
     regionY: 48
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -337,36 +337,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/7
+  - name: boy_run/7
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: -.03125, y: -.0937499851, z: 0}
+    - {x: .9375, y: 1.0625, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: -.5, y: -.625, z: 0}
+    - {x: .4375, y: -.625, z: 0}
+    - {x: -.5, y: .43750003, z: 0}
+    - {x: .4375, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: 1.56250007e-05}
-    - {x: .937468767, y: 1.56250007e-05}
-    - {x: .500031233, y: .296859384}
-    - {x: .937468767, y: .296859384}
+    - {x: .500015616, y: .351570308}
+    - {x: .500015616, y: .468742192}
+    - {x: .765609384, y: .351570308}
+    - {x: .765609384, y: .468742192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 48
     regionY: 48
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -379,36 +379,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/8
+  - name: boy_run/8
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: .03125, y: -.0625000149, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
+    - {x: -.4375, y: -.625, z: 0}
+    - {x: .5, y: -.625, z: 0}
     - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: .5, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: .296890616}
-    - {x: .937468767, y: .296890616}
-    - {x: .500031233, y: .593734384}
-    - {x: .937468767, y: .593734384}
+    - {x: .562515616, y: .234382808}
+    - {x: .562515616, y: .351554692}
+    - {x: .843734384, y: .234382808}
+    - {x: .843734384, y: .351554692}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 0
     regionY: 24
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -421,30 +421,30 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/9
+  - name: boy_run/9
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: .03125, y: -.0937499851, z: 0}
+    - {x: .9375, y: 1.0625, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: -.4375, y: -.625, z: 0}
+    - {x: .5, y: -.625, z: 0}
+    - {x: -.4375, y: .43750003, z: 0}
+    - {x: .5, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: .296890616}
-    - {x: .937468767, y: .296890616}
-    - {x: .500031233, y: .593734384}
-    - {x: .937468767, y: .593734384}
+    - {x: .765640616, y: .351570308}
+    - {x: .999984384, y: .351570308}
+    - {x: .765640616, y: .484367192}
+    - {x: .999984384, y: .484367192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 16
     regionY: 24
@@ -463,36 +463,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/10
+  - name: boy_run/10
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: .03125, y: -.0625000149, z: 0}
+    - {x: .9375, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
+    - {x: -.4375, y: -.625, z: 0}
+    - {x: .5, y: -.625, z: 0}
     - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: .5, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: .296890616}
-    - {x: .937468767, y: .296890616}
-    - {x: .500031233, y: .593734384}
-    - {x: .937468767, y: .593734384}
+    - {x: 1.56250007e-05, y: .242195308}
+    - {x: 1.56250007e-05, y: .359367192}
+    - {x: .281234384, y: .242195308}
+    - {x: .281234384, y: .359367192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 32
     regionY: 24
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -505,36 +505,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/11
+  - name: boy_run/11
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: .875, y: 1.1875, z: 0}
+    - {x: 0, y: -.124999985, z: 0}
+    - {x: 1, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.4375, y: -.6875, z: 0}
-    - {x: .4375, y: -.6875, z: 0}
-    - {x: -.4375, y: .49999997, z: 0}
-    - {x: .4375, y: .49999997, z: 0}
+    - {x: -.5, y: -.6875, z: 0}
+    - {x: .5, y: -.6875, z: 0}
+    - {x: -.5, y: .43750003, z: 0}
+    - {x: .5, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: .500031233, y: .296890616}
-    - {x: .937468767, y: .296890616}
-    - {x: .500031233, y: .593734384}
-    - {x: .937468767, y: .593734384}
+    - {x: .281265616, y: 7.81250037e-06}
+    - {x: .281265616, y: .124992184}
+    - {x: .562484384, y: 7.81250037e-06}
+    - {x: .562484384, y: .124992184}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 48
     regionY: 24
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -547,36 +547,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/12
+  - name: boy_run/12
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.0625000149, z: 0}
+    - {x: .875, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.625, z: 0}
+    - {x: .4375, y: -.625, z: 0}
+    - {x: -.4375, y: .49999997, z: 0}
+    - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: .296890616}
-    - {x: .499968737, y: .296890616}
-    - {x: 3.12500015e-05, y: .593734384}
-    - {x: .499968737, y: .593734384}
+    - {x: .218765631, y: .390632808}
+    - {x: .218765631, y: .499992192}
+    - {x: .499984384, y: .390632808}
+    - {x: .499984384, y: .499992192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 0
     regionY: 0
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -589,30 +589,30 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/13
+  - name: boy_run/13
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.156249985, z: 0}
+    - {x: .875, y: 1.1875, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.75, z: 0}
+    - {x: .4375, y: -.75, z: 0}
+    - {x: -.4375, y: .43750003, z: 0}
+    - {x: .4375, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: .296890616}
-    - {x: .499968737, y: .296890616}
-    - {x: 3.12500015e-05, y: .593734384}
-    - {x: .499968737, y: .593734384}
+    - {x: .281265616, y: .242195308}
+    - {x: .499984384, y: .242195308}
+    - {x: .281265616, y: .390617192}
+    - {x: .499984384, y: .390617192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 16
     regionY: 0
@@ -631,36 +631,36 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/14
+  - name: boy_run/14
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.0625000149, z: 0}
+    - {x: .875, y: 1.125, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.625, z: 0}
+    - {x: .4375, y: -.625, z: 0}
+    - {x: -.4375, y: .49999997, z: 0}
+    - {x: .4375, y: .49999997, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: .296890616}
-    - {x: .499968737, y: .296890616}
-    - {x: 3.12500015e-05, y: .593734384}
-    - {x: .499968737, y: .593734384}
+    - {x: .218765631, y: .390632808}
+    - {x: .218765631, y: .499992192}
+    - {x: .499984384, y: .390632808}
+    - {x: .499984384, y: .499992192}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 32
     regionY: 0
     regionW: 16
     regionH: 24
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -673,30 +673,30 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: NPC 28/15
+  - name: boy_run/15
     boundsData:
-    - {x: 0, y: -.0937500149, z: 0}
-    - {x: 1, y: 1.1875, z: 0}
+    - {x: 0, y: -.156249985, z: 0}
+    - {x: .875, y: 1.1875, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 1.5, z: 0}
     texelSize: {x: .0625, y: .0625}
     positions:
-    - {x: -.5, y: -.6875, z: 0}
-    - {x: .5, y: -.6875, z: 0}
-    - {x: -.5, y: .49999997, z: 0}
-    - {x: .5, y: .49999997, z: 0}
+    - {x: -.4375, y: -.75, z: 0}
+    - {x: .4375, y: -.75, z: 0}
+    - {x: -.4375, y: .43750003, z: 0}
+    - {x: .4375, y: .43750003, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 3.12500015e-05, y: .296890616}
-    - {x: .499968737, y: .296890616}
-    - {x: 3.12500015e-05, y: .593734384}
-    - {x: .499968737, y: .593734384}
+    - {x: 1.56250007e-05, y: .359382808}
+    - {x: .218734369, y: .359382808}
+    - {x: 1.56250007e-05, y: .507804692}
+    - {x: .218734369, y: .507804692}
     indices: 000000000300000001000000020000000300000000000000
-    material: {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+    material: {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
     materialId: 0
-    sourceTextureGUID: bf74825f95f705944a05a025b2c3dc65
+    sourceTextureGUID: 1d391be88406cc346a8c06252f46a308
     extractRegion: 1
     regionX: 48
     regionY: 0
@@ -718,22 +718,22 @@ MonoBehaviour:
   premultipliedAlpha: 0
   material: {fileID: 0}
   materials:
-  - {fileID: 2100000, guid: 515483d477ac63f4c8a13393e069bb60, type: 2}
+  - {fileID: 2100000, guid: dc87b43e0acaa344083e00923645fe4f, type: 2}
   textures:
-  - {fileID: 2800000, guid: 8372320b07a25864fb9d285c066c1d9b, type: 3}
+  - {fileID: 2800000, guid: fcdb51aa7b9768847ae8810cf786197b, type: 3}
   pngTextures: []
   materialPngTextureId: 00000000
   textureFilterMode: 0
   textureMipMaps: 0
   allowMultipleAtlases: 0
-  spriteCollectionGUID: 2fddf7479d177c74d8bca6d8eff03c99
-  spriteCollectionName: skin28
+  spriteCollectionGUID: 57da8da33a6e77442b78712ea9ee1259
+  spriteCollectionName: skin1
   assetName: 
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 8
-  buildKey: 967939346
-  dataGuid: 19ba4689ebadb3945a79185eccdcb7ff
+  buildKey: 1813060134
+  dataGuid: cecde3c53794ad4429f903bfb76075b3
   managedSpriteCollection: 0
   hasPlatformData: 0
   spriteCollectionPlatforms: []
@@ -747,6 +747,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 125090}
+  m_RootGameObject: {fileID: 157894}
   m_IsPrefabParent: 1
   m_IsExploded: 1
