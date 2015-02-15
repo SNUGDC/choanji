@@ -69,8 +69,8 @@ namespace Choanji
 
 			g.Scissor(new PRect
 			{
-				org = _rect.org - new Point(5, 5),
-				dst = _rect.dst + new Point(5, 5)
+				org = _rect.org - new Point(10, 10),
+				dst = _rect.dst + new Point(10, 10)
 			});
 		}
 
