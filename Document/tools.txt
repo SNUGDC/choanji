@@ -16,6 +16,8 @@ NvvCSVClasses: CSV 파일 읽기.
 
 Unity 플러그인:
 
+2dtoolkit: sprite, sprite animation.
+SoundManager3: BGM, SFX 재생.
 Tiled2Unity: tmx 임포터.
 Cartoon FX Pack 1 ~ 4: 이펙트.
 
