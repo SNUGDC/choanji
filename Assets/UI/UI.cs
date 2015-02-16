@@ -55,11 +55,15 @@ namespace Choanji.UI
 		public const float TOP_MENU_SPEED = 8;
 
 		public static bool isTopMenuOpened { get; private set; }
+		public static bool sCanOpenTopMenu = true;
 		private static bool? dirTopMenu;
 		private static TopMenu sTopMenu;
 
 		public static TopMenu OpenTopMenu()
 		{
+			if (!sCanOpenTopMenu)
+				return null;
+
 			if (isTopMenuOpened)
 			{
 				L.W("trying to open top menu again.");
@@ -81,6 +85,18 @@ namespace Choanji.UI
 			var _rect = ((RectTransform)_trans);
 			_rect.Fill();
 			_trans.Translate(0, _rect.H(), 0);
+
+			sTopMenu.onPopupOpened += delegate
+			{
+				sCanOpenTopMenu = false;
+				CloseTopMenu();
+			};
+
+			sTopMenu.onPopupClosed += delegate
+			{
+				sCanOpenTopMenu = true;
+				OpenTopMenu();
+			};
 
 			return sTopMenu;
 		}

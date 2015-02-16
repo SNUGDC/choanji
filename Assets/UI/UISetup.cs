@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Choanji.UI;
+using Gem;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -8,6 +10,8 @@ namespace Choanji
 		{
 			TheChoanji.g.context = ContextType.WORLD;
 			UI.UI.RegKey();
+			Popups.Setup();
+			PopupHelper.RegKey();
 			Destroy(this);
 		}
 	}
