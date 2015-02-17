@@ -1,20 +1,30 @@
-﻿namespace Choanji
+﻿namespace Choanji.Battle
 {
+	public enum BattlerID { }
+
 	public class Battler
 	{
-		public Battler(Deck _deck, int _hpMax, int _manaMax)
+		public Battler(StatSet _baseStat, Party _party)
 		{
-			hpMax = hp = _hpMax;
-			mana = manaMax = _manaMax;
-			deck = _deck;
+			baseStat = _baseStat;
+			partyStat = _party.CalStat();
+
+			hpMax = hp = baseStat.hp + (int)partyStat.hp;
+			apMax = ap = baseStat.ap + (int)partyStat.ap;
+
+			party = _party;
 		}
 
-		public readonly Deck deck;
+		public readonly StatSet baseStat;
+		public readonly StatSet partyStat;
+		public readonly StatSet dynamicStat = new StatSet();
 
-		public readonly int hpMax;
-		public int hp { get; private set; }
+		public readonly HP hpMax;
+		public HP hp { get; private set; }
 
-		public readonly int manaMax;
-		public int mana { get; private set; }
+		public readonly AP apMax;
+		public AP ap { get; private set; }
+
+		public readonly Party party;
 	}
 }

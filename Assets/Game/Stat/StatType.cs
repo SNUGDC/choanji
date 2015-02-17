@@ -4,6 +4,8 @@ namespace Choanji
 {
 	public enum StatType
 	{
+		HP,
+		AP,
 		STR,
 		DEF,
 		SPD,

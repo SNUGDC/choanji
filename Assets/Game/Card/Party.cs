@@ -2,12 +2,12 @@
 
 namespace Choanji
 {
-	public class Deck
+	public class Party
 	{
 		public readonly List<CardData> passives = new List<CardData>();
 		public readonly List<CardData> actives = new List<CardData>();
 
-		public StatSet CalStat(StatRst _key)
+		public StatSet CalStat()
 		{
 			var _statSet = new StatSet();
 			foreach (var _passive in passives)

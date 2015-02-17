@@ -3,5 +3,9 @@
 	public enum Gold { }
 
 	public enum HP { }
-	public enum Cost { }
+	public enum AP { }
+	public enum STR { }
+	public enum DEF { }
+	public enum SPD { }
+	public enum RST { }
 }

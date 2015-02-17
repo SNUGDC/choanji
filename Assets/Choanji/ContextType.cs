@@ -5,5 +5,6 @@
 		NONE = 0,
 		INTRO,
 		WORLD,
+		BATTLE,
 	}
 }
