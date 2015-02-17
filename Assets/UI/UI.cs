@@ -50,8 +50,6 @@ namespace Choanji.UI
 		#region top menu
 		// note: top menu를 animation으로 하면 
 		// 원치않는 동작을 보일 때가 많아 코드로 합니다.
-		public const int TOP_MENU_UP = 400;
-		public const int TOP_MENU_DOWN = 300;
 		public const float TOP_MENU_SPEED = 8;
 
 		public static bool isTopMenuOpened { get; private set; }
@@ -131,16 +129,20 @@ namespace Choanji.UI
 
 				if (dirTopMenu.Value)
 				{
-					sTopMenu.transform.Translate(0, -_dy, 0);
+					_rect.Translate(0, -_dy, 0);
 					if (_rect.MaxY() <= 0)
+					{
+						_rect.Translate(0, _rect.MaxY(), 0);
 						dirTopMenu = null;
+					}
 				}
 				else
 				{
-					sTopMenu.transform.Translate(0, _dy, 0);
+					_rect.Translate(0, _dy, 0);
 					if (_rect.MaxY() > _h)
 					{
 						dirTopMenu = null;
+						_rect.Translate(0, _h - _rect.MaxY(), 0);
 						sTopMenu.gameObject.SetActive(false);
 					}
 				}
