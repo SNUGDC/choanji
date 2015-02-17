@@ -1,0 +1,24 @@
+{
+	"txts": [
+		"삐빕!",
+		"모험을 기록하고 있습니다!",
+		{
+			"type": "action",
+			"data": {
+				"type": "SAVE",
+				"onSuccess": {
+					"type": "OPEN_DIALOG",
+					"dialog": {
+						"txt": "저장완료!"
+					}
+				},
+				"onFail": {
+					"type": "OPEN_DIALOG",
+					"dialog": {
+						"txt": "알수없는 힘이 작용했다!"
+					}
+				}
+			}
+		}
+	]
+}
