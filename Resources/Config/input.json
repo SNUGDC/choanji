@@ -5,5 +5,8 @@
 	"L": { "type": "KEY", "code": "LeftArrow" },
 	
 	"Y": { "type": "KEY", "code": "X" },
-	"N": { "type": "KEY", "code": "Z" }
+	"N": { "type": "KEY", "code": "Z" },
+	
+	"RET": { "type": "KEY", "code": "Return" },
+	"ESC": { "type": "KEY", "code": "Escape" }
 }

@@ -9,13 +9,15 @@ namespace Choanji
 
 		void Update()
 		{
-			Timer.g.Update(Time.deltaTime);
+			var _dt = Time.deltaTime;
+			Timer.g.Update(_dt);
 			
 			switch (context)
 			{
 				case ContextType.INTRO:
 					break;
 				case ContextType.WORLD:
+					UI.UI.Update(_dt);
 					WorldProgress.Update();
 					break;
 			}

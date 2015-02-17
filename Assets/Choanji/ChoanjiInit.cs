@@ -10,6 +10,7 @@ namespace Choanji
 		public PrefabDB prefab;
 		public TileDB tile;
 		public CharacterSkins skin;
+		public UI.DB ui;
 		public Battle.SCDB sc;
 		
 		void Start()
@@ -25,6 +26,7 @@ namespace Choanji
 			PrefabDB.g = prefab;
 			TileDB.g = tile;
 			CharacterSkins.g = skin;
+			UI.DB.g = ui;
 			Battle.SCDB.g = sc;
 			NPCDB.Load();
 
