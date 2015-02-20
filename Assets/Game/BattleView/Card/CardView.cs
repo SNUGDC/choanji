@@ -1,9 +1,8 @@
-﻿using System;
-using Gem;
+﻿using Gem;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Choanji
+namespace Choanji.Battle
 {
 	public class CardView : MonoBehaviour
 	{
