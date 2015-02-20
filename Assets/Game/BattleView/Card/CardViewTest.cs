@@ -11,17 +11,14 @@ namespace Choanji.Battle
 
 		void Start()
 		{
-			var _passive = new PassiveData("LIGHTNING_ROD", "피뢰침", "설명");
-			var _active = new ActiveData("SPARK", ActiveType.ATK, "스파크", "설명", (AP)50,
-				new ActivePerform.Dmg(ElementDB.Search("ELE"), (HP)40));
-			var _data = new CardData("CIRCUIT_II", "회로2", "설명", new StatSet(), _passive, _active);
+			var _data = CardDB.Get(CardHelper.MakeID("KEYBOARD_WARRIOR"));
 			var _card = new Card(_data);
 
 			activeCard.card.Setup(_card);
-			activeCard.Setup(_active);
+			activeCard.Setup(_data.active);
 
 			passiveCard.card.Setup(_card);
-			passiveCard.Setup(_passive);
+			passiveCard.Setup(_data.passive);
 		}
 	}
 }

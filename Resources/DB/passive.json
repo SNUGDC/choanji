@@ -4,10 +4,11 @@
 		"detail": "적의 무속성 공격을 일정 확률로 무시한다.",
 		"perform": {
 			"trigger": {
-				"when": "BEFORE_HIT",
-				"where": { 
-					"key": "CUR_DMG_TYPE_EQUALS",
-					"arg": "NOR" 
+				"when": "BEFORE_HIT",     // 없을 경우 BATTLE_START.
+				"where": {                // 없을 경우 TRUE.
+					"type": "CUR_DMG_TYPE",
+					"cmp": "EQUAL",       // 없을 경우 EQUAL. NOT_EQUAL도 넣을 수 있음.
+					"ele": "NOR"
 				},
 				"prob": 10
 			},
@@ -21,9 +22,6 @@
 		"name": "냉철한 두뇌",
 		"detail": "분석력 공격의 데미지가 증가한다.",
 		"perform": {
-			"trigger": {
-				"when": "BATTLE_START"
-			},
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "ANA",
@@ -36,9 +34,6 @@
 		"name": "effective",
 		"detail": "분석력 공격의 데미지가 증가한다.",
 		"perform": {
-			"trigger": {
-				"when": "BATTLE_START"
-			},
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "MEM",
@@ -51,9 +46,6 @@
 		"name": "블록 쌓기",
 		"detail": "창의력 공격의 데미지가 증가한다.",
 		"perform": {
-			"trigger": {
-				"when": "BATTLE_START"
-			},
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "CRE",
@@ -66,9 +58,6 @@
 		"name": "탄탄한 성대",
 		"detail": "무속성 공격의 데미지가 증가한다.",
 		"perform": {
-			"trigger": {
-				"when": "BATTLE_START"
-			},
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "NOR",

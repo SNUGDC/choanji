@@ -5,22 +5,20 @@ namespace Choanji
 {
 	public class PassiveData
 	{
-		public PassiveData(string _key, string _name, string _detail)
+		public PassiveData(string _key, JsonData _data)
 		{
 			id = (PassiveID)HashEnsure.Do(_key);
 			key = _key;
-			name = _name;
-			detail = _detail;
+			name = (string) _data["name"];
+			detail = (string) _data["detail"];
+			perform = new Battle.TA(_data["perform"]);
 		}
-
-		public PassiveData(string _key, JsonData _data)
-			: this(_key, (string)_data["name"], (string)_data["detail"])
-		{}
 
 		public readonly PassiveID id;
 		public readonly string key;
 		public readonly string name;
 		public readonly string detail;
+		public readonly Battle.TA perform;
 
 		public static implicit operator PassiveID(PassiveData _this)
 		{

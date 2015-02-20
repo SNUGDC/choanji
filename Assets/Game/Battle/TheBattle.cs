@@ -10,6 +10,7 @@ namespace Choanji.Battle
 		public static Battle battle;
 
 		public static Action<Setup> onSetup;
+		public static Action onStart;
 		public static Action<Result> onDone;
 
 		public static void Setup(Setup _setup)
@@ -35,6 +36,7 @@ namespace Choanji.Battle
 
 		public static void Start()
 		{
+			onStart.CheckAndCall();
 			battle.SelectCards();
 		}
 

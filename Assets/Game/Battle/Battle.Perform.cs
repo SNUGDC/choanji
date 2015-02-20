@@ -1,6 +1,7 @@
-﻿using Choanji.ActivePerform;
+﻿using System;
+using Choanji.ActivePerform;
 using Gem;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Choanji.Battle
 {
@@ -10,10 +11,11 @@ namespace Choanji.Battle
 	public class PerformDmgResult : PerformResult
 	{
 		public bool hit;
+		public bool block;
 		public Damage? dmg;
 	}
 
-	public partial class Battle 
+	public partial class Battle
 	{
 		private static bool Dice(int _prob)
 		{
@@ -45,11 +47,31 @@ namespace Choanji.Battle
 			if (Dice(_perform.accuracy))
 			{
 				L.D("hit");
-				var _dmgTrue = Other(_battler).Hit(_perform.dmg);
-				return new PerformDmgResult {
-					hit = true, 
-					dmg = new Damage(_perform.dmg.ele, _dmgTrue)
-				};
+
+				var _target = Other(_battler);
+				var _state = state.GetStateOf(_battler);
+
+				_state.beforeHit.CheckAndCall(_perform.dmg);
+
+				if (_state.blockHitOneTime)
+				{
+					L.D("block");
+					_state.blockHitOneTime = false;
+					return new PerformDmgResult
+					{
+						hit = true,
+						block = true,
+					};
+				}
+				else
+				{
+					var _dmgTrue = _target.Hit(_perform.dmg);
+					return new PerformDmgResult
+					{
+						hit = true,
+						dmg = new Damage(_perform.dmg.ele, _dmgTrue)
+					};	
+				}
 			}
 			else
 			{

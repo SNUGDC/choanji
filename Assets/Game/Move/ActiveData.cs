@@ -5,26 +5,16 @@ namespace Choanji
 {
 	public class ActiveData
 	{
-		public ActiveData(string _key, ActiveType _type, string _name, string _detail, AP _cost, ActivePerform.Base _perform)
+		public ActiveData(string _key, JsonData _data)
 		{
 			id = (ActiveID)HashEnsure.Do(_key);
 			key = _key;
-			type = _type;
-			name = _name;
-			detail = _detail;
-			cost = _cost;
-			perform = _perform;
+			type = EnumHelper.ParseOrDefault<ActiveType>((string) _data["type"]);
+			name = (string) _data["name"];
+			detail = (string) _data["detail"];
+			cost = (AP) (int) _data["cost"];
+			perform = ActivePerform.Factory.Make(_data["perform"]);
 		}
-
-		public ActiveData(string _key, JsonData _data)
-			: this(
-			_key,
-			EnumHelper.ParseOrDefault<ActiveType>((string)_data["type"]),
-			(string)_data["name"],
-			(string)_data["detail"],
-			(AP)(int)_data["cost"],
-			ActivePerform.Factory.Make(_data["perform"]))
-		{}
 
 		public readonly ActiveID id;
 		public readonly string key;
