@@ -7,7 +7,7 @@ namespace Choanji.Battle
 	public class ViewTest : MonoBehaviour
 	{
 		public HPBar hp;
-		public CostBar cost;
+		public APBar cost;
 		public SCView sc;
 
 		public MessageView msg;

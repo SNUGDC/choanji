@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Choanji.Battle
 {
-	public class CostBar : Bar
+	public class APBar : Bar
 	{
 		public Image highlightImg;
 

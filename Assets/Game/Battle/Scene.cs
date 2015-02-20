@@ -9,7 +9,7 @@ namespace Choanji.Battle
 	public class Scene : MonoBehaviour
 	{
 		public HPBar hp;
-		public CostBar cost;
+		public APBar cost;
 
 		void Start()
 		{
