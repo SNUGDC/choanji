@@ -16,9 +16,9 @@ namespace Choanji
 			perform = _perform;
 		}
 
-		public ActiveData(JsonData _data)
+		public ActiveData(string _key, JsonData _data)
 			: this(
-			(string)_data["key"],
+			_key,
 			EnumHelper.ParseOrDefault<ActiveType>((string)_data["type"]),
 			(string)_data["name"],
 			(string)_data["detail"],
@@ -35,5 +35,10 @@ namespace Choanji
 		public readonly int cost;
 
 		public readonly ActivePerform.Base perform;
+
+		public static implicit operator ActiveID(ActiveData _this)
+		{
+			return _this.id;
+		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Choanji
 	{
 		private CardData(string _key)
 		{
-			id = (CardID) HashEnsure.Do(_key);
+			id = CardHelper.MakeID(_key);
 			key = _key;	
 		}
 
@@ -33,8 +33,8 @@ namespace Choanji
 			name = (string) _data["name"];
 			detail = (string) _data["detail"];
 			stat = new StatSet(_data["stat"]);
-			passive = new PassiveData(_data["passive"]);
-			active = new ActiveData(_data["active"]);
+			passive = MoveDB.Get(CardHelper.MakePassiveID((string)_data["passive"]));
+			active = MoveDB.Get(CardHelper.MakeActiveID((string)_data["active"]));
 		}
 
 		public readonly CardID id;

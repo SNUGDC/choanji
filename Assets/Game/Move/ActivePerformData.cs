@@ -26,22 +26,24 @@ namespace Choanji.ActivePerform
 
 	public sealed class Dmg : Base
 	{
-		public Dmg(ElementID _ele, int _val)
+		public Dmg(ElementID _ele, int _dmg)
 			: base("DMG")
 		{
 			ele = _ele;
-			val = _val;
+			dmg = _dmg;
 		}
 
 		public Dmg(JsonData _data)
 			: base(_data)
 		{
-			ele = ElementDB.Search((string)_data["ele"]).id;
-			val = (int) _data["val"];
+			ele = ElementDB.Search((string)_data["ele"]);
+			dmg = (int)_data["dmg"];
+			accuracy = _data.IntOrDefault("accuracy", 100);
 		}
 
 		public readonly ElementID ele;
-		public readonly int val;
+		public readonly int dmg;
+		public int accuracy = 100;
 	}
 
 	public static class Factory

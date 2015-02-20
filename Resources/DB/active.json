@@ -1,0 +1,66 @@
+{
+	"SMASH": {
+		"name": "후려치기",
+		"type": "ATK",
+		"detail": "적에게 무속성 데미지를 입힌다.",
+		"cost": 70,
+		"perform": {
+			"key": "DMG",
+			"ele": "NOR",
+			"dmg": 30,
+			"accuracy": 90
+		}
+	},
+	
+	"SHARP_TONGUED": {
+		"name": "날카로운 혀",
+		"type": "ATK",
+		"detail": "적에게 분석력 데미지를 입힌다.",
+		"cost": 70,
+		"perform": {
+			"key": "DMG",
+			"ele": "ANA",
+			"dmg": 30,
+			"accuracy": 90
+		}
+	},
+	
+	"BASIC_VOCA_ATTACK": {
+		"name": "attack",
+		"type": "ATK",
+		"detail": "적에게 암기력 데미지를 입힌다.",
+		"cost": 70,
+		"perform": {
+			"key": "DMG",
+			"ele": "MEM",
+			"dmg": 30,
+			"accuracy": 90
+		}
+	},
+	
+	"BLOCK_TRAP": {
+		"name": "블록 밟게 하기",
+		"type": "ATK",
+		"detail": "창의력 공격의 데미지를 입힌다.",
+		"cost": 70,
+		"perform": {
+			"key": "DMG",
+			"ele": "CRE",
+			"dmg": 30,
+			"accuracy": 90
+		}
+	},
+	
+	"GROWLING": {
+		"name": "그로울링",
+		"type": "ATK",
+		"detail": "적에게 빗나가기 쉽지만 강력한 위력의 무속성 공격을 가한다.",
+		"cost": 100,
+		"perform": {
+			"key": "DMG",
+			"ele": "NOR",
+			"dmg": 100,
+			"accuracy": 50
+		}
+	}
+}

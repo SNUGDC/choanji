@@ -13,14 +13,19 @@ namespace Choanji
 			detail = _detail;
 		}
 
-		public PassiveData(JsonData _data)
-			: this((string)_data["key"], (string)_data["name"], (string)_data["detail"])
+		public PassiveData(string _key, JsonData _data)
+			: this(_key, (string)_data["name"], (string)_data["detail"])
 		{}
 
 		public readonly PassiveID id;
 		public readonly string key;
 		public readonly string name;
 		public readonly string detail;
+
+		public static implicit operator PassiveID(PassiveData _this)
+		{
+			return _this.id;
+		}
 	}
 
 }

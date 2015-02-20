@@ -1,0 +1,79 @@
+{
+	"WINNERS_MENTALLITY": {
+		"name": "정신승리",
+		"detail": "적의 무속성 공격을 일정 확률로 무시한다.",
+		"perform": {
+			"trigger": {
+				"when": "BEFORE_HIT",
+				"where": { 
+					"key": "CUR_DMG_TYPE_EQUALS",
+					"arg": "NOR" 
+				},
+				"prob": 10
+			},
+			"action": {
+				"type": "AVOID_HIT"
+			}
+		}
+	},
+	
+	"COOL_HEAD": {
+		"name": "냉철한 두뇌",
+		"detail": "분석력 공격의 데미지가 증가한다.",
+		"perform": {
+			"trigger": {
+				"when": "BATTLE_START"
+			},
+			"action": {
+				"type": "BUFF_ELE",
+				"ele": "ANA",
+				"arg": 130
+			}
+		}
+	},
+	
+	"BASIC_VOCA_EFFECTIVE": {
+		"name": "effective",
+		"detail": "분석력 공격의 데미지가 증가한다.",
+		"perform": {
+			"trigger": {
+				"when": "BATTLE_START"
+			},
+			"action": {
+				"type": "BUFF_ELE",
+				"ele": "MEM",
+				"arg": 130
+			}
+		}
+	},
+	
+	"BLOCK_BUILD": {
+		"name": "블록 쌓기",
+		"detail": "창의력 공격의 데미지가 증가한다.",
+		"perform": {
+			"trigger": {
+				"when": "BATTLE_START"
+			},
+			"action": {
+				"type": "BUFF_ELE",
+				"ele": "CRE",
+				"arg": 130
+			}
+		}
+	},
+	
+	"STRONG_THROAT": {
+		"name": "탄탄한 성대",
+		"detail": "무속성 공격의 데미지가 증가한다.",
+		"perform": {
+			"trigger": {
+				"when": "BATTLE_START"
+			},
+			"action": {
+				"type": "BUFF_ELE",
+				"ele": "NOR",
+				"arg": 130
+			}
+		}
+	}
+}

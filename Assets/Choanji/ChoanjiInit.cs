@@ -23,6 +23,10 @@ namespace Choanji
 
 			sIsInited = true;
 
+			ElementDB.Load();
+			MoveDB.Load();
+			CardDB.Load();
+
 			PrefabDB.g = prefab;
 			TileDB.g = tile;
 			CharacterSkins.g = skin;

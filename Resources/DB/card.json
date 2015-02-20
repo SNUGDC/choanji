@@ -1,0 +1,61 @@
+{
+	"KEYBOARD_WARRIOR": {
+		"name": "키보드워리어링",
+		"detail": "키보드의 용사!",
+		"stat": {
+			"STR": 20,
+			"DEF": 20,
+			"SPD": 10
+		},
+		"passive": "WINNERS_MENTALLITY",
+		"active": "SMASH"
+	},
+	
+	"LOGICAL_CRITICS": {
+		"name": "논리적 독설",
+		"detail": "맞는 말이지만! 이 오묘한 기분은...?!",
+		"stat": {
+			"STR": 30,
+			"DEF": 10,
+			"SPD": 10
+		},
+		"passive": "SHARP_TONGUED",
+		"active": "COOL_HEAD"
+	},
+	
+	"BASIC_VOCA": {
+		"name": "basic voca",
+		"detail": "chaos, destruction, oblivion",
+		"stat": {
+			"STR": 10,
+			"DEF": 30,
+			"SPD": 10
+		},
+		"passive": "BASIC_VOCA_ATTACK",
+		"active": "BASIC_VOCA_EFFECTIVE"
+	},
+	
+	"LEGO_MAKER": {
+		"name": "레고 제작",
+		"detail": "설명",
+		"stat": {
+			"STR": 10,
+			"DEF": 10,
+			"SPD": 30
+		},
+		"passive": "BLOCK_TRAP",
+		"active": "BLOCK_BUILD"
+	},
+	
+	"HEAVY_METAL": {
+		"name": "헤비메탈",
+		"detail": "설명",
+		"stat": {
+			"STR": 40,
+			"DEF": 5,
+			"SPD": 5
+		},
+		"passive": "GROWLING",
+		"active": "STRONG_THROAT"
+	}
+}
