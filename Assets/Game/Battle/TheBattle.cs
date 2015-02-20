@@ -9,7 +9,7 @@ namespace Choanji.Battle
 		public static State state;
 		public static Battle battle;
 
-		public static Action onSetup;
+		public static Action<Setup> onSetup;
 		public static Action<Result> onDone;
 
 		public static void Setup(Setup _setup)
@@ -30,7 +30,7 @@ namespace Choanji.Battle
 
 			battle = new Battle(_setup.mode, state);
 
-			onSetup.CheckAndCall();
+			onSetup.CheckAndCall(_setup);
 		}
 
 		public static void Start()

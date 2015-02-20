@@ -1,4 +1,5 @@
-﻿using Gem;
+﻿using Choanji.Battle;
+using Gem;
 using UnityEngine;
 
 namespace Choanji.R
@@ -50,6 +51,16 @@ namespace Choanji.R
 			{
 				var _tex = TextureCache.Load(new FullPath("Resources/Card/" + _key + "_ILLU_S.png"));
 				return _tex.CreateSpite();
+			}
+
+			public static Sprite FIELD_BG(EnvType _env)
+			{
+				return Resources.Load<Sprite>("Battlebacks/BG_" + _env);
+			}
+
+			public static Sprite FIELD_BASE(EnvType _env)
+			{
+				return Resources.Load<Sprite>("Battlebacks/BASE_" + _env);
 			}
 
 			public static Sprite BATTLER_FIELD_ILLUST(string _key)

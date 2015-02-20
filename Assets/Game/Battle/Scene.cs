@@ -18,6 +18,7 @@ namespace Choanji.Battle
 		public HPBar hp;
 		public APBar ap;
 
+		public FieldView field;
 		public BattlerView battler;
 
 		void Start()
@@ -30,7 +31,7 @@ namespace Choanji.Battle
 			TheBattle.onSetup -= Setup;
 		}
 
-		public void Setup()
+		public void Setup(Setup _setup)
 		{
 			var _battlerA = TheBattle.state.battlerA;
 			var _battlerB = TheBattle.state.battlerB;
@@ -42,6 +43,7 @@ namespace Choanji.Battle
 
 			SetupCards();
 
+			field.env = _setup.env;
 			battler.SetBattler(_battlerB.data.key);
 		}
 
