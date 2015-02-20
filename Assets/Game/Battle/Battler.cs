@@ -1,4 +1,6 @@
-﻿namespace Choanji.Battle
+﻿using Gem;
+
+namespace Choanji.Battle
 {
 	public enum BattlerID { }
 
@@ -20,10 +22,24 @@
 		public readonly StatSet dynamicStat = new StatSet();
 
 		public readonly HP hpMax;
-		public HP hp { get; private set; }
+		public HP mHP;
+		public HP hp { 
+			get { return mHP; }
+			private set { mHP = value < hpMax ? value : hpMax; } 
+		}
 
 		public readonly AP apMax;
-		public AP ap { get; private set; }
+
+		private AP mAP;
+		public AP ap
+		{
+			get { return mAP; }
+			private set
+			{
+				D.Assert(value >= 0);
+				mAP = value < apMax ? value : apMax;
+			}
+		}
 
 		public readonly Party party;
 
@@ -52,5 +68,16 @@
 			hp -= _trueDmg;
 			return _trueDmg;
 		}
+
+		public void ConsumeAP(AP _val)
+		{
+			ap -= _val;
+		}
+
+		public void RegenAP()
+		{
+			ap += CalStat(StatType.AP_REGEN);
+		}
+
 	}
 }

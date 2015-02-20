@@ -5,7 +5,7 @@ namespace Choanji
 {
 	public class ActiveData
 	{
-		public ActiveData(string _key, ActiveType _type, string _name, string _detail, int _cost, ActivePerform.Base _perform)
+		public ActiveData(string _key, ActiveType _type, string _name, string _detail, AP _cost, ActivePerform.Base _perform)
 		{
 			id = (ActiveID)HashEnsure.Do(_key);
 			key = _key;
@@ -22,7 +22,7 @@ namespace Choanji
 			EnumHelper.ParseOrDefault<ActiveType>((string)_data["type"]),
 			(string)_data["name"],
 			(string)_data["detail"],
-			(int)_data["cost"],
+			(AP)(int)_data["cost"],
 			ActivePerform.Factory.Make(_data["perform"]))
 		{}
 
@@ -32,7 +32,7 @@ namespace Choanji
 		public readonly string name;
 		public readonly string detail;
 
-		public readonly int cost;
+		public readonly AP cost;
 
 		public readonly ActivePerform.Base perform;
 

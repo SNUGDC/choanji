@@ -6,6 +6,7 @@ namespace Choanji
 	{
 		HP,
 		AP,
+		AP_REGEN,
 		STR,
 		DEF,
 		SPD,

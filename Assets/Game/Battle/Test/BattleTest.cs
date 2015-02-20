@@ -10,13 +10,13 @@ namespace Choanji.Battle
 		{
 			var _battlerA = new Setup.Battler()
 			{
-				baseStat = new StatSet(),
+				baseStat = new StatSet { hp = (HP)100, ap = (AP)100, apRegen = (AP)10, },
 				party = new Party(),
 			};
 			
 			var _battlerB = new Setup.Battler()
 			{
-				baseStat = new StatSet(),
+				baseStat = new StatSet { hp = (HP)100, ap = (AP)100, apRegen = (AP)10, },
 				party = new Party(),
 			};
 			

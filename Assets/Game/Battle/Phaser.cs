@@ -70,8 +70,17 @@ namespace Choanji.Battle
 	    }
 
 	    private void Go(Battler _battler, List<Card> _cards)
-		{
-			mDelegate.start(_battler, _cards[mRunning], _doneType =>
+	    {
+		    var _card = _cards[mRunning];
+		    var _cost = _card.data.active.cost;
+
+		    if (_battler.ap < _cost)
+		    {
+				Done(PhaseDoneType.TURN_END);
+			    return;
+		    }
+
+			StartCard(_battler, _cards[mRunning], _doneType =>
 			{
 				if (_doneType == PhaseDoneType.CONTINUE)
 				{
@@ -94,12 +103,28 @@ namespace Choanji.Battle
 	    }
 
 	    private void Go()
-	    {
+		{
 			var _cardA = mCardsA[mRunning];
 			var _cardB = mCardsB[mRunning];
 
 		    var _battlerA = state.battlerA;
 		    var _battlerB = state.battlerB;
+
+			var _costA = _cardA.data.active.cost;
+			var _costB = _cardB.data.active.cost;
+
+		    if (_battlerA.ap < _costA)
+		    {
+			    Go(_battlerB, mCardsB);
+			    return;
+		    }
+
+		    if (_battlerB.ap < _costB)
+		    {
+				Go(_battlerA, mCardsA);
+			    return;
+		    }
+
 			var _spdA = _battlerA.CalStat(StatType.SPD);
 			var _spdB = _battlerB.CalStat(StatType.SPD);
 
@@ -123,10 +148,10 @@ namespace Choanji.Battle
 				_slowerCard = _cardA;
 		    }
 
-			mDelegate.start(_faster, _fasterCard, _doneTypeA =>
+			StartCard(_faster, _fasterCard, _doneTypeA =>
 			{
 				if (_doneTypeA == PhaseDoneType.CONTINUE)
-					mDelegate.start(_slower, _slowerCard, _doneTypeB =>
+					StartCard(_slower, _slowerCard, _doneTypeB =>
 					{
 						if (_doneTypeB == PhaseDoneType.CONTINUE)
 							Loop();
@@ -136,6 +161,12 @@ namespace Choanji.Battle
 				else
 					Done(_doneTypeA);
 			});
+	    }
+
+	    private void StartCard(Battler _battler, Card _card, Action<PhaseDoneType> _done)
+	    {
+			_battler.ConsumeAP(_card.data.active.cost);
+		    mDelegate.start(_battler, _card, _done);
 	    }
 
 		private void Done(PhaseDoneType _doneType)

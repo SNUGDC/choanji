@@ -1,4 +1,5 @@
 ﻿using Choanji.ActivePerform;
+using Gem;
 using UnityEngine;
 
 namespace Choanji.Battle
@@ -43,6 +44,7 @@ namespace Choanji.Battle
 		{
 			if (Dice(_perform.accuracy))
 			{
+				L.D("hit");
 				var _dmgTrue = Other(_battler).Hit(_perform.dmg);
 				return new PerformDmgResult {
 					hit = true, 
@@ -51,6 +53,7 @@ namespace Choanji.Battle
 			}
 			else
 			{
+				L.D("miss");
 				return new PerformDmgResult
 				{
 					hit = false

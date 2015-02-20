@@ -17,6 +17,7 @@ namespace Choanji
 		{
 			hp = (HP)_json.IntOrDefault(StatType.HP.ToString());
 			ap = (AP)_json.IntOrDefault(StatType.AP.ToString());
+			apRegen = (AP)_json.IntOrDefault(StatType.AP_REGEN.ToString());
 			str = (STR)_json.IntOrDefault(StatType.STR.ToString());
 			def = (DEF)_json.IntOrDefault(StatType.DEF.ToString());
 			spd = (SPD)_json.IntOrDefault(StatType.SPD.ToString());
@@ -35,6 +36,7 @@ namespace Choanji
 
 		public HP hp;
 		public AP ap;
+		public AP apRegen;
 		public STR str;
 		public DEF def;
 		public SPD spd;
@@ -47,6 +49,7 @@ namespace Choanji
 				{
 					case StatType.HP:  return (int)hp;
 					case StatType.AP:  return (int)ap;
+					case StatType.AP_REGEN: return (int)apRegen;
 					case StatType.STR: return (int)str;
 					case StatType.DEF: return (int)def;
 					case StatType.SPD: return (int)spd;
@@ -62,6 +65,7 @@ namespace Choanji
 				{
 					case StatType.HP:  hp = (HP)value; return;
 					case StatType.AP:  ap = (AP)value; return;
+					case StatType.AP_REGEN: apRegen = (AP)value; return;
 					case StatType.STR: str = (STR)value; return;
 					case StatType.DEF: def = (DEF)value; return;
 					case StatType.SPD: spd = (SPD)value; return;
@@ -107,31 +111,5 @@ namespace Choanji
 
 			return _ret;
 		}
-	}
-
-	public class ReadOnlyStatSet
-	{
-		public ReadOnlyStatSet(StatSet _statSet)
-		{
-			mStatSet = _statSet;
-		}
-
-		public HP hp { get { return mStatSet.hp; } }
-		public AP ap { get { return mStatSet.ap; } }
-		public STR str { get { return mStatSet.str; } }
-		public DEF def { get { return mStatSet.def; } }
-		public SPD spd { get { return mStatSet.spd; } }
-
-		public RST GetRst(ElementID _elemID)
-		{
-			return mStatSet.GetRst(_elemID);
-		}
-
-		public IEnumerable<Rst> GetRstEnum()
-		{
-			return mStatSet.GetRstEnum();
-		}
-
-		private readonly StatSet mStatSet;
 	}
 }

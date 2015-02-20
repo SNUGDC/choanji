@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Gem;
 
 namespace Choanji.Battle
@@ -15,9 +16,23 @@ namespace Choanji.Battle
 
 		protected override void DoStartCardSelect()
 		{
-			// todo: 개선
-			var _card = mBattler.party.actives.Rand();
-			EndCardSelect(new CardSelectYield(new List<Card>{ _card }));
+			var _available = mBattler.ap;
+			var _cards = new List<Card>();
+
+			var _actives = new List<Card>(mBattler.party.actives);
+			_actives.Shuffle();
+
+			while (!_actives.Empty())
+			{
+				var _card = _actives.Last();
+				var _cost = _card.data.active.cost;
+				if (_cost > _available) break;
+				_available -= _cost;
+				_actives.RemoveBack();
+				_cards.Add(_card);
+			}
+
+			EndCardSelect(new CardSelectYield(_cards));
 		}
 	}
 }

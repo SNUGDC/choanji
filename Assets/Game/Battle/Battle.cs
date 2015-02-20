@@ -45,6 +45,8 @@ namespace Choanji.Battle
 
 		public Battle(Mode _mode, State _state)
 		{
+			L.SetLevel(L.V.D);
+
 			mode = _mode;
 			state = _state;
 
@@ -79,8 +81,6 @@ namespace Choanji.Battle
 
 		private void StartPhase()
 		{
-			// todo: consume ap
-
 			mPhase.Start(
 				mAgentA.selectedCards, 
 				mAgentB.selectedCards);
@@ -112,7 +112,7 @@ namespace Choanji.Battle
 			switch (_doneType)
 			{
 				case PhaseDoneType.TURN_END:
-					onTurnEnd();
+					OnTurnEnd();
 					break;
 				case PhaseDoneType.WIN_A:
 				{
@@ -136,6 +136,13 @@ namespace Choanji.Battle
 					D.Assert(false);
 					break;
 			}
+		}
+
+		private void OnTurnEnd()
+		{
+			state.battlerA.RegenAP();
+			state.battlerB.RegenAP();
+			onTurnEnd();
 		}
 	}
 }
