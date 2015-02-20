@@ -9,8 +9,8 @@ namespace Choanji.Battle
 
 	public class MessageView : MonoBehaviour
 	{
-		private const float TXT_DUR = 1;
-		private const float ANIM_DUR = 0.5f;
+		private const float TXT_DUR = 0.5f;
+		private const float ANIM_DUR = 0.2f;
 		private const int INTV = 32;
 
 		public struct Message
