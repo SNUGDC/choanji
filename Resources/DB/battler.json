@@ -3,7 +3,7 @@
 		"stat": {
 			"HP": 300,
 			"AP": 100,
-			"AP_REGEN": 100,
+			"AP_REGEN": 10,
 			"STR": 50,
 			"DEF": 30,
 			"SPD": 10,

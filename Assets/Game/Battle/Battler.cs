@@ -1,4 +1,5 @@
-﻿using Gem;
+﻿using System;
+using Gem;
 
 namespace Choanji.Battle
 {
@@ -25,7 +26,21 @@ namespace Choanji.Battle
 		public HP mHP;
 		public HP hp { 
 			get { return mHP; }
-			private set { mHP = value < hpMax ? value : hpMax; } 
+			private set
+			{
+				if (mHP == value) return;
+
+				var _old = mHP;
+
+				if (value < 0) 
+					mHP = 0;
+				else if (value > hpMax)
+					mHP = hpMax;
+				else
+					mHP = value;
+
+				onHPMod.CheckAndCall(mHP, _old);
+			} 
 		}
 
 		public readonly AP apMax;
@@ -37,11 +52,17 @@ namespace Choanji.Battle
 			private set
 			{
 				D.Assert(value >= 0);
+				if (mAP == value) return;
+				var _old = mAP;
 				mAP = value < apMax ? value : apMax;
+				onAPMod.CheckAndCall(mAP, _old);
 			}
 		}
 
 		public readonly Party party;
+
+		public Action<HP, HP> onHPMod;
+		public Action<AP, AP> onAPMod;
 
 		public int CalStat(StatType _type)
 		{

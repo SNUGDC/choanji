@@ -8,6 +8,8 @@ namespace Choanji.Battle
 		public static bool isRunning;
 		public static State state;
 		public static Battle battle;
+
+		public static Action onSetup;
 		public static Action<Result> onDone;
 
 		public static void Setup(Setup _setup)
@@ -27,6 +29,8 @@ namespace Choanji.Battle
 				new Battler(_setup.battlerB.stat, _setup.battlerB.party));
 
 			battle = new Battle(_setup.mode, state);
+
+			onSetup.CheckAndCall();
 		}
 
 		public static void Start()
