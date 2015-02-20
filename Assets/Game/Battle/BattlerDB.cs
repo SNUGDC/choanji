@@ -20,12 +20,14 @@ namespace Choanji.Battle
 		{
 			id = BattlerHelper.MakeID(_key);
 			key = _key;
+			name = (string)_data["name"];
 			stat = new StatSet(_data["stat"]);
 			party = new Party(_data["party"]);
 		}
 
 		public readonly BattlerID id;
 		public readonly string key;
+		public readonly string name;
 		public readonly StatSet stat;
 		public readonly Party party;
 

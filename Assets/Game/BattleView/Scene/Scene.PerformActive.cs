@@ -37,6 +37,7 @@ namespace Choanji.Battle
 				}
 				else
 				{
+					// todo: implement
 					// poper.PopText()
 					msg.Push(new MessageView.Message
 					{
@@ -50,7 +51,12 @@ namespace Choanji.Battle
 
 		private void PerformB(Battler _battler, Card _card, PerformResult _result, Action _done)
 		{
-			_done();
+			msg.Push(new MessageView.Message
+			{
+				txts = new List<string> { _battler.data.name + "은(는) " + _card.data.name + "을(를) 사용했다!" }
+			});
+
+			Timer.g.Add(1, _done);
 		}
 	}
 }
