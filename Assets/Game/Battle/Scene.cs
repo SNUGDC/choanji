@@ -8,18 +8,24 @@ namespace Choanji.Battle
 {
 	public class Scene : MonoBehaviour
 	{
-		private const float CARD_X_MARGIN = 0.2f;
-		private const float CARD_Y_MARGIN = 0.02f;
-		private const float CARD_HEIGHT = 0.3f;
-		private const float CARD_WIDTH = 1 / (6 + CARD_X_MARGIN * 7);
+		public static Scene g;
 
 		public Canvas parent;
+
+		public FieldView field;
+		public BattlerView battler;
 
 		public HPBar hp;
 		public APBar ap;
 
-		public FieldView field;
-		public BattlerView battler;
+		public PartyView party;
+
+		public SubmitButton submit;
+
+		void Awake()
+		{
+			g = this;
+		}
 
 		void Start()
 		{
@@ -36,57 +42,27 @@ namespace Choanji.Battle
 			var _battlerA = TheBattle.state.battlerA;
 			var _battlerB = TheBattle.state.battlerB;
 
+			field.env = _setup.env;
+			battler.SetBattler(_battlerB.data.key);
+
 			hp.max = (int)_battlerA.hpMax;
 			ap.max = (int)_battlerA.apMax;
 			_battlerA.onHPMod += (_cur, _old) => hp.Set((int)_cur);
 			_battlerA.onAPMod += (_cur, _old) => ap.Set((int)_cur);
 
-			SetupCards();
-
-			field.env = _setup.env;
-			battler.SetBattler(_battlerB.data.key);
+			party.Setup(_battlerA.party);
 		}
 
-		private void SetupCards()
+		public void GatherCards(Action<List<Card>> _onDone)
 		{
-			var _partyA = TheBattle.state.battlerA.party;
-
-			var i = 0;
-
-			foreach (var _card in _partyA.actives)
+			submit.onClick = () =>
 			{
-				var _view = PrefabDB.g.activeCardView.Instantiate();
-				PositionCard((RectTransform)_view.transform, i);
-				_view.card.Setup(_card.data);
-				_view.Setup(_card.data.active);
-				++i;
-			}
-
-			foreach (var _card in _partyA.passives)
-			{
-				var _view = PrefabDB.g.passiveCardView.Instantiate();
-				PositionCard((RectTransform)_view.transform, i);
-				_view.card.Setup(_card.data);
-				_view.Setup(_card.data.passive);
-				++i;
-			}
+				_onDone(party.Submit());
+				submit.onClick = null;
+			};
 		}
 
-		private void PositionCard(RectTransform _rect, int _idx)
-		{
-			var _size = new Vector2(CARD_WIDTH, CARD_HEIGHT);
-			_rect.SetParent(parent.transform);
-			_rect.offsetMin = Vector2.zero;
-			_rect.offsetMax = Vector2.zero;
-			_rect.anchorMin = new Vector2(CARD_WIDTH * (CARD_X_MARGIN * (_idx + 1) + _idx), CARD_Y_MARGIN);
-			_rect.anchorMax = _size + _rect.anchorMin;
-		}
-
-		public static void GatherPlayerCard(Action<List<Card>> _onDone)
-		{
-		}
-
-		public static void AnimateBattleEnd(Result _result, Action _onDone)
+		public void AnimateBattleEnd(Result _result, Action _onDone)
 		{
 			Popup _popup = null;
 

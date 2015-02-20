@@ -8,7 +8,7 @@
 
 		protected override void DoStartCardSelect()
 		{
-			Scene.GatherPlayerCard(_cards => EndCardSelect(new CardSelectYield(_cards)));
+			Scene.g.GatherCards(_cards => EndCardSelect(new CardSelectYield(_cards)));
 		}
 	}
 }

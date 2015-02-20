@@ -1,4 +1,5 @@
-﻿using Gem;
+﻿using System;
+using Gem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ namespace Choanji.Battle
 
 		public Text name_;
 		public Image illust;
+
+		public Action onSelect;
+		public Action onShowDetail;
 
 		public bool isSetuped { get { return data != null; } }
 
@@ -24,6 +28,14 @@ namespace Choanji.Battle
 			data = _data;
 			name_.text = _data.name;
 			illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_data.key);
+		}
+
+		public void OnClick()
+		{
+			if (Input.GetMouseButtonUp(0))
+				onSelect.CheckAndCall();
+			else if (Input.GetMouseButtonUp(1))
+				onShowDetail.CheckAndCall();
 		}
 	}
 }
