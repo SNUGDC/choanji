@@ -17,7 +17,7 @@ namespace Choanji.Battle
 		{
 			hp.max = 50;
 			cost.max = 50;
-			cost.highlight = 20;
+			cost.highlight = (AP)20;
 
 			msg.Push(new MessageView.Message
 			{

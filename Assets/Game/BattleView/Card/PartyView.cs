@@ -14,11 +14,12 @@ namespace Choanji.Battle
 		private const float CARD_WIDTH = 1 / (6 + X_MARGIN * 7);
 
 		private AP mCost;
-		private readonly Dictionary<int, Card> mMap = new Dictionary<int, Card>();
-		private readonly HashSet<int> mSelection = new HashSet<int>();
+		private readonly Dictionary<CardView, Card> mMap = new Dictionary<CardView, Card>();
+		private readonly HashSet<CardView> mSelection = new HashSet<CardView>();
 
 		public Action<Card> onSelect;
 		public Action<Card> onCancel;
+		public Action<bool, Card> onPointerOver;
 
 		public void Setup(Party _party)
 		{
@@ -28,14 +29,13 @@ namespace Choanji.Battle
 			{
 				var _view = PrefabDB.g.activeCardView.Instantiate();
 				Position((RectTransform)_view.transform, i);
-				_view.card.Setup(_card.data);
+				_view.card.Setup(_card);
 				_view.Setup(_card.data.active);
+				mMap.Add(_view.card, _card);
 
-				var _id = _view.GetInstanceID();
-				mMap.Add(_id, _card);
-
-				_view.card.onSelect += () => OnSelect(_id);
+				_view.card.onSelect += () => OnSelect(_view.card);
 				_view.card.onCancel += () => Cancel(_card);
+				_view.card.onPointerOver += _enter => OnPointerOver(_enter, _view.card);
 
 				++i;
 			}
@@ -44,7 +44,7 @@ namespace Choanji.Battle
 			{
 				var _view = PrefabDB.g.passiveCardView.Instantiate();
 				Position((RectTransform)_view.transform, i);
-				_view.card.Setup(_card.data);
+				_view.card.Setup(_card);
 				_view.Setup(_card.data.passive);
 				++i;
 			}
@@ -60,20 +60,29 @@ namespace Choanji.Battle
 			_rect.anchorMax = _size + _rect.anchorMin;
 		}
 
-		private void OnSelect(int _id)
+		private void OnSelect(CardView _view)
 		{
-			if (mSelection.Contains(_id))
+			if (mSelection.Contains(_view))
 				return;
 
-			var _card = mMap[_id];
+			var _card = mMap[_view];
 			var _cost = _card.data.active.cost;
 
 			if (mCost + (int)_cost > TheBattle.state.battlerA.ap)
 				return;
 
 			mCost += (int)_cost;
-			mSelection.Add(_id);
-			onSelect.CheckAndCall(mMap[_id]);
+			mSelection.Add(_view);
+			onSelect.CheckAndCall(mMap[_view]);
+		}
+
+		private CardView mPointerOver;
+		private void OnPointerOver(bool _enter, CardView _card)
+		{
+			if (mPointerOver != null && mPointerOver != _card)
+				onPointerOver.CheckAndCall(mPointerOver, mPointerOver.card);
+			mPointerOver = _card;
+			onPointerOver.CheckAndCall(_enter, mPointerOver.card);
 		}
 
 		public void Cancel(Card _card)
@@ -88,13 +97,13 @@ namespace Choanji.Battle
 			}
 		}
 
-		private void Cancel(int _id)
+		private void Cancel(CardView _view)
 		{
-			if (!mSelection.Contains(_id))
+			if (!mSelection.Contains(_view))
 				return;
-			var _card = mMap[_id];
+			var _card = mMap[_view];
 			mCost -= _card.data.active.cost;
-			mSelection.Remove(_id);
+			mSelection.Remove(_view);
 			onCancel.CheckAndCall(_card);
 		}
 

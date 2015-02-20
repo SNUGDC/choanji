@@ -13,11 +13,11 @@ namespace Choanji.Battle
 			textCurSize = 28;
 		}
 
-		protected override void DoSet(float _val)
+		protected override void Resize()
 		{
-			base.DoSet(_val);
+			base.Resize();
 
-			var _prop = _val / max;
+			var _prop = val / max;
 
 			bar.color = (_prop > 0.5f)
 				? Color.Lerp(COLOR_MID, COLOR_MAX, 2 * (_prop - 0.5f)) 

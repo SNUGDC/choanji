@@ -10,8 +10,8 @@ namespace Choanji.Battle
 
 		public bool isHighlighted { get { return highlight != 0; } }
 
-		private int mHighlight;
-		public int highlight
+		private AP mHighlight;
+		public AP highlight
 		{
 			private get { return mHighlight; }
 			set
@@ -20,6 +20,7 @@ namespace Choanji.Battle
 					return;
 				mHighlight = value;
 				highlightImg.gameObject.SetActive(highlight != 0);
+				ResizeHighlight();
 			}
 		}
 
@@ -39,14 +40,18 @@ namespace Choanji.Battle
 			}
 		}
 
-		protected override void DoSet(float _val)
+		protected override void Resize()
 		{
-			base.DoSet(_val);
+			base.Resize();
+			ResizeHighlight();
+		}
 
+		public void ResizeHighlight()
+		{
 			if (isHighlighted)
 			{
-				var _highlightVal = Mathf.Max(0, _val - highlight);
-				highlightImg.rectTransform.SetMinX(_highlightVal/max * width);
+				var _highlightVal = Mathf.Max(0, val - (int)highlight);
+				highlightImg.rectTransform.SetMinX(_highlightVal / max * width);
 				highlightImg.rectTransform.SetMaxX(bar.rectTransform.MaxX());
 			}
 		}

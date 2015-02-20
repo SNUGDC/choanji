@@ -57,6 +57,13 @@ namespace Choanji.Battle
 			party.Setup(_battlerA.party);
 			party.onSelect = _card => selection.Add(_card);
 			party.onCancel = _card => selection.Remove(_card);
+			party.onPointerOver = (_enter, _card) =>
+			{
+				if (_enter)
+					ap.highlight = _card.data.active.cost;
+				else
+					ap.highlight = 0;
+			};
 
 			selection.onCancel += party.Cancel;
 		}

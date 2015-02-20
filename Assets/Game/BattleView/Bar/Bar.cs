@@ -10,6 +10,7 @@ namespace Choanji
 		public Text text;
 
 		public int max { protected get; set; }
+		protected float val { get; private set; }
 
 		protected float width { get { return ((RectTransform) transform).W(); } }
 
@@ -29,7 +30,9 @@ namespace Choanji
 				_val = max;
 			}
 
-			DoSet(_val);
+			val = _val;
+
+			Resize();
 		}
 
 		public void Full()
@@ -37,12 +40,12 @@ namespace Choanji
 			Set(max);
 		}
 
-		protected virtual void DoSet(float _val)
+		protected virtual void Resize()
 		{
 			if (text)
-				text.text = BuildText(_val);
+				text.text = BuildText(val);
 
-			var _prop = _val / max;
+			var _prop = val / max;
 			bar.rectTransform.SetMaxX((_prop - 1) * width);
 		}
 
