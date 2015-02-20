@@ -22,7 +22,7 @@ namespace Choanji.Battle
 			msg.Push(new MessageView.Message
 			{
 				txts = txts,
-				autoclear = false,
+				manual = true,
 			});
 		}
 

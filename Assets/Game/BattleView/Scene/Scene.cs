@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Choanji.Battle
 {
-	public class Scene : MonoBehaviour
+	public partial class Scene : MonoBehaviour
 	{
 		public static Scene g;
 
@@ -22,6 +22,9 @@ namespace Choanji.Battle
 		public SelectionView selection;
 
 		public SubmitButton submit;
+
+		public MessageView msg;
+		public Poper poper;
 
 		void Awake()
 		{
@@ -66,6 +69,8 @@ namespace Choanji.Battle
 			};
 
 			selection.onCancel += party.Cancel;
+
+			TheBattle.battle.onCardPerform = Perform;
 		}
 
 		public void GatherCards(Action<List<Card>> _onDone)

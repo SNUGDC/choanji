@@ -16,7 +16,7 @@ namespace Choanji.Battle
 		public struct Message
 		{
 			public List<string> txts;
-			public bool autoclear;
+			public bool manual;
 		}
 
 		public Text txt1;
@@ -74,7 +74,7 @@ namespace Choanji.Battle
 		public Key Push(Message _msg)
 		{
 			var _key = default(Key);
-			if (_msg.autoclear)
+			if (!_msg.manual)
 				_key = mNextKey++;
 
 			mMessages.AddLast(new KeyAndMessage(_key, _msg));
@@ -174,8 +174,7 @@ namespace Choanji.Battle
 			var _kv = mMessages.First();
 			var _msg = _kv.msg;
 
-			if (!_msg.autoclear 
-				&& (mTxtIdx == _msg.txts.Count - 1))
+			if (_msg.manual && (mTxtIdx == _msg.txts.Count - 1))
 			{
 				waiting.SetActive(true);
 			}
@@ -186,8 +185,7 @@ namespace Choanji.Battle
 			var _kv = mMessages.First();
 			var _msg = _kv.msg;
 
-			if (!_msg.autoclear
-				&& (mTxtIdx == _msg.txts.Count - 1))
+			if (_msg.manual && (mTxtIdx == _msg.txts.Count - 1))
 				return;
 
 			if (mStateElapsed < TXT_DUR)

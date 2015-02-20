@@ -16,7 +16,7 @@ namespace Choanji.Battle
 
 			TheBattle.Setup(new Setup(mode, _battlerA, _battlerB) { env = env });
 
-			TheBattle.battle.onCardPerform = (_battler, _card, _result, _done) => _done();
+			// TheBattle.battle.onCardPerform = (_battler, _card, _result, _done) => _done();
 			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.SelectCards);
 			TheBattle.battle.onFinish = _result => Debug.Log(_result.type);
 

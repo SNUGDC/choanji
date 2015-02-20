@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 953814798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc76f02ffc84dea42a9564aec2c254e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2225a19e03a26e14eacade43c63f8ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 467597884}
@@ -1374,6 +1374,8 @@ MonoBehaviour:
   party: {fileID: 1450298134}
   selection: {fileID: 1171704568}
   submit: {fileID: 507097559}
+  msg: {fileID: 128828042}
+  poper: {fileID: 1772202315}
 --- !u!1 &970284433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1607,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1167721744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4b4ce7d981765e4dae775db4ee04403, type: 3}
   m_Name: 

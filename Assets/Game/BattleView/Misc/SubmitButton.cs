@@ -1,4 +1,5 @@
 ﻿using System;
+using Gem;
 using UnityEngine;
 
 namespace Choanji.Battle
@@ -9,7 +10,7 @@ namespace Choanji.Battle
 
 		public void OnClick()
 		{
-			onClick();
+			onClick.CheckAndCall();
 		}
 	}
 
