@@ -71,6 +71,11 @@ namespace Choanji.Battle
 			}
 		}
 
+		public Key Push(string _txt)
+		{
+			return Push(new Message { txts = new List<string> { _txt } });
+		}
+
 		public Key Push(Message _msg)
 		{
 			var _key = default(Key);

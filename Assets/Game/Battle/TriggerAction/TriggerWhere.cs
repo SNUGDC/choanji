@@ -44,6 +44,20 @@ namespace Choanji.Battle
 
 			ele = ElementDB.Search((string) _data["ele"]);
 		}
+
+		public bool Test(ElementID _ele)
+		{
+			switch (cmp)
+			{
+				case TriggerWhereComparison.EQUAL:
+					return ele == _ele;
+				case TriggerWhereComparison.NOT_EQUAL:
+					return ele != _ele;
+				default:
+					D.Assert(false);
+					return false;
+			}
+		}
 	}
 
 	public static partial class TriggerFactory

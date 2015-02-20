@@ -70,7 +70,7 @@ namespace Choanji.Battle
 
 			selection.onCancel += party.Cancel;
 
-			TheBattle.battle.onCardPerform = Perform;
+			TheBattle.battle.onCardPerform = AnimateActive;
 		}
 
 		public void GatherCards(Action<List<Card>> _onDone)

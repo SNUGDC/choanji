@@ -36,6 +36,7 @@ namespace Choanji.Battle
 		private readonly AgentInfo mAgentB;
 
 		private readonly Phaser mPhase;
+		private readonly TAManager mTA;
 
 		public Action<Result, Action> endDelegate;
 
@@ -58,6 +59,12 @@ namespace Choanji.Battle
 			mAgentB.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentB, _cards));
 
 			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(PerformActive));
+
+			mTA = new TAManager();
+			foreach (var _card in state.battlerA.party.passives)
+				mTA.Add(state.battlerA, _card.data.passive.perform);
+			foreach (var _card in state.battlerB.party.passives)
+				mTA.Add(state.battlerB, _card.data.passive.perform);
 		}
 
 		public void SelectCards()
