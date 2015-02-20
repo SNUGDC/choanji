@@ -32,6 +32,11 @@ namespace Choanji
 			DoSet(_val);
 		}
 
+		public void Full()
+		{
+			Set(max);
+		}
+
 		protected virtual void DoSet(float _val)
 		{
 			if (text)

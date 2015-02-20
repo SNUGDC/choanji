@@ -48,6 +48,9 @@ namespace Choanji.Battle
 
 			hp.max = (int)_battlerA.hpMax;
 			ap.max = (int)_battlerA.apMax;
+			hp.Full();
+			ap.Full();
+
 			_battlerA.onHPMod += (_cur, _old) => hp.Set((int)_cur);
 			_battlerA.onAPMod += (_cur, _old) => ap.Set((int)_cur);
 
