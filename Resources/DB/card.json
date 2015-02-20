@@ -31,8 +31,8 @@
 			"DEF": 30,
 			"SPD": 10
 		},
-		"passive": "BASIC_VOCA_ATTACK",
-		"active": "BASIC_VOCA_EFFECTIVE"
+		"passive": "BASIC_VOCA_EFFECTIVE",
+		"active": "BASIC_VOCA_ATTACK"
 	},
 	
 	"LEGO_MAKER": {
@@ -43,8 +43,8 @@
 			"DEF": 10,
 			"SPD": 30
 		},
-		"passive": "BLOCK_TRAP",
-		"active": "BLOCK_BUILD"
+		"passive": "BLOCK_BUILD",
+		"active": "BLOCK_TRAP"
 	},
 	
 	"HEAVY_METAL": {
@@ -55,7 +55,7 @@
 			"DEF": 5,
 			"SPD": 5
 		},
-		"passive": "GROWLING",
-		"active": "STRONG_THROAT"
+		"passive": "STRONG_THROAT",
+		"active": "GROWLING"
 	}
 }

@@ -165,6 +165,7 @@ namespace Choanji.Battle
 
 	    private void StartCard(Battler _battler, Card _card, Action<PhaseDoneType> _done)
 	    {
+			L.D("StartCard " + _card.data.key);
 			_battler.ConsumeAP(_card.data.active.cost);
 		    mDelegate.start(_battler, _card, _done);
 	    }

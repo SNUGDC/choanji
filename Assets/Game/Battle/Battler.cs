@@ -11,8 +11,8 @@ namespace Choanji.Battle
 			baseStat = _baseStat;
 			partyStat = _party.CalStat();
 
-			hpMax = hp = baseStat.hp + (int)partyStat.hp;
-			apMax = ap = baseStat.ap + (int)partyStat.ap;
+			hp = hpMax = (baseStat.hp + (int)partyStat.hp);
+			ap = apMax = (baseStat.ap + (int)partyStat.ap);
 
 			party = _party;
 		}

@@ -23,8 +23,8 @@ namespace Choanji.Battle
 			TheChoanji.g.context = ContextType.BATTLE;
 
 			state = new State(
-				new Battler(_setup.battlerA.baseStat, _setup.battlerA.party),
-				new Battler(_setup.battlerB.baseStat, _setup.battlerB.party));
+				new Battler(_setup.battlerA.stat, _setup.battlerA.party),
+				new Battler(_setup.battlerB.stat, _setup.battlerB.party));
 
 			battle = new Battle(_setup.mode, state);
 		}

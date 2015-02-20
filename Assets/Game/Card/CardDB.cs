@@ -19,13 +19,13 @@ namespace Choanji
 				return;
 			}
 
-			var _data = JsonHelper.DataWithRaw(new FullPath("Resources/DB/card.json"));
-			if (_data == null) return;
+			var _dataJs = JsonHelper.DataWithRaw(new FullPath("Resources/DB/card.json"));
+			if (_dataJs == null) return;
 
-			foreach (var _kv in _data.GetDictEnum())
+			foreach (var _kv in _dataJs.GetDictEnum())
 			{
-				var _id = CardHelper.MakeID(_kv.Key);
-				mDic.Add(_id, new CardData(_kv.Key, _kv.Value));
+				var _data = new CardData(_kv.Key, _kv.Value);
+				mDic.Add(_data, _data);
 			}
 		}
 

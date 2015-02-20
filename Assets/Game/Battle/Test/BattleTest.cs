@@ -8,20 +8,8 @@ namespace Choanji.Battle
 	{
 		void Start()
 		{
-			var _battlerA = new Setup.Battler()
-			{
-				baseStat = new StatSet { hp = (HP)100, ap = (AP)100, apRegen = (AP)10, },
-				party = new Party(),
-			};
-			
-			var _battlerB = new Setup.Battler()
-			{
-				baseStat = new StatSet { hp = (HP)100, ap = (AP)100, apRegen = (AP)10, },
-				party = new Party(),
-			};
-			
-			_battlerA.party.actives.Add(new Card(CardDB.Get(CardHelper.MakeID("KEYBOARD_WARRIOR"))));
-			_battlerB.party.actives.Add(new Card(CardDB.Get(CardHelper.MakeID("LOGICAL_CRITICS"))));
+			var _battlerA = BattlerDB.Get(BattlerHelper.MakeID("SAMPLE_01"));
+			var _battlerB = BattlerDB.Get(BattlerHelper.MakeID("SAMPLE_01"));
 
 			TheBattle.Setup(new Setup(Mode.SIM, _battlerA, _battlerB));
 

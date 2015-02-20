@@ -26,6 +26,7 @@ namespace Choanji
 			ElementDB.Load();
 			MoveDB.Load();
 			CardDB.Load();
+			Battle.BattlerDB.Load();
 
 			PrefabDB.g = prefab;
 			TileDB.g = tile;

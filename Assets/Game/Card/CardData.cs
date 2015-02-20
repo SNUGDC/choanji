@@ -44,6 +44,11 @@ namespace Choanji
 		public readonly StatSet stat;
 		public readonly PassiveData passive;
 		public readonly ActiveData active;
+
+		public static implicit operator CardID(CardData _this)
+		{
+			return _this.id;
+		}
 	}
 
 }
