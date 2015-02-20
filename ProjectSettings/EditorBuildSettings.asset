@@ -11,5 +11,7 @@ EditorBuildSettings:
     path: Assets/Scene/load.unity
   - enabled: 1
     path: Assets/Scene/world.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/battle.unity
+  - enabled: 0
+    path: Assets/Scene/battle_ui.unity
