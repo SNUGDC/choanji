@@ -18,6 +18,8 @@ namespace Choanji.Battle
 		public HPBar hp;
 		public APBar ap;
 
+		public BattlerView battler;
+
 		void Start()
 		{
 			TheBattle.onSetup += Setup;
@@ -31,6 +33,7 @@ namespace Choanji.Battle
 		public void Setup()
 		{
 			var _battlerA = TheBattle.state.battlerA;
+			var _battlerB = TheBattle.state.battlerB;
 
 			hp.max = (int)_battlerA.hpMax;
 			ap.max = (int)_battlerA.apMax;
@@ -38,6 +41,8 @@ namespace Choanji.Battle
 			_battlerA.onAPMod += (_cur, _old) => ap.Set((int)_cur);
 
 			SetupCards();
+
+			battler.SetBattler(_battlerB.data.key);
 		}
 
 		private void SetupCards()

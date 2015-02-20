@@ -52,6 +52,10 @@ namespace Choanji.R
 				return _tex.CreateSpite();
 			}
 
+			public static Sprite BATTLER_FIELD_ILLUST(string _key)
+			{
+				return TextureCache.Load(new FullPath("Resources/Battler/" + _key + ".png")).CreateSpite();
+			}
 		}
 	}
 }

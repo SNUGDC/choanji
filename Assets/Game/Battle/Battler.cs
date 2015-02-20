@@ -7,20 +7,20 @@ namespace Choanji.Battle
 
 	public class Battler
 	{
-		public Battler(StatSet _baseStat, Party _party)
+		public Battler(BattlerData _data)
 		{
-			baseStat = _baseStat;
-			partyStat = _party.CalStat();
-
+			data = _data;
+			partyStat = party.CalStat();
 			hp = hpMax = (baseStat.hp + (int)partyStat.hp);
 			ap = apMax = (baseStat.ap + (int)partyStat.ap);
-
-			party = _party;
 		}
 
-		public readonly StatSet baseStat;
+		public readonly BattlerData data;
+
+		public StatSet baseStat { get { return data.stat; } }
 		public readonly StatSet partyStat;
 		public readonly StatSet dynamicStat = new StatSet();
+		public Party party { get { return data.party; } }
 
 		public readonly HP hpMax;
 		public HP mHP;
@@ -58,8 +58,6 @@ namespace Choanji.Battle
 				onAPMod.CheckAndCall(mAP, _old);
 			}
 		}
-
-		public readonly Party party;
 
 		public Action<HP, HP> onHPMod;
 		public Action<AP, AP> onAPMod;
