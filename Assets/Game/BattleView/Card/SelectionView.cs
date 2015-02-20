@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Gem;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Choanji.Battle
 {

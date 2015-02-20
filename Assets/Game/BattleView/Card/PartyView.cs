@@ -13,6 +13,7 @@ namespace Choanji.Battle
 		private const float CARD_HEIGHT = 0.9f;
 		private const float CARD_WIDTH = 1 / (6 + X_MARGIN * 7);
 
+		private AP mCost;
 		private readonly Dictionary<int, Card> mMap = new Dictionary<int, Card>();
 		private readonly HashSet<int> mSelection = new HashSet<int>();
 
@@ -63,13 +64,20 @@ namespace Choanji.Battle
 		{
 			if (mSelection.Contains(_id))
 				return;
+
+			var _card = mMap[_id];
+			var _cost = _card.data.active.cost;
+
+			if (mCost + (int)_cost > TheBattle.state.battlerA.ap)
+				return;
+
+			mCost += (int)_cost;
 			mSelection.Add(_id);
-			onSelect.CheckAndCall(mMap[_id]);	
+			onSelect.CheckAndCall(mMap[_id]);
 		}
 
 		public void Cancel(Card _card)
 		{
-			// note: optimize
 			foreach (var _kv in mMap)
 			{
 				if (_kv.Value == _card)
@@ -84,13 +92,16 @@ namespace Choanji.Battle
 		{
 			if (!mSelection.Contains(_id))
 				return;
+			var _card = mMap[_id];
+			mCost -= _card.data.active.cost;
 			mSelection.Remove(_id);
-			onCancel.CheckAndCall(mMap[_id]);
+			onCancel.CheckAndCall(_card);
 		}
 
 		public List<Card> Submit()
 		{
 			var _ret = mSelection.ToList().ConvertAll(_viewID => mMap[_viewID]);
+			mCost = 0;
 			mSelection.Clear();
 			return _ret;
 		}
