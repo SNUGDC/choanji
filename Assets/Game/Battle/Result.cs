@@ -2,8 +2,8 @@
 {
 	public enum ResultType
 	{
-		WIN,
-		LOSE,
+		WIN_A,
+		WIN_B,
 	}
 
 	public class Result

@@ -26,5 +26,22 @@
 		public AP ap { get; private set; }
 
 		public readonly Party party;
+
+		public int CalStat(StatType _type)
+		{
+			return baseStat[_type] + partyStat[_type] + dynamicStat[_type];
+		}
+
+		public RST CalRst(ElementID _ele)
+		{
+			return baseStat.GetRst(_ele) 
+				+ (int)partyStat.GetRst(_ele) 
+				+ (int)dynamicStat.GetRst(_ele);
+		}
+
+		public StatSet CalStat()
+		{
+			return baseStat + partyStat + dynamicStat;
+		}
 	}
 }

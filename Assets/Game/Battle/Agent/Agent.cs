@@ -42,7 +42,6 @@ namespace Choanji.Battle
 		public Job job { get; private set; }
 		public bool isRunning { get { return job != Job.NONE; } }
 
-		// note: null 체크 안함.
 		public AgentReport report;
 
 		protected Agent(AgentType _type)

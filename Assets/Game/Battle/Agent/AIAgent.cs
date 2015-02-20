@@ -1,14 +1,23 @@
-﻿namespace Choanji.Battle
+﻿using System.Collections.Generic;
+using Gem;
+
+namespace Choanji.Battle
 {
 	public class AIAgent : Agent
 	{
-		public AIAgent()
+		private readonly Battler mBattler;
+
+		public AIAgent(Battler _battler)
 			: base(AgentType.AI)
-		{}
+		{
+			mBattler = _battler;
+		}
 
 		protected override void DoStartCardSelect()
 		{
-			throw new System.NotImplementedException();
+			// todo: 개선
+			var _card = mBattler.party.actives.Rand();
+			EndCardSelect(new CardSelectYield(new List<Card>{ _card }));
 		}
 	}
 }

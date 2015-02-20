@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gem;
 
 namespace Choanji.Battle
 {
@@ -17,8 +18,6 @@ namespace Choanji.Battle
 
 	public class Battle
 	{
-		private readonly State mState;
-
 		private class AgentInfo
 		{
 			public AgentInfo(Agent _agent)
@@ -36,79 +35,83 @@ namespace Choanji.Battle
 
 		private readonly Phaser mPhase;
 
+		public Action<Battler, Card, Action<PhaseDoneType>> cardStartDelegate;
 		public Action<Result, Action> endDelegate;
+
+		public Action onTurnEnd;
+		public Action<Result> onFinish;
 
 		public Battle(Mode _mode, State _state)
 		{
 			mode = _mode;
 
-			mState = _state;
-			
 			var _agents = Helper.ModeToAgents(mode);
-			mAgentA = new AgentInfo(AgentFactory.Make(_agents.first));
-			mAgentB = new AgentInfo(AgentFactory.Make(_agents.second));
+			mAgentA = new AgentInfo(AgentFactory.Make(_agents.first, _state.battlerA));
+			mAgentB = new AgentInfo(AgentFactory.Make(_agents.second, _state.battlerB));
 
-			mAgentA.agent.report = new AgentReport(_cards => AssignCardAndProceed(mAgentA, _cards));
-			mAgentB.agent.report = new AgentReport(_cards => AssignCardAndProceed(mAgentB, _cards));
+			mAgentA.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentA, _cards));
+			mAgentB.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentB, _cards));
 
-			mPhase = new Phaser(_state, new PhaserDelegate());
+			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(OnCardStart));
 		}
 
-		public void Go()
+		public void SelectCards()
 		{
-			var _statA = mState.battlerA.party.CalStat();
-			var _statB = mState.battlerB.party.CalStat();
-
-			var _faster = (_statA.spd > _statB.spd) ? mAgentA : mAgentB;
-			_faster.agent.StartCardSelect();
+			mAgentA.agent.StartCardSelect();
+			mAgentB.agent.StartCardSelect();
 		}
 
-		private void AssignCardAndProceed(AgentInfo _agent, CardSelectYield _selected)
+		private void AssignCardsAndProceed(AgentInfo _agent, CardSelectYield _yield)
 		{
-			_agent.selectedCards = _selected.cards;
+			D.Assert(_yield.cards != null);
+
+			_agent.selectedCards = _yield.cards;
 
 			var _other = (_agent == mAgentA) 
 				? mAgentB : mAgentA;
 
-			if (_other.selectedCards == null)
-				_other.agent.StartCardSelect();
-			else
+			if (_other.selectedCards != null)
 				StartPhase();
 		}
 
 		private void StartPhase()
 		{
-			mPhase.Go();
+			mPhase.Start(
+				mAgentA.selectedCards, 
+				mAgentB.selectedCards);
 		}
 
-		/*
-		private ResultType CheckEndTurn()
+		private void OnCardStart(Battler _battler, Card _card, Action<PhaseDoneType> _done)
 		{
-			ResultType _endType;
+			cardStartDelegate(_battler, _card, _done);
+		}
 
-			if (mState.player.Hp <= 0)
-			{
-				_endType = ResultType.LOSE;
-			}
-			else if (mState.enemy.Hp <= 0)
-			{
-				_endType = ResultType.WIN;
-			}
-			else
-			{
-				_endType = ResultType.NOTEND;
-			}
-			return _endType;
-		}
-		*/
-		/*
-		public void End(ResultType _type)
+		private void OnPhaseDone(PhaseDoneType _doneType)
 		{
-			if (endDelegate == null)
-				endDelegate();
-			else
-				endDelegate();
+			mAgentA.selectedCards = null;
+			mAgentB.selectedCards = null;
+
+			switch (_doneType)
+			{
+				case PhaseDoneType.TURN_END:
+					onTurnEnd();
+					break;
+				case PhaseDoneType.WIN_A:
+				{
+					var _result = new Result(ResultType.WIN_A);
+					endDelegate(_result, () => onFinish(_result));
+					break;
+				}
+				case PhaseDoneType.WIN_B:
+				{
+					var _result = new Result(ResultType.WIN_B);
+					endDelegate(_result, () => onFinish(_result));
+					break;
+				}
+				default:
+					D.Assert(false);
+					break;
+			}
 		}
-		 */
 	}
 }

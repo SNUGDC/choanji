@@ -10,7 +10,7 @@ namespace Choanji.Battle
 		public static Battle battle;
 		public static Action<Result> onDone;
 
-		public static void Start(Setup _setup)
+		public static void Setup(Setup _setup)
 		{
 			if (isRunning)
 			{
@@ -27,6 +27,11 @@ namespace Choanji.Battle
 				new Battler(_setup.battlerB.baseStat, _setup.battlerB.party));
 
 			battle = new Battle(_setup.mode, state);
+		}
+
+		public static void Start()
+		{
+			battle.SelectCards();
 		}
 
 		public static void Done(Result _result)

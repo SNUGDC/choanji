@@ -16,5 +16,12 @@
 
 		public Battler battlerA;
 		public Battler battlerB;
+
+		public Setup(Mode _mode, Battler _battlerA, Battler _battlerB)
+		{
+			mode = _mode;
+			battlerA = _battlerA;
+			battlerB = _battlerB;
+		}
 	}
 }

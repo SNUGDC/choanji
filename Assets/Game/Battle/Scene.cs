@@ -17,10 +17,10 @@ namespace Choanji.Battle
 
 			switch (_result.type)
 			{
-				case ResultType.WIN:
+				case ResultType.WIN_A:
 					_popup = ThePopup.Open(Popups.BATTLE_WIN);
 					break;
-				case ResultType.LOSE:
+				case ResultType.WIN_B:
 					_popup = ThePopup.Open(Popups.BATTLE_LOSE);
 					break;
 			}
