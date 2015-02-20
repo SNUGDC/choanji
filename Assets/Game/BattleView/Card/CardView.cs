@@ -13,6 +13,7 @@ namespace Choanji.Battle
 		public Image illust;
 
 		public Action onSelect;
+		public Action onCancel;
 		public Action onShowDetail;
 
 		public bool isSetuped { get { return data != null; } }
@@ -34,6 +35,8 @@ namespace Choanji.Battle
 		{
 			if (Input.GetMouseButtonUp(0))
 				onSelect.CheckAndCall();
+			else if (Input.GetMouseButtonUp(2))
+				onCancel.CheckAndCall();
 			else if (Input.GetMouseButtonUp(1))
 				onShowDetail.CheckAndCall();
 		}

@@ -42,6 +42,7 @@ MonoBehaviour:
   ch: {fileID: 11463510, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   activeCardView: {fileID: 11470124, guid: b963767fbc35a0240938ff93860bf9b9, type: 2}
   passiveCardView: {fileID: 11416690, guid: 84aa46699b9994543b044fddda6fa19c, type: 2}
+  selectedCardCell: {fileID: 11461676, guid: 03ff713925f5e214fb84675c19950ae0, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,5 +8,6 @@ namespace Choanji
 		public Character ch;
 		public Battle.ActiveCardView activeCardView;
 		public Battle.PassiveCardView passiveCardView;
+		public Battle.SelectionCell selectedCardCell;
 	}
 }

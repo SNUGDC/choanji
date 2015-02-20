@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Gem;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace Choanji.Battle
 		private readonly Dictionary<int, Card> mMap = new Dictionary<int, Card>();
 		private readonly HashSet<int> mSelection = new HashSet<int>();
 
+		public Action<Card> onSelect;
+		public Action<Card> onCancel;
+
 		public void Setup(Party _party)
 		{
 			var i = 0;
@@ -28,7 +32,9 @@ namespace Choanji.Battle
 
 				var _id = _view.GetInstanceID();
 				mMap.Add(_id, _card);
+
 				_view.card.onSelect += () => OnSelect(_id);
+				_view.card.onCancel += () => Cancel(_card);
 
 				++i;
 			}
@@ -55,7 +61,31 @@ namespace Choanji.Battle
 
 		private void OnSelect(int _id)
 		{
+			if (mSelection.Contains(_id))
+				return;
 			mSelection.Add(_id);
+			onSelect.CheckAndCall(mMap[_id]);	
+		}
+
+		public void Cancel(Card _card)
+		{
+			// note: optimize
+			foreach (var _kv in mMap)
+			{
+				if (_kv.Value == _card)
+				{
+					Cancel(_kv.Key);
+					return;
+				}
+			}
+		}
+
+		private void Cancel(int _id)
+		{
+			if (!mSelection.Contains(_id))
+				return;
+			mSelection.Remove(_id);
+			onCancel.CheckAndCall(mMap[_id]);
 		}
 
 		public List<Card> Submit()

@@ -19,6 +19,7 @@ namespace Choanji.Battle
 		public APBar ap;
 
 		public PartyView party;
+		public SelectionView selection;
 
 		public SubmitButton submit;
 
@@ -51,12 +52,17 @@ namespace Choanji.Battle
 			_battlerA.onAPMod += (_cur, _old) => ap.Set((int)_cur);
 
 			party.Setup(_battlerA.party);
+			party.onSelect = _card => selection.Add(_card);
+			party.onCancel = _card => selection.Remove(_card);
+
+			selection.onCancel += party.Cancel;
 		}
 
 		public void GatherCards(Action<List<Card>> _onDone)
 		{
 			submit.onClick = () =>
 			{
+				selection.Clear();
 				_onDone(party.Submit());
 				submit.onClick = null;
 			};
