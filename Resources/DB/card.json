@@ -19,8 +19,8 @@
 			"DEF": 10,
 			"SPD": 10
 		},
-		"passive": "SHARP_TONGUED",
-		"active": "COOL_HEAD"
+		"passive": "COOL_HEAD",
+		"active": "SHARP_TONGUED"
 	},
 	
 	"BASIC_VOCA": {

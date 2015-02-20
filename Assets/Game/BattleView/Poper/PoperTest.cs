@@ -19,7 +19,7 @@ namespace Choanji.Battle
 			foreach (var _ele in ElementDB.GetEnum())
 			{
 				yield return new WaitForSeconds(1);
-				poper.PopDmg(new Damage { ele = _ele, val = Random.Range(50, 300) });
+				poper.PopDmg(new Damage { ele = _ele, val = (HP)Random.Range(50, 300) });
 			}
 		}
 	}

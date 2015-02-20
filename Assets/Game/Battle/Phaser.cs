@@ -131,10 +131,10 @@ namespace Choanji.Battle
 						if (_doneTypeB == PhaseDoneType.CONTINUE)
 							Loop();
 						else
-							Done(_doneTypeA);
+							Done(_doneTypeB);
 					});
 				else
-					Loop();
+					Done(_doneTypeA);
 			});
 	    }
 

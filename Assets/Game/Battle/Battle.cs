@@ -16,7 +16,7 @@ namespace Choanji.Battle
 		}
 	}
 
-	public class Battle
+	public partial class Battle
 	{
 		private class AgentInfo
 		{
@@ -29,21 +29,24 @@ namespace Choanji.Battle
 			public List<Card> selectedCards;
 		}
 
-		private readonly Mode mode;
+		public Mode mode { get; private set; }
+		public State state { get; private set; }
+
 		private readonly AgentInfo mAgentA;
 		private readonly AgentInfo mAgentB;
 
 		private readonly Phaser mPhase;
 
-		public Action<Battler, Card, Action<PhaseDoneType>> cardStartDelegate;
 		public Action<Result, Action> endDelegate;
 
+		public Action<Battler, Card, PerformResult, Action> onCardPerform;
 		public Action onTurnEnd;
 		public Action<Result> onFinish;
 
 		public Battle(Mode _mode, State _state)
 		{
 			mode = _mode;
+			state = _state;
 
 			var _agents = Helper.ModeToAgents(mode);
 			mAgentA = new AgentInfo(AgentFactory.Make(_agents.first, _state.battlerA));
@@ -52,7 +55,7 @@ namespace Choanji.Battle
 			mAgentA.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentA, _cards));
 			mAgentB.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentB, _cards));
 
-			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(OnCardStart));
+			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(PerformActive));
 		}
 
 		public void SelectCards()
@@ -76,14 +79,29 @@ namespace Choanji.Battle
 
 		private void StartPhase()
 		{
+			// todo: consume ap
+
 			mPhase.Start(
 				mAgentA.selectedCards, 
 				mAgentB.selectedCards);
 		}
 
-		private void OnCardStart(Battler _battler, Card _card, Action<PhaseDoneType> _done)
+		private void PerformActive(Battler _battler, Card _card, Action<PhaseDoneType> _done)
 		{
-			cardStartDelegate(_battler, _card, _done);
+			L.D("perform");
+
+			var _result = PerformActive(_battler, _card);
+
+			PhaseDoneType _doneType;
+
+			if (state.battlerA.hp <= 0)
+				_doneType = PhaseDoneType.WIN_B;
+			else if (state.battlerB.hp <= 0)
+				_doneType = PhaseDoneType.WIN_A;
+			else
+				_doneType = PhaseDoneType.CONTINUE;
+
+			onCardPerform(_battler, _card, _result, () => _done(_doneType));
 		}
 
 		private void OnPhaseDone(PhaseDoneType _doneType)
@@ -99,13 +117,19 @@ namespace Choanji.Battle
 				case PhaseDoneType.WIN_A:
 				{
 					var _result = new Result(ResultType.WIN_A);
-					endDelegate(_result, () => onFinish(_result));
+					if (endDelegate != null)
+						endDelegate(_result, () => onFinish(_result));
+					else
+						onFinish(_result);
 					break;
 				}
 				case PhaseDoneType.WIN_B:
 				{
 					var _result = new Result(ResultType.WIN_B);
-					endDelegate(_result, () => onFinish(_result));
+					if (endDelegate != null)
+						endDelegate(_result, () => onFinish(_result));
+					else
+						onFinish(_result);
 					break;
 				}
 				default:

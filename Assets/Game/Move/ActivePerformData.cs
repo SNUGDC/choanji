@@ -26,23 +26,22 @@ namespace Choanji.ActivePerform
 
 	public sealed class Dmg : Base
 	{
-		public Dmg(ElementID _ele, int _dmg)
+		public Dmg(ElementID _ele, HP _dmg)
 			: base("DMG")
 		{
-			ele = _ele;
-			dmg = _dmg;
+			dmg = new Damage(_ele, _dmg);
 		}
 
 		public Dmg(JsonData _data)
 			: base(_data)
 		{
-			ele = ElementDB.Search((string)_data["ele"]);
-			dmg = (int)_data["dmg"];
+			var _ele = ElementDB.Search((string)_data["ele"]);
+			var _val = (HP)(int)_data["dmg"];
+			dmg = new Damage(_ele, _val);
 			accuracy = _data.IntOrDefault("accuracy", 100);
 		}
 
-		public readonly ElementID ele;
-		public readonly int dmg;
+		public readonly Damage dmg;
 		public int accuracy = 100;
 	}
 

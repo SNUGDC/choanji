@@ -25,9 +25,9 @@ namespace Choanji.Battle
 
 			TheBattle.Setup(new Setup(Mode.SIM, _battlerA, _battlerB));
 
-			TheBattle.battle.cardStartDelegate = (_battler, _card, _done) => _done(PhaseDoneType.CONTINUE);
-
+			TheBattle.battle.onCardPerform = (_battler, _card, _result, _done) => _done();
 			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.SelectCards);
+			TheBattle.battle.onFinish = _result => Debug.Log(_result.type);
 
 			TheBattle.Start();
 		}

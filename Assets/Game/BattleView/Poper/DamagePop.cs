@@ -8,8 +8,8 @@ namespace Choanji.Battle
 		private const float LIFE = 2;
 		private const int SIZE_MIN = 16;
 		private const int SIZE_MAX = 64;
-		private const int DMG_MIN = 50;
-		private const int DMG_MAX = 300;
+		private const HP DMG_MIN = (HP)50;
+		private const HP DMG_MAX = (HP)300;
 
 		public Text txt;
 
@@ -26,7 +26,7 @@ namespace Choanji.Battle
 				else if (value < DMG_MIN)
 					_size = SIZE_MIN;
 				else
-					_size = (int)(SIZE_MIN + (value - DMG_MIN) / (float)(DMG_MAX - DMG_MIN) * (SIZE_MAX - SIZE_MIN));
+					_size = (int)(SIZE_MIN + (value.val - DMG_MIN) / (float)(DMG_MAX - DMG_MIN) * (SIZE_MAX - SIZE_MIN));
 
 				txt.fontSize = _size;
 			}

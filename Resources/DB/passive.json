@@ -27,7 +27,7 @@
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "ANA",
-				"arg": 130
+				"arg": 30
 			}
 		}
 	},
@@ -42,7 +42,7 @@
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "MEM",
-				"arg": 130
+				"arg": 30
 			}
 		}
 	},
@@ -57,7 +57,7 @@
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "CRE",
-				"arg": 130
+				"arg": 30
 			}
 		}
 	},
@@ -72,7 +72,7 @@
 			"action": {
 				"type": "BUFF_ELE",
 				"ele": "NOR",
-				"arg": 130
+				"arg": 30
 			}
 		}
 	}

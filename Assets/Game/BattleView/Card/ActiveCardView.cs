@@ -1,5 +1,4 @@
-﻿using Gem;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Choanji.Battle
@@ -22,7 +21,7 @@ namespace Choanji.Battle
 			iconType.sprite = R.BattleUI.Spr.CARD_ACTIVE_TYPE(_data.type);
 
 			if (_data.perform.id == ActivePerform.ID.DMG)
-				iconEle.sprite = R.Spr.ELE_S(((ActivePerform.Dmg)_data.perform).ele);
+				iconEle.sprite = R.Spr.ELE_S(((ActivePerform.Dmg)_data.perform).dmg.ele);
 			else 
 				iconEle.gameObject.SetActive(false);
 		}

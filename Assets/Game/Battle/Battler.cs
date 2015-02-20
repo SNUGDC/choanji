@@ -43,5 +43,14 @@
 		{
 			return baseStat + partyStat + dynamicStat;
 		}
+
+		public HP Hit(Damage _dmg)
+		{
+			var _rst = CalRst(_dmg.ele);
+			var _factor = (100/(100 + (float) _rst));
+			var _trueDmg = (HP) ((float) _dmg.val*_factor);
+			hp -= _trueDmg;
+			return _trueDmg;
+		}
 	}
 }
