@@ -32,10 +32,9 @@ namespace Choanji.Battle
 
 			if (_ta.trigger == null)
 			{
-				var _event = TheBattle.onStart;
 				Action _fire = () => Fire(_battler, _ta.action);
-				_event += _fire;
-				_taInfo.cleanup = () => { _event -= _fire; };
+				TheBattle.onStart += _fire;
+				_taInfo.cleanup = () => { TheBattle.onStart -= _fire; };
 				mTAs.Add(_taInfo);
 				return;
 			}
@@ -64,7 +63,8 @@ namespace Choanji.Battle
 					}
 
 				default:
-					throw new ArgumentOutOfRangeException();
+					L.E("when " + _when + " is not implemented.");
+					return;
 			}
 
 			mTAs.Add(_taInfo);
@@ -92,7 +92,8 @@ namespace Choanji.Battle
 				case TriggerWhereType.CUR_DMG_TYPE:
 					return ((TriggerWhereEleType)_where).Test(((Damage)_arg).ele);
 				default:
-					throw new ArgumentOutOfRangeException();
+					L.E("where " + _where.type + " is not implemented.");
+					return false;
 			}
 		}
 
@@ -110,7 +111,8 @@ namespace Choanji.Battle
 					break;
 
 				default:
-					throw new ArgumentOutOfRangeException();
+					L.E("action " + _action.type + " is not implemented.");
+					break;
 			}
 		}
 
