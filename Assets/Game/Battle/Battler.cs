@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Gem;
 
 namespace Choanji.Battle
@@ -13,6 +14,30 @@ namespace Choanji.Battle
 			partyStat = party.CalStat();
 			hp = hpMax = (baseStat.hp + (int)partyStat.hp);
 			ap = apMax = (baseStat.ap + (int)partyStat.ap);
+
+			foreach (var _ele in ElementDB.GetEnum())
+			{
+				attackModifier.Add(_ele, 0);
+				hitModifier.Add(_ele, 0);
+			}
+
+			attackBuilder.Add(_org =>
+			{
+				int _mod;
+				if (!attackModifier.TryGetValue(_org.ele, out _mod))
+					return _org;
+				_org.val = (HP)((float)_org.val * ((100 + _mod) / 100f));
+				return _org;
+			});
+
+			hitBuilder.Add(_org =>
+			{
+				int _mod;
+				if (!hitModifier.TryGetValue(_org.ele, out _mod))
+					return _org;
+				_org.val = (HP)((float)_org.val * (100f / (100 + _mod)));
+				return _org;
+			});
 		}
 
 		public readonly BattlerData data;
@@ -61,6 +86,15 @@ namespace Choanji.Battle
 
 		public Action<HP, HP> onHPMod;
 		public Action<AP, AP> onAPMod;
+
+		public readonly Dictionary<ElementID, int> attackModifier = new Dictionary<ElementID, int>();
+		public readonly DamageBuilder attackBuilder = new DamageBuilder();
+
+		public readonly Dictionary<ElementID, int> hitModifier = new Dictionary<ElementID, int>();
+		public readonly DamageBuilder hitBuilder = new DamageBuilder();
+
+		public bool blockHitOneTime;
+		public Action<Damage> beforeHit;
 
 		public int CalStat(StatType _type)
 		{

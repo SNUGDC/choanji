@@ -55,10 +55,9 @@ namespace Choanji.Battle
 
 				case TriggerWhenType.BEFORE_HIT:
 					{
-						var _target = TheBattle.state.GetStateOf(_battler);
 						Action<Damage> _fire = _dmg => TestAndFire(_battler, _ta, _dmg);
-						_target.beforeHit += _fire;
-						_taInfo.cleanup = () => { _target.beforeHit -= _fire; };
+						_battler.beforeHit += _fire;
+						_taInfo.cleanup = () => { _battler.beforeHit -= _fire; };
 						break;
 					}
 
@@ -105,21 +104,19 @@ namespace Choanji.Battle
 
 		public static ActionResult Fire(Battler _battler, Action_ _action)
 		{
-			var _battlerState = TheBattle.state.GetStateOf(_battler);
-
 			switch (_action.type)
 			{
 				case ActionType.DMG:
 					return Fire(_battler, (ActionDmg)_action);
 
 				case ActionType.AVOID_HIT:
-					_battlerState.blockHitOneTime = true;
+					_battler.blockHitOneTime = true;
 					break;
 
 				case ActionType.BUFF_ATK:
 				{
 					var _theAction = (ActionBuffEle)_action;
-					_battlerState.attackModifier[_theAction.ele] += _theAction.per;
+					_battler.attackModifier[_theAction.ele] += _theAction.per;
 					break;
 				}
 
@@ -139,17 +136,15 @@ namespace Choanji.Battle
 
 				var _state = TheBattle.state;
 
-				var _attacker = _state.GetStateOf(_battler);
-				var _dmg = _attacker.attackBuilder.Build(_action.dmg);
+				var _dmg = _battler.attackBuilder.Build(_action.dmg);
 
 				var _hitter = _state.Other(_battler);
-				var _hitterState = _state.GetStateOf(_hitter);
-				_hitterState.beforeHit.CheckAndCall(_dmg);
+				_hitter.beforeHit.CheckAndCall(_dmg);
 
-				if (_hitterState.blockHitOneTime)
+				if (_hitter.blockHitOneTime)
 				{
 					L.D("block");
-					_hitterState.blockHitOneTime = false;
+					_hitter.blockHitOneTime = false;
 					return new ActionDmgResult
 					{
 						hit = true,
