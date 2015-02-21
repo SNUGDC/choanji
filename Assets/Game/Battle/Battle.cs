@@ -69,6 +69,9 @@ namespace Choanji.Battle
 
 		public void StartTurn()
 		{
+			state.battlerA.AfterTurnEnd();
+			state.battlerB.AfterTurnEnd();
+
 			foreach (var _result in mTA.FireDelayed())
 				continue;
 			

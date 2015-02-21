@@ -88,7 +88,7 @@
 		}
 	},
 	
-	"GUARD_BEGINNER": {
+	"GUARD_BEGINNER": { // 구현 불가
 		"name": "방어 능숙", 
 		"detail": "방어 스킬의 데미지 감소량이 증가한다.",
 		"perform": {

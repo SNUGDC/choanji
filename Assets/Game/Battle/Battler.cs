@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gem;
 
 namespace Choanji.Battle
@@ -46,6 +47,9 @@ namespace Choanji.Battle
 		public readonly StatSet partyStat;
 		public StatSet dynamicStat = new StatSet();
 		public Party party { get { return data.party; } }
+
+		private int mCurTurn;
+		public Dictionary<int, StatSet> mTimeoutStat = new Dictionary<int, StatSet>();
 
 		public readonly HP hpMax;
 		public HP mHP;
@@ -113,10 +117,23 @@ namespace Choanji.Battle
 			return baseStat + partyStat + dynamicStat;
 		}
 
+		public void ApplyForDuration(StatSet _stat, int _dur)
+		{
+			dynamicStat += _stat;
+
+			var _until = mCurTurn + _dur;
+			if (mTimeoutStat.ContainsKey(_until))
+				mTimeoutStat[_until] += _stat;
+			else
+				mTimeoutStat[_until] = _stat;
+		}
+
 		public HP Hit(Damage _dmg)
 		{
+			var _def = CalStat(StatType.DEF);
 			var _rst = CalRst(_dmg.ele);
-			var _factor = (100/(100 + (float) _rst));
+			var _factor = (100 / (100 + (float)_def)) 
+				* (100 / (100 + (float)_rst));
 			var _trueDmg = (HP) ((float) _dmg.val*_factor);
 			hp -= _trueDmg;
 			return _trueDmg;
@@ -139,5 +156,17 @@ namespace Choanji.Battle
 			ap += CalStat(StatType.AP_REGEN);
 		}
 
+		public void AfterTurnEnd()
+		{
+			while (!mTimeoutStat.Empty())
+			{
+				var _kv = mTimeoutStat.First();
+				if (_kv.Key > mCurTurn) break;
+				dynamicStat -= _kv.Value;
+				mTimeoutStat.Remove(_kv.Key);
+			}
+
+			++mCurTurn;
+		}
 	}
 }

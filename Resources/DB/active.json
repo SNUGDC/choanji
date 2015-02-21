@@ -114,7 +114,7 @@
 			"action": {
 				"type": "STAT_MOD",
 				"dur": 1,
-				"DEF_MOD": 50
+				"DEF": 50
 			}
 		}
 	},

@@ -100,6 +100,22 @@ namespace Choanji
 			return mRst ?? Enumerable.Empty<Rst>();
 		}
 
+		public static StatSet operator -(StatSet _this)
+		{
+			var _ret = new StatSet();
+
+			foreach (var _stat in EnumHelper.GetValues<StatType>())
+				_ret[_stat] = -_this[_stat];
+
+			foreach (var _ele in ElementDB.GetEnum())
+			{
+				var _rst = (RST)(-(int)_this.GetRst(_ele));
+				if (_rst != 0) _ret.SetRst(_ele, _rst);
+			}
+
+			return _ret;
+		}
+
 		public static StatSet operator +(StatSet a, StatSet b)
 		{
 			var _ret = new StatSet();
@@ -107,13 +123,18 @@ namespace Choanji
 			foreach (var _stat in EnumHelper.GetValues<StatType>())
 				_ret[_stat] = a[_stat] + b[_stat];
 
-			foreach (var _elem in ElementDB.GetEnum())
+			foreach (var _ele in ElementDB.GetEnum())
 			{
-				var _rst = (RST)((int)a.GetRst(_elem) + (int)b.GetRst(_elem));
-				if (_rst != 0) _ret.SetRst(_elem, _rst);
+				var _rst = (RST)((int)a.GetRst(_ele) + (int)b.GetRst(_ele));
+				if (_rst != 0) _ret.SetRst(_ele, _rst);
 			}
 
 			return _ret;
+		}
+
+		public static StatSet operator -(StatSet a, StatSet b)
+		{
+			return a + (-b);
 		}
 	}
 }

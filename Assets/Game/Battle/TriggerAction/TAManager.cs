@@ -158,8 +158,14 @@ namespace Choanji.Battle
 					break;
 
 				case ActionType.STAT_MOD:
-					_battler.dynamicStat += ((ActionStatMod)_action).stat;
+				{
+					var _theAction = ((ActionStatMod) _action);
+					if (!_theAction.dur.HasValue)
+						_battler.dynamicStat += _theAction.stat;
+					else
+						_battler.ApplyForDuration(_theAction.stat, _theAction.dur.Value);
 					break;
+				}
 
 				case ActionType.BUFF_ATK:
 				{

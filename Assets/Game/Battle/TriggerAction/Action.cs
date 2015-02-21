@@ -57,12 +57,17 @@ namespace Choanji.Battle
 
 	public sealed class ActionStatMod : Action_
 	{
+		public readonly int? dur;
 		public readonly StatSet stat;
 
 		public ActionStatMod(JsonData _data)
 			: base(ActionType.STAT_MOD)
 		{
 			stat = new StatSet(_data);
+
+			JsonData _durJs;
+			if (_data.TryGet("dur", out _durJs))
+				dur = (int)_durJs;
 		}
 	}
 
