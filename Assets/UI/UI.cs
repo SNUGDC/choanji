@@ -13,7 +13,7 @@ namespace Choanji.UI
 		}
 
 		#region key binding
-		public static readonly InputGroup sBinds = new InputGroup(InputManager.g);
+		public static readonly InputGroup sBinds = new InputGroup(TheInput.world);
 
 		public static void RegKey()
 		{

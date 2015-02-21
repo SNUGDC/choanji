@@ -96,13 +96,13 @@ namespace Choanji
 
 			var _bind = new InputBind(InputCode.Y, new InputHandler());
 
-			_bind.handler.down = _bind.MakeOneShot(delegate { 
+			_bind.handler.down = _bind.MakeOneShot(TheInput.world, delegate { 
 				if (!Next()) 
 					Done(true);
 				return true;
 			});
 
-			InputManager.g.Reg(_bind);
+			TheInput.world.Reg(_bind);
 		}
 
 		private bool Next()

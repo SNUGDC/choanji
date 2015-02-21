@@ -11,7 +11,7 @@ namespace Choanji
 
 		void Start()
 		{
-			mInput = new InputGroup(InputManager.g);
+			mInput = new InputGroup(TheInput.world);
 			mInput.Add(MakeYesBind());
 			mInput.DecorateDirection(ProcessDir, _dir => ProcessDir(_dir));
 			mDelegate = GetComponent<CharacterCtrl>();

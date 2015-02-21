@@ -19,17 +19,17 @@ namespace Choanji
 
 		void OnDestroy()
 		{
-			InputManager.g.Unreg(mBind);
+			TheInput.intro.Unreg(mBind);
 		}
 
 		private void OnSplashDone()
 		{
-			InputManager.g.Reg(mBind);
+			TheInput.intro.Reg(mBind);
 		}
 
 		private bool OnPressYes()
 		{
-			InputManager.g.Unreg(mBind);
+			TheInput.intro.Unreg(mBind);
 			Application.LoadLevel("load");
 			return true;
 		}

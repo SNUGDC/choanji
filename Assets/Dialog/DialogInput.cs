@@ -67,12 +67,12 @@ namespace Choanji
 				};
 			}
 
-			InputManager.g.Reg(mInputBind);
+			TheInput.world.Reg(mInputBind);
 		}
 
 		void UnregInput()
 		{
-			InputManager.g.Unreg(mInputBind);
+			TheInput.world.Unreg(mInputBind);
 		}
 
 		void Rebase()

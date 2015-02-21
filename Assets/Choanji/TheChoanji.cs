@@ -30,12 +30,15 @@ namespace Choanji
 			switch (context)
 			{
 				case ContextType.INTRO:
+					TheInput.intro.Update();
 					break;
 				case ContextType.WORLD:
+					TheInput.world.Update();
 					UI.UI.Update(_dt);
 					WorldProgress.Update();
 					break;
 				case ContextType.BATTLE:
+					TheInput.battle.Update();
 					break;
 			}
 		}
