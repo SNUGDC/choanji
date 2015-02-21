@@ -122,9 +122,16 @@ namespace Choanji.Battle
 			return _trueDmg;
 		}
 
+		public AP CalConsumption(AP _val)
+		{
+			var _mod = CalStat(StatType.AP_CONSUME);
+			var _consumption = _val + _mod;
+			return _consumption > 0 ? _consumption : 0;
+		}
+
 		public void ConsumeAP(AP _val)
 		{
-			ap -= _val;
+			ap -= CalConsumption(_val);
 		}
 
 		public void RegenAP()

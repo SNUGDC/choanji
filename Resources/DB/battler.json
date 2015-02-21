@@ -16,7 +16,7 @@
 			}
 		},
 		"party": {
-			"passive": ["MILITARY"],
+			"passive": ["RHYTHM_GAMER"],
 			"active": ["MILITARY"]
 		}
 	},

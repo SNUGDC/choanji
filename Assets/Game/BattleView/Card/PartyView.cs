@@ -68,7 +68,8 @@ namespace Choanji.Battle
 			var _card = mMap[_view];
 			var _cost = _card.data.active.cost;
 
-			if (mCost + (int)_cost > TheBattle.state.battlerA.ap)
+			var _battler = TheBattle.state.battlerA;
+			if (mCost + (int)_battler.CalConsumption(_cost) > _battler.ap)
 				return;
 
 			mCost += (int)_cost;

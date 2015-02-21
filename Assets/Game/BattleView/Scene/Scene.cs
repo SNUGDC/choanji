@@ -63,7 +63,7 @@ namespace Choanji.Battle
 			party.onPointerOver = (_enter, _card) =>
 			{
 				if (_enter)
-					ap.highlight = _card.data.active.cost;
+					ap.highlight = _battlerA.CalConsumption(_card.data.active.cost);
 				else
 					ap.highlight = 0;
 			};
