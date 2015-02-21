@@ -1,4 +1,5 @@
-﻿using Gem;
+﻿using System;
+using Gem;
 using LitJson;
 
 namespace Choanji.Battle
@@ -11,6 +12,8 @@ namespace Choanji.Battle
 		AVOID_HIT,
 		STAT_MOD,
 		BUFF_ATK,
+		SC_IMPOSE,
+		SC_IMMUNE,
 		SC_HEAL,
 	}
 
@@ -106,6 +109,30 @@ namespace Choanji.Battle
 		}
 	}
 
+	public sealed class ActionSC : Action_
+	{
+		public readonly SC sc;
+
+		public ActionSC(ActionType _type, JsonData _data)
+			: base(_type)
+		{
+			EnumHelper.TryParse((string)_data["sc"], out sc);
+		}
+	}
+
+	public sealed class ActionSCImpose : Action_
+	{
+		public readonly SC sc;
+		public readonly Percent accuracy;
+
+		public ActionSCImpose(JsonData _data)
+			: base(ActionType.SC_IMPOSE)
+		{
+			EnumHelper.TryParse((string)_data["sc"], out sc);
+			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
+		}
+	}
+
 	public sealed class ActionSCHeal : Action_
 	{
 		public readonly Percent accuracy;
@@ -149,6 +176,10 @@ namespace Choanji.Battle
 					return new ActionStatMod(_data);
 				case ActionType.BUFF_ATK:
 					return new ActionBuffEle(_type, _data);
+				case ActionType.SC_IMPOSE:
+					return new ActionSCImpose(_data);
+				case ActionType.SC_IMMUNE:
+					return new ActionSC(ActionType.SC_IMMUNE, _data);
 				case ActionType.SC_HEAL:
 					return new ActionSCHeal(_data);
 				default:

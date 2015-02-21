@@ -163,6 +163,9 @@ namespace Choanji.Battle
 
 		public static ActionResult Fire(Battler _battler, Action_ _action)
 		{
+			var _state = TheBattle.state;
+			var _other = _state.Other(_battler);
+			
 			switch (_action.type)
 			{
 				case ActionType.DMG:
@@ -185,8 +188,8 @@ namespace Choanji.Battle
 				case ActionType.STAT_MOD:
 				{
 					var _theAction = ((ActionStatMod) _action);
-					var _target = _theAction.target == TargetType.SELF 
-						? _battler : TheBattle.state.Other(_battler);
+					var _target = _theAction.target == TargetType.SELF
+						? _battler : _other;
 
 					if (!_theAction.dur.HasValue)
 						_target.dynamicStat += _theAction.stat;
@@ -199,6 +202,20 @@ namespace Choanji.Battle
 				{
 					var _theAction = (ActionBuffEle)_action;
 					_battler.attackModifier[_theAction.ele] += _theAction.per;
+					break;
+				}
+
+				case ActionType.SC_IMPOSE:
+				{
+					var _theAction = (ActionSCImpose)_action;
+					_other.TryImposeSC(_theAction.sc, _theAction.accuracy);
+					break;
+				}
+
+				case ActionType.SC_IMMUNE:
+				{
+					var _theAction = (ActionSC) _action;
+					_battler.AddImmune(_theAction.sc);
 					break;
 				}
 
