@@ -29,7 +29,7 @@ namespace Choanji.Battle
 				new Battler(_setup.battlerA),
 				new Battler(_setup.battlerB));
 
-			battle = new Battle(_setup.mode, state);
+			battle = new Battle(_setup.mode, state) { onFinish = Done };
 
 			onSetup.CheckAndCall(_setup);
 		}
@@ -40,7 +40,7 @@ namespace Choanji.Battle
 			battle.StartTurn();
 		}
 
-		public static void Done(Result _result)
+		private static void Done(Result _result)
 		{
 			if (!isRunning)
 			{
