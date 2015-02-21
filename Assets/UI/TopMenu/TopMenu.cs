@@ -27,16 +27,19 @@ namespace Choanji.UI
 
 		public void OnBagClicked()
 		{
+			return;
 			onPopupOpened.CheckAndCall();
 		}
 
 		public void OnSaveClicked()
 		{
+			return;
 			onPopupOpened.CheckAndCall();
 		}
 
 		public void OnOptionClicked()
 		{
+			return;
 			onPopupOpened.CheckAndCall();
 		}
 	}
