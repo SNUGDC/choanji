@@ -56,6 +56,11 @@ namespace Choanji.Battle
 			battlerB = _battlerB;
         }
 
+	    public Battler Other(Battler _battler)
+	    {
+		    return battlerA == _battler ? battlerB : battlerA;
+	    }
+
 	    public BattlerState GetStateOf(Battler _battler)
 	    {
 		    return (_battler == battlerA)

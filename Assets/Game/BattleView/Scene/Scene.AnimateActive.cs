@@ -7,7 +7,7 @@ namespace Choanji.Battle
 	{
 		private const float MSG_DELAY = 1;
 
-		public void AnimateActive(Battler _battler, Card _card, PerformResult _result, Action _done)
+		public void AnimateActive(Battler _battler, Card _card, ActionResult _result, Action _done)
 		{
 			var _delay = 0f;
 
@@ -21,26 +21,26 @@ namespace Choanji.Battle
 			Timer.g.Add(_delay, _done);
 		}
 
-		private float AnimateCommon(Battler _battler, Card _card, PerformResult _result)
+		private float AnimateCommon(Battler _battler, Card _card, ActionResult _result)
 		{
 			float _delay = 0;
 
 			_delay += PushMessageUseActive(_battler, _card.data.active);
 
-			if (_result is PerformDmgResult)
+			if (_result is ActionDmgResult)
 			{
-				var _theResult = (PerformDmgResult)_result;
+				var _theResult = (ActionDmgResult)_result;
 				_delay += PushMessageDamage(_theResult);
 			}
 
 			return _delay;
 		}
 
-		private float AnimateA(Battler _battler, Card _card, PerformResult _result)
+		private float AnimateA(Battler _battler, Card _card, ActionResult _result)
 		{
-			if (_result is PerformDmgResult)
+			if (_result is ActionDmgResult)
 			{
-				var _theResult = (PerformDmgResult)_result;
+				var _theResult = (ActionDmgResult)_result;
 				if (_theResult.dmg.HasValue)
 				{
 					var _dmg = _theResult.dmg.Value;
@@ -52,7 +52,7 @@ namespace Choanji.Battle
 			return 0;
 		}
 
-		private float AnimateB(Battler _battler, Card _card, PerformResult _result)
+		private float AnimateB(Battler _battler, Card _card, ActionResult _result)
 		{
 			return 0;
 		}
@@ -68,7 +68,7 @@ namespace Choanji.Battle
 			return MSG_DELAY;
 		}
 
-		private float PushMessageDamage(PerformDmgResult _result)
+		private float PushMessageDamage(ActionDmgResult _result)
 		{
 			if (_result.dmg.HasValue)
 			{

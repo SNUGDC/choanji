@@ -55,6 +55,16 @@ namespace Choanji.Battle
 		}
 	}
 
+	public class ActionResult
+	{ }
+
+	public class ActionDmgResult : ActionResult
+	{
+		public bool hit;
+		public bool block;
+		public Damage? dmg;
+	}
+
 	public static class ActionFactory
 	{
 		public static Action_ Make(JsonData _data)

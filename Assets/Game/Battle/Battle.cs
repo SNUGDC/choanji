@@ -40,7 +40,7 @@ namespace Choanji.Battle
 
 		public Action<Result, Action> endDelegate;
 
-		public Action<Battler, Card, PerformResult, Action> onCardPerform;
+		public Action<Battler, Card, ActionResult, Action> onCardPerform;
 		public Action onTurnEnd;
 		public Action<Result> onFinish;
 
@@ -97,7 +97,7 @@ namespace Choanji.Battle
 		{
 			L.D("perform");
 
-			var _result = PerformActive(_battler, _card);
+			var _result = TAManager.Fire(_battler, _card.data.active.perform.action);
 
 			PhaseDoneType _doneType;
 

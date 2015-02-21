@@ -99,15 +99,19 @@ namespace Choanji.Battle
 
 		private static bool Test(int _prob)
 		{
+			if (_prob >= 100) return true;
 			return UnityEngine.Random.Range(0, 100) < _prob;
 		}
 
-		private static void Fire(Battler _battler, Action_ _action)
+		public static ActionResult Fire(Battler _battler, Action_ _action)
 		{
 			var _battlerState = TheBattle.state.GetStateOf(_battler);
 
 			switch (_action.type)
 			{
+				case ActionType.DMG:
+					return Fire(_battler, (ActionDmg)_action);
+
 				case ActionType.AVOID_HIT:
 					_battlerState.blockHitOneTime = true;
 					break;
@@ -122,6 +126,53 @@ namespace Choanji.Battle
 				default:
 					L.E("action " + _action.type + " is not implemented.");
 					break;
+			}
+
+			return new ActionResult();
+		}
+
+		private static ActionResult Fire(Battler _battler, ActionDmg _action)
+		{
+			if (Test(_action.accuracy))
+			{
+				L.D("hit");
+
+				var _state = TheBattle.state;
+
+				var _attacker = _state.GetStateOf(_battler);
+				var _dmg = _attacker.attackBuilder.Build(_action.dmg);
+
+				var _hitter = _state.Other(_battler);
+				var _hitterState = _state.GetStateOf(_hitter);
+				_hitterState.beforeHit.CheckAndCall(_dmg);
+
+				if (_hitterState.blockHitOneTime)
+				{
+					L.D("block");
+					_hitterState.blockHitOneTime = false;
+					return new ActionDmgResult
+					{
+						hit = true,
+						block = true,
+					};
+				}
+				else
+				{
+					var _dmgTrue = _hitter.Hit(_dmg);
+					return new ActionDmgResult
+					{
+						hit = true,
+						dmg = new Damage(_dmg.ele, _dmgTrue)
+					};
+				}
+			}
+			else
+			{
+				L.D("miss");
+				return new ActionDmgResult
+				{
+					hit = false
+				};
 			}
 		}
 
