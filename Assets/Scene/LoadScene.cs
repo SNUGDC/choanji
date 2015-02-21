@@ -9,15 +9,14 @@ namespace Choanji
 		{
 			Disket.LoadOrDefault("test");
 			DisketHelper.SetupCommon();
-			Application.LoadLevel("world");
-			Timer.g.Add(0.5f, SetupWorld);
+			Application.LoadLevel("game");
+			Timer.g.Add(0, SetupWorld);
 		}
 
 		private static void SetupWorld()
 		{
-			if (TheChoanji.g.context != ContextType.WORLD)
-				return;
 			DisketHelper.SetupWorld();
+			TheChoanji.g.context = ContextType.WORLD;
 		}
 	}
 }
