@@ -262,7 +262,7 @@
 				"when": "AFTER_HIT"
 			},
 			"action": {
-				"type": "AP_REGEN",
+				"type": "AP_CHARGE",
 				"val": 15
 			}
 		}

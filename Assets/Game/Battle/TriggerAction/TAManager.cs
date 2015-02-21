@@ -49,8 +49,16 @@ namespace Choanji.Battle
 			Clear();
 		}
 
+		private static Battler Choose(TargetType _target, Battler _self, Battler _other)
+		{
+			return _target == TargetType.SELF ? _self : _other;
+		}
+
 		public void Add(Battler _battler, TA _ta)
 		{
+			var _state = TheBattle.state;
+			var _other = _state.Other(_battler);
+			
 			var _taInfo = new TAInfo(_ta, _battler);
 
 			if (_ta.trigger == null)
@@ -89,6 +97,16 @@ namespace Choanji.Battle
 					Action<Damage> _fire = _dmg => TestAndFireAndWorn(_taInfo, _dmg);
 					_battler.beforeHit += _fire;
 					_taInfo.cleanup = () => { _battler.beforeHit -= _fire; };
+					break;
+				}
+
+				case TriggerWhenType.AFTER_HIT:
+				{
+					var _theWhen = (TriggerWhenTarget) _ta.trigger.when;
+					var _target = Choose(_theWhen.target, _battler, _other);
+					Action<Damage> _fire = _dmg => TestAndFireAndWorn(_taInfo, _dmg);
+					_target.afterHit += _fire;
+					_taInfo.cleanup = () => { _target.afterHit -= _fire; };
 					break;
 				}
 
@@ -181,6 +199,13 @@ namespace Choanji.Battle
 					break;
 				}
 
+				case ActionType.AP_CHARGE:
+				{
+					var _theAction = ((ActionAPCharge) _action);
+					_battler.ChargeAP(_theAction.val);
+					break;
+				}
+
 				case ActionType.AVOID_HIT:
 					_battler.blockHitOneTime = true;
 					break;
@@ -188,8 +213,7 @@ namespace Choanji.Battle
 				case ActionType.STAT_MOD:
 				{
 					var _theAction = ((ActionStatMod) _action);
-					var _target = _theAction.target == TargetType.SELF
-						? _battler : _other;
+					var _target = Choose(_theAction.target, _battler, _other);
 
 					if (!_theAction.dur.HasValue)
 						_target.dynamicStat += _theAction.stat;
@@ -260,11 +284,13 @@ namespace Choanji.Battle
 				}
 				else
 				{
-					var _dmgTrue = _hitter.Hit(_dmg);
+					var _trueDmg = new Damage(_dmg.ele, _hitter.Hit(_dmg));
+					_hitter.afterHit.CheckAndCall(_trueDmg);
+
 					return new ActionDmgResult
 					{
 						hit = true,
-						dmg = new Damage(_dmg.ele, _dmgTrue)
+						dmg = _trueDmg,
 					};
 				}
 			}

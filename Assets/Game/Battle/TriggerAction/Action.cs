@@ -1,5 +1,4 @@
-﻿using System;
-using Gem;
+﻿using Gem;
 using LitJson;
 
 namespace Choanji.Battle
@@ -9,6 +8,7 @@ namespace Choanji.Battle
 		NONE = 0,
 		DMG,
 		HEAL,
+		AP_CHARGE,
 		AVOID_HIT,
 		STAT_MOD,
 		BUFF_ATK,
@@ -19,7 +19,7 @@ namespace Choanji.Battle
 
 	public enum TargetType
 	{
-		SELF, OTHER,
+		SELF = 0, OTHER,
 	}
 
 	public class Action_
@@ -71,6 +71,17 @@ namespace Choanji.Battle
 				D.Assert(false);
 				val = 0;
 			}
+		}
+	}
+
+	public sealed class ActionAPCharge : Action_
+	{
+		public readonly AP val;
+
+		public ActionAPCharge(JsonData _data)
+			: base(ActionType.AP_CHARGE)
+		{
+			val = (AP)_data.IntOrDefault("val", 0);
 		}
 	}
 
@@ -172,6 +183,8 @@ namespace Choanji.Battle
 					return new ActionDmg(_data);
 				case ActionType.HEAL:
 					return new ActionHeal(_data);
+				case ActionType.AP_CHARGE:
+					return new ActionAPCharge(_data);
 				case ActionType.STAT_MOD:
 					return new ActionStatMod(_data);
 				case ActionType.BUFF_ATK:

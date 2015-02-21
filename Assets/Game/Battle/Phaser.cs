@@ -133,7 +133,7 @@ namespace Choanji.Battle
 		    Card _fasterCard;
 		    Card _slowerCard;
 
-		    if (_spdA > _spdB)
+		    if (_spdA >= _spdB)
 		    {
 			    _faster = _battlerA;
 			    _slower = _battlerB;

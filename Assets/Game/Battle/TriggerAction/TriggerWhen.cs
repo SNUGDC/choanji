@@ -1,5 +1,4 @@
-﻿using System;
-using Gem;
+﻿using Gem;
 using LitJson;
 
 namespace Choanji.Battle
@@ -28,6 +27,19 @@ namespace Choanji.Battle
 		}
 	}
 
+	public class TriggerWhenTarget : TriggerWhen
+	{
+		public readonly TargetType target;
+		
+		public TriggerWhenTarget(TriggerWhenType _type, JsonData _data)
+			: base(_type)
+		{
+			JsonData _targetJs;
+			if (_data.TryGet("target", out _targetJs))
+				EnumHelper.TryParse((string) _targetJs, out target);
+		}
+	}
+
 	public static partial class TriggerFactory
 	{
 		public static TriggerWhen MakeWhen(JsonData _data)
@@ -43,6 +55,9 @@ namespace Choanji.Battle
 
 			switch (_type)
 			{
+				case TriggerWhenType.AFTER_HIT:
+					return new TriggerWhenTarget(_type, _data);
+
 				default:
 					L.E("when " + _type + " is not handled.");
 					return null;

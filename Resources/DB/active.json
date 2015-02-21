@@ -324,7 +324,7 @@
 	"S": {
 		"name": "S",
 		"type": "SPE",
-		"detail": "이번 배틀 동안 적에게 데미지를 입히면 AP가 회복된다.",
+		"detail": "이번 턴에 적에게 데미지를 입히면 AP가 회복된다.",
 		"cost": 100,
 		"perform": {
 			"dur": 1,
@@ -335,7 +335,7 @@
 				}
 			},
 			"action": {
-				"type": "AP_REGEN",
+				"type": "AP_CHARGE",
 				"val": 10
 			}
 		}

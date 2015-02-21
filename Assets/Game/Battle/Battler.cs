@@ -103,6 +103,7 @@ namespace Choanji.Battle
 
 		public bool blockHitOneTime;
 		public Action<Damage> beforeHit;
+		public Action<Damage> afterHit;
 
 		public int CalStat(StatType _type)
 		{
@@ -158,6 +159,11 @@ namespace Choanji.Battle
 			var _mod = CalStat(StatType.AP_CONSUME);
 			var _consumption = _val + _mod;
 			return _consumption > 0 ? _consumption : 0;
+		}
+
+		public void ChargeAP(AP _val)
+		{
+			ap += (int)_val;
 		}
 
 		public void ConsumeAP(AP _val)
