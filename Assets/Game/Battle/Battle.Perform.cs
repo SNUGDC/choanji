@@ -1,5 +1,4 @@
-﻿using Choanji.ActivePerform;
-using Gem;
+﻿using Gem;
 using Random = UnityEngine.Random;
 
 namespace Choanji.Battle
@@ -32,16 +31,16 @@ namespace Choanji.Battle
 		{
 			var _perform = _card.data.active.perform;
 
-			switch (_perform.id)
+			switch (_perform.action.type)
 			{
-				case ID.DMG:
-					return PerformDmg(_battler, (Dmg)_perform);
+				case ActionType.DMG:
+					return PerformDmg(_battler, (ActionDmg)_perform.action);
 			}
 
 			return null;
 		}
 
-		private PerformResult PerformDmg(Battler _battler, Dmg _perform)
+		private PerformResult PerformDmg(Battler _battler, ActionDmg _perform)
 		{
 			if (Dice(_perform.accuracy))
 			{

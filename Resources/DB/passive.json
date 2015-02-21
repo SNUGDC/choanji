@@ -260,7 +260,7 @@
 		"detail": "적에게 공격 받았을 시, 내 AP가 회복된다.",
 		"perform": {
 			"trigger": {
-				"when": "HIT"
+				"when": "AFTER_HIT"
 			},
 			"action": {
 				"type": "AP_REGEN",

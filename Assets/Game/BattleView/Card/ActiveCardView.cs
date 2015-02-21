@@ -20,8 +20,8 @@ namespace Choanji.Battle
 
 			iconType.sprite = R.BattleUI.Spr.CARD_ACTIVE_TYPE(_data.type);
 
-			if (_data.perform.id == ActivePerform.ID.DMG)
-				iconEle.sprite = R.Spr.ELE_S(((ActivePerform.Dmg)_data.perform).dmg.ele);
+			if (_data.perform.action == ActionType.DMG)
+				iconEle.sprite = R.Spr.ELE_S(((ActionDmg)_data.perform.action).dmg.ele);
 			else 
 				iconEle.gameObject.SetActive(false);
 		}

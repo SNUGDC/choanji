@@ -7,7 +7,10 @@ namespace Choanji.Battle
 	public enum TriggerWhenType
 	{
 		BATTLE_START,
+		BEFORE_START_TURN,
 		BEFORE_HIT,
+		AFTER_HIT,
+		DEAD,
 	}
 
 	public class TriggerWhen
@@ -41,7 +44,8 @@ namespace Choanji.Battle
 			switch (_type)
 			{
 				default:
-					throw new ArgumentOutOfRangeException();
+					L.E("when " + _type + " is not handled.");
+					return null;
 			}
 		}
 	}

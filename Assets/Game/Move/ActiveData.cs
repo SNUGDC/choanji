@@ -13,7 +13,7 @@ namespace Choanji
 			name = (string) _data["name"];
 			detail = (string) _data["detail"];
 			cost = (AP) (int) _data["cost"];
-			perform = ActivePerform.Factory.Make(_data["perform"]);
+			perform = new Battle.TA(_data["perform"]);
 		}
 
 		public readonly ActiveID id;
@@ -24,7 +24,7 @@ namespace Choanji
 
 		public readonly AP cost;
 
-		public readonly ActivePerform.Base perform;
+		public readonly Battle.TA perform;
 
 		public static implicit operator ActiveID(ActiveData _this)
 		{

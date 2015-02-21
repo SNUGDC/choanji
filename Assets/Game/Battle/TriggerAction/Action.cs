@@ -6,6 +6,7 @@ namespace Choanji.Battle
 	public enum ActionType
 	{
 		NONE = 0,
+		DMG,
 		AVOID_HIT,
 		BUFF_ATK,
 		BUFF_DEF,
@@ -18,6 +19,26 @@ namespace Choanji.Battle
 		public Action_(ActionType _type)
 		{
 			type = _type;
+		}
+
+		public static implicit operator ActionType(Action_ _this)
+		{
+			return _this.type;
+		}
+	}
+
+	public sealed class ActionDmg : Action_
+	{
+		public readonly Damage dmg;
+		public readonly int accuracy;
+
+		public ActionDmg(JsonData _data)
+			: base(ActionType.DMG)
+		{
+			var _ele = ElementDB.Search((string)_data["ele"]);
+			var _val = (HP)(int)_data["dmg"];
+			dmg = new Damage(_ele, _val);
+			accuracy = _data.IntOrDefault("accuracy", 100);
 		}
 	}
 
@@ -38,10 +59,15 @@ namespace Choanji.Battle
 	{
 		public static Action_ Make(JsonData _data)
 		{
+			if (_data.IsString)
+				return new Action_(EnumHelper.ParseOrDefault<ActionType>((string)_data));
+
 			var _type = EnumHelper.ParseOrDefault<ActionType>((string)_data["type"]);
 
 			switch (_type)
 			{
+				case ActionType.DMG:
+					return new ActionDmg(_data);
 				case ActionType.BUFF_ATK:
 				case ActionType.BUFF_DEF:
 					return new ActionBuffEle(_type, _data);
