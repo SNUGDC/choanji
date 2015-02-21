@@ -10,7 +10,7 @@ namespace Choanji
 			Disket.LoadOrDefault("test");
 			DisketHelper.SetupCommon();
 			Application.LoadLevel("game");
-			Timer.g.Add(0, SetupWorld);
+			Timer.g.Add(0.5f, SetupWorld);
 		}
 
 		private static void SetupWorld()
