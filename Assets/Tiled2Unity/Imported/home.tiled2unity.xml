@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 2015-02-15 오후 6:49:16-->
+<!--Last exported: 2015-02-21 오후 10:38:22-->
 <Tiled2Unity version="0.9.7.4">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Interior general" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Interior general" sortingLayerName="" sortingOrder="1" />
@@ -49,6 +49,10 @@
         <Property name="dialog" value="mom_01" />
         <Property name="key" value="mom" />
         <Property name="type" value="NPC" />
+      </GameObject>
+      <GameObject name="computer" x="112" y="-64">
+        <Property name="data" value="computer_save" />
+        <Property name="type" value="TA" />
       </GameObject>
     </GameObject>
   </Prefab>

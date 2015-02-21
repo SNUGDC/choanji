@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Gem;
 using LitJson;
 
@@ -6,6 +8,7 @@ namespace Choanji
 {
 	public enum ActionType
 	{
+		SEQUENCE,
 		OPEN_DIALOG,
 		SAVE,
 	}
@@ -24,10 +27,38 @@ namespace Choanji
 		public abstract void Do(object _data);
 	}
 
+	public sealed class ActionSequence : Action_
+	{
+		private readonly List<Action_> mSequence = new List<Action_>();
+
+		public ActionSequence(JsonData _data)
+			: base(ActionType.SAVE)
+		{
+			Action_ _actionPrev = null;
+			
+			foreach (var _actionData in _data["sequence"].GetListEnum())
+			{
+				var _actionCur = ActionFactory.Make(_actionData);
+				if (_actionCur == null) 
+					continue;
+				if (_actionPrev != null)
+					_actionPrev.onDone = () => _actionCur.Do(null);
+				mSequence.Add(_actionCur);
+				_actionPrev = _actionCur;
+			}
+		}
+
+		public override void Do(object _data)
+		{
+			mSequence.Last().onDone = onDone.CheckAndCall;
+			mSequence.First().Do(_data);
+		}
+	}
+
 	public sealed class ActionSave : Action_
 	{
-		private Action_ mOnSuccess;
-		private Action_ mOnFail;
+		private readonly Action_ mOnSuccess;
+		private readonly Action_ mOnFail;
 
 		public ActionSave(JsonData _data)
 			: base(ActionType.SAVE)
@@ -70,6 +101,8 @@ namespace Choanji
 		{
 			switch (_type)
 			{
+				case ActionType.SEQUENCE:
+					return new ActionSequence(_data);
 				case ActionType.SAVE:
 					return new ActionSave(_data);
 				case ActionType.OPEN_DIALOG:

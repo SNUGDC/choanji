@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gem;
 using Gem.In;
 using UnityEngine;
@@ -121,8 +122,10 @@ namespace Choanji
 
 		private void Done(bool _exitNorm)
 		{
+			Action<bool> _onDone = null;
+
 			if (mHandler != null)
-				mHandler.onDone.CheckAndCall(_exitNorm);
+				_onDone = mHandler.onDone;
 
 			if (mInput.isConn)
 				mInput.Dis();
@@ -131,6 +134,9 @@ namespace Choanji
 			mProvider = null;
 			mIndexer = null;
 			dialog = null;
+
+			// for reentrancy.
+			Timer.g.Add(0, () => _onDone.CheckAndCall(_exitNorm));
 		}
 	}
 

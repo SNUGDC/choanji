@@ -1,0 +1,22 @@
+{
+	"action": {
+		"type": "SEQUENCE",
+		"sequence": [
+			{
+				"type": "OPEN_DIALOG",
+				"dialog": "save_computer"
+			},
+			{				
+				"type": "SAVE",
+				"success": {
+					"type": "OPEN_DIALOG",
+					"dialog": "save_success"
+				},
+				"fail": {
+					"type": "OPEN_DIALOG",
+					"dialog": "save_fail"
+				}
+			}
+		]		
+	}
+}

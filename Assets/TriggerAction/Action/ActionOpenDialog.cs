@@ -24,12 +24,17 @@ namespace Choanji
 
 		public override void Do(object _data)
 		{
-			TheCharacter.ctrl.blockMove.Add(CharacterMoveBlock.INSPECTEE);
+			var _isBlocked = blockMove;
+
+			if (blockMove)
+				TheCharacter.ctrl.blockMove.Add(CharacterMoveBlock.INSPECTEE);
+
 			TheDialog.g.Open(DialogHelper.MakeProvider(dialog), new DialogHandler()
 			{
 				onDone = delegate
 				{
-					TheCharacter.ctrl.blockMove.Remove(CharacterMoveBlock.INSPECTEE);
+					if (_isBlocked)
+						TheCharacter.ctrl.blockMove.Remove(CharacterMoveBlock.INSPECTEE);
 					onDone.CheckAndCall();
 				}
 			});

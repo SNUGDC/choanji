@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="5">
  <tileset firstgid="1" source="Interior general.tsx"/>
  <layer name="FLR" width="16" height="16">
   <data>
@@ -1567,13 +1567,13 @@
    <property name="key" value="mom"/>
    <property name="type" value="NPC"/>
   </properties>
-  <object name="book_01" type="Book" gid="1333" x="112" y="128">
+  <object id="1" name="book_01" type="Book" gid="1333" x="112" y="128">
    <properties>
     <property name="data" value="sample"/>
     <property name="type" value="TA"/>
    </properties>
   </object>
-  <object name="door_01" type="Door" gid="5" x="112" y="208">
+  <object id="2" name="door_01" type="Door" gid="5" x="112" y="208">
    <properties>
     <property name="exit_door" value="door_01"/>
     <property name="exit_map" value="field"/>
@@ -1583,7 +1583,7 @@
     <property name="type" value="Door"/>
    </properties>
   </object>
-  <object name="mom" type="NPC" gid="5" x="96" y="176">
+  <object id="3" name="mom" type="NPC" gid="5" x="96" y="176">
    <properties>
     <property name="agent" value="RAND"/>
     <property name="dialog" value="mom_01"/>
@@ -1591,7 +1591,7 @@
     <property name="type" value="NPC"/>
    </properties>
   </object>
-  <object name="computer" type="Computer" gid="5" x="112" y="64">
+  <object id="4" name="computer" type="Computer" gid="5" x="112" y="64">
    <properties>
     <property name="data" value="computer_save"/>
     <property name="type" value="TA"/>
