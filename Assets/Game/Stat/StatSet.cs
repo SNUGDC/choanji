@@ -22,6 +22,7 @@ namespace Choanji
 			str = (STR)_json.IntOrDefault(StatType.STR.ToString());
 			def = (DEF)_json.IntOrDefault(StatType.DEF.ToString());
 			spd = (SPD)_json.IntOrDefault(StatType.SPD.ToString());
+			rstSC = (RST_SC)_json.IntOrDefault(StatType.RST_SC.ToString());
 
 			JsonData _rstData;
 			if (_json.TryGet("RST", out _rstData))
@@ -42,6 +43,7 @@ namespace Choanji
 		public STR str;
 		public DEF def;
 		public SPD spd;
+		public RST_SC rstSC;
 
 		public int this[StatType _stat]
 		{
@@ -56,6 +58,7 @@ namespace Choanji
 					case StatType.STR: return (int)str;
 					case StatType.DEF: return (int)def;
 					case StatType.SPD: return (int)spd;
+					case StatType.RST_SC: return (int)rstSC;
 					default:
 						L.E(L.M.CASE_INVALID(_stat));
 						return 0;
@@ -73,6 +76,7 @@ namespace Choanji
 					case StatType.STR: str = (STR)value; return;
 					case StatType.DEF: def = (DEF)value; return;
 					case StatType.SPD: spd = (SPD)value; return;
+					case StatType.RST_SC: rstSC = (RST_SC)value; return;
 					default:
 						L.E(L.M.CASE_INVALID(_stat));
 						return;

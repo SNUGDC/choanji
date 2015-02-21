@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gem;
+using Random = UnityEngine.Random;
 
 namespace Choanji.Battle
 {
@@ -91,6 +92,9 @@ namespace Choanji.Battle
 		public Action<HP, HP> onHPMod;
 		public Action<AP, AP> onAPMod;
 
+		public SC? sc { get; private set; }
+		private readonly HashSet<SC> mSCImmune = new HashSet<SC>();
+
 		public readonly Dictionary<ElementID, int> attackModifier = new Dictionary<ElementID, int>();
 		public readonly DamageBuilder attackBuilder = new DamageBuilder();
 
@@ -166,6 +170,46 @@ namespace Choanji.Battle
 			ap += CalStat(StatType.AP_REGEN);
 		}
 
+		public bool IsImmuned(SC _sc)
+		{
+			return mSCImmune.Contains(_sc);
+		}
+
+		public void AddImmune(SC _sc)
+		{
+			mSCImmune.Add(_sc);
+		}
+
+		public void RemoveImmune(SC _sc)
+		{
+			mSCImmune.Remove(_sc);
+		}
+
+		public bool TryImposeSC(SC _sc)
+		{
+			if (IsImmuned(_sc))
+				return false;
+			sc = _sc;
+			return true;
+		}
+
+		public bool TryImposeSC(SC _sc, Percent _per)
+		{
+			var _rst = CalStat(StatType.RST_SC);
+			var _factor = 100f / (100 + _rst);
+			var _factored = (int)_per * _factor;
+
+			if (_factored > Random.Range(0, 100))
+				return TryImposeSC(_sc);
+			else
+				return false;
+		}
+
+		public void HealSC()
+		{
+			sc = null;
+		}
+
 		public void AfterTurnEnd()
 		{
 			while (!mTimeoutStat.Empty())
@@ -178,5 +222,7 @@ namespace Choanji.Battle
 
 			++mCurTurn;
 		}
+
+
 	}
 }

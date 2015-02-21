@@ -127,10 +127,15 @@ namespace Choanji.Battle
 			}
 		}
 
+		private static bool Test(Percent _prob)
+		{
+			if ((int)_prob >= 100) return true;
+			return UnityEngine.Random.Range(0, 100) < (int)_prob;
+		}
+
 		private static bool Test(int _prob)
 		{
-			if (_prob >= 100) return true;
-			return UnityEngine.Random.Range(0, 100) < _prob;
+			return Test((Percent) _prob);
 		}
 		
 		public IEnumerable<ActionResult> FireDelayed()
@@ -191,6 +196,14 @@ namespace Choanji.Battle
 				{
 					var _theAction = (ActionBuffEle)_action;
 					_battler.attackModifier[_theAction.ele] += _theAction.per;
+					break;
+				}
+
+				case ActionType.SC_HEAL:
+				{
+					var _theAction = (ActionSCHeal)_action;
+					if (Test(_theAction.accuracy))
+						_battler.HealSC();
 					break;
 				}
 

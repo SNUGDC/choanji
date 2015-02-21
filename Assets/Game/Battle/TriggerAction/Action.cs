@@ -11,6 +11,7 @@ namespace Choanji.Battle
 		AVOID_HIT,
 		STAT_MOD,
 		BUFF_ATK,
+		SC_HEAL,
 	}
 
 	public class Action_
@@ -94,6 +95,17 @@ namespace Choanji.Battle
 		}
 	}
 
+	public sealed class ActionSCHeal : Action_
+	{
+		public readonly Percent accuracy;
+
+		public ActionSCHeal(JsonData _data)
+			: base(ActionType.SC_HEAL)
+		{
+			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
+		}
+	}
+
 	public class ActionResult
 	{ }
 
@@ -126,6 +138,8 @@ namespace Choanji.Battle
 					return new ActionStatMod(_data);
 				case ActionType.BUFF_ATK:
 					return new ActionBuffEle(_type, _data);
+				case ActionType.SC_HEAL:
+					return new ActionSCHeal(_data);
 				default:
 					return new Action_(_type);
 			}

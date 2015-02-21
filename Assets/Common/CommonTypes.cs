@@ -10,4 +10,5 @@
 	public enum DEF { }
 	public enum SPD { }
 	public enum RST { }
+	public enum RST_SC { }
 }

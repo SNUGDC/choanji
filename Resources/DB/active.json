@@ -201,8 +201,7 @@
 		"cost": 100,
 		"perform": {
 			"action": {
-				"type": "SC_MOD",
-				"sc": "NONE",
+				"type": "SC_HEAL",
 				"accuracy": 80
 			}
 		}

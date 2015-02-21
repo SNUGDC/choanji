@@ -8,9 +8,12 @@ namespace Choanji
 		AP,
 		AP_REGEN,
 		AP_CONSUME,
+
 		STR,
 		DEF,
 		SPD,
+
+		RST_SC,
 	}
 
 	public struct StatRst
