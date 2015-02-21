@@ -104,11 +104,20 @@ namespace Choanji.Battle
 
 		private static void Fire(Battler _battler, Action_ _action)
 		{
+			var _battlerState = TheBattle.state.GetStateOf(_battler);
+
 			switch (_action.type)
 			{
 				case ActionType.AVOID_HIT:
-					TheBattle.state.GetStateOf(_battler).blockHitOneTime = true;
+					_battlerState.blockHitOneTime = true;
 					break;
+
+				case ActionType.BUFF_ATK:
+				{
+					var _theAction = (ActionBuffAtkEle)_action;
+					_battlerState.attackModifier[_theAction.ele] += _theAction.per;
+					break;
+				}
 
 				default:
 					L.E("action " + _action.type + " is not implemented.");

@@ -23,9 +23,9 @@
 		"detail": "분석력 공격의 데미지가 증가한다.",
 		"perform": {
 			"action": {
-				"type": "BUFF_ELE",
+				"type": "BUFF_ATK",
 				"ele": "ANA",
-				"arg": 30
+				"per": 30
 			}
 		}
 	},
@@ -35,9 +35,9 @@
 		"detail": "분석력 공격의 데미지가 증가한다.",
 		"perform": {
 			"action": {
-				"type": "BUFF_ELE",
+				"type": "BUFF_ATK",
 				"ele": "MEM",
-				"arg": 30
+				"per": 30
 			}
 		}
 	},
@@ -47,9 +47,9 @@
 		"detail": "창의력 공격의 데미지가 증가한다.",
 		"perform": {
 			"action": {
-				"type": "BUFF_ELE",
+				"type": "BUFF_ATK",
 				"ele": "CRE",
-				"arg": 30
+				"per": 30
 			}
 		}
 	},
@@ -59,9 +59,9 @@
 		"detail": "무속성 공격의 데미지가 증가한다.",
 		"perform": {
 			"action": {
-				"type": "BUFF_ELE",
+				"type": "BUFF_ATK",
 				"ele": "NOR",
-				"arg": 30
+				"per": 30
 			}
 		}
 	}

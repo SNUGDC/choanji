@@ -14,7 +14,7 @@ namespace Choanji.Battle
 			if (_data.TryGet("trigger", out _triggerData))
 				trigger = new Trigger(_triggerData);
 
-			action = new Action_(_data["action"]);
+			action = ActionFactory.Make(_data["action"]);
 		}
 
 		private static TAHandle sAlloc;

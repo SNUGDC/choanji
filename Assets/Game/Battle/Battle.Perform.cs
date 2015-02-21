@@ -1,5 +1,4 @@
-﻿using System;
-using Choanji.ActivePerform;
+﻿using Choanji.ActivePerform;
 using Gem;
 using Random = UnityEngine.Random;
 
@@ -48,15 +47,17 @@ namespace Choanji.Battle
 			{
 				L.D("hit");
 
-				var _target = Other(_battler);
-				var _state = state.GetStateOf(_battler);
+				var _attacker = state.GetStateOf(_battler);
+				var _dmg = _attacker.attackBuilder.Build(_perform.dmg);
 
-				_state.beforeHit.CheckAndCall(_perform.dmg);
+				var _hitter = Other(_battler);
+				var _hitterState = state.GetStateOf(_hitter);
+				_hitterState.beforeHit.CheckAndCall(_dmg);
 
-				if (_state.blockHitOneTime)
+				if (_hitterState.blockHitOneTime)
 				{
 					L.D("block");
-					_state.blockHitOneTime = false;
+					_hitterState.blockHitOneTime = false;
 					return new PerformDmgResult
 					{
 						hit = true,
@@ -65,11 +66,11 @@ namespace Choanji.Battle
 				}
 				else
 				{
-					var _dmgTrue = _target.Hit(_perform.dmg);
+					var _dmgTrue = _hitter.Hit(_dmg);
 					return new PerformDmgResult
 					{
 						hit = true,
-						dmg = new Damage(_perform.dmg.ele, _dmgTrue)
+						dmg = new Damage(_dmg.ele, _dmgTrue)
 					};	
 				}
 			}
