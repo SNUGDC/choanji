@@ -64,5 +64,279 @@
 				"per": 30
 			}
 		}
+	},
+	
+	"STRONG_ARMOR": {
+		"name": "튼튼한 장갑",
+		"detail": "무속성 공격의 데미지를 적게 입는다.",
+		"perform": {
+			"action": {
+				"type": "BUFF_DEF",
+				"ele": "NOR",
+				"per": 30
+			}
+		}
+	},
+	
+	"OCTO_FINGER": {
+		"name": "유연한 손가락",
+		"detail": "액티브 스킬의 코스트를 감소시킨다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"AP_CONSUME": -10
+			}
+		}
+	},
+	
+	"GUARD_BEGINNER": {
+		"name": "방어 능숙", 
+		"detail": "방어 스킬의 데미지 감소량이 증가한다.",
+		"perform": {
+			"action": {
+				"type": "DEF_MOD",
+				"per": 10
+			}
+		}
+	},
+	
+	"RST_ANA": {
+		"name": "분석 저항",
+		"detail": "분석력 공격의 데미지를 적게 입는다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"RST": {
+					"ANA": 30
+				}
+			}
+		}
+	},
+	
+	"RST_MEM": {
+		"name": "암기 저항",
+		"detail": "악기력 공격의 데미지를 적게 입는다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"RST": {
+					"MEM": 30
+				}
+			}
+		}
+	},
+	
+	"RST_CRE": {
+		"name": "창의 저항",
+		"detail": "창의력 공격의 데미지를 적게 입는다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"RST": {
+					"CRE": 30
+				}
+			}
+		}
+	},
+	
+	"CPR": {
+		"name": "인공호흡",
+		"detail": "전투 중 단 한번만 기절에서 깨어난다.",
+		"perform": {
+			"mode": "once",
+			"trigger": {
+				"when": "DEAD"
+			},
+			"action": {
+				"type": "HEAL",
+				"per": 50
+			}
+		}
+	},
+	
+	"EXHALE": {
+		"name": "날숨",
+		"detail": "상태이상에 잘 걸리지 않는다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"RST_SC": 50
+			}
+		}
+	},
+	
+	"BODY_BUILDING": {
+		"name": "비대한 근육",
+		"detail": "공격력이 증가한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"STR": 30
+			}
+		}
+	},
+	
+	"JUST_TICKLE": {
+		"name": "안 아파요",
+		"detail": "방어력이 증가한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"DEF": 30
+			}
+		}
+	},
+	
+	"OVERSEER": {
+		"name": "시지각 확대",
+		"detail": "속이 증가한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"SPD": 30
+			}
+		}
+	},
+	
+	"GYI_YO_MI": {
+		"name": "귀여움 기본탑재",
+		"detail": "적의 공격력이 감소한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"target": "OTHER",
+				"STR": -30
+			}
+		}
+	},
+	
+	"FUNNY_FACE": {
+		"name": "개그형 얼굴",
+		"detail": "적의 방어력이 감소한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"target": "OTHER",
+				"DEF": -30
+			}
+		}
+	},
+	
+	"SC_IMMUNE_MEN": {
+		"name": "",
+		"detail": "멘탈붕괴 상태에 빠지지 않는다.",
+		"perform": {
+			"action": {
+				"type": "SC_IMMUNE",
+				"sc": "MEN"
+			}
+		}
+	},
+	
+	"SC_IMMUNE_SLO": {
+		"name": "",
+		"detail": "귀차니즘 상태에 빠지지 않는다.",
+		"perform": {
+			"action": {
+				"type": "SC_IMMUNE",
+				"sc": "SLO"
+			}
+		}
+	},
+	
+	"SC_IMMUNE_FAT": {
+		"name": "",
+		"detail": "의욕감퇴 상태에 빠지지 않는다.",
+		"perform": {
+			"action": {
+				"type": "SC_IMMUNE",
+				"sc": "FAT"
+			}
+		}
+	},
+	
+	"M": {
+		"name": "M",
+		"detail": "적에게 공격 받았을 시, 내 AP가 회복된다.",
+		"perform": {
+			"trigger": {
+				"when": "HIT"
+			},
+			"action": {
+				"type": "AP_REGEN",
+				"val": 15
+			}
+		}
+	},
+	
+	"FORTIFY_ANA_01": {
+		"name": "",
+		"detail": "",
+		"perform": {
+			"action": {
+				"type": "DMG_CONVERT_ELE",
+				"src": "NOR",
+				"dst": "ANA"
+			}
+		}
+	},
+	
+	"STEALTH": {
+		"name": "몰래 몰래",
+		"detail": "적의 공격을 잘 회피하게 된다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"EVA": 30
+			}
+		}
+	},
+	
+	"PENALTY": {
+		"name": "벌금",
+		"detail": "적은 더 많은 코스트를 써야한다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"target": "OTHER",
+				"AP_CONSUME": 10
+			}
+		}
+	},
+	
+	"PERFECT_MATCH": {
+		"name": "효과 만점",
+		"detail": "가끔씩 적의 급소를 공격하게 된다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"CRI": 20
+			}
+		}
+	},
+	
+	"HANDYMAN": {
+		"name": "지식왕",
+		"detail": "아는 것이 많아진다.",
+		"perform": {
+			"action": {
+				"type": "STAT_MOD",
+				"STR": 10,
+				"DEF": 10,
+				"SPD": 10
+			}
+		}
+	},
+	
+	"SALVATION": {
+		"name": "무소유",
+		"detail": "내 공격이 무속성으로 바뀐다.",
+		"perform": {
+			"action": {
+				"type": "DMG_CONVERT_ELE",
+				"src": "ALL",
+				"dst": "NOR"
+			}
+		}
 	}
 }

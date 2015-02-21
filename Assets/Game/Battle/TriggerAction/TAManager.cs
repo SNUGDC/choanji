@@ -114,7 +114,7 @@ namespace Choanji.Battle
 
 				case ActionType.BUFF_ATK:
 				{
-					var _theAction = (ActionBuffAtkEle)_action;
+					var _theAction = (ActionBuffEle)_action;
 					_battlerState.attackModifier[_theAction.ele] += _theAction.per;
 					break;
 				}

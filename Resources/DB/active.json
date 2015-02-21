@@ -62,5 +62,373 @@
 			"dmg": 100,
 			"accuracy": 50
 		}
+	},
+	
+	"NUCLEAR_508": {
+		"name": "그로울링",
+		"type": "ATK",
+		"detail": "1턴 후 적에게 강력한 위력의 무속성 데미지를 입힌다.",
+		"cost": 100,
+		"perform": {
+			"key": "DMG",
+			"ele": "NOR",
+			"dmg": 150,
+			"accuracy": 80,
+			"delay": 1
+		}
+	},
+	
+	"ROCK_AND_ROLL": {
+		"name": "연타",
+		"type": "ATK",
+		"detail": "적에게 약한 위력의 무속성 데미지를 입힌다.",
+		"cost": 50,
+		"perform": {
+			"key": "DMG",
+			"ele": "NOR",
+			"dmg": 32,
+			"accuracy": 90
+		}
+	},
+	
+	"GUARD_UP": {
+		"name": "가드 올리기",
+		"type": "DEF",
+		"detail": "적의 공격을 방어한다.",
+		"cost": 70,
+		"perform": {
+			"key": "DEF_MOD",
+			"val": 50
+		}
+	},
+	
+	"GUARD_WITH_BOOK": {
+		"name": "책으로 막기",
+		"type": "DEF",
+		"detail": "적의 분석 속성 공격을 잘 방어한다.",
+		"cost": 70,
+		"perform": {
+			"key": "STAT_MOD",
+			"RST": {
+				"ANA": 75
+			}
+		}
+	},
+	
+	"FRYING_FAN_UP": {
+		"name": "프라이팬 들기",
+		"type": "DEF",
+		"detail": "적의 암기 속성 공격을 잘 방어한다.",
+		"cost": 70,
+		"perform": {
+			"key": "STAT_MOD",
+			"RST": {
+				"MEM": 75
+			}
+		}
+	},
+	
+	"DEF_CRE_01": {
+		"name": "DEF_CRE_01",
+		"type": "DEF",
+		"detail": "적의 ckddml 속성 공격을 잘 방어한다.",
+		"cost": 70,
+		"perform": {
+			"key": "STAT_MOD",
+			"RST": {
+				"CRE": 75
+			}
+		}
+	},
+	
+	"LICK": {
+		"name": "침바르기",
+		"type": "RST",
+		"detail": "체력을 3턴 동안 조금씩 회복한다.",
+		"cost": 70,
+		"perform": {
+			"dur": 3,
+			"trigger": {
+				"when": "BEFORE_START_TURN"
+			},
+			"action": {
+				"key": "HEAL",
+				"val": 150
+			}
+		}
+	},
+	
+	"FIRST_AID_KIT": {
+		"name": "구급약",
+		"type": "RST",
+		"detail": "내 체력을 많이 회복한다.",
+		"cost": 200,
+		"perform": {
+			"key": "HEAL",
+			"val": 600
+		}
+	},
+	
+	"INHALE": {
+		"name": "들숨",
+		"type": "RST",
+		"detail": "모든 상태이상을 회복한다.",
+		"cost": 100,
+		"perform": {
+			"key": "SC_MOD",
+			"sc": "NONE",
+			"accuracy": 80
+		}
+	},
+	
+	"BARBELL": {
+		"name": "아령 들기",
+		"type": "SPE",
+		"detail": "공격력을 3턴 동안 향상시킨다.",
+		"cost": 70,
+		"perform": {
+			"action": {
+				"key": "STAT_MOD",
+				"dur": 3,
+				"STR_MOD": 30
+			}
+		}
+	},
+	
+	"SMOOTH": {
+		"name": "살살 맞으면",
+		"type": "SPE",
+		"detail": "방어력을 3턴 동안 향상시킨다.",
+		"cost": 70,
+		"perform": {
+			"action": {
+				"key": "STAT_MOD",
+				"dur": 3,
+				"DEF_MOD": 30
+			}
+		}
+	},
+	
+	"FOCUS_MIND": {
+		"name": "정신 집중",
+		"type": "SPE",
+		"detail": "속을 3턴 동안 향상시킨다.",
+		"cost": 70,
+		"perform": {
+			"dur": 3,
+			"action": {
+				"key": "STAT_MOD",
+				"SPD_MOD": 30
+			}
+		}
+	},
+	
+	"CHARMING": {
+		"name": "애교부리기",
+		"type": "SPE",
+		"detail": "적의 공격력을 3턴 동안 떨어뜨린다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "STAT_MOD",
+				"target": "OTHER",
+				"dur": 3,
+				"STR_MOD": -30
+			}
+		}
+	},
+	
+	"LOL": {
+		"name": "박장대소",
+		"type": "SPE",
+		"detail": "적의 방어력을 3턴 동안 떨어뜨린다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "STAT_MOD",
+				"target": "OTHER",
+				"dur": 3,
+				"DEF_MOD": -30
+			}
+		}
+	},
+	
+	"SC_MEN_01": { // mental destruction
+		"name": "",
+		"type": "SPE",
+		"detail": "적을 멘탈붕괴 상태에 빠뜨린다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "SC_MOD",
+				"sc": "MEN",
+				"accuracy": 90
+			}
+		}
+	},
+	
+	"SC_SLO_01": { // sloth
+		"name": "",
+		"type": "SPE",
+		"detail": "적을 귀차니즘 상태에 빠뜨린다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "SC_MOD",
+				"sc": "SLO",
+				"accuracy": 90
+			}
+		}
+	},
+	
+	"SC_FAT_01": { // fatigue
+		"name": "",
+		"type": "SPE",
+		"detail": "적을 의욕감퇴 상태에 빠뜨린다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "SC_MOD",
+				"sc": "FAT",
+				"accuracy": 90
+			}
+		}
+	},
+	
+	"S": {
+		"name": "S",
+		"type": "SPE",
+		"detail": "이번 배틀 동안 적에게 데미지를 입히면 AP가 회복된다.",
+		"cost": 100,
+		"perform": {
+			"dur": 1,
+			"trigger": {
+				"when": {
+					"type": "HIT",
+					"target": "OTHER"
+				}
+			},
+			"action": {
+				"key": "AP_REGEN",
+				"val": 10
+			}
+		}
+	},
+	
+	"FORTIFY_ANA_01": {
+		"name": "",
+		"type": "SPE",
+		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "BUFF_ATK",
+				"dur": 1,
+				"ele": "ANA",
+				"per": 100
+			}
+		}
+	},
+	
+	"FORTIFY_MEM_01": {
+		"name": "",
+		"type": "SPE",
+		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "BUFF_ATK",
+				"dur": 1,
+				"ele": "MEM",
+				"per": 100
+			}
+		}
+	},
+	
+	"FORTIFY_CRE_01": {
+		"name": "",
+		"type": "SPE",
+		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"key": "BUFF_ATK",
+				"dur": 1,
+				"ele": "CRE",
+				"per": 100
+			}
+		}
+	},
+	
+	"CHEATING": {
+		"name": "컨닝",
+		"type": "ATK",
+		"detail": "적에게 무속성 데미지를 입히고 체력을 회복한다.",
+		"cost": 70,
+		"perform": {
+			"key": "DMG",
+			"ele": "NOR",
+			"dmg": 30,
+			"accuracy": 90,
+			"drain": { "per": 50 }
+		}
+	},
+	
+	"TAX": {
+		"name": "회비 걷기",
+		"type": "SPE",
+		"detail": "상대의 코스트를 훔친다.",
+		"cost": 100,
+		"perform": {
+			"action": [
+				{
+					"key": "AP_MOD",
+					"target": "OTHER",
+					"val": -50
+				},
+				{
+					"key": "AP_MOD",
+					"val": 50
+				}
+			]
+		}
+	},
+	
+	"FETISH_CATCHER": {
+		"name": "취향 저격",
+		"type": "SPE",
+		"detail": "다음 턴에 사용하는 공격 스킬은 빗나가지 않는다.",
+		"cost": 0,
+		"perform": {
+			"trigger": {
+				"when": "BEFORE_START_TURN"
+			},
+			"action": "NO_MISS"
+		}
+	},
+	
+	"TIME_MACHINE": { // 구현불가
+		"name": "시간이 벌써",
+		"type": "SPE",
+		"detail": "적과 나 모두의 지속시간, 발동지연 시간을 1턴 줄인다.",
+		"cost": 50,
+		"perform": {
+		}
+	},
+	
+	"WE_ARE_THE_WORLD": {
+		"name": "너도 함께",
+		"type": "SPE",
+		"detail": "적의 공격이 무속성으로 바뀐다.",
+		"cost": 100,
+		"perform": {
+			"action": {
+				"type": "DMG_CONVERT_ELE",
+				"target": "OTHER",
+				"dur": 1,
+				"src": "ALL",
+				"dst": "NOR"
+			}
+		}
 	}
 }

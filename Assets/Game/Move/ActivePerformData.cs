@@ -51,7 +51,11 @@ namespace Choanji.ActivePerform
 		{
 			ID _id;
 
-			if (!EnumHelper.TryParse((string) _data["key"], out _id))
+			JsonData _keyJs;
+			if (!_data.TryGet("key", out _keyJs))
+				return null;
+
+			if (!EnumHelper.TryParse((string)_keyJs, out _id))
 				return null;
 
 			switch (_id)

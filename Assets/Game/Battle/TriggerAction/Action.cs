@@ -8,6 +8,7 @@ namespace Choanji.Battle
 		NONE = 0,
 		AVOID_HIT,
 		BUFF_ATK,
+		BUFF_DEF,
 	}
 
 	public class Action_
@@ -20,13 +21,13 @@ namespace Choanji.Battle
 		}
 	}
 
-	public sealed class ActionBuffAtkEle : Action_
+	public sealed class ActionBuffEle : Action_
 	{
 		public readonly ElementID ele;
 		public readonly int per;
 
-		public ActionBuffAtkEle(JsonData _data)
-			: base(ActionType.BUFF_ATK)
+		public ActionBuffEle(ActionType _type, JsonData _data)
+			: base(_type)
 		{
 			ele = ElementDB.Search((string) _data["ele"]);
 			per = (int) _data["per"];
@@ -42,7 +43,8 @@ namespace Choanji.Battle
 			switch (_type)
 			{
 				case ActionType.BUFF_ATK:
-					return new ActionBuffAtkEle(_data);
+				case ActionType.BUFF_DEF:
+					return new ActionBuffEle(_type, _data);
 				default:
 					return new Action_(_type);
 			}

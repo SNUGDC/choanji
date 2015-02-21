@@ -8,7 +8,10 @@ namespace Choanji.Battle
 		public BattlerState()
 		{
 			foreach (var _ele in ElementDB.GetEnum())
+			{
 				attackModifier.Add(_ele, 0);
+				hitModifier.Add(_ele, 0);	
+			}
 
 			attackBuilder.Add(_org =>
 			{
@@ -18,10 +21,22 @@ namespace Choanji.Battle
 				_org.val = (HP)((float)_org.val * ((100 + _mod)/100f));
 				return _org;
 			});
+
+			hitBuilder.Add(_org =>
+			{
+				int _mod;
+				if (!hitModifier.TryGetValue(_org.ele, out _mod))
+					return _org;
+				_org.val = (HP)((float)_org.val * (100f / (100 + _mod)));
+				return _org;
+			});
 		}
 
 		public readonly Dictionary<ElementID, int> attackModifier = new Dictionary<ElementID, int>();
 		public readonly DamageBuilder attackBuilder = new DamageBuilder();
+
+		public readonly Dictionary<ElementID, int> hitModifier = new Dictionary<ElementID, int>();
+		public readonly DamageBuilder hitBuilder = new DamageBuilder();
 
 		public bool blockHitOneTime;
 		public Action<Damage> beforeHit;
