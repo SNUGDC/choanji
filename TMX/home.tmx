@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="8">
  <tileset firstgid="1" source="Interior general.tsx"/>
  <layer name="FLR" width="16" height="16">
   <data>
@@ -1423,7 +1423,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="1333"/>
-   <tile gid="0"/>
+   <tile gid="1496"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1593,7 +1593,13 @@
   </object>
   <object id="4" name="computer" type="Computer" gid="5" x="112" y="64">
    <properties>
-    <property name="data" value="computer_save"/>
+    <property name="data" value="sample_save"/>
+    <property name="type" value="TA"/>
+   </properties>
+  </object>
+  <object id="6" name="food_01" type="Food" gid="1496" x="128" y="128">
+   <properties>
+    <property name="data" value="sample_battle"/>
     <property name="type" value="TA"/>
    </properties>
   </object>

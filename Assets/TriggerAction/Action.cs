@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Choanji.Battle;
 using Gem;
 using LitJson;
 
@@ -11,6 +12,7 @@ namespace Choanji
 		SEQUENCE,
 		OPEN_DIALOG,
 		SAVE,
+		START_BATTLE,
 	}
 
 	public abstract class Action_
@@ -87,6 +89,31 @@ namespace Choanji
 		}
 	}
 
+	public sealed class ActionStartBattle : Action_
+	{
+		private readonly BattlerID mBattler;
+
+		public ActionStartBattle(JsonData _data)
+			: base(ActionType.START_BATTLE)
+		{
+			mBattler = BattlerHelper.MakeID((string)_data["battler"]);
+		}
+
+		public override void Do(object _data)
+		{
+			var _self = BattlerDB.Get(BattlerHelper.MakeID("SAMPLE_01"));
+			var _battler = BattlerDB.Get(mBattler);
+
+			TheBattle.Setup(new Setup(Mode.PVE, _self, _battler));
+			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.StartTurn);
+			// todo: 로직 이동
+			TheBattle.onDone = _result => { TheChoanji.g.context = ContextType.WORLD; };
+			TheBattle.Start();
+
+			onDone.CheckAndCall();
+		}
+	}
+
 	public static class ActionFactory
 	{
 		public static Action_ Make(JsonData _data)
@@ -103,10 +130,12 @@ namespace Choanji
 			{
 				case ActionType.SEQUENCE:
 					return new ActionSequence(_data);
-				case ActionType.SAVE:
-					return new ActionSave(_data);
 				case ActionType.OPEN_DIALOG:
 					return new ActionOpenDialog(_data);
+				case ActionType.SAVE:
+					return new ActionSave(_data);
+				case ActionType.START_BATTLE:
+					return new ActionStartBattle(_data);
 				default:
 					D.Assert(false);
 					return null;

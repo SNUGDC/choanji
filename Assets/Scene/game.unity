@@ -1604,6 +1604,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 660414131}
   - 20: {fileID: 660414133}
+  - 81: {fileID: 660414132}
   m_Layer: 0
   m_Name: FieldCamera
   m_TagString: MainCamera
@@ -1623,6 +1624,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1975752583}
   m_RootOrder: 0
+--- !u!81 &660414132
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660414130}
+  m_Enabled: 1
 --- !u!20 &660414133
 Camera:
   m_ObjectHideFlags: 0

@@ -38,7 +38,10 @@ namespace Choanji
 					case ContextType.WORLD:
 						WorldScene.g.SetActive(true);
 						if (Cameras.world)
+						{
 							Cameras.world.transform.SetParent(TheWorld.parent);
+							Cameras.world.gameObject.SetActive(true);
+						}
 						break;
 
 					case ContextType.BATTLE:

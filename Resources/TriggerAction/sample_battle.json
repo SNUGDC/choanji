@@ -1,0 +1,15 @@
+{
+	"action": {
+		"type": "SEQUENCE",
+		"sequence": [
+			{
+				"type": "OPEN_DIALOG",
+				"dialog": "엄마가 손수 만든 음식이 공격을 하였다!"
+			},
+			{
+				"type": "START_BATTLE",
+				"battler": "SAMPLE_01"
+			}
+		]
+	}
+}
