@@ -7,6 +7,7 @@ namespace Choanji.Battle
 	{
 		NONE = 0,
 		DMG,
+		HEAL,
 		AVOID_HIT,
 		STAT_MOD,
 		BUFF_ATK,
@@ -39,6 +40,28 @@ namespace Choanji.Battle
 			var _val = (HP)(int)_data["dmg"];
 			dmg = new Damage(_ele, _val);
 			accuracy = _data.IntOrDefault("accuracy", 100);
+		}
+	}
+
+	public sealed class ActionHeal : Action_
+	{
+		public readonly HP? val;
+		public readonly Percent? per;
+
+		public ActionHeal(JsonData _data)
+			: base(ActionType.HEAL)
+		{
+			JsonData _val;
+
+			if (_data.TryGet("val", out _val))
+				val = (HP)(int) _val;
+			else if (_data.TryGet("per", out _val))
+				per = (Percent)(int)_val;
+			else
+			{
+				D.Assert(false);
+				val = 0;
+			}
 		}
 	}
 
@@ -97,6 +120,8 @@ namespace Choanji.Battle
 			{
 				case ActionType.DMG:
 					return new ActionDmg(_data);
+				case ActionType.HEAL:
+					return new ActionHeal(_data);
 				case ActionType.STAT_MOD:
 					return new ActionStatMod(_data);
 				case ActionType.BUFF_ATK:

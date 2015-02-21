@@ -11,7 +11,11 @@ namespace Choanji.Battle
 		{
 			handle = ++sAlloc;
 
-			delay = _data.IntOrDefault("delay", 0);
+			JsonData _limit;
+			if (_data.TryGet("limit", out _limit))
+				limit = (int)_limit;
+
+			delay = _data.IntOrDefault("delay");
 
 			JsonData _triggerData;
 			if (_data.TryGet("trigger", out _triggerData))
@@ -24,6 +28,7 @@ namespace Choanji.Battle
 
 		public readonly TAHandle handle;
 
+		public readonly int? limit;
 		public readonly int delay;
 		public readonly Trigger trigger;
 		public readonly Action_ action;

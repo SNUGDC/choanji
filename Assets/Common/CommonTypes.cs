@@ -1,5 +1,7 @@
 ﻿namespace Choanji
 {
+	public enum Percent { }
+
 	public enum Gold { }
 
 	public enum HP { }

@@ -8,6 +8,8 @@ namespace Choanji.Battle
 	{
 		private class TAInfo
 		{
+			public int count;
+
 			public readonly TA ta;
 			public readonly Battler battler;
 			public Action cleanup;
@@ -67,20 +69,28 @@ namespace Choanji.Battle
 			switch (_when)
 			{
 				case TriggerWhenType.BATTLE_START:
-					{
-						Action _fire = () => TestAndFire(_battler, _ta, null);
-						TheBattle.onStart += _fire;
-						_taInfo.cleanup = () => { TheBattle.onStart -= _fire; };
-						break;
-					}
+				{
+					Action _fire = () => TestAndFireAndWorn(_taInfo, null);
+					TheBattle.onStart += _fire;
+					_taInfo.cleanup = () => { TheBattle.onStart -= _fire; };
+					break;
+				}
+
+				case TriggerWhenType.BEFORE_START_TURN:
+				{
+					Action _fire = () => TestAndFireAndWorn(_taInfo, null);
+					TheBattle.battle.onTurnStart += _fire;
+					_taInfo.cleanup = () => { TheBattle.battle.onTurnStart -= _fire; };
+					break;
+				}
 
 				case TriggerWhenType.BEFORE_HIT:
-					{
-						Action<Damage> _fire = _dmg => TestAndFire(_battler, _ta, _dmg);
-						_battler.beforeHit += _fire;
-						_taInfo.cleanup = () => { _battler.beforeHit -= _fire; };
-						break;
-					}
+				{
+					Action<Damage> _fire = _dmg => TestAndFireAndWorn(_taInfo, _dmg);
+					_battler.beforeHit += _fire;
+					_taInfo.cleanup = () => { _battler.beforeHit -= _fire; };
+					break;
+				}
 
 				default:
 					L.E("when " + _when + " is not implemented.");
@@ -153,6 +163,16 @@ namespace Choanji.Battle
 				case ActionType.DMG:
 					return Fire(_battler, (ActionDmg)_action);
 
+				case ActionType.HEAL:
+				{
+					var _theAction = ((ActionHeal)_action);
+					if (_theAction.val.HasValue)
+						_battler.Heal(_theAction.val.Value);
+					else if (_theAction.per.HasValue)
+						_battler.Heal(_theAction.per.Value);
+					break;
+				}
+
 				case ActionType.AVOID_HIT:
 					_battler.blockHitOneTime = true;
 					break;
@@ -176,10 +196,10 @@ namespace Choanji.Battle
 
 				default:
 					L.E("action " + _action.type + " is not implemented.");
-					break;
+					return null;
 			}
 
-			return null;
+			return new ActionResult();
 		}
 
 		private static ActionResult Fire(Battler _battler, ActionDmg _action)
@@ -225,6 +245,24 @@ namespace Choanji.Battle
 			}
 		}
 
+		private ActionResult TestAndFireAndWorn(TAInfo _taInfo, object _arg)
+		{
+			var _result = TestAndFire(_taInfo.battler, _taInfo.ta, _arg);
+			if (_result == null) return null;
+
+			++_taInfo.count;
+
+			var _limit = _taInfo.ta.limit;
+
+			if (_limit.HasValue)
+			{
+				if (_taInfo.count >= _limit)
+					Remove(_taInfo.battler, _taInfo.ta);
+			}
+
+			return _result;
+		}
+
 		public ActionResult TestAndFire(Battler _battler, TA _ta, object _arg)
 		{
 			if (_ta.delay == 0)
@@ -233,8 +271,9 @@ namespace Choanji.Battle
 			}
 			else
 			{
-				if (DoTest(_ta.trigger, _arg))
-					mDelayedFires.Add(new DelayedFire(mCurTurn, _battler, _ta, _arg));
+				if (!DoTest(_ta.trigger, _arg))
+					return null;
+				mDelayedFires.Add(new DelayedFire(mCurTurn, _battler, _ta, _arg));
 				return new ActionDelayedResult();
 			}
 		}

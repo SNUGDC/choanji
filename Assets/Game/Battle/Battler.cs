@@ -139,6 +139,16 @@ namespace Choanji.Battle
 			return _trueDmg;
 		}
 
+		public void Heal(HP _val)
+		{
+			hp += (int)_val;
+		}
+
+		public void Heal(Percent _val)
+		{
+			hp += (int)(((int) hpMax) * ((int)_val / 100f));
+		}
+
 		public AP CalConsumption(AP _val)
 		{
 			var _mod = CalStat(StatType.AP_CONSUME);

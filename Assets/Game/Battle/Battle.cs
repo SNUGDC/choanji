@@ -40,8 +40,9 @@ namespace Choanji.Battle
 
 		public Action<Result, Action> endDelegate;
 
-		public Action<Battler, Card, ActionResult, Action> onCardPerform;
+		public Action onTurnStart;
 		public Action onTurnEnd;
+		public Action<Battler, Card, ActionResult, Action> onCardPerform;
 		public Action<Result> onFinish;
 
 		public Battle(Mode _mode, State _state)
@@ -69,11 +70,12 @@ namespace Choanji.Battle
 
 		public void StartTurn()
 		{
+			onTurnStart.CheckAndCall();
+
 			state.battlerA.AfterTurnEnd();
 			state.battlerB.AfterTurnEnd();
 
-			foreach (var _result in mTA.FireDelayed())
-				continue;
+			foreach (var _result in mTA.FireDelayed()) {}
 			
 			SelectCards();
 		}
@@ -108,7 +110,14 @@ namespace Choanji.Battle
 		{
 			L.D("perform");
 
-			var _result = mTA.TestAndFire(_battler, _card.data.active.perform, null);
+			ActionResult _result = null;
+
+			var _perform = _card.data.active.perform;
+
+			if (_perform.trigger == null)
+				_result = mTA.TestAndFire(_battler, _perform, null);
+			else
+				mTA.Add(_battler, _perform);
 
 			PhaseDoneType _doneType;
 

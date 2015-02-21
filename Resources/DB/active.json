@@ -152,7 +152,7 @@
 	"DEF_CRE_01": {
 		"name": "DEF_CRE_01",
 		"type": "DEF",
-		"detail": "적의 ckddml 속성 공격을 잘 방어한다.",
+		"detail": "적의 창의 속성 공격을 잘 방어한다.",
 		"cost": 70,
 		"perform": {
 			"action": {
@@ -170,7 +170,7 @@
 		"detail": "체력을 3턴 동안 조금씩 회복한다.",
 		"cost": 70,
 		"perform": {
-			"dur": 3,
+			"limit": 3,
 			"trigger": {
 				"when": "BEFORE_START_TURN"
 			},
@@ -410,14 +410,9 @@
 		"cost": 100,
 		"perform": {
 			"action": {
-				"type": "AP_MOD",
-				"target": "OTHER",
-				"val": -50
-			}
-			/*,{
-				"type": "AP_MOD",
+				"type": "AP_STEAL",
 				"val": 50
-			}*/
+			}
 		}
 	},
 	
@@ -454,7 +449,6 @@
 				"type": "DMG_CONVERT_ELE",
 				"target": "OTHER",
 				"dur": 1,
-				"src": "ALL",
 				"dst": "NOR"
 			}
 		}

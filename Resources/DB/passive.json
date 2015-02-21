@@ -138,11 +138,11 @@
 		}
 	},
 	
-	"CPR": {
+	"CPR": { // 보류
 		"name": "인공호흡",
 		"detail": "전투 중 단 한번만 기절에서 깨어난다.",
 		"perform": {
-			"mode": "once",
+			"limit": 1,
 			"trigger": {
 				"when": "DEAD"
 			},
