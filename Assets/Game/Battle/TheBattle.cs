@@ -37,7 +37,7 @@ namespace Choanji.Battle
 		public static void Start()
 		{
 			onStart.CheckAndCall();
-			battle.SelectCards();
+			battle.StartTurn();
 		}
 
 		public static void Done(Result _result)

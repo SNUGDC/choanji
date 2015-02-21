@@ -71,9 +71,8 @@
 		"detail": "무속성 공격의 데미지를 적게 입는다.",
 		"perform": {
 			"action": {
-				"type": "BUFF_DEF",
-				"ele": "NOR",
-				"per": 30
+				"type": "STAT_MOD",
+				"RST": { "NOR": 30 }
 			}
 		}
 	},

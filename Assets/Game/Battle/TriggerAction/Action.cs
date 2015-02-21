@@ -8,8 +8,8 @@ namespace Choanji.Battle
 		NONE = 0,
 		DMG,
 		AVOID_HIT,
+		STAT_MOD,
 		BUFF_ATK,
-		BUFF_DEF,
 	}
 
 	public class Action_
@@ -55,8 +55,22 @@ namespace Choanji.Battle
 		}
 	}
 
+	public sealed class ActionStatMod : Action_
+	{
+		public readonly StatSet stat;
+
+		public ActionStatMod(JsonData _data)
+			: base(ActionType.STAT_MOD)
+		{
+			stat = new StatSet(_data);
+		}
+	}
+
 	public class ActionResult
 	{ }
+
+	public class ActionDelayedResult : ActionResult
+	{}
 
 	public class ActionDmgResult : ActionResult
 	{
@@ -78,8 +92,9 @@ namespace Choanji.Battle
 			{
 				case ActionType.DMG:
 					return new ActionDmg(_data);
+				case ActionType.STAT_MOD:
+					return new ActionStatMod(_data);
 				case ActionType.BUFF_ATK:
-				case ActionType.BUFF_DEF:
 					return new ActionBuffEle(_type, _data);
 				default:
 					return new Action_(_type);

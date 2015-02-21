@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using Gem;
+using LitJson;
 
 namespace Choanji.Battle
 {
@@ -10,6 +11,8 @@ namespace Choanji.Battle
 		{
 			handle = ++sAlloc;
 
+			delay = _data.IntOrDefault("delay", 0);
+
 			JsonData _triggerData;
 			if (_data.TryGet("trigger", out _triggerData))
 				trigger = new Trigger(_triggerData);
@@ -20,6 +23,8 @@ namespace Choanji.Battle
 		private static TAHandle sAlloc;
 
 		public readonly TAHandle handle;
+
+		public readonly int delay;
 		public readonly Trigger trigger;
 		public readonly Action_ action;
 

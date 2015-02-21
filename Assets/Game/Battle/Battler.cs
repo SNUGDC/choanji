@@ -44,7 +44,7 @@ namespace Choanji.Battle
 
 		public StatSet baseStat { get { return data.stat; } }
 		public readonly StatSet partyStat;
-		public readonly StatSet dynamicStat = new StatSet();
+		public StatSet dynamicStat = new StatSet();
 		public Party party { get { return data.party; } }
 
 		public readonly HP hpMax;

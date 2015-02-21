@@ -16,7 +16,7 @@ namespace Choanji.Battle
 		}
 	}
 
-	public partial class Battle
+	public class Battle
 	{
 		private class AgentInfo
 		{
@@ -67,7 +67,15 @@ namespace Choanji.Battle
 				mTA.Add(state.battlerB, _card.data.passive.perform);
 		}
 
-		public void SelectCards()
+		public void StartTurn()
+		{
+			foreach (var _result in mTA.FireDelayed())
+				continue;
+			
+			SelectCards();
+		}
+
+		private void SelectCards()
 		{
 			mAgentA.agent.StartCardSelect();
 			mAgentB.agent.StartCardSelect();
@@ -97,7 +105,7 @@ namespace Choanji.Battle
 		{
 			L.D("perform");
 
-			var _result = TAManager.Fire(_battler, _card.data.active.perform.action);
+			var _result = mTA.TestAndFire(_battler, _card.data.active.perform, null);
 
 			PhaseDoneType _doneType;
 

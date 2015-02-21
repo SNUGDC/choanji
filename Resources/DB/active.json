@@ -75,17 +75,17 @@
 	},
 	
 	"NUCLEAR_508": {
-		"name": "그로울링",
+		"name": "NUCLEAR_508",
 		"type": "ATK",
 		"detail": "1턴 후 적에게 강력한 위력의 무속성 데미지를 입힌다.",
 		"cost": 100,
 		"perform": {
+			"delay": 1,
 			"action": {
 				"type": "DMG",
 				"ele": "NOR",
 				"dmg": 150,
-				"accuracy": 80,
-				"delay": 1
+				"accuracy": 80
 			}
 		}
 	},
@@ -112,8 +112,9 @@
 		"cost": 70,
 		"perform": {
 			"action": {
-				"type": "DEF_MOD",
-				"val": 50
+				"type": "STAT_MOD",
+				"dur": 1,
+				"DEF_MOD": 50
 			}
 		}
 	},

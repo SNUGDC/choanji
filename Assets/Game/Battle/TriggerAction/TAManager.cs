@@ -21,6 +21,27 @@ namespace Choanji.Battle
 
 		private readonly List<TAInfo> mTAs = new List<TAInfo>();
 
+		private class DelayedFire
+		{
+			public readonly int start;
+			public int schedule { get { return start + ta.delay; } }
+
+			public readonly Battler battler;
+			public readonly TA ta;
+			public readonly object arg;
+			
+			public DelayedFire(int _start, Battler _battler, TA _ta, object _arg)
+			{
+				start = _start;
+				battler = _battler;
+				ta = _ta;
+				arg = _arg;
+			}
+		}
+
+		private int mCurTurn;
+		private readonly List<DelayedFire> mDelayedFires = new List<DelayedFire>();
+
 		~TAManager()
 		{
 			Clear();
@@ -101,6 +122,29 @@ namespace Choanji.Battle
 			if (_prob >= 100) return true;
 			return UnityEngine.Random.Range(0, 100) < _prob;
 		}
+		
+		public IEnumerable<ActionResult> FireDelayed()
+		{
+			++mCurTurn;
+
+			mDelayedFires.Sort((a, b) => a.schedule.CompareTo(b.schedule));
+
+			var i = 0;
+			foreach (var _delayedFire in mDelayedFires)
+			{
+				if (_delayedFire.schedule >= mCurTurn)
+				{
+					yield return Fire(_delayedFire.battler, _delayedFire.ta.action);
+					++i;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			mDelayedFires.RemoveRange(0, i);
+		}
 
 		public static ActionResult Fire(Battler _battler, Action_ _action)
 		{
@@ -111,6 +155,10 @@ namespace Choanji.Battle
 
 				case ActionType.AVOID_HIT:
 					_battler.blockHitOneTime = true;
+					break;
+
+				case ActionType.STAT_MOD:
+					_battler.dynamicStat += ((ActionStatMod)_action).stat;
 					break;
 
 				case ActionType.BUFF_ATK:
@@ -125,7 +173,7 @@ namespace Choanji.Battle
 					break;
 			}
 
-			return new ActionResult();
+			return null;
 		}
 
 		private static ActionResult Fire(Battler _battler, ActionDmg _action)
@@ -171,23 +219,45 @@ namespace Choanji.Battle
 			}
 		}
 
-		private static bool TestAndFire(Battler _battler, TA _ta, object _arg)
+		public ActionResult TestAndFire(Battler _battler, TA _ta, object _arg)
 		{
-			if (_ta.trigger.where != null
-				&& !Test(_ta.trigger.where, _arg))
+			if (_ta.delay == 0)
+			{
+				return DoTestAndFire(_battler, _ta, _arg);
+			}
+			else
+			{
+				if (DoTest(_ta.trigger, _arg))
+					mDelayedFires.Add(new DelayedFire(mCurTurn, _battler, _ta, _arg));
+				return new ActionDelayedResult();
+			}
+		}
+
+		private static bool DoTest(Trigger _trigger, object _arg)
+		{
+			if (_trigger == null)
+				return true;
+
+			if (_trigger.where != null
+				&& !Test(_trigger.where, _arg))
 			{
 				return false;
 			}
 
-			if (_ta.trigger.prob.HasValue
-				&& !Test(_ta.trigger.prob.Value))
+			if (_trigger.prob.HasValue
+				&& !Test(_trigger.prob.Value))
 			{
 				return false;
 			}
-
-			Fire(_battler, _ta.action);
 
 			return true;
+		}
+
+		private static ActionResult DoTestAndFire(Battler _battler, TA _ta, object _arg)
+		{
+			if (!DoTest(_ta.trigger, _arg))
+				return null;
+			return Fire(_battler, _ta.action);
 		}
 	}
 }
