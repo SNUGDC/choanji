@@ -9,8 +9,12 @@ namespace Choanji.Battle
 
 		public void SetBattler(string _key)
 		{
-			renderer_.sprite = R.BattleUI.Spr.BATTLER_FIELD_ILLUST(_key);
-			transform.SetLPosY(renderer_.sprite.rect.height / 200);
+			var _spr = R.BattleUI.Spr.BATTLER_FIELD_ILLUST(_key);
+			if (_spr)
+			{
+				renderer_.sprite = _spr;
+				transform.SetLPosY(renderer_.sprite.rect.height / 200);
+			}
 		}
 	}
 }

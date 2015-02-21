@@ -16,8 +16,30 @@
 			}
 		},
 		"party": {
-			"passive": ["KEYBOARD_WARRIOR", "LOGICAL_CRITICS"],
-			"active": ["BASIC_VOCA", "LEGO_MAKER"]
+			"passive": ["MILITARY"],
+			"active": ["MILITARY"]
+		}
+	},
+	
+	"SAMPLE_02": {
+		"name": "공대생 2호기",
+		"stat": {
+			"HP": 300,
+			"AP": 100,
+			"AP_REGEN": 10,
+			"STR": 50,
+			"DEF": 30,
+			"SPD": 10,
+			"RST": {
+				"NOR": 0,
+				"ANA": 50,
+				"MEM": 10,
+				"CRE": 10
+			}
+		},
+		"party": {
+			"passive": [],
+			"active": ["KEYBOARD_WARRIOR"]
 		}
 	}
 }
