@@ -17,7 +17,11 @@ namespace Choanji
 			if (_fullpath.Exists())
 				return new DialogProvider(_fullpath);
 			else
-				return DialogDB.Make(_name);
+			{
+				var _ret = DialogDB.Make(_name);
+				if (_ret != null) return _ret;
+				return new DialogProvider().Add(_name);
+			}
 		}
 	}
 }

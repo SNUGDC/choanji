@@ -12,14 +12,9 @@ namespace Choanji
 			JsonData _dialog;
 
 			if (sDic.TryGet(_key, out _dialog))
-			{
 				return new DialogProvider(_dialog);
-			}
 			else
-			{
-				L.E("dialog of key " + _key + " not exists.");
-				return new DialogProvider();
-			}
+				return null;
 		}
 	}
 }
