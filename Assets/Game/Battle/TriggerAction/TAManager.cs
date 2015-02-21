@@ -185,10 +185,13 @@ namespace Choanji.Battle
 				case ActionType.STAT_MOD:
 				{
 					var _theAction = ((ActionStatMod) _action);
+					var _target = _theAction.target == TargetType.SELF 
+						? _battler : TheBattle.state.Other(_battler);
+
 					if (!_theAction.dur.HasValue)
-						_battler.dynamicStat += _theAction.stat;
+						_target.dynamicStat += _theAction.stat;
 					else
-						_battler.ApplyForDuration(_theAction.stat, _theAction.dur.Value);
+						_target.ApplyForDuration(_theAction.stat, _theAction.dur.Value);
 					break;
 				}
 

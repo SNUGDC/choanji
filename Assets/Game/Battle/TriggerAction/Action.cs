@@ -14,6 +14,11 @@ namespace Choanji.Battle
 		SC_HEAL,
 	}
 
+	public enum TargetType
+	{
+		SELF, OTHER,
+	}
+
 	public class Action_
 	{
 		public readonly ActionType type;
@@ -82,12 +87,18 @@ namespace Choanji.Battle
 	public sealed class ActionStatMod : Action_
 	{
 		public readonly int? dur;
+		public readonly TargetType target;
 		public readonly StatSet stat;
 
 		public ActionStatMod(JsonData _data)
 			: base(ActionType.STAT_MOD)
 		{
 			stat = new StatSet(_data);
+
+			target = TargetType.SELF;
+			JsonData _targetJs;
+			if (_data.TryGet("target", out _targetJs))
+				EnumHelper.TryParse((string) _targetJs, out target);
 
 			JsonData _durJs;
 			if (_data.TryGet("dur", out _durJs))
