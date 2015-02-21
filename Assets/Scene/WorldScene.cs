@@ -8,15 +8,29 @@ namespace Choanji
 		private static WorldScene mG;
 		public static WorldScene g
 		{
-			get { return mG ?? (mG = FindObjectOfType<WorldScene>()); }
+			get
+			{
+				if (mG == null)
+				{
+					mG = FindObjectOfType<WorldScene>();
+					mG.Setup();
+				}
+
+				return mG;
+			}
 		}
 
 		public GameObject world { get { return TheWorld.parent.gameObject; } }
 		public GameObject ui;
 
+		private static bool sIsSetuped;
 		public void Setup()
 		{
-			TheChoanji.g.context = ContextType.WORLD;
+			if (sIsSetuped)
+				return;
+
+			sIsSetuped = true;
+
 			UI.UI.RegKey();
 			UI.Popups.Setup();
 			TheInput.world.Reg(new InputBind(InputCode.ESC,
