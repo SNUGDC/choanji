@@ -89,7 +89,7 @@ namespace Choanji
 			if (g == null)
 				return;
 
-			var _cam = Cameras.game;
+			var _cam = Cameras.world;
 			D.Assert(_cam);
 
 			var _camPos = _cam.transform.position;

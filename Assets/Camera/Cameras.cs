@@ -5,27 +5,27 @@ namespace Choanji
 {
 	public static class Cameras
 	{
-		private static Camera mGame;
+		private static Camera mWorld;
 
-		public static Camera game
+		public static Camera world
 		{
-			get { return mGame; }
+			get { return mWorld; }
 			set
 			{
-				if (mGame != null)
+				if (mWorld != null)
 					L.E(L.M.CALL_RETRY("set camera"));
 
-				mGame = value;
+				mWorld = value;
 
-				gameMani = null;
+				worldMani = null;
 
-				if (game)
+				if (world)
 				{
-					gameMani = game.gameObject.AddIfNotExists<TransformManipulator>();
+					worldMani = world.gameObject.AddIfNotExists<TransformManipulator>();
 				}
 			}
 		}
 
-		public static TransformManipulator gameMani { get; private set; }
+		public static TransformManipulator worldMani { get; private set; }
 	}
 }

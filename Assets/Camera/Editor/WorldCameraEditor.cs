@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Choanji
 {
-	[CustomEditor(typeof(GameCamera))]
-	public class GameCameraEditor : Editor
+	[CustomEditor(typeof(WorldCamera))]
+	public class WorldCameraEditor : Editor
 	{
-		private GameCamera mThis;
+		private WorldCamera mThis;
 
 		void OnEnable()
 		{
-			mThis = (GameCamera) target;
+			mThis = (WorldCamera)target;
 		}
 
 		public override void OnInspectorGUI()

@@ -2,7 +2,6 @@
 
 namespace Choanji
 {
-
 	public class DialogInit : MonoBehaviour
 	{
 		public Dialog prefab;
@@ -12,6 +11,7 @@ namespace Choanji
 		{
 			TheDialog.g.dialogPrefab = prefab;
 			TheDialog.g.dialogParent = parent;
+			Destroy(gameObject, 0);
 		}
 	}
 

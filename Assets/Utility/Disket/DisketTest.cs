@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using Gem;
 using UnityEngine;
 
 namespace Choanji
@@ -14,6 +13,7 @@ namespace Choanji
 				Disket.LoadOrDefault("test");
 				DisketHelper.SetupCommon();
 				DisketHelper.SetupWorld();
+				TheChoanji.g.context = ContextType.WORLD;
 			}
 		}
 	}

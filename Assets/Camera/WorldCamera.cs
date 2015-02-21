@@ -2,13 +2,13 @@
 
 namespace Choanji
 {
-	public class GameCamera : MonoBehaviour
+	public class WorldCamera : MonoBehaviour
 	{
 		public Camera cam;
 
 		void Awake()
 		{
-			Cameras.game = cam;
+			Cameras.world = cam;
 		}
 	}
 

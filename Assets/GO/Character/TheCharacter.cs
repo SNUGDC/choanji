@@ -18,6 +18,7 @@ namespace Choanji
 				}
 
 				sCh = value;
+				sCh.transform.SetParent(TheWorld.parent);
 
 				ctrl = sCh.GetComponent<CharacterCtrl>();
 				D.Assert(ctrl != null);
@@ -26,7 +27,7 @@ namespace Choanji
 				D.Assert(ch.GetComponent<CharacterInputAgent>() == null);
 				ch.gameObject.AddComponent<CharacterInputAgent>();
 
-				Cameras.gameMani.default_ = DefaultCam;
+				Cameras.worldMani.default_ = DefaultCam;
 			}
 		}
 

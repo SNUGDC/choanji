@@ -8,9 +8,14 @@ namespace Choanji.Battle
 {
 	public partial class Scene : MonoBehaviour
 	{
-		public static Scene g;
+		private static Scene mG;
+		public static Scene g
+		{
+			get { return (mG ?? (mG = FindObjectOfType<Scene>())); }
+		}
 
-		public Canvas parent;
+		public GameObject root;
+		public Canvas canvas;
 
 		public FieldView field;
 		public BattlerView battler;
@@ -25,11 +30,6 @@ namespace Choanji.Battle
 
 		public MessageView msg;
 		public Poper poper;
-
-		void Awake()
-		{
-			g = this;
-		}
 
 		void Start()
 		{

@@ -18,7 +18,33 @@ namespace Choanji
 					return;
 				}
 
+				switch (mContext)
+				{
+					case ContextType.WORLD:
+						WorldScene.g.SetActive(false);
+						if (Cameras.world)
+							Cameras.world.gameObject.SetActive(false);
+						break;
+
+					case ContextType.BATTLE:
+						Battle.Scene.g.root.SetActive(false);
+						break;
+				}
+
 				mContext = value;
+
+				switch (value)
+				{
+					case ContextType.WORLD:
+						WorldScene.g.SetActive(true);
+						if (Cameras.world)
+							Cameras.world.transform.SetParent(TheWorld.parent);
+						break;
+
+					case ContextType.BATTLE:
+						Battle.Scene.g.root.SetActive(true);
+						break;
+				}
 			}
 		}
 
