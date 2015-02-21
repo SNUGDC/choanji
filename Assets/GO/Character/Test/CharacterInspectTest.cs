@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR
 
-using Gem;
 using UnityEngine;
 
 namespace Choanji
@@ -13,7 +12,7 @@ namespace Choanji
 
 		void Start()
 		{
-			ch.inspectee = new DialogInspectee { dialog = new DialogProvider(DialogHelper.FullPath(dialog)) };
+			ch.inspectee = new DialogInspectee { dialog = DialogHelper.MakeProvider(dialog) };
 		}
 
 	}

@@ -34,7 +34,7 @@ namespace Choanji
 	        if (data.dialog != null)
 	        {
 				var _inspectee = _ch.AddComponent<CharacterInspectee>();
-				_inspectee.inspectee = new DialogInspectee { dialog = new DialogProvider(DialogHelper.FullPath(data.dialog)) };   
+				_inspectee.inspectee = new DialogInspectee { dialog = DialogHelper.MakeProvider(data.dialog) };   
 	        }
 
 			if (!_ctrl.TrySetPosition(_pos))
