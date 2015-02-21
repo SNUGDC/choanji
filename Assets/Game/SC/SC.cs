@@ -3,9 +3,9 @@
 	// status condition
 	public enum SC
 	{
-		BRN,
-		FRZ,
-		PAR,
+		MEN, // 멘탈붕괴, mental destruction
+		SLO, // 귀차니즘, sloth
+		FAT, // 의욕감퇴, fatigue
 	}
 
 	public static class SCHelper
