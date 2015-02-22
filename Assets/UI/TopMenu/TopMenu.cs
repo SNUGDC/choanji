@@ -18,24 +18,21 @@ namespace Choanji.UI
 		public void OnDeckClicked()
 		{
 			var _popup = ThePopup.Open(Popups.PARTY);
-			if (_popup)
-			{
-				_popup.onClose += onPopupClosed;
+			if (!_popup) return;
 
-				var _deck = (DeckPopup) _popup;
-				_deck.partyTab.party = Player.party;
-				_deck.partyTab.stat = Player.stat + Player.party.CalStat();
+			_popup.onClose += onPopupClosed;
 
-				_deck.partyTab.onRemoveRequest = (_card, _commit) =>
-				{
-					if (Player.party.Remove(_card))
-						_deck.partyTab.party = Player.party;
-					else
-						TheToast.Open("적어도 한장의 카드는 있어야해!");
-				};
+			var _deck = (DeckPopup)_popup;
+			_deck.party = Player.party;
+			_deck.afterRefreshPartyTab += () => RefreshPartyTab(_deck);
+			RefreshPartyTab(_deck);
 
-				onPopupOpened.CheckAndCall();
-			}
+			onPopupOpened.CheckAndCall();
+		}
+
+		private void RefreshPartyTab(DeckPopup _deck)
+		{
+			_deck.partyTab.stat = Player.stat + Player.party.CalStat();
 		}
 
 		public void OnBagClicked()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Gem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,8 +19,6 @@ namespace Choanji.UI
 		public RectTransform party2;
 		private readonly List<PartyCell> mCells = new List<PartyCell>(Const.PARTY_MAX);
 
-		public Action<Card, Action> onRemoveRequest;
-
 		public StatSet stat 
 		{
 			set
@@ -33,54 +30,66 @@ namespace Choanji.UI
 			}
 		}
 
+		private Party mParty;
 		public Party party
 		{
+			get { return mParty; }
 			set
 			{
-				if (mCells.Empty())
-				{
-					for (var i = 0; i != Const.PARTY_MAX; ++i)
-					{
-						var _cell = DB.g.partyCellPrf.Instantiate();
-						var _trans = _cell.gameObject.transform;
-						_trans.SetParent(i < Const.PARTY_MAX / 2 ? party1 : party2, false);
-
-						var _pos = i%3;
-
-						var _rect = (RectTransform) _trans;
-						_rect.anchorMin = new Vector2(_pos * (CARD_WIDTH + CARD_MARGIN), 0);
-						_rect.anchorMax = new Vector2((_pos + 1) * CARD_WIDTH + _pos * CARD_MARGIN, 1);
-						_rect.offsetMin = Vector2.zero;
-						_rect.offsetMax = Vector2.zero;
-
-						mCells.Add(_cell);
-					}
-				}
-
-				var _idx = 0;
-
-				foreach (var _card in value)
-				{
-					var _cell = mCells[_idx];
-					_cell.card = _card.first;
-
-					var _cardCapture = _card.first;
-					var _idxCapture = _idx;
-
-					_cell.onCancel = () => onRemoveRequest.CheckAndCall(_cardCapture, () => Remove(_idxCapture));
-					++_idx;
-				}
-				
-				for (; _idx < Const.PARTY_MAX; ++_idx)
-				{
-					mCells[_idx].card = null;
-				}
+				mParty = value;
+				Refresh();
 			}
 		}
 
-		private void Remove(int _idx)
+		public void Refresh()
 		{
-			mCells[_idx].card = null;
+			if (mParty == null)
+				return;
+
+			if (mCells.Empty())
+			{
+				for (var i = 0; i != Const.PARTY_MAX; ++i)
+				{
+					var _cell = DB.g.partyCellPrf.Instantiate();
+					var _trans = _cell.gameObject.transform;
+					_trans.SetParent(i < Const.PARTY_MAX / 2 ? party1 : party2, false);
+
+					var _pos = i % 3;
+
+					var _rect = (RectTransform)_trans;
+					_rect.anchorMin = new Vector2(_pos * (CARD_WIDTH + CARD_MARGIN), 0);
+					_rect.anchorMax = new Vector2((_pos + 1) * CARD_WIDTH + _pos * CARD_MARGIN, 1);
+					_rect.offsetMin = Vector2.zero;
+					_rect.offsetMax = Vector2.zero;
+
+					mCells.Add(_cell);
+				}
+			}
+
+			var _idx = 0;
+
+			foreach (var _card in mParty)
+			{
+				var _cell = mCells[_idx];
+				_cell.card = _card.first;
+
+				var _cardCapture = _card.first;
+
+				_cell.onCancel = () =>
+				{
+					if (party.Remove(_cardCapture))
+						Refresh();
+					else
+						TheToast.Open("적어도 한장의 액티브가드는 있어야한다!");
+				};
+
+				++_idx;
+			}
+
+			for (; _idx < Const.PARTY_MAX; ++_idx)
+			{
+				mCells[_idx].card = null;
+			}
 		}
 	}
 }

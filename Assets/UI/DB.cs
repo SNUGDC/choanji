@@ -9,5 +9,6 @@ namespace Choanji.UI
 		public DeckPopup deckPopupPrf;
 		public PartyCell partyCellPrf;
 		public CardDetail cardDetailPrf;
+		public DeckCell deckCellPrf;
 	}
 }

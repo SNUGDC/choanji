@@ -7,17 +7,32 @@ namespace Choanji
 {
 	public class DeckCell : MonoBehaviour
 	{
+		public static DeckCell sCur;
+		public DeckCell cur
+		{
+			get { return sCur; }
+			set
+			{
+				sCur = value;
+				if (cur != null)
+					lastFocus = cur;
+			}
+		}
+
+		public static DeckCell lastFocus;
+
 		public Image illust;
 		public GameObject passive;
 		public new GameObject active;
 		public Sprite hidden;
 
-		private Card mCard;
-		public CardMode? mMode;
+		public Card card { get; private set; }
+		public CardMode? mode { get; private set; }
 
 		public bool isHidden { get; private set; }
-		public Func<bool> shouldShowPassive;
-		public Func<bool> shouldShowActive;
+		public bool isSelectionOpened { get { return this == cur; } }
+		public Func<bool> canSelectPassive;
+		public Func<bool> canSelectActive;
 
 		public Action<Card, CardMode, Action<bool>> equipRequest;
 		public Action<Card, Action<bool>> unequipRequest;
@@ -26,16 +41,18 @@ namespace Choanji
 
 		private void SetModeVisiblity(bool _passive, bool _active)
 		{
-			passive.SetActive(_passive && shouldShowPassive());
-			active.SetActive(_active && shouldShowActive());
+			passive.SetActive(_passive);
+			active.SetActive(_active);
 		}
 
 		public void Hide()
 		{
 			if (isHidden)
 				return;
+			if (cur == this)
+				cur = null;
 			isHidden = true;
-			mCard = null;
+			card = null;
 			illust.sprite = hidden;
 			SetModeVisiblity(false, false);
 		}
@@ -43,7 +60,7 @@ namespace Choanji
 		public void Show(Card _card)
 		{
 			isHidden = false;
-			mCard = _card;
+			card = _card;
 			illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_card.data.key);
 			SetModeVisiblity(false, false);
 		}
@@ -56,26 +73,42 @@ namespace Choanji
 				return;
 			}
 
+			if (cur)
+				cur.CloseSelection();
+
+			cur = this;
+
 			SetModeVisiblity(true, true);
 		}
 
 		public void CloseSelection()
 		{
-			if (mMode.HasValue)
-				DoEquip(mMode.Value);
+			if (cur == this)
+				cur = null;
+
+			if (mode.HasValue)
+				DoEquip(mode.Value);
 			else 
 				SetModeVisiblity(false, false);
 		}
 
+		public void Equip(CardMode _mode)
+		{
+			DoEquip(_mode);
+		}
+
 		private void DoEquip(CardMode _mode)
 		{
+			if (cur == this)
+				cur = null;
+
 			if (isHidden)
 			{
 				L.W("cannot equip while hidden.");
 				return;
 			}
 
-			mMode = _mode;
+			mode = _mode;
 
 			switch (_mode)
 			{
@@ -95,32 +128,45 @@ namespace Choanji
 
 		public void OnPointerUp()
 		{
+			if (isHidden)
+				return;
+
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (!isHidden)
-					OpenSelection();
+				OpenSelection();
 			}
 			else if (Input.GetMouseButtonUp(2))
 			{
-				if (mCard != null)
-					unequipRequest(mCard, _confirm => Unequip());
+				if (isSelectionOpened)
+					CloseSelection();
+				else if (card != null)
+					unequipRequest(card, _confirm =>
+					{
+						if (_confirm) Unequip();
+					});
 			}
 		}
 
 		public void OnPassiveClicked()
 		{
-			equipRequest(mCard, CardMode.PASSIVE, _confirm => DoEquip(CardMode.PASSIVE));
+			if (canSelectPassive())
+				equipRequest(card, CardMode.PASSIVE, _confirm => DoEquip(CardMode.PASSIVE));
+			else
+				TheToast.Open("파티가 가득 찼다!");
 		}
 
 		public void OnActiveClicked()
 		{
-			equipRequest(mCard, CardMode.ACTIVE, _confirm => DoEquip(CardMode.ACTIVE));
+			if (canSelectActive())
+				equipRequest(card, CardMode.ACTIVE, _confirm => DoEquip(CardMode.ACTIVE));
+			else
+				TheToast.Open("파티가 가득 찼다!");
 		}
 
 		public void OnPointerHover(bool _enter)
 		{
-			if (mCard != null)
-				onPointerHover.CheckAndCall(mCard, mMode, _enter);
+			if (card != null)
+				onPointerHover.CheckAndCall(card, mode, _enter);
 		}
 	}
 }

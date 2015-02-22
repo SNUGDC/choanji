@@ -79,9 +79,8 @@ namespace Choanji.UI
 
 			sTopMenu = DB.g.topMenuPrf.Instantiate();
 			var _trans = sTopMenu.transform;
-			_trans.SetParent(canvas.transform);
+			_trans.SetParent(canvas.transform, false);
 			var _rect = ((RectTransform)_trans);
-			_rect.Fill();
 			_trans.Translate(0, _rect.H(), 0);
 
 			sTopMenu.onPopupOpened += delegate

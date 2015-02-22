@@ -11,6 +11,8 @@ namespace Choanji
 
 		public static bool isLoaded { get { return !mDic.Empty(); } }
 
+		public static int count { get { return mDic.Count; } }
+
 		public static void Load()
 		{
 			if (isLoaded)
@@ -33,6 +35,11 @@ namespace Choanji
 		{
 			if (!isLoaded) Load();
 			return mDic.GetOrDefault(_id);
+		}
+
+		public static IEnumerable<CardData> GetEnum()
+		{
+			return mDic.Values;
 		}
 	}
 }

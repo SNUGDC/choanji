@@ -14,8 +14,8 @@ namespace Choanji.UI
 
 		void Start()
 		{
-			cell.shouldShowPassive = () => true;
-			cell.shouldShowActive = () => true;
+			cell.canSelectPassive = () => true;
+			cell.canSelectActive = () => true;
 
 			cell.equipRequest = (_card, _mode, _confirm) => _confirm(true);
 			cell.unequipRequest = (_card, _confirm) => _confirm(false);

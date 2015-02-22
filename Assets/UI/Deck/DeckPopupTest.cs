@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using Choanji.Battle;
 using UnityEngine;
 
 namespace Choanji.UI
@@ -10,9 +9,12 @@ namespace Choanji.UI
 
 		void Start()
 		{
-			var _battler = BattlerDB.Get(BattlerHelper.MakeID("SAMPLE_01"));
-			target.partyTab.stat = _battler.stat;
-			target.partyTab.party = _battler.party;
+			Disket.LoadOrDefault("test");
+			DisketHelper.SetupCommon();
+
+			target.party = Player.party;
+			target.deckTab.deck = Player.deck;
+			target.partyTab.stat = Player.stat;
 		}
 	}
 }
