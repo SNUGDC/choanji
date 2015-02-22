@@ -80,7 +80,9 @@
 		"detail": "1턴 후 적에게 강력한 위력의 무속성 데미지를 입힌다.",
 		"cost": 100,
 		"perform": {
-			"delay": 1,
+			"trigger": {
+				"when": "BEFORE_START_TURN"
+			},
 			"action": {
 				"type": "DMG",
 				"ele": "NOR",
@@ -170,9 +172,9 @@
 		"detail": "체력을 3턴 동안 조금씩 회복한다.",
 		"cost": 70,
 		"perform": {
-			"limit": 3,
 			"trigger": {
-				"when": "BEFORE_START_TURN"
+				"when": "BEFORE_START_TURN",
+				"limit": 3
 			},
 			"action": {
 				"type": "HEAL",
@@ -241,9 +243,9 @@
 		"detail": "속을 3턴 동안 향상시킨다.",
 		"cost": 70,
 		"perform": {
-			"dur": 3,
 			"action": {
 				"type": "STAT_MOD",
+				"dur": 3,
 				"SPD": 30
 			}
 		}
@@ -424,7 +426,9 @@
 			"trigger": {
 				"when": "BEFORE_START_TURN"
 			},
-			"action": "NO_MISS"
+			"action": {
+				"type": "NO_MISS"
+			}
 		}
 	},
 	
@@ -434,7 +438,9 @@
 		"detail": "적과 나 모두의 지속시간, 발동지연 시간을 1턴 줄인다.",
 		"cost": 50,
 		"perform": {
-			"action": "NONE"
+			"action": {
+				"type": "NONE"
+			}
 		}
 	},
 	

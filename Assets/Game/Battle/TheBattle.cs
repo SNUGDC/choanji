@@ -9,6 +9,9 @@ namespace Choanji.Battle
 		public static State state;
 		public static Battle battle;
 
+		public static TriggerManager trigger;
+		public static ActionManager action;
+
 		public static Action<Setup> onSetup;
 		public static Action onStart;
 		public static Action<Result> onDone;
@@ -28,6 +31,9 @@ namespace Choanji.Battle
 			state = new State(
 				new Battler(_setup.battlerA),
 				new Battler(_setup.battlerB));
+
+			trigger = new TriggerManager();
+			action = new ActionManager();
 
 			battle = new Battle(_setup.mode, state) { onFinish = Done };
 

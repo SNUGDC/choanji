@@ -7,25 +7,25 @@ namespace Choanji.Battle
 	{
 		private const float MSG_DELAY = 1;
 
-		public void AnimateActive(Battler _battler, Card _card, ActionResult _result, Action _done)
+		public void AnimateActive(ActionInvoker _invoker, ActionResult _result, Action _done)
 		{
 			var _delay = 0f;
 
-			_delay += AnimateCommon(_battler, _card, _result);
+			_delay += AnimateCommon(_invoker, _result);
 
-			if (TheBattle.state.battlerA == _battler)
-				_delay += AnimateA(_battler, _card, _result);
+			if (TheBattle.state.battlerA == _invoker.battler)
+				_delay += AnimateA(_invoker, _result);
 			else
-				_delay += AnimateB(_battler, _card, _result);
+				_delay += AnimateB(_invoker, _result);
 
 			Timer.g.Add(_delay, _done);
 		}
 
-		private float AnimateCommon(Battler _battler, Card _card, ActionResult _result)
+		private float AnimateCommon(ActionInvoker _invoker, ActionResult _result)
 		{
 			float _delay = 0;
 
-			_delay += PushMessageUseActive(_battler, _card.data.active);
+			_delay += PushMessageUseActive(_invoker, _invoker.card.data.active);
 
 			if (_result is ActionDmgResult)
 			{
@@ -36,7 +36,7 @@ namespace Choanji.Battle
 			return _delay;
 		}
 
-		private float AnimateA(Battler _battler, Card _card, ActionResult _result)
+		private float AnimateA(ActionInvoker _invoker, ActionResult _result)
 		{
 			if (_result is ActionDmgResult)
 			{
@@ -52,7 +52,7 @@ namespace Choanji.Battle
 			return 0;
 		}
 
-		private float AnimateB(Battler _battler, Card _card, ActionResult _result)
+		private float AnimateB(ActionInvoker _invoker, ActionResult _result)
 		{
 			return 0;
 		}

@@ -14,12 +14,12 @@ namespace Choanji.Battle
 
 	public class PhaserDelegate
 	{
-		public PhaserDelegate(Action<Battler, Card, Action<PhaseDoneType>> _start)
+		public PhaserDelegate(Action<ActionInvoker, Action<PhaseDoneType>> _start)
 		{
 			start = _start;
 		}
 		
-		public Action<Battler, Card, Action<PhaseDoneType>> start;
+		public Action<ActionInvoker, Action<PhaseDoneType>> start;
 	}
 
     public class Phaser
@@ -80,7 +80,7 @@ namespace Choanji.Battle
 			    return;
 		    }
 
-			StartCard(_battler, _cards[mRunning], _doneType =>
+			StartCard(new ActionInvoker(_battler, _cards[mRunning]), _doneType =>
 			{
 				if (_doneType == PhaseDoneType.CONTINUE)
 				{
@@ -128,30 +128,27 @@ namespace Choanji.Battle
 			var _spdA = _battlerA.CalStat(StatType.SPD);
 			var _spdB = _battlerB.CalStat(StatType.SPD);
 
-		    Battler _faster;
-			Battler _slower;
-		    Card _fasterCard;
-		    Card _slowerCard;
+			var _invokerA = new ActionInvoker(_battlerA, _cardA);
+			var _invokerB = new ActionInvoker(_battlerB, _cardB);
+
+		    ActionInvoker _faster;
+			ActionInvoker _slower;
 
 		    if (_spdA >= _spdB)
 		    {
-			    _faster = _battlerA;
-			    _slower = _battlerB;
-			    _fasterCard = _cardA;
-			    _slowerCard = _cardB;
+			    _faster = _invokerA;
+				_slower = _invokerB;
 		    }
 		    else
 		    {
-				_faster = _battlerB;
-				_slower = _battlerA;
-				_fasterCard = _cardB;
-				_slowerCard = _cardA;
+				_faster = _invokerB;
+				_slower = _invokerA;
 		    }
 
-			StartCard(_faster, _fasterCard, _doneTypeA =>
+			StartCard(_faster, _doneTypeA =>
 			{
 				if (_doneTypeA == PhaseDoneType.CONTINUE)
-					StartCard(_slower, _slowerCard, _doneTypeB =>
+					StartCard(_slower, _doneTypeB =>
 					{
 						if (_doneTypeB == PhaseDoneType.CONTINUE)
 							Loop();
@@ -163,11 +160,10 @@ namespace Choanji.Battle
 			});
 	    }
 
-	    private void StartCard(Battler _battler, Card _card, Action<PhaseDoneType> _done)
+	    private void StartCard(ActionInvoker _invoker, Action<PhaseDoneType> _done)
 	    {
-			L.D("StartCard " + _card.data.key);
-			_battler.ConsumeAP(_card.data.active.cost);
-		    mDelegate.start(_battler, _card, _done);
+			_invoker.battler.ConsumeAP(_invoker.card.data.active.cost);
+			mDelegate.start(_invoker, _done);
 	    }
 
 		private void Done(PhaseDoneType _doneType)

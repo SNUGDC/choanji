@@ -1,15 +1,19 @@
-﻿using Gem;
+﻿using System.Collections.Generic;
+using Gem;
 using LitJson;
+using Random = UnityEngine.Random;
 
 namespace Choanji.Battle
 {
 	public enum ActionType
 	{
 		NONE = 0,
+		TA,
+		DICE,
 		DMG,
 		HEAL,
-		AP_CHARGE,
 		AVOID_HIT,
+		AP_CHARGE,
 		STAT_MOD,
 		BUFF_ATK,
 		SC_IMPOSE,
@@ -22,11 +26,53 @@ namespace Choanji.Battle
 		SELF = 0, OTHER,
 	}
 
-	public class Action_
+	public static class ActionHelper
+	{
+		public static bool Dice(Percent _prob)
+		{
+			if ((int)_prob >= 100) return true;
+			return Random.Range(0, 100) < (int)_prob;
+		}
+
+		public static Battler Other(Battler _battler)
+		{
+			return TheBattle.state.Other(_battler);
+		}
+
+		public static Battler Choose(TargetType _target, Battler _self)
+		{
+			return _target == TargetType.SELF 
+				? _self : TheBattle.state.Other(_self);
+		}
+	}
+
+	public struct ActionInvoker
+	{
+		public Battler battler;
+		public Card card;
+
+		public ActionInvoker(Battler _battler, Card _card)
+		{
+			battler = _battler;
+			card = _card;
+		}
+
+		public static implicit operator Battler(ActionInvoker _this)
+		{
+			return _this.battler;
+		}
+
+		public static implicit operator Card(ActionInvoker _this)
+		{
+			return _this.card;
+		}
+	}
+
+	public abstract class Action_
 	{
 		public readonly ActionType type;
 
-		public Action_(ActionType _type)
+		protected Action_(ActionType _type)
 		{
 			type = _type;
 		}
@@ -35,12 +81,53 @@ namespace Choanji.Battle
 		{
 			return _this.type;
 		}
+
+		public abstract ActionResult Invoke(ActionInvoker _invoker, object _arg);
+	}
+
+	public sealed class ActionTA : Action_
+	{
+		public readonly TA ta;
+
+		public ActionTA(JsonData _data)
+			: base(ActionType.TA)
+		{
+			ta = new TA(_data);
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			TheBattle.trigger.Add(_invoker, ta);
+			return null;
+		}
+	}
+
+
+	public sealed class ActionDice : Action_
+	{
+		public Percent prob;
+		public Action_ action;
+
+		public ActionDice(JsonData _data)
+			: base(ActionType.DICE)
+		{
+			prob = (Percent)(int)_data["prob"];
+			action = ActionFactory.Make(_data["action"]);
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			if (ActionHelper.Dice(prob))
+				return TheBattle.action.Fire(_invoker, action, _arg);
+			else 
+				return null;
+		}
 	}
 
 	public sealed class ActionDmg : Action_
 	{
 		public readonly Damage dmg;
-		public readonly int accuracy;
+		public readonly Percent accuracy;
 
 		public ActionDmg(JsonData _data)
 			: base(ActionType.DMG)
@@ -48,7 +135,50 @@ namespace Choanji.Battle
 			var _ele = ElementDB.Search((string)_data["ele"]);
 			var _val = (HP)(int)_data["dmg"];
 			dmg = new Damage(_ele, _val);
-			accuracy = _data.IntOrDefault("accuracy", 100);
+			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			var _battler = _invoker.battler;
+
+			if (ActionHelper.Dice(accuracy))
+			{
+				var _state = TheBattle.state;
+
+				var _dmg = _battler.attackBuilder.Build(dmg);
+
+				var _hitter = _state.Other(_battler);
+				_hitter.beforeHit.CheckAndCall(_dmg);
+
+				if (_hitter.blockHitOneTime)
+				{
+					_hitter.blockHitOneTime = false;
+					return new ActionDmgResult(_invoker)
+					{
+						hit = true,
+						block = true,
+					};
+				}
+				else
+				{
+					var _trueDmg = new Damage(_dmg.ele, _hitter.Hit(_dmg));
+					_hitter.afterHit.CheckAndCall(_trueDmg);
+
+					return new ActionDmgResult(_invoker)
+					{
+						hit = true,
+						dmg = _trueDmg,
+					};
+				}
+			}
+			else
+			{
+				return new ActionDmgResult(_invoker)
+				{
+					hit = false
+				};
+			}
 		}
 	}
 
@@ -72,6 +202,34 @@ namespace Choanji.Battle
 				val = 0;
 			}
 		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			var _battler = _invoker.battler;
+			if (val.HasValue)
+			{
+				_battler.Heal(val.Value);
+				return new ActionHealResult(_invoker, val.Value);
+			}
+			else 
+			{
+				_battler.Heal(per.Value);
+				return new ActionHealResult(_invoker, per.Value);
+			}
+		}
+	}
+
+	public sealed class ActionAvoidHit : Action_
+	{
+		public ActionAvoidHit() : base(ActionType.AVOID_HIT)
+		{
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			_invoker.battler.blockHitOneTime = true;
+			return null;
+		}
 	}
 
 	public sealed class ActionAPCharge : Action_
@@ -83,18 +241,35 @@ namespace Choanji.Battle
 		{
 			val = (AP)_data.IntOrDefault("val", 0);
 		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			_invoker.battler.ChargeAP(val);
+			return new ActionDescriptResult(_invoker, "AP 충전 " + val);
+		}
 	}
 
 	public sealed class ActionBuffEle : Action_
 	{
 		public readonly ElementID ele;
-		public readonly int per;
+		public readonly Percent per;
 
 		public ActionBuffEle(ActionType _type, JsonData _data)
 			: base(_type)
 		{
 			ele = ElementDB.Search((string) _data["ele"]);
-			per = (int) _data["per"];
+			per = (Percent)(int)_data["per"];
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			if (type == ActionType.BUFF_ATK)
+			{
+				_invoker.battler.attackModifier[ele] += (int)per;
+				return new ActionDescriptResult(_invoker, string.Format("{0} 강화 {1}%", ElementDB.Get(ele).name, per));
+			}
+
+			return null;
 		}
 	}
 
@@ -118,16 +293,21 @@ namespace Choanji.Battle
 			if (_data.TryGet("dur", out _durJs))
 				dur = (int)_durJs;
 		}
-	}
 
-	public sealed class ActionSC : Action_
-	{
-		public readonly SC sc;
-
-		public ActionSC(ActionType _type, JsonData _data)
-			: base(_type)
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
 		{
-			EnumHelper.TryParse((string)_data["sc"], out sc);
+			var _target = ActionHelper.Choose(target, _invoker.battler);
+
+			if (!dur.HasValue)
+			{
+				_target.dynamicStat += stat;
+				return new ActionDescriptResult(_invoker, "스텟 상승");
+			}
+			else
+			{
+				_target.ApplyForDuration(stat, dur.Value);
+				return new ActionDescriptResult(_invoker, dur.Value + "턴 동안 스텟 상승");
+			}
 		}
 	}
 
@@ -142,6 +322,31 @@ namespace Choanji.Battle
 			EnumHelper.TryParse((string)_data["sc"], out sc);
 			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
 		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			if (ActionHelper.Other(_invoker.battler).TryImposeSC(sc, accuracy))
+				return null;
+			else
+				return new ActionDescriptResult(_invoker, "상태이상 " + sc + "을(를) 거는데 실패하였다!");
+		}
+	}
+
+	public sealed class ActionSCImmune : Action_
+	{
+		public readonly SC sc;
+
+		public ActionSCImmune(JsonData _data)
+			: base(ActionType.SC_IMMUNE)
+		{
+			EnumHelper.TryParse((string)_data["sc"], out sc);
+		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			_invoker.battler.AddImmune(sc);
+			return new ActionDescriptResult(_invoker, "상태이상 " + sc + "에 면역되었다!");
+		}
 	}
 
 	public sealed class ActionSCHeal : Action_
@@ -153,36 +358,103 @@ namespace Choanji.Battle
 		{
 			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
 		}
+
+		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		{
+			if (ActionHelper.Dice(accuracy))
+			{
+				_invoker.battler.HealSC();
+				return new ActionDescriptResult(_invoker, "상태이상을 치료하였다!");
+			}
+			else
+			{
+				return new ActionDescriptResult(_invoker, "상태이상을 치료하지 못했다!");
+			}
+		}
 	}
 
 	public class ActionResult
-	{ }
+	{
+		public readonly ActionInvoker invoker;
 
-	public class ActionDelayedResult : ActionResult
-	{}
+		public ActionResult(ActionInvoker _invoker)
+		{
+			invoker = _invoker;
+		}
+
+		public virtual List<string> Descript() { return null; }
+	}
+
+	public class ActionDescriptResult : ActionResult
+	{
+		private readonly List<string> mDescription;
+
+		public ActionDescriptResult(ActionInvoker _invoker, string _txt)
+			: base(_invoker)
+		{
+			mDescription = new List<string>{ _txt };
+		}
+
+		public ActionDescriptResult(ActionInvoker _invoker, List<string> _txt)
+			: base(_invoker)
+		{
+			mDescription = _txt;
+		}
+	}
 
 	public class ActionDmgResult : ActionResult
 	{
 		public bool hit;
 		public bool block;
 		public Damage? dmg;
+
+		public ActionDmgResult(ActionInvoker _invoker) 
+			: base(_invoker)
+		{}
+	}
+
+	public class ActionHealResult : ActionResult
+	{
+		public readonly HP? val;
+		public readonly Percent? per;
+
+		public ActionHealResult(ActionInvoker _invoker, HP _hp) : base(_invoker)
+		{
+			val = _hp;
+		}
+
+		public ActionHealResult(ActionInvoker _invoker, Percent? _per) : base(_invoker)
+		{
+			per = _per;
+		}
+
+		public override List<string> Descript()
+		{
+			if (val.HasValue)
+				return new List<string>{ "회복 +" + val.Value };
+			else
+				return new List<string>{ "회복 " + per.Value + "%" };
+		}
 	}
 
 	public static class ActionFactory
 	{
 		public static Action_ Make(JsonData _data)
 		{
-			if (_data.IsString)
-				return new Action_(EnumHelper.ParseOrDefault<ActionType>((string)_data));
-
 			var _type = EnumHelper.ParseOrDefault<ActionType>((string)_data["type"]);
 
 			switch (_type)
 			{
+				case ActionType.TA:
+					return new ActionTA(_data);
+				case ActionType.DICE:
+					return new ActionDice(_data);
 				case ActionType.DMG:
 					return new ActionDmg(_data);
 				case ActionType.HEAL:
 					return new ActionHeal(_data);
+				case ActionType.AVOID_HIT:
+					return new ActionAvoidHit();
 				case ActionType.AP_CHARGE:
 					return new ActionAPCharge(_data);
 				case ActionType.STAT_MOD:
@@ -192,11 +464,12 @@ namespace Choanji.Battle
 				case ActionType.SC_IMPOSE:
 					return new ActionSCImpose(_data);
 				case ActionType.SC_IMMUNE:
-					return new ActionSC(ActionType.SC_IMMUNE, _data);
+					return new ActionSCImmune(_data);
 				case ActionType.SC_HEAL:
 					return new ActionSCHeal(_data);
 				default:
-					return new Action_(_type);
+					L.W(L.M.CASE_INVALID(_type));
+					return null;
 			}
 		}
 	}

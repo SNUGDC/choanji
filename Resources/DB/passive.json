@@ -9,11 +9,14 @@
 					"type": "CUR_DMG_TYPE",
 					"cmp": "EQUAL",       // 없을 경우 EQUAL. NOT_EQUAL도 넣을 수 있음.
 					"ele": "NOR"
-				},
-				"prob": 10
+				}
 			},
 			"action": {
-				"type": "AVOID_HIT"
+				"type": "DICE",
+				"prob": 10,
+				"action": {
+					"type": "AVOID_HIT"
+				}
 			}
 		}
 	},
@@ -156,9 +159,9 @@
 		"name": "인공호흡",
 		"detail": "전투 중 단 한번만 기절에서 깨어난다.",
 		"perform": {
-			"limit": 1,
 			"trigger": {
-				"when": "DEAD"
+				"when": "DEAD",
+				"limit": 1
 			},
 			"action": {
 				"type": "HEAL",

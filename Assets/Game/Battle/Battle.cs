@@ -36,19 +36,16 @@ namespace Choanji.Battle
 		private readonly AgentInfo mAgentB;
 
 		private readonly Phaser mPhase;
-		private readonly TAManager mTA;
 
-		public Action<Result, Action> endDelegate;
+		public Action<ActionInvoker, ActionResult, Action> requestProceedActive;
+		public Action<Result, Action> requestFinish;
 
 		public Action onTurnStart;
 		public Action onTurnEnd;
-		public Action<Battler, Card, ActionResult, Action> onCardPerform;
 		public Action<Result> onFinish;
 
 		public Battle(Mode _mode, State _state)
 		{
-			L.SetLevel(L.V.D);
-
 			mode = _mode;
 			state = _state;
 
@@ -61,11 +58,20 @@ namespace Choanji.Battle
 
 			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(PerformActive));
 
-			mTA = new TAManager();
 			foreach (var _card in state.battlerA.party.passives)
-				mTA.Add(state.battlerA, _card.data.passive.perform);
+				AddPassiveTA(state.battlerA, _card);
 			foreach (var _card in state.battlerB.party.passives)
-				mTA.Add(state.battlerB, _card.data.passive.perform);
+				AddPassiveTA(state.battlerB, _card);
+		}
+
+		private void AddPassiveTA(Battler _battler, Card _card)
+		{
+			var _invoker = new ActionInvoker(_battler, _card);
+			var _ta = _card.data.passive.perform;
+			if (_ta.trigger != null)
+				TheBattle.trigger.Add(_invoker, _ta);
+			else
+				TheBattle.action.Fire(_invoker, _ta.action, null);
 		}
 
 		public void StartTurn()
@@ -75,8 +81,6 @@ namespace Choanji.Battle
 			state.battlerA.AfterTurnEnd();
 			state.battlerB.AfterTurnEnd();
 
-			foreach (var _result in mTA.FireDelayed()) {}
-			
 			SelectCards();
 		}
 
@@ -106,18 +110,16 @@ namespace Choanji.Battle
 				mAgentB.selectedCards);
 		}
 
-		private void PerformActive(Battler _battler, Card _card, Action<PhaseDoneType> _done)
+		private void PerformActive(ActionInvoker _invoker, Action<PhaseDoneType> _done)
 		{
-			L.D("perform");
-
 			ActionResult _result = null;
 
-			var _perform = _card.data.active.perform;
+			var _perform = _invoker.card.data.active.perform;
 
 			if (_perform.trigger == null)
-				_result = mTA.TestAndFire(_battler, _perform, null);
+				_result = TheBattle.action.Fire(_invoker, _perform.action, null);
 			else
-				mTA.Add(_battler, _perform);
+				TheBattle.trigger.Add(_invoker, _perform);
 
 			PhaseDoneType _doneType;
 
@@ -128,7 +130,7 @@ namespace Choanji.Battle
 			else
 				_doneType = PhaseDoneType.CONTINUE;
 
-			onCardPerform(_battler, _card, _result, () => _done(_doneType));
+			requestProceedActive(_invoker, _result, () => _done(_doneType));
 		}
 
 		private void OnPhaseDone(PhaseDoneType _doneType)
@@ -144,8 +146,8 @@ namespace Choanji.Battle
 				case PhaseDoneType.WIN_A:
 				{
 					var _result = new Result(ResultType.WIN_A);
-					if (endDelegate != null)
-						endDelegate(_result, () => onFinish(_result));
+					if (requestFinish != null)
+						requestFinish(_result, () => onFinish(_result));
 					else
 						onFinish(_result);
 					break;
@@ -153,8 +155,8 @@ namespace Choanji.Battle
 				case PhaseDoneType.WIN_B:
 				{
 					var _result = new Result(ResultType.WIN_B);
-					if (endDelegate != null)
-						endDelegate(_result, () => onFinish(_result));
+					if (requestFinish != null)
+						requestFinish(_result, () => onFinish(_result));
 					else
 						onFinish(_result);
 					break;
