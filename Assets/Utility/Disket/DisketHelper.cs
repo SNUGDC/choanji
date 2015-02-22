@@ -11,6 +11,7 @@ namespace Choanji
 			var _data = Disket.data;
 
 			Wallet.gold = _data.user.gold;
+			Player.Load(_data.player);
 		}
 
 		public static void SetupWorld()

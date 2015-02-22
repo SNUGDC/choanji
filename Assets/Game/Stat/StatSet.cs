@@ -36,6 +36,27 @@ namespace Choanji
 			}
 		}
 
+		public JsonData Serialize()
+		{
+			var _json = new JsonData();
+
+			foreach (var _stat in EnumHelper.GetValues<StatType>())
+			{
+				if (_stat == 0) continue;
+				_json[_stat.ToString()] = this[_stat];
+			}
+
+			_json["RST"] = new JsonData();
+			foreach (var _ele in ElementDB.GetEnum())
+			{
+				var _rst = GetRst(_ele);
+				if (_rst == 0) continue;
+				_json["RST"][_ele.ToString()] = (int)_rst;
+			}
+
+			return _json;
+		}
+
 		public HP hp;
 		public AP ap;
 		public AP apRegen;

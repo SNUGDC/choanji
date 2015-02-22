@@ -1,4 +1,6 @@
-﻿namespace Choanji
+﻿using LitJson;
+
+namespace Choanji
 {
 	public class SaveData
 	{
@@ -19,17 +21,21 @@
 		}
 
 		public readonly User user;
+		public readonly JsonData player;
 		public readonly Character ch;
 		public readonly World world;
+		public readonly JsonData data;
 
 		public SaveData()
 		{}
 
-		public SaveData(User _user, Character _ch, World _world)
+		public SaveData(User _user, JsonData _player, Character _ch, World _world, JsonData _data)
 		{
 			user = _user;
+			player = _player;
 			ch = _ch;
 			world = _world;
+			data = _data;
 		}
 	}
 }

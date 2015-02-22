@@ -10,5 +10,32 @@
 	"world": {
 		"key": "home",
 		"pos": { "x": 5, "y": 5 }
-	}
+	},
+	
+	"player": {
+		"stat": {
+			"HP": 100,
+			"AP": 100,
+			"AP_REGEN": 10,
+			"STR": 50,
+			"DEF": 30,
+			"SPD": 30,
+			"RST": {
+				"NOR": 0,
+				"ANA": 10,
+				"MEM": 10,
+				"CRE": 10
+			}
+		},
+		"deck": [
+			"RHYTHM_GAMER",
+			"MILITARY"
+		],
+		"party": {
+			"passive": ["RHYTHM_GAMER"],
+			"active": ["MILITARY"]
+		}
+	},
+	
+	"data": null
 }

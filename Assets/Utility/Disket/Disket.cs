@@ -57,10 +57,15 @@ namespace Choanji
 				return false;
 			}
 
+			var _player = new JsonData();
+			Player.Save(_player);
+
 			data = new SaveData(
 				new SaveData.User { gold = Wallet.gold },
+				_player,
 				new SaveData.Character { skin = TheCharacter.ch.renderer_.GetSkinKey() },
-				new SaveData.World { key = TheWorld.bluePrint.name, pos = TheCharacter.ch.position });
+				new SaveData.World { key = TheWorld.bluePrint.name, pos = TheCharacter.ch.position },
+				null);
 
 			try
 			{
