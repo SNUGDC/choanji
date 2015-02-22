@@ -101,7 +101,7 @@ namespace Choanji
 
 		public override void Do(object _data)
 		{
-			var _self = BattlerDB.Get(BattlerHelper.MakeID("SAMPLE_01"));
+			var _self = Player.MakeBattler();
 			var _battler = BattlerDB.Get(mBattler);
 
 			TheBattle.Setup(new Setup(Mode.PVE, _self, _battler));

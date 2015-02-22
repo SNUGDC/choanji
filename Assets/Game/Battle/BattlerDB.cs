@@ -16,6 +16,15 @@ namespace Choanji.Battle
 
 	public class BattlerData
 	{
+		public BattlerData(string _name, StatSet _stat, Party _party)
+		{
+			id = default(BattlerID);
+			key = string.Empty;
+			name = _name;
+			stat = _stat;
+			party = _party;
+		}
+
 		public BattlerData(string _key, JsonData _data)
 		{
 			id = BattlerHelper.MakeID(_key);

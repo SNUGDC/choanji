@@ -42,8 +42,9 @@ namespace Choanji
 
 			foreach (var _stat in EnumHelper.GetValues<StatType>())
 			{
-				if (_stat == 0) continue;
-				_json[_stat.ToString()] = this[_stat];
+				var _val = this[_stat];
+				if (_val == 0) continue;
+				_json[_stat.ToString()] = _val;
 			}
 
 			_json["RST"] = new JsonData();
