@@ -31,7 +31,7 @@ namespace Choanji
 
 		public static CardData Get(CardID _id)
 		{
-			D.Assert(isLoaded);
+			if (!isLoaded) Load();
 			return mDic.GetOrDefault(_id);
 		}
 	}

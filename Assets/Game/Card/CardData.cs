@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using Gem;
+using LitJson;
 
 namespace Choanji
 {
@@ -16,20 +17,11 @@ namespace Choanji
 			key = _key;	
 		}
 
-		public CardData(string _key, string _name, string _detail, StatSet _stat, PassiveData _passive, ActiveData _active)
-			: this(_key)
-		{
-			name = _name;
-			detail = _detail;
-			stat = _stat;
-			passive = _passive;
-			active = _active;
-		}
-
 		public CardData(string _key, JsonData _data)
 			: this(_key)
 		{
-			name = (string) _data["name"];
+			ele = ElementDB.Search(_data.StringOrDefault("ele", "NOR"));
+			name = (string)_data["name"];
 			detail = (string) _data["detail"];
 			stat = new StatSet(_data["stat"]);
 			passive = MoveDB.Get(CardHelper.MakePassiveID((string)_data["passive"]));
@@ -38,6 +30,7 @@ namespace Choanji
 
 		public readonly CardID id;
 		public readonly string key;
+		public readonly ElementID ele;
 		public readonly string name;
 		public readonly string detail;
 		public readonly StatSet stat;
