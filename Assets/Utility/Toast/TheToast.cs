@@ -6,7 +6,7 @@ namespace Choanji
 	public static class TheToast
 	{
 		private const float MARGIN = 0.2f;
-		private const float WIDTH = 0.15f;
+		private const float WIDTH = 0.3f;
 		private const float HEIGHT = 60;
 
 		public static Toast Open(string _txt)
