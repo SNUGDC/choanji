@@ -4,9 +4,9 @@ namespace Choanji
 {
 	public static class Player
 	{
-		public static StatSet stat;
-		public static Deck deck;
-		public static Party party;
+		public static StatSet stat = new StatSet();
+		public static Deck deck = new Deck();
+		public static Party party = new Party();
 
 		public static void Load(JsonData _data)
 		{

@@ -7,5 +7,6 @@ namespace Choanji.UI
 		public static DB g;
 		public TopMenu topMenuPrf;
 		public DeckPopup deckPopupPrf;
+		public PartyCell partyCellPrf;
 	}
 }

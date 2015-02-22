@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topMenuPrf: {fileID: 11414538, guid: 58fae46036ad2f040bb86d843fa879e5, type: 2}
   deckPopupPrf: {fileID: 11440694, guid: f0a4c370f723601418c07be2d8d48ba1, type: 2}
+  partyCellPrf: {fileID: 11441014, guid: e17e4a2802732924f99f1676af37560b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
