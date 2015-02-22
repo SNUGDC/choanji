@@ -51,7 +51,7 @@ namespace Choanji
 			{
 				var _rst = GetRst(_ele);
 				if (_rst == 0) continue;
-				_json["RST"][_ele.ToString()] = (int)_rst;
+				_json["RST"][_ele.key] = (int)_rst;
 			}
 
 			return _json;
