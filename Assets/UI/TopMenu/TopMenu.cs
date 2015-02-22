@@ -33,8 +33,10 @@ namespace Choanji.UI
 
 		public void OnSaveClicked()
 		{
-			return;
-			onPopupOpened.CheckAndCall();
+			if (Disket.Save())
+				TheToast.Open("모험을 기록하였다!");
+			else
+				TheToast.Open("기록할 수 없다.");
 		}
 
 		public void OnOptionClicked()
