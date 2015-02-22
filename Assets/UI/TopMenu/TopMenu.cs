@@ -23,9 +23,12 @@ namespace Choanji.UI
 			_popup.onClose += onPopupClosed;
 
 			var _deck = (DeckPopup)_popup;
+
 			_deck.party = Player.party;
 			_deck.afterRefreshPartyTab += () => RefreshPartyTab(_deck);
 			RefreshPartyTab(_deck);
+
+			_deck.deckTab.deck = Player.deck;
 
 			onPopupOpened.CheckAndCall();
 		}
