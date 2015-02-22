@@ -71,7 +71,7 @@ namespace Choanji
 			{
 				using (var _file = File.CreateText(FullPath(filename)))
 				{
-					var _writer = new JsonWriter(_file);
+					var _writer = new JsonWriter(_file) { PrettyPrint = true };
 					JsonMapper.ToJson(data, _writer);
 				}
 			}
