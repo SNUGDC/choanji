@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26987bf8d5ad9d54ab00774aef8e63f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toast: {fileID: 11440096, guid: 350c9c174412f1a44babd0e0e42581c6, type: 2}
   ch: {fileID: 11463510, guid: 5240f5d24bfc28e4fb282a6197e0c153, type: 2}
   activeCardView: {fileID: 11470124, guid: b963767fbc35a0240938ff93860bf9b9, type: 2}
   passiveCardView: {fileID: 11416690, guid: 84aa46699b9994543b044fddda6fa19c, type: 2}

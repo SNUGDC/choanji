@@ -37,6 +37,7 @@ namespace Choanji
 				{
 					case ContextType.WORLD:
 						WorldScene.g.SetActive(true);
+						canvas = UI.UI.canvas;
 						if (Cameras.world)
 						{
 							Cameras.world.transform.SetParent(TheWorld.parent);
@@ -46,9 +47,17 @@ namespace Choanji
 
 					case ContextType.BATTLE:
 						Battle.Scene.g.root.SetActive(true);
+						canvas = Battle.Scene.g.canvas;
 						break;
 				}
 			}
+		}
+
+		public Canvas mCanvas;
+		public Canvas canvas
+		{
+			get { return mCanvas ?? (mCanvas = FindObjectOfType<Canvas>()); }
+			private set { mCanvas = value; }
 		}
 
 		void Update()
