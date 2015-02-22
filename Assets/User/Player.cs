@@ -13,7 +13,19 @@ namespace Choanji
 		public static void Load(JsonData _data)
 		{
 			stat = new StatSet(_data["stat"]);
-			deck = new Deck(_data["deck"]);
+
+			if (Cheat.BoolOrDefault("card_all"))
+			{
+				deck = new Deck();
+				foreach (var _card in CardDB.GetEnum())
+					deck.cards.Add(_card, new Card(_card));
+			}
+			else
+			{
+				deck = new Deck(_data["deck"]);
+			}
+
+			
 			party = new Party(deck, _data["party"]);
 		}
 

@@ -138,6 +138,20 @@
 		}
 	},
 	
+	"PLACEBO": {
+		"name": "위약 효과",
+		"detail": "매 턴마다 조금씩 체력이 회복됩니다.",
+		"perform": {
+			"trigger": {
+				"when": "BEFORE_START_TURN"
+			},
+			"action": {
+				"type": "HEAL",
+				"val": 50
+			}
+		}
+	},
+	
 	"CPR": { // 보류
 		"name": "인공호흡",
 		"detail": "전투 중 단 한번만 기절에서 깨어난다.",
@@ -164,7 +178,7 @@
 		}
 	},
 	
-	"BODY_BUILDING": {
+	"BODYBUILDING": {
 		"name": "비대한 근육",
 		"detail": "공격력이 증가한다.",
 		"perform": {
@@ -270,12 +284,36 @@
 	
 	"FORTIFY_ANA_01": {
 		"name": "",
-		"detail": "",
+		"detail": "무속성 공격 스킬이 분석 속성으로 적용된다.",
 		"perform": {
 			"action": {
 				"type": "DMG_CONVERT_ELE",
 				"src": "NOR",
 				"dst": "ANA"
+			}
+		}
+	},
+	
+	"FORTIFY_MEM_01": {
+		"name": "",
+		"detail": "무속성 공격 스킬이 암기 속성으로 적용된다.",
+		"perform": {
+			"action": {
+				"type": "DMG_CONVERT_ELE",
+				"src": "NOR",
+				"dst": "MEM"
+			}
+		}
+	},
+	
+	"FORTIFY_CRE_01": {
+		"name": "",
+		"detail": "창의력 공격 스킬이 분석 속성으로 적용된다.",
+		"perform": {
+			"action": {
+				"type": "DMG_CONVERT_ELE",
+				"src": "NOR",
+				"dst": "CRE"
 			}
 		}
 	},

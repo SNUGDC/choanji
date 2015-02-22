@@ -47,13 +47,17 @@ namespace Choanji
 		public static PassiveData Get(PassiveID _id)
 		{
 			D.Assert(isLoaded);
-			return mPassiveDic.GetOrDefault(_id);
+			PassiveData _ret;
+			if (mPassiveDic.TryGet(_id, out _ret)) return _ret;
+			else return null;
 		}
 
 		public static ActiveData Get(ActiveID _id)
 		{
 			D.Assert(isLoaded);
-			return mActiveDic.GetOrDefault(_id);
+			ActiveData _ret;
+			if (mActiveDic.TryGet(_id, out _ret)) return _ret;
+			else return null;
 		}
 	}
 }

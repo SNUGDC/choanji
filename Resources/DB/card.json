@@ -275,7 +275,7 @@
 		"active": "S"
 	},
 	
-	"FORFITY_ANA_01": {
+	"FORTIFY_ANA_01": {
 		"name": "분석력 속성 공격 강화 스킬",
 		"detail": "설명",
 		"stat": {
@@ -283,11 +283,11 @@
 			"DEF": 5,
 			"SPD": 10
 		},
-		"passive": "FORFITY_ANA_01",
-		"active": "FORFITY_ANA_01"
+		"passive": "FORTIFY_ANA_01",
+		"active": "FORTIFY_ANA_01"
 	},
 	
-	"FORFITY_MEM_01": {
+	"FORTIFY_MEM_01": {
 		"name": "암기력 속성 공격 강화 스킬",
 		"detail": "설명",
 		"stat": {
@@ -295,11 +295,11 @@
 			"DEF": 35,
 			"SPD": 10
 		},
-		"passive": "FORFITY_MEM_01",
-		"active": "FORFITY_MEM_01"
+		"passive": "FORTIFY_MEM_01",
+		"active": "FORTIFY_MEM_01"
 	},
 	
-	"FORFITY_CRE_01": {
+	"FORTIFY_CRE_01": {
 		"name": "창의력 속성 공격 강화 스킬",
 		"detail": "설명",
 		"stat": {
@@ -307,8 +307,8 @@
 			"DEF": 10,
 			"SPD": 35
 		},
-		"passive": "FORFITY_CRE_01",
-		"active": "FORFITY_CRE_01"
+		"passive": "FORTIFY_CRE_01",
+		"active": "FORTIFY_CRE_01"
 	},
 	
 	"CHEAT": {
@@ -319,8 +319,8 @@
 			"DEF": 0,
 			"SPD": 0
 		},
-		"passive": "CHEATING",
-		"active": "STEALTH"
+		"passive": "STEALTH",
+		"active": "CHEATING"
 	},
 	
 	"GREEDY": {
@@ -331,8 +331,8 @@
 			"DEF": 10,
 			"SPD": 25
 		},
-		"passive": "TAX",
-		"active": "PENALTY"
+		"passive": "PENALTY",
+		"active": "TAX"
 	},
 	
 	"COFFEE_MAKER": {
