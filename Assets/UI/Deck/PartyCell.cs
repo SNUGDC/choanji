@@ -30,6 +30,8 @@ namespace Choanji.UI
 					var _data = value.data;
 
 					illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_data.key);
+
+					detailRoot.SetActive(true);
 					cost.text = _data.active.cost.ToString();
 
 					var _stat = _data.stat;

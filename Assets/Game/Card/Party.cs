@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Gem;
 using LitJson;
 
 namespace Choanji
 {
-	public class Party
+	public class Party : IEnumerable<Pair<Card, CardMode>>
 	{
+		public int count { get { return passives.Count + actives.Count; } }
 		public readonly List<Card> passives = new List<Card>();
 		public readonly List<Card> actives = new List<Card>();
 
@@ -43,6 +45,29 @@ namespace Choanji
 			return _statSet;
 		}
 
+		public bool Remove(Card _card)
+		{
+			if (passives.Remove(_card))
+				return true;
+			
+			if (actives.Count == 1)
+				return false;
+
+			return actives.Remove(_card);
+		}
+
+		public IEnumerator<Pair<Card, CardMode>> GetEnumerator()
+		{
+			foreach (var _card in actives)
+				yield return new Pair<Card, CardMode>(_card, CardMode.ACTIVE);
+			foreach (var _card in passives)
+				yield return new Pair<Card, CardMode>(_card, CardMode.PASSIVE);
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
 	}
 
 }

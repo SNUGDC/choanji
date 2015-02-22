@@ -20,7 +20,7 @@ namespace Choanji.UI
 		public RectTransform party2;
 		private readonly List<PartyCell> mCells = new List<PartyCell>(Const.PARTY_MAX);
 
-		public Action<Card> onRemove;
+		public Action<Card, Action> onRemoveRequest;
 
 		public StatSet stat 
 		{
@@ -59,27 +59,28 @@ namespace Choanji.UI
 
 				var _idx = 0;
 
-				foreach (var _card in value.actives)
+				foreach (var _card in value)
 				{
 					var _cell = mCells[_idx];
-					_cell.card = _card;
-					_cell.onCancel = () => { onRemove.CheckAndCall(_card); };
+					_cell.card = _card.first;
+
+					var _cardCapture = _card.first;
+					var _idxCapture = _idx;
+
+					_cell.onCancel = () => onRemoveRequest.CheckAndCall(_cardCapture, () => Remove(_idxCapture));
 					++_idx;
 				}
 				
-				foreach (var _card in value.passives)
-				{
-					var _cell = mCells[_idx];
-					_cell.card = _card;
-					_cell.onCancel = () => { onRemove.CheckAndCall(_card); };
-					++_idx;
-				}
-
 				for (; _idx < Const.PARTY_MAX; ++_idx)
 				{
 					mCells[_idx].card = null;
 				}
 			}
+		}
+
+		private void Remove(int _idx)
+		{
+			mCells[_idx].card = null;
 		}
 	}
 }

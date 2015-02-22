@@ -26,6 +26,14 @@ namespace Choanji.UI
 				_deck.partyTab.party = Player.party;
 				_deck.partyTab.stat = Player.stat + Player.party.CalStat();
 
+				_deck.partyTab.onRemoveRequest = (_card, _commit) =>
+				{
+					if (Player.party.Remove(_card))
+						_deck.partyTab.party = Player.party;
+					else
+						TheToast.Open("적어도 한장의 카드는 있어야해!");
+				};
+
 				onPopupOpened.CheckAndCall();
 			}
 		}
