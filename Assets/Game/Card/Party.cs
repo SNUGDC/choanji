@@ -24,17 +24,32 @@ namespace Choanji
 				actives.Add(new Card(_card));
 		}
 
+		public Party(Deck _deck, JsonData _data)
+		{
+			foreach (var _key in _data["passive"].GetListEnum())
+			{
+				var _card = _deck.Find(CardHelper.MakeID((string)_key));
+				if (_card != null) passives.Add(_card);
+			}
+
+			foreach (var _key in _data["active"].GetListEnum())
+			{
+				var _card = _deck.Find(CardHelper.MakeID((string) _key));
+				if (_card != null) actives.Add(_card);
+			}
+		}
+
 		public JsonData Serialize()
 		{
 			var _data = new JsonData();
 
 			var _passive = _data["passive"] = new JsonData();
 			foreach (var _card in passives)
-				_passive.Add(_card.Serialize());
+				_passive.Add(_card.data.key);
 
 			var _active = _data["active"] = new JsonData();
 			foreach (var _card in actives)
-				_active.Add(_card.Serialize());
+				_active.Add(_card.data.key);
 
 			return _data;
 		}

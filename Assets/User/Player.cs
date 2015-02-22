@@ -12,7 +12,7 @@ namespace Choanji
 		{
 			stat = new StatSet(_data["stat"]);
 			deck = new Deck(_data["deck"]);
-			party = new Party(_data["party"]);
+			party = new Party(deck, _data["party"]);
 		}
 
 		public static void Save(JsonData _data)

@@ -120,7 +120,7 @@ namespace Choanji.UI
 				_cell.Hide();
 
 			foreach (var _card in mDeck.cards)
-				mCells[_card.data].Show(_card);
+				mCells[_card.Value.data].Show(_card.Value);
 
 			foreach (var _card in mParty.passives)
 				mCells[_card.data].Equip(CardMode.PASSIVE);

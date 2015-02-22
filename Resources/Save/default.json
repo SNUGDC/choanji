@@ -28,11 +28,12 @@
 			}
 		},
 		"deck": [
+			"KEYBOARD_WARRIOR",
 			"RHYTHM_GAMER",
 			"MILITARY"
 		],
 		"party": {
-			"passive": ["RHYTHM_GAMER"],
+			"passive": ["KEYBOARD_WARRIOR", "RHYTHM_GAMER"],
 			"active": ["MILITARY"]
 		}
 	},
