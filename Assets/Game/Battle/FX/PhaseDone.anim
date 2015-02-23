@@ -31,7 +31,7 @@ AnimationClip:
       - time: 1.5
         value: 0
         inSlope: 0
-        outSlope: 84.831131
+        outSlope: -5183.88379
         tangentMode: 5
       - time: 2
         value: -953
@@ -187,6 +187,64 @@ AnimationClip:
       m_PostInfinity: 2
     attribute: m_Color.b
     path: Back
+    classID: 114
+    script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 320
+        outSlope: 320
+        tangentMode: 10
+      - time: .5
+        value: 160
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.5
+        value: 160
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 2
+        value: 0
+        inSlope: -320
+        outSlope: -320
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: BackBorder
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 1.50588238
+        outSlope: 1.50588238
+        tangentMode: 10
+      - time: .5
+        value: .752941191
+        inSlope: .752941191
+        outSlope: .752941191
+        tangentMode: 10
+      - time: 1.5
+        value: .752941191
+        inSlope: -.752941191
+        outSlope: -.752941191
+        tangentMode: 10
+      - time: 2
+        value: 0
+        inSlope: -1.50588238
+        outSlope: -1.50588238
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.a
+    path: BackBorder
     classID: 114
     script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_PPtrCurves: []
@@ -232,7 +290,7 @@ AnimationClip:
       - time: 1.5
         value: 0
         inSlope: 0
-        outSlope: 84.831131
+        outSlope: -5183.88379
         tangentMode: 5
       - time: 2
         value: -953
@@ -388,6 +446,64 @@ AnimationClip:
       m_PostInfinity: 2
     attribute: m_Color.b
     path: Back
+    classID: 114
+    script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 320
+        outSlope: 320
+        tangentMode: 10
+      - time: .5
+        value: 160
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.5
+        value: 160
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 2
+        value: 0
+        inSlope: -320
+        outSlope: -320
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: BackBorder
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 1.50588238
+        outSlope: 1.50588238
+        tangentMode: 10
+      - time: .5
+        value: .752941191
+        inSlope: .752941191
+        outSlope: .752941191
+        tangentMode: 10
+      - time: 1.5
+        value: .752941191
+        inSlope: -.752941191
+        outSlope: -.752941191
+        tangentMode: 10
+      - time: 2
+        value: 0
+        inSlope: -1.50588238
+        outSlope: -1.50588238
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.a
+    path: BackBorder
     classID: 114
     script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_EulerEditorCurves: []
