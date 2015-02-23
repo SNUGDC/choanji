@@ -46,28 +46,6 @@ namespace Choanji.Battle
 		}
 	}
 
-	public struct ActionInvoker
-	{
-		public Battler battler;
-		public Card card;
-
-		public ActionInvoker(Battler _battler, Card _card)
-		{
-			battler = _battler;
-			card = _card;
-		}
-
-		public static implicit operator Battler(ActionInvoker _this)
-		{
-			return _this.battler;
-		}
-
-		public static implicit operator Card(ActionInvoker _this)
-		{
-			return _this.card;
-		}
-	}
-
 	public abstract class Action_
 	{
 		public readonly ActionType type;
@@ -82,7 +60,7 @@ namespace Choanji.Battle
 			return _this.type;
 		}
 
-		public abstract ActionResult Invoke(ActionInvoker _invoker, object _arg);
+		public abstract Digest Invoke(Invoker _invoker, object _arg);
 	}
 
 	public sealed class ActionTA : Action_
@@ -95,7 +73,7 @@ namespace Choanji.Battle
 			ta = new TA(_data);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			TheBattle.trigger.Add(_invoker, ta);
 			return null;
@@ -115,7 +93,7 @@ namespace Choanji.Battle
 			action = ActionFactory.Make(_data["action"]);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			if (ActionHelper.Dice(prob))
 				return TheBattle.action.Fire(_invoker, action, _arg);
@@ -138,7 +116,7 @@ namespace Choanji.Battle
 			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			var _battler = _invoker.battler;
 
@@ -154,7 +132,7 @@ namespace Choanji.Battle
 				if (_hitter.blockHitOneTime)
 				{
 					_hitter.blockHitOneTime = false;
-					return new ActionDmgResult(_invoker)
+					return new DmgDigest(_invoker)
 					{
 						hit = true,
 						block = true,
@@ -165,7 +143,7 @@ namespace Choanji.Battle
 					var _trueDmg = new Damage(_dmg.ele, _hitter.Hit(_dmg));
 					_hitter.afterHit.CheckAndCall(_trueDmg);
 
-					return new ActionDmgResult(_invoker)
+					return new DmgDigest(_invoker)
 					{
 						hit = true,
 						dmg = _trueDmg,
@@ -174,7 +152,7 @@ namespace Choanji.Battle
 			}
 			else
 			{
-				return new ActionDmgResult(_invoker)
+				return new DmgDigest(_invoker)
 				{
 					hit = false
 				};
@@ -203,18 +181,18 @@ namespace Choanji.Battle
 			}
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			var _battler = _invoker.battler;
 			if (val.HasValue)
 			{
 				_battler.Heal(val.Value);
-				return new ActionHealResult(_invoker, val.Value);
+				return new HealDigest(_invoker, val.Value);
 			}
 			else 
 			{
 				_battler.Heal(per.Value);
-				return new ActionHealResult(_invoker, per.Value);
+				return new HealDigest(_invoker, per.Value);
 			}
 		}
 	}
@@ -225,7 +203,7 @@ namespace Choanji.Battle
 		{
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			_invoker.battler.blockHitOneTime = true;
 			return null;
@@ -242,10 +220,10 @@ namespace Choanji.Battle
 			val = (AP)_data.IntOrDefault("val", 0);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			_invoker.battler.ChargeAP(val);
-			return new ActionDescriptResult(_invoker, "AP 충전 " + val);
+			return new StringDigest(_invoker, "AP 충전 " + val);
 		}
 	}
 
@@ -261,12 +239,12 @@ namespace Choanji.Battle
 			per = (Percent)(int)_data["per"];
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			if (type == ActionType.BUFF_ATK)
 			{
 				_invoker.battler.attackModifier[ele] += (int)per;
-				return new ActionDescriptResult(_invoker, string.Format("{0} 강화 {1}%", ElementDB.Get(ele).name, per));
+				return new StringDigest(_invoker, string.Format("{0} 강화 {1}%", ElementDB.Get(ele).name, per));
 			}
 
 			return null;
@@ -294,19 +272,19 @@ namespace Choanji.Battle
 				dur = (int)_durJs;
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			var _target = ActionHelper.Choose(target, _invoker.battler);
 
 			if (!dur.HasValue)
 			{
 				_target.dynamicStat += stat;
-				return new ActionDescriptResult(_invoker, "스텟 상승");
+				return new StringDigest(_invoker, "스텟 상승");
 			}
 			else
 			{
 				_target.ApplyForDuration(stat, dur.Value);
-				return new ActionDescriptResult(_invoker, dur.Value + "턴 동안 스텟 상승");
+				return new StringDigest(_invoker, dur.Value + "턴 동안 스텟 상승");
 			}
 		}
 	}
@@ -323,12 +301,12 @@ namespace Choanji.Battle
 			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			if (ActionHelper.Other(_invoker.battler).TryImposeSC(sc, accuracy))
 				return null;
 			else
-				return new ActionDescriptResult(_invoker, "상태이상 " + sc + "을(를) 거는데 실패하였다!");
+				return new StringDigest(_invoker, "상태이상 " + sc + "을(를) 거는데 실패하였다!");
 		}
 	}
 
@@ -342,10 +320,10 @@ namespace Choanji.Battle
 			EnumHelper.TryParse((string)_data["sc"], out sc);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			_invoker.battler.AddImmune(sc);
-			return new ActionDescriptResult(_invoker, "상태이상 " + sc + "에 면역되었다!");
+			return new StringDigest(_invoker, "상태이상 " + sc + "에 면역되었다!");
 		}
 	}
 
@@ -359,81 +337,17 @@ namespace Choanji.Battle
 			accuracy = (Percent)_data.IntOrDefault("accuracy", 100);
 		}
 
-		public override ActionResult Invoke(ActionInvoker _invoker, object _arg)
+		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			if (ActionHelper.Dice(accuracy))
 			{
 				_invoker.battler.HealSC();
-				return new ActionDescriptResult(_invoker, "상태이상을 치료하였다!");
+				return new StringDigest(_invoker, "상태이상을 치료하였다!");
 			}
 			else
 			{
-				return new ActionDescriptResult(_invoker, "상태이상을 치료하지 못했다!");
+				return new StringDigest(_invoker, "상태이상을 치료하지 못했다!");
 			}
-		}
-	}
-
-	public class ActionResult
-	{
-		public readonly ActionInvoker invoker;
-
-		public ActionResult(ActionInvoker _invoker)
-		{
-			invoker = _invoker;
-		}
-
-		public virtual List<string> Descript() { return null; }
-	}
-
-	public class ActionDescriptResult : ActionResult
-	{
-		private readonly List<string> mDescription;
-
-		public ActionDescriptResult(ActionInvoker _invoker, string _txt)
-			: base(_invoker)
-		{
-			mDescription = new List<string>{ _txt };
-		}
-
-		public ActionDescriptResult(ActionInvoker _invoker, List<string> _txt)
-			: base(_invoker)
-		{
-			mDescription = _txt;
-		}
-	}
-
-	public class ActionDmgResult : ActionResult
-	{
-		public bool hit;
-		public bool block;
-		public Damage? dmg;
-
-		public ActionDmgResult(ActionInvoker _invoker) 
-			: base(_invoker)
-		{}
-	}
-
-	public class ActionHealResult : ActionResult
-	{
-		public readonly HP? val;
-		public readonly Percent? per;
-
-		public ActionHealResult(ActionInvoker _invoker, HP _hp) : base(_invoker)
-		{
-			val = _hp;
-		}
-
-		public ActionHealResult(ActionInvoker _invoker, Percent? _per) : base(_invoker)
-		{
-			per = _per;
-		}
-
-		public override List<string> Descript()
-		{
-			if (val.HasValue)
-				return new List<string>{ "회복 +" + val.Value };
-			else
-				return new List<string>{ "회복 " + per.Value + "%" };
 		}
 	}
 

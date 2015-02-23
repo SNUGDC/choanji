@@ -8,7 +8,7 @@ namespace Choanji.Battle
 	{
 		class TAInfo
 		{
-			public readonly ActionInvoker invoker;
+			public readonly Invoker invoker;
 			public readonly TA ta;
 
 			public Trigger trigger { get { return ta.trigger; } }
@@ -17,7 +17,7 @@ namespace Choanji.Battle
 
 			public int count;
 
-			public TAInfo(ActionInvoker _invoker, TA _ta)
+			public TAInfo(Invoker _invoker, TA _ta)
 			{
 				invoker = _invoker;
 				ta = _ta;
@@ -36,7 +36,7 @@ namespace Choanji.Battle
 			return _target == TargetType.SELF ? _self : _other;
 		}
 
-		public void Add(ActionInvoker _invoker, TA _ta)
+		public void Add(Invoker _invoker, TA _ta)
 		{
 			if (_ta.trigger == null)
 			{
@@ -131,7 +131,7 @@ namespace Choanji.Battle
 			}
 		}
 
-		private ActionResult TestAndFire(TAInfo _taInfo, object _arg)
+		private Digest TestAndFire(TAInfo _taInfo, object _arg)
 		{
 			if (!Test(_taInfo.trigger, _arg))
 				return null;

@@ -14,12 +14,12 @@ namespace Choanji.Battle
 
 	public class PhaserDelegate
 	{
-		public PhaserDelegate(Action<ActionInvoker, Action<PhaseDoneType>> _start)
+		public PhaserDelegate(Action<Invoker, Action<PhaseDoneType>> _start)
 		{
 			start = _start;
 		}
 		
-		public Action<ActionInvoker, Action<PhaseDoneType>> start;
+		public Action<Invoker, Action<PhaseDoneType>> start;
 	}
 
     public class Phaser
@@ -80,7 +80,7 @@ namespace Choanji.Battle
 			    return;
 		    }
 
-			StartCard(new ActionInvoker(_battler, _cards[mRunning]), _doneType =>
+			StartCard(new Invoker(_battler, _cards[mRunning]), _doneType =>
 			{
 				if (_doneType == PhaseDoneType.CONTINUE)
 				{
@@ -128,11 +128,11 @@ namespace Choanji.Battle
 			var _spdA = _battlerA.CalStat(StatType.SPD);
 			var _spdB = _battlerB.CalStat(StatType.SPD);
 
-			var _invokerA = new ActionInvoker(_battlerA, _cardA);
-			var _invokerB = new ActionInvoker(_battlerB, _cardB);
+			var _invokerA = new Invoker(_battlerA, _cardA);
+			var _invokerB = new Invoker(_battlerB, _cardB);
 
-		    ActionInvoker _faster;
-			ActionInvoker _slower;
+		    Invoker _faster;
+			Invoker _slower;
 
 		    if (_spdA >= _spdB)
 		    {
@@ -160,7 +160,7 @@ namespace Choanji.Battle
 			});
 	    }
 
-	    private void StartCard(ActionInvoker _invoker, Action<PhaseDoneType> _done)
+	    private void StartCard(Invoker _invoker, Action<PhaseDoneType> _done)
 	    {
 			_invoker.battler.ConsumeAP(_invoker.card.data.active.cost);
 			mDelegate.start(_invoker, _done);

@@ -37,7 +37,7 @@ namespace Choanji.Battle
 
 		private readonly Phaser mPhase;
 
-		public Action<ActionInvoker, ActionResult, Action> requestProceedActive;
+		public Action<Invoker, Digest, Action> requestProceedActive;
 		public Action<Result, Action> requestFinish;
 
 		public Action onTurnStart;
@@ -66,7 +66,7 @@ namespace Choanji.Battle
 
 		private void AddPassiveTA(Battler _battler, Card _card)
 		{
-			var _invoker = new ActionInvoker(_battler, _card);
+			var _invoker = new Invoker(_battler, _card);
 			var _ta = _card.data.passive.perform;
 			if (_ta.trigger != null)
 				TheBattle.trigger.Add(_invoker, _ta);
@@ -110,9 +110,9 @@ namespace Choanji.Battle
 				mAgentB.selectedCards);
 		}
 
-		private void PerformActive(ActionInvoker _invoker, Action<PhaseDoneType> _done)
+		private void PerformActive(Invoker _invoker, Action<PhaseDoneType> _done)
 		{
-			ActionResult _result = null;
+			Digest _result = null;
 
 			var _perform = _invoker.card.data.active.perform;
 

@@ -7,19 +7,19 @@ namespace Choanji.Battle
 	{
 		public int count;
 
-		private readonly Queue<ActionResult> mResults = new Queue<ActionResult>();
+		private readonly Queue<Digest> mResults = new Queue<Digest>();
 
-		public void Enq(ActionResult _result)
+		public void Enq(Digest _result)
 		{
 			mResults.Enqueue(_result);
 		}
 
-		public ActionResult Deq()
+		public Digest Deq()
 		{
 			return mResults.Dequeue();
 		}
 
-		public ActionResult Fire(ActionInvoker _invoker, Action_ _action, object _arg)
+		public Digest Fire(Invoker _invoker, Action_ _action, object _arg)
 		{
 			var _result = _action.Invoke(_invoker, _arg);
 			if (_result != null) Enq(_result);
