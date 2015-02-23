@@ -3,7 +3,7 @@ using Choanji.Battle;
 
 namespace Choanji
 {
-	public struct Invoker
+	public class Invoker
 	{
 		public Battler battler;
 		public Card card;

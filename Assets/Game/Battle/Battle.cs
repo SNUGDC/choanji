@@ -36,9 +36,7 @@ namespace Choanji.Battle
 		private readonly AgentInfo mAgentB;
 
 		private readonly Phaser mPhase;
-
-		public Action<Invoker, Digest, Action> requestProceedActive;
-		public Action<Result, Action> requestFinish;
+		private ResultType? mResult;
 
 		public Action onTurnStart;
 		public Action onTurnEnd;
@@ -53,15 +51,46 @@ namespace Choanji.Battle
 			mAgentA = new AgentInfo(AgentFactory.Make(_agents.first, _state.battlerA));
 			mAgentB = new AgentInfo(AgentFactory.Make(_agents.second, _state.battlerB));
 
-			mAgentA.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentA, _cards));
-			mAgentB.agent.report = new AgentReport(_cards => AssignCardsAndProceed(mAgentB, _cards));
+			mAgentA.agent.report = new AgentReport(_cards => AssignCards(mAgentA, _cards));
+			mAgentB.agent.report = new AgentReport(_cards => AssignCards(mAgentB, _cards));
 
-			mPhase = new Phaser(_state, OnPhaseDone, new PhaserDelegate(PerformActive));
+			mPhase = new Phaser(_state, EndTurn, PerformActive);
 
 			foreach (var _card in state.battlerA.party.passives)
 				AddPassiveTA(state.battlerA, _card);
 			foreach (var _card in state.battlerB.party.passives)
 				AddPassiveTA(state.battlerB, _card);
+		}
+		
+		private ResultType? CheckDone()
+		{ 
+			if (!state.battlerA.alive)
+				return ResultType.WIN_B;
+			if (!state.battlerB.alive)
+				return ResultType.WIN_A;
+			return null;
+		}
+
+		public void Update()
+		{
+			if (mResult.HasValue)
+				return;
+
+			mResult = CheckDone();
+
+			if (mResult.HasValue)
+			{
+				Finish();
+			}
+			else if (!mPhase.isRunning)
+			{
+				if (mAgentA.selectedCards != null && mAgentB.selectedCards != null)
+					mPhase.Setup(mAgentA.selectedCards, mAgentB.selectedCards);
+			}
+			else
+			{
+				mPhase.Next();
+			}
 		}
 
 		private void AddPassiveTA(Battler _battler, Card _card)
@@ -77,11 +106,16 @@ namespace Choanji.Battle
 		public void StartTurn()
 		{
 			onTurnStart.CheckAndCall();
-
 			state.battlerA.AfterTurnEnd();
 			state.battlerB.AfterTurnEnd();
-
 			SelectCards();
+		}
+
+		private void EndTurn()
+		{
+			state.battlerA.RegenAP();
+			state.battlerB.RegenAP();
+			onTurnEnd.CheckAndCall();
 		}
 
 		private void SelectCards()
@@ -90,88 +124,44 @@ namespace Choanji.Battle
 			mAgentB.agent.StartCardSelect();
 		}
 
-		private void AssignCardsAndProceed(AgentInfo _agent, CardSelectYield _yield)
+		private void AssignCards(AgentInfo _agent, CardSelectYield _yield)
 		{
 			D.Assert(_yield.cards != null);
-
 			_agent.selectedCards = _yield.cards;
-
-			var _other = (_agent == mAgentA) 
-				? mAgentB : mAgentA;
-
-			if (_other.selectedCards != null)
-				StartPhase();
 		}
 
 		private void StartPhase()
 		{
-			mPhase.Start(
+			mPhase.Setup(
 				mAgentA.selectedCards, 
 				mAgentB.selectedCards);
 		}
 
-		private void PerformActive(Invoker _invoker, Action<PhaseDoneType> _done)
+		private void PerformActive(Invoker _invoker)
 		{
-			Digest _result = null;
+			var _active = _invoker.card.data.active;
+			var _perform = _active.perform;
 
-			var _perform = _invoker.card.data.active.perform;
+			_invoker.battler.ConsumeAP(_active.cost);
 
 			if (_perform.trigger == null)
-				_result = TheBattle.trigger.Fire(_invoker, _perform.action, null);
+				TheBattle.trigger.Fire(_invoker, _perform.action, null);
 			else
 				TheBattle.trigger.Add(_invoker, _perform);
-
-			PhaseDoneType _doneType;
-
-			if (state.battlerA.hp <= 0)
-				_doneType = PhaseDoneType.WIN_B;
-			else if (state.battlerB.hp <= 0)
-				_doneType = PhaseDoneType.WIN_A;
-			else
-				_doneType = PhaseDoneType.CONTINUE;
-
-			requestProceedActive(_invoker, _result, () => _done(_doneType));
 		}
 
-		private void OnPhaseDone(PhaseDoneType _doneType)
+		private void Finish()
 		{
+			if (!mResult.HasValue)
+			{
+				L.E("result doesn't have value.");
+				return;
+			}
+
 			mAgentA.selectedCards = null;
 			mAgentB.selectedCards = null;
-
-			switch (_doneType)
-			{
-				case PhaseDoneType.TURN_END:
-					OnTurnEnd();
-					break;
-				case PhaseDoneType.WIN_A:
-				{
-					var _result = new Result(ResultType.WIN_A);
-					if (requestFinish != null)
-						requestFinish(_result, () => onFinish(_result));
-					else
-						onFinish(_result);
-					break;
-				}
-				case PhaseDoneType.WIN_B:
-				{
-					var _result = new Result(ResultType.WIN_B);
-					if (requestFinish != null)
-						requestFinish(_result, () => onFinish(_result));
-					else
-						onFinish(_result);
-					break;
-				}
-				default:
-					D.Assert(false);
-					break;
-			}
+			onFinish(new Result(mResult.Value));
 		}
 
-		private void OnTurnEnd()
-		{
-			state.battlerA.RegenAP();
-			state.battlerB.RegenAP();
-			onTurnEnd();
-		}
 	}
 }

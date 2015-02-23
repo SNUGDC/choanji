@@ -4,132 +4,140 @@ using Gem;
 
 namespace Choanji.Battle
 {
-	public enum PhaseDoneType
+	public enum PhaseResult
 	{
-		CONTINUE,
-		TURN_END,
-		WIN_A,
-		WIN_B,
+		DONE,
+		NO_AP,
 	}
 
-	public class PhaserDelegate
+	public class PhaserDigest : Digest
 	{
-		public PhaserDelegate(Action<Invoker, Action<PhaseDoneType>> _start)
+		public static readonly PhaserDigest DONE = new PhaserDigest(null, PhaseResult.DONE);
+
+		public readonly PhaseResult result;
+
+		public PhaserDigest(Invoker _invoker, PhaseResult _result)
+			: base(_invoker)
 		{
-			start = _start;
+			result = _result;
 		}
-		
-		public Action<Invoker, Action<PhaseDoneType>> start;
 	}
 
     public class Phaser
     {
-		public bool isRunning { get { return mRunning != -1; } }
+		public bool isRunning { get { return mNext != -1; } }
+		public bool isSetuped { get { return mCardsA != null; } }
 		public State state { get; private set; }
 
-		public readonly Action<PhaseDoneType> onDone;
+	    private int mNext = -1;
+	    private Invoker mSlower;
 
-	    private int mRunning = -1;
 	    private List<Card> mCardsA;
 		private List<Card> mCardsB;
-		private readonly PhaserDelegate mDelegate;
 
-		public Phaser(State _state, Action<PhaseDoneType> _onDone, PhaserDelegate _delegate)
+		private readonly Action mDone;
+		private readonly Action<Invoker> mPerform;
+
+		public Phaser(State _state, Action _done, Action<Invoker> _perform)
 		{
 			state = _state;
-		    onDone = _onDone;
-			mDelegate = _delegate;
+			mDone = _done;
+			mPerform = _perform;
 		}
 
-	    public void Start(List<Card> _cardsA, List<Card> _cardsB)
+	    public void Setup(List<Card> _cardsA, List<Card> _cardsB)
 	    {
 		    if (isRunning)
 		    {
-			    L.W("trying to go again. ignore.");
+			    L.W("trying to setup again. ignore.");
 			    return;
 		    }
 
-		    mCardsA = _cardsA;
+			mNext = 0;
+			mCardsA = _cardsA;
 		    mCardsB = _cardsB;
-
-			Loop();
 	    }
 
-	    private void Loop()
+		public void Next()
 	    {
-			++mRunning;
-
-			if (mRunning >= mCardsA.Count && mRunning >= mCardsB.Count)
-				Done(PhaseDoneType.TURN_END);
-			else if (mRunning >= mCardsA.Count)
-				Go(state.battlerB, mCardsB);
-			else if (mRunning >= mCardsB.Count)
-				Go(state.battlerA, mCardsA);
-			else 
-				Go();
-	    }
-
-	    private void Go(Battler _battler, List<Card> _cards)
-	    {
-		    var _card = _cards[mRunning];
-		    var _cost = _card.data.active.cost;
-
-		    if (_battler.ap < _cost)
-		    {
-				Done(PhaseDoneType.TURN_END);
-			    return;
-		    }
-
-			StartCard(new Invoker(_battler, _cards[mRunning]), _doneType =>
+			if (!isRunning)
 			{
-				if (_doneType == PhaseDoneType.CONTINUE)
-				{
-					if (mRunning >= _cards.Count)
-						Done(_doneType);
-					else
-					{
-						++mRunning;
-						if (mRunning < _cards.Count)
-							Go(_battler, _cards);
-						else
-							Done(PhaseDoneType.TURN_END);
-					}
-				}
-				else
-				{
-					Done(_doneType);
-				}
-			});
-	    }
+				L.E("not running.");
+				return;
+			}
 
-	    private void Go()
+			if (mSlower != null)
+			{
+				Do(mSlower);
+				mSlower = null;
+				return;
+			}
+
+			var _cur = mNext++;
+
+			Invoker _invokerA = null;
+			Invoker _invokerB = null;
+
+			if (_cur < mCardsA.Count)
+			{
+				var _cardA = mCardsA[_cur];
+				var _battlerA = state.battlerA;
+				_invokerA = new Invoker(_battlerA, _cardA);
+			}
+
+			if (_cur < mCardsB.Count)
+			{
+				var _cardB = mCardsB[_cur];
+				var _battlerB = state.battlerB;
+				_invokerB = new Invoker(_battlerB, _cardB);
+			}
+
+			var _aOK = _invokerA != null;
+			var _bOK = _invokerB != null;
+
+			if (_aOK && _bOK)
+				Do(_invokerA, _invokerB);
+			else if (_aOK)
+				Do(_invokerA);
+			else if (_bOK)
+				Do(_invokerB);
+			else
+				Done();
+		}
+
+		private static bool CheckEnoughAPAndDigest(Invoker _invoker)
 		{
-			var _cardA = mCardsA[mRunning];
-			var _cardB = mCardsB[mRunning];
+			var _cost = _invoker.card.data.active.cost;
+			var _enough = _invoker.battler.ap >= _cost;
+			if (!_enough)
+				TheBattle.digest.Enq(new PhaserDigest(_invoker, PhaseResult.NO_AP));
+			return _enough;
+		}
 
-		    var _battlerA = state.battlerA;
-		    var _battlerB = state.battlerB;
+	    private void Do(Invoker _invoker)
+	    {
+			if (CheckEnoughAPAndDigest(_invoker))
+				Perform(_invoker);
+		    else
+				Done();
+		}
 
-			var _costA = _cardA.data.active.cost;
-			var _costB = _cardB.data.active.cost;
-
-		    if (_battlerA.ap < _costA)
+		private void Do(Invoker _invokerA, Invoker _invokerB)
+		{
+			if (!CheckEnoughAPAndDigest(_invokerA))
 		    {
-			    Go(_battlerB, mCardsB);
+				Do(_invokerB);
+				return;
+			}
+
+			if (!CheckEnoughAPAndDigest(_invokerB))
+		    {
+				Do(_invokerA);
 			    return;
 		    }
 
-		    if (_battlerB.ap < _costB)
-		    {
-				Go(_battlerA, mCardsA);
-			    return;
-		    }
-
-			var _spdA = _battlerA.CalStat(StatType.SPD);
-			var _spdB = _battlerB.CalStat(StatType.SPD);
-
-			var _invokerA = new Invoker(_battlerA, _cardA);
-			var _invokerB = new Invoker(_battlerB, _cardB);
+			var _spdA = _invokerA.battler.CalStat(StatType.SPD);
+			var _spdB = _invokerB.battler.CalStat(StatType.SPD);
 
 		    Invoker _faster;
 			Invoker _slower;
@@ -145,31 +153,28 @@ namespace Choanji.Battle
 				_slower = _invokerA;
 		    }
 
-			StartCard(_faster, _doneTypeA =>
+		    Perform(_faster);
+
+			if (CheckEnoughAPAndDigest(_slower))
+				mSlower = _slower;
+		}
+
+	    private void Perform(Invoker _invoker)
+	    {
+		    mPerform(_invoker);
+	    }
+
+		private void Done()
+	    {
+			if (!isRunning)
 			{
-				if (_doneTypeA == PhaseDoneType.CONTINUE)
-					StartCard(_slower, _doneTypeB =>
-					{
-						if (_doneTypeB == PhaseDoneType.CONTINUE)
-							Loop();
-						else
-							Done(_doneTypeB);
-					});
-				else
-					Done(_doneTypeA);
-			});
-	    }
+				L.E("already done.");
+				return;
+			}
 
-	    private void StartCard(Invoker _invoker, Action<PhaseDoneType> _done)
-	    {
-			_invoker.battler.ConsumeAP(_invoker.card.data.active.cost);
-			mDelegate.start(_invoker, _done);
-	    }
-
-		private void Done(PhaseDoneType _doneType)
-	    {
-		    mRunning = -1;
-		    onDone(_doneType);
+		    mNext = -1;
+			TheBattle.digest.Enq(PhaserDigest.DONE);
+			mDone();
 	    }
 	}
 }

@@ -31,6 +31,8 @@ namespace Choanji.Battle
 		public MessageView msg;
 		public Poper poper;
 
+		private float mDelay;
+
 		void Start()
 		{
 			TheBattle.onSetup += Setup;
@@ -43,6 +45,8 @@ namespace Choanji.Battle
 
 		public void Setup(Setup _setup)
 		{
+			mDelay = 0;
+
 			var _battlerA = TheBattle.state.battlerA;
 			var _battlerB = TheBattle.state.battlerB;
 
@@ -53,9 +57,6 @@ namespace Choanji.Battle
 			ap.max = (int)_battlerA.apMax;
 			hp.Full();
 			ap.Full();
-
-			_battlerA.onHPMod += (_cur, _old) => hp.Set((int)_cur);
-			_battlerA.onAPMod += (_cur, _old) => ap.Set((int)_cur);
 
 			party.Setup(_battlerA.party);
 			party.onSelect = _card => selection.Add(_card);
@@ -69,8 +70,30 @@ namespace Choanji.Battle
 			};
 
 			selection.onCancel += party.Cancel;
+		}
 
-			TheBattle.battle.requestProceedActive = AnimateActive;
+		void Update()
+		{
+			if (!TheBattle.isSetuped)
+				return;
+				
+			mDelay -= Time.deltaTime;
+
+			if (mDelay > 0)
+				return;
+
+			if (!TheBattle.digest.empty)
+			{
+				mDelay = Animate(TheBattle.digest.Deq());
+			}
+			else
+			{
+				if (mDelay < -3)
+				{
+					TheChoanji.g.context = ContextType.WORLD;
+					TheBattle.Cleanup();
+				}
+			}
 		}
 
 		public void GatherCards(Action<List<Card>> _onDone)
@@ -81,24 +104,6 @@ namespace Choanji.Battle
 				_onDone(party.Submit());
 				submit.onClick = null;
 			};
-		}
-
-		public void AnimateBattleEnd(Result _result, Action _onDone)
-		{
-			Popup _popup = null;
-
-			switch (_result.type)
-			{
-				case ResultType.WIN_A:
-					_popup = ThePopup.Open(Popups.BATTLE_WIN);
-					break;
-				case ResultType.WIN_B:
-					_popup = ThePopup.Open(Popups.BATTLE_LOSE);
-					break;
-			}
-
-			if (_popup)
-				_popup.onClose += _onDone;
 		}
 	}
 }

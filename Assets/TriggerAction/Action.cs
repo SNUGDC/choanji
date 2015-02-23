@@ -106,8 +106,6 @@ namespace Choanji
 
 			TheBattle.Setup(new Setup(Mode.PVE, _self, _battler));
 			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.StartTurn);
-			// todo: 로직 이동
-			TheBattle.onDone = _result => { TheChoanji.g.context = ContextType.WORLD; };
 			TheBattle.Start();
 
 			onDone.CheckAndCall();

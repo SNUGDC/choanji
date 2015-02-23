@@ -77,6 +77,7 @@ namespace Choanji
 					break;
 				case ContextType.BATTLE:
 					TheInput.battle.Update();
+					Battle.TheBattle.Update();
 					break;
 			}
 		}

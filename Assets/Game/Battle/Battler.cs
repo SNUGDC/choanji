@@ -59,19 +59,16 @@ namespace Choanji.Battle
 			private set
 			{
 				if (mHP == value) return;
-
-				var _old = mHP;
-
 				if (value < 0) 
 					mHP = 0;
 				else if (value > hpMax)
 					mHP = hpMax;
 				else
 					mHP = value;
-
-				onHPMod.CheckAndCall(mHP, _old);
 			} 
 		}
+
+		public bool alive { get { return hp > 0; } }
 
 		public readonly AP apMax;
 
@@ -83,14 +80,9 @@ namespace Choanji.Battle
 			{
 				D.Assert(value >= 0);
 				if (mAP == value) return;
-				var _old = mAP;
 				mAP = value < apMax ? value : apMax;
-				onAPMod.CheckAndCall(mAP, _old);
 			}
 		}
-
-		public Action<HP, HP> onHPMod;
-		public Action<AP, AP> onAPMod;
 
 		public SC? sc { get; private set; }
 		private readonly HashSet<SC> mSCImmune = new HashSet<SC>();

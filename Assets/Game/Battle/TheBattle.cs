@@ -5,22 +5,23 @@ namespace Choanji.Battle
 {
 	public static class TheBattle 
 	{
-		public static bool isRunning;
-		public static State state;
-		public static Battle battle;
+		public static bool isRunning { get; private set; }
+		public static bool isSetuped { get { return state != null; } }
 
+		public static State state;
 		public static TriggerManager trigger;
 		public static DigestManager digest;
+		public static Battle battle;
 
 		public static Action<Setup> onSetup;
 		public static Action onStart;
-		public static Action<Result> onDone;
+		public static Action<Result> onFinish;
 
 		public static void Setup(Setup _setup)
 		{
-			if (isRunning)
+			if (isSetuped)
 			{
-				L.W("trying to done but not running.");
+				L.W("already setuped.");
 				return;
 			}
 
@@ -35,7 +36,7 @@ namespace Choanji.Battle
 			trigger = new TriggerManager();
 			digest = new DigestManager();
 
-			battle = new Battle(_setup.mode, state) { onFinish = Done };
+			battle = new Battle(_setup.mode, state) { onFinish = Finish };
 
 			onSetup.CheckAndCall(_setup);
 		}
@@ -46,19 +47,37 @@ namespace Choanji.Battle
 			battle.StartTurn();
 		}
 
-		private static void Done(Result _result)
+		public static void Update()
+		{
+			if (isRunning)
+				battle.Update();
+		}
+
+		private static void Finish(Result _result)
 		{
 			if (!isRunning)
 			{
-				L.W("trying to done but not running.");
+				L.W("not running.");
 				return;
 			}
 
-			onDone(_result);
-
 			isRunning = false;
-			state = null;
+
+			onFinish.CheckAndCall(_result);
+		}
+
+		public static void Cleanup()
+		{
+			if (isRunning)
+			{
+				L.E("cleanup while running.");
+				return;
+			}
+
 			battle = null;
+			trigger = null;
+			digest = null;
+			state = null;
 		}
 	}
 }

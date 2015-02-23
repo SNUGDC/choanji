@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 
 namespace Choanji.Battle
 {
+	[DebuggerDisplay("{mDebuggerDisplay}")]
     public class State
     {
 		public readonly Battler battlerA;
@@ -14,15 +14,28 @@ namespace Choanji.Battle
 			battlerB = _battlerB;
         }
 
+		public bool IsA(Battler _battler)
+		{
+			return battlerA == _battler;
+		}
+
+		public bool IsB(Battler _battler)
+		{
+			return battlerB == _battler;
+		}
+
 	    public Battler Other(Battler _battler)
 	    {
-		    return battlerA == _battler ? battlerB : battlerA;
+		    return IsA(_battler) ? battlerB : battlerA;
 	    }
 
-        public override string ToString()
-        {
-            return "BattlerA: " + battlerA.hp + "\n"
-				+ "BattlerB: " + battlerB.hp;
-        }
+		private string mDebuggerDisplay
+		{
+			get
+			{
+				return "BattlerA: " + battlerA.hp + "\n"
+					+ "BattlerB: " + battlerB.hp;
+			}
+		}
     }
 }

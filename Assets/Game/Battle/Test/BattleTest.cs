@@ -18,7 +18,7 @@ namespace Choanji.Battle
 
 			// TheBattle.battle.onCardPerform = (_battler, _card, _result, _done) => _done();
 			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.StartTurn);
-			TheBattle.onDone = _result => Debug.Log(_result.type);
+			TheBattle.onFinish = _result => Debug.Log(_result.type);
 
 			TheBattle.Start();
 		}
