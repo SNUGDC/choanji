@@ -98,6 +98,8 @@ namespace Choanji.Battle
 		{
 			submit.onClick = () =>
 			{
+				if (!TheBattle.digest.empty)
+					return;
 				selection.Clear();
 				_onDone(party.Submit());
 				submit.onClick = null;

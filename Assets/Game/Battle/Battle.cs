@@ -112,6 +112,13 @@ namespace Choanji.Battle
 
 		public void StartTurn()
 		{
+			if (mAgentA.agent.isRunning 
+				|| mAgentB.agent.isRunning)
+			{
+				L.E("agents busy.");
+				return;
+			}
+
 			onTurnStart.CheckAndCall();
 			TheBattle.digest.Enq(new TypedDigest(null, DigestType.BATTLE_TURN_START));
 			state.battlerA.AfterTurnEnd();
@@ -140,8 +147,15 @@ namespace Choanji.Battle
 
 		private void TryStartPhase()
 		{
-			if (mAgentA.selectedCards != null && mAgentB.selectedCards != null)
-				mPhase.Setup(mAgentA.selectedCards, mAgentB.selectedCards);
+			var _cardsA = mAgentA.selectedCards;
+			var _cardsB = mAgentB.selectedCards;
+
+			if (_cardsA != null && _cardsB != null)
+			{
+				mAgentA.selectedCards = null;
+				mAgentB.selectedCards = null;
+				mPhase.Setup(_cardsA, _cardsB);
+			}
 		}
 
 		private void PerformActive(Invoker _invoker)

@@ -105,7 +105,7 @@ namespace Choanji
 			var _battler = BattlerDB.Get(mBattler);
 
 			TheBattle.Setup(new Setup(Mode.PVE, _self, _battler));
-			TheBattle.battle.onTurnEnd = () => Timer.g.Add(0, TheBattle.battle.StartTurn);
+			TheBattle.battle.onTurnEnd = TheBattle.battle.StartTurn;
 			TheBattle.Start();
 
 			onDone.CheckAndCall();
