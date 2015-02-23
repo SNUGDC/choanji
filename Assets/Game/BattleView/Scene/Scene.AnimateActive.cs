@@ -15,6 +15,28 @@ namespace Choanji.Battle
 
 		public float Animate(Digest _digest)
 		{
+			if (_digest is TypedDigest)
+			{
+				var _theDigest = (TypedDigest) _digest;
+				if (_theDigest.type == DigestType.BATTLE_TURN_START)
+				{
+					var _fx = FXDB.g.phaseDone.Instantiate();
+					_fx.transform.SetParent(canvas.transform, false);
+					return _fx.GetComponent<PropertyFloat>().value;
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			else
+			{
+				return AnimateDescript(_digest);
+			}
+		}
+
+		public float AnimateDescript(Digest _digest)
+		{
 			var _descript = _digest.Descript();
 			if (_descript == null || _descript.Empty())
 				return 0;

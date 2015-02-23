@@ -292,7 +292,8 @@ MonoBehaviour:
   tile: {fileID: 11448664, guid: 426772bebe2775b498d799d33140cb90, type: 2}
   skin: {fileID: 11406340, guid: 8cb8eafa9bf5af04aa4ca43407a12b44, type: 2}
   ui: {fileID: 11423504, guid: 1e076acdb4e8fc3469c217f124265aca, type: 2}
-  sc: {fileID: 11460372, guid: 9d2f3d0e349b7454ebe231d5efac32da, type: 2}
+  battleSC: {fileID: 11460372, guid: 9d2f3d0e349b7454ebe231d5efac32da, type: 2}
+  battleFX: {fileID: 11454496, guid: 11c8f4e04baecab4b95625f3e9b71aa0, type: 2}
 --- !u!1 &113866314
 GameObject:
   m_ObjectHideFlags: 0

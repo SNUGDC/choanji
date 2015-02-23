@@ -11,7 +11,8 @@ namespace Choanji
 		public TileDB tile;
 		public CharacterSkins skin;
 		public UI.DB ui;
-		public Battle.SCDB sc;
+		public Battle.SCDB battleSC;
+		public Battle.FXDB battleFX;
 		
 		void Start()
 		{
@@ -32,7 +33,8 @@ namespace Choanji
 			TileDB.g = tile;
 			CharacterSkins.g = skin;
 			UI.DB.g = ui;
-			Battle.SCDB.g = sc;
+			Battle.SCDB.g = battleSC;
+			Battle.FXDB.g = battleFX;
 			NPCDB.Load();
 
 			var _choanjiAwake = TheChoanji.g;
