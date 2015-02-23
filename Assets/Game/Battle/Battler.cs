@@ -44,6 +44,8 @@ namespace Choanji.Battle
 
 		public readonly BattlerData data;
 
+		public string name { get { return data.name; } }
+
 		public StatSet baseStat { get { return data.stat; } }
 		public readonly StatSet partyStat;
 		public StatSet dynamicStat = new StatSet();

@@ -95,7 +95,7 @@ namespace Choanji.Battle
 
 		private void AddPassiveTA(Battler _battler, Card _card)
 		{
-			var _invoker = new Invoker(_battler, _card);
+			var _invoker = new Invoker(_battler, _card, CardMode.PASSIVE);
 			var _ta = _card.data.passive.perform;
 			if (_ta.trigger != null)
 				TheBattle.trigger.Add(_invoker, _ta);

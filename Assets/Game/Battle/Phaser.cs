@@ -6,20 +6,43 @@ namespace Choanji.Battle
 {
 	public enum PhaseResult
 	{
-		DONE,
+		PERFORM,
 		NO_AP,
+		DONE,
 	}
 
 	public class PhaserDigest : Digest
 	{
-		public static readonly PhaserDigest DONE = new PhaserDigest(null, PhaseResult.DONE);
-
 		public readonly PhaseResult result;
 
 		public PhaserDigest(Invoker _invoker, PhaseResult _result)
 			: base(_invoker)
 		{
 			result = _result;
+		}
+
+		public override List<string> Descript()
+		{
+			string _descript;
+			
+			switch (result)
+			{
+				case PhaseResult.PERFORM:
+					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
+					break;
+				case PhaseResult.NO_AP:
+					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
+					break;
+				case PhaseResult.DONE:
+					_descript = "턴종료!";
+					break;
+				default:
+					L.E("PHASER_UNHANDLED");
+					_descript = "PHASER_UNHANDLED";
+					break;
+			}
+
+			return new List<string> {_descript};
 		}
 	}
 
@@ -82,14 +105,14 @@ namespace Choanji.Battle
 			{
 				var _cardA = mCardsA[_cur];
 				var _battlerA = state.battlerA;
-				_invokerA = new Invoker(_battlerA, _cardA);
+				_invokerA = new Invoker(_battlerA, _cardA, CardMode.ACTIVE);
 			}
 
 			if (_cur < mCardsB.Count)
 			{
 				var _cardB = mCardsB[_cur];
 				var _battlerB = state.battlerB;
-				_invokerB = new Invoker(_battlerB, _cardB);
+				_invokerB = new Invoker(_battlerB, _cardB, CardMode.ACTIVE);
 			}
 
 			var _aOK = _invokerA != null;
@@ -161,6 +184,7 @@ namespace Choanji.Battle
 
 	    private void Perform(Invoker _invoker)
 	    {
+			TheBattle.digest.Enq(new PhaserDigest(_invoker, PhaseResult.PERFORM));
 		    mPerform(_invoker);
 	    }
 
@@ -173,7 +197,7 @@ namespace Choanji.Battle
 			}
 
 		    mNext = -1;
-			TheBattle.digest.Enq(PhaserDigest.DONE);
+			TheBattle.digest.Enq(new PhaserDigest(null, PhaseResult.DONE));
 			mDone();
 	    }
 	}

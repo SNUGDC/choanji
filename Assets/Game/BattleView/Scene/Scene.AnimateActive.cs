@@ -15,12 +15,11 @@ namespace Choanji.Battle
 
 		public float Animate(Digest _digest)
 		{
-			return 0;
-// 			var _commonDelay = AnimateCommon(_digest);
-// 
-// 			var _battlerDelay = 0f;
-// 
-// 			return _battlerDelay;
+			var _descript = _digest.Descript();
+			if (_descript == null || _descript.Empty())
+				return 0;
+			msg.Push(new MessageView.Message {txts = _descript});
+			return _descript.Count*MSG_DELAY;
 		}
 
 		private float AnimateCommon(Digest _digest)
@@ -45,7 +44,7 @@ namespace Choanji.Battle
 		private float AnimateBattler()
 		{
 			return 0;
-			// 			if (TheBattle.state.IsA(_digest.invoker.battler))
+// 			if (TheBattle.state.IsA(_digest.invoker.battler))
 // 				return AnimateBattlerA(_digest);
 // 			else
 // 				return AnimateBattlerB(_digest);
@@ -88,12 +87,6 @@ namespace Choanji.Battle
 
 			if (_popup)
 				_popup.onClose += _onDone;
-		}
-
-		private float PushMessageUseActive(Battler _battler, ActiveData _active)
-		{
-			msg.Push(BattlerName(_battler) + "은(는) " + _active.name + "을(를) 사용했다!");
-			return MSG_DELAY;
 		}
 
 		private float PushMessageDamage(DmgDigest _digest)

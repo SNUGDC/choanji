@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Choanji.Battle;
+using Gem;
 
 namespace Choanji
 {
@@ -7,8 +8,9 @@ namespace Choanji
 	{
 		public Battler battler;
 		public Card card;
+		public CardMode? mode;
 
-		public Invoker(Battler _battler, Card _card)
+		public Invoker(Battler _battler, Card _card, CardMode? _mode)
 		{
 			battler = _battler;
 			card = _card;
@@ -28,6 +30,86 @@ namespace Choanji
 	public class Digest
 	{
 		public readonly Invoker invoker;
+
+		public string battlerName
+		{
+			get
+			{
+				if (invoker.battler != null)
+				{
+					return invoker.battler.name;
+				}
+				else
+				{
+					L.E("NO_BATTLER");
+					return "NO_BATTLER";
+				}
+			}
+		}
+
+		public string cardName
+		{
+			get
+			{
+				if (invoker.card != null)
+				{
+					return invoker.card.data.name;
+				}
+				else
+				{
+					L.E("NO_CARD");
+					return "NO_CARD";
+				}
+			}
+		}
+
+		public string moveName
+		{
+			get
+			{
+				if (!invoker.mode.HasValue)
+				{
+					L.E("NO_CARD_MODE");
+					return "NO_CARD_MODE";
+				}
+				else if (invoker.mode.Value == CardMode.PASSIVE)
+					return invoker.card.data.passive.name;
+				else
+					return invoker.card.data.active.name;
+			}
+		}
+
+		public string passiveName
+		{
+			get
+			{
+				if (invoker.card != null)
+				{
+					return invoker.card.data.passive.name;
+				}
+				else
+				{
+					L.E("NO_PASSIVE");
+					return "NO_PASSIVE";
+				}
+			}
+		}
+
+		public string activeName
+		{
+			get
+			{
+				if (invoker.card != null)
+				{
+					return invoker.card.data.active.name;
+				}
+				else
+				{
+					L.E("NO_ACTIVE");
+					return "NO_ACTIVE";
+				}
+			}
+		}
 
 		public Digest(Invoker _invoker)
 		{

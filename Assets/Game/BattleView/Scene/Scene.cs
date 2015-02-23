@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Choanji.UI;
-using Gem;
 using UnityEngine;
 
 namespace Choanji.Battle
@@ -86,7 +84,7 @@ namespace Choanji.Battle
 			{
 				mDelay = Animate(TheBattle.digest.Deq());
 			}
-			else
+			else if (!TheBattle.isRunning)
 			{
 				if (mDelay < -3)
 				{
