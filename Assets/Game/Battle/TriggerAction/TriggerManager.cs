@@ -146,7 +146,14 @@ namespace Choanji.Battle
 					Remove(_taInfo);
 			}
 
-			return TheBattle.action.Fire(_taInfo.invoker, _taInfo.action, _arg);
+			return Fire(_taInfo.invoker, _taInfo.action, _arg);
+		}
+
+		public Digest Fire(Invoker _invoker, Action_ _action, object _arg)
+		{
+			var _result = _action.Invoke(_invoker, _arg);
+			if (_result != null) TheBattle.digest.Enq(_result);
+			return _result;
 		}
 	}
 }

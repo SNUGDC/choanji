@@ -10,7 +10,7 @@ namespace Choanji.Battle
 		public static Battle battle;
 
 		public static TriggerManager trigger;
-		public static ActionManager action;
+		public static DigestManager digest;
 
 		public static Action<Setup> onSetup;
 		public static Action onStart;
@@ -33,7 +33,7 @@ namespace Choanji.Battle
 				new Battler(_setup.battlerB));
 
 			trigger = new TriggerManager();
-			action = new ActionManager();
+			digest = new DigestManager();
 
 			battle = new Battle(_setup.mode, state) { onFinish = Done };
 

@@ -71,7 +71,7 @@ namespace Choanji.Battle
 			if (_ta.trigger != null)
 				TheBattle.trigger.Add(_invoker, _ta);
 			else
-				TheBattle.action.Fire(_invoker, _ta.action, null);
+				TheBattle.trigger.Fire(_invoker, _ta.action, null);
 		}
 
 		public void StartTurn()
@@ -117,7 +117,7 @@ namespace Choanji.Battle
 			var _perform = _invoker.card.data.active.perform;
 
 			if (_perform.trigger == null)
-				_result = TheBattle.action.Fire(_invoker, _perform.action, null);
+				_result = TheBattle.trigger.Fire(_invoker, _perform.action, null);
 			else
 				TheBattle.trigger.Add(_invoker, _perform);
 

@@ -96,7 +96,7 @@ namespace Choanji.Battle
 		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			if (ActionHelper.Dice(prob))
-				return TheBattle.action.Fire(_invoker, action, _arg);
+				return TheBattle.trigger.Fire(_invoker, action, _arg);
 			else 
 				return null;
 		}
