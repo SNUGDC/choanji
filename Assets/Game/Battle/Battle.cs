@@ -79,18 +79,11 @@ namespace Choanji.Battle
 			mResult = CheckDone();
 
 			if (mResult.HasValue)
-			{
 				Finish();
-			}
 			else if (!mPhase.isRunning)
-			{
-				if (mAgentA.selectedCards != null && mAgentB.selectedCards != null)
-					mPhase.Setup(mAgentA.selectedCards, mAgentB.selectedCards);
-			}
+				TryStartPhase();
 			else
-			{
 				mPhase.Next();
-			}
 		}
 
 		private static void AddPassiveTA(Battler _battler, Card _card)
@@ -120,6 +113,7 @@ namespace Choanji.Battle
 		public void StartTurn()
 		{
 			onTurnStart.CheckAndCall();
+			TheBattle.digest.Enq(new TypedDigest(null, DigestType.BATTLE_TURN_START));
 			state.battlerA.AfterTurnEnd();
 			state.battlerB.AfterTurnEnd();
 			SelectCards();
@@ -144,11 +138,10 @@ namespace Choanji.Battle
 			_agent.selectedCards = _yield.cards;
 		}
 
-		private void StartPhase()
+		private void TryStartPhase()
 		{
-			mPhase.Setup(
-				mAgentA.selectedCards, 
-				mAgentB.selectedCards);
+			if (mAgentA.selectedCards != null && mAgentB.selectedCards != null)
+				mPhase.Setup(mAgentA.selectedCards, mAgentB.selectedCards);
 		}
 
 		private void PerformActive(Invoker _invoker)

@@ -1,8 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gem;
 
 namespace Choanji.Battle
 {
+	public enum DigestType
+	{
+		BATTLE_TURN_START,
+		BATTLE_CARD_SELECT,
+	}
+
 	public static partial class Helper
 	{
 		public static List<string> ToList(string _descript)
@@ -127,25 +134,41 @@ namespace Choanji.Battle
 		public virtual List<string> Descript() { return null; }
 	}
 
-	public class StringDigest : Digest
+	public sealed class TypedDigest : Digest
 	{
-		private readonly List<string> mDescription;
+		public readonly DigestType type;
+
+		public TypedDigest(Invoker _invoker, DigestType _type) 
+			: base(_invoker)
+		{
+			type = _type;
+		}
+
+		public static implicit operator DigestType(TypedDigest _this)
+		{
+			return _this.type;
+		}
+	}
+
+	public sealed class StringDigest : Digest
+	{
+		private readonly List<string> mDescripts;
 
 		public StringDigest(Invoker _invoker, string _txt)
 			: base(_invoker)
 		{
-			mDescription = new List<string> { _txt };
+			mDescripts = new List<string> { _txt };
 		}
 
 		public StringDigest(Invoker _invoker, List<string> _txt)
 			: base(_invoker)
 		{
-			mDescription = _txt;
+			mDescripts = _txt;
 		}
 
 		public override List<string> Descript()
 		{
-			return mDescription;
+			return mDescripts;
 		}
 	}
 
