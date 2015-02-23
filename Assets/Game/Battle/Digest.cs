@@ -1,19 +1,27 @@
 ﻿using System.Collections.Generic;
-using Choanji.Battle;
 using Gem;
 
-namespace Choanji
+namespace Choanji.Battle
 {
+	public static partial class Helper
+	{
+		public static List<string> ToList(string _descript)
+		{
+			return new List<string>{_descript};
+		}
+	}
+
 	public class Invoker
 	{
-		public Battler battler;
-		public Card card;
-		public CardMode? mode;
+		public readonly Battler battler;
+		public readonly Card card;
+		public readonly CardMode? mode;
 
 		public Invoker(Battler _battler, Card _card, CardMode? _mode)
 		{
 			battler = _battler;
 			card = _card;
+			mode = _mode;
 		}
 
 		public static implicit operator Battler(Invoker _this)
@@ -53,7 +61,7 @@ namespace Choanji
 			{
 				if (invoker.card != null)
 				{
-					return invoker.card.data.name;
+					return invoker.card.data.richName;
 				}
 				else
 				{
@@ -73,9 +81,9 @@ namespace Choanji
 					return "NO_CARD_MODE";
 				}
 				else if (invoker.mode.Value == CardMode.PASSIVE)
-					return invoker.card.data.passive.name;
+					return invoker.card.data.passive.richName;
 				else
-					return invoker.card.data.active.name;
+					return invoker.card.data.active.richName;
 			}
 		}
 
@@ -85,7 +93,7 @@ namespace Choanji
 			{
 				if (invoker.card != null)
 				{
-					return invoker.card.data.passive.name;
+					return invoker.card.data.passive.richName;
 				}
 				else
 				{
@@ -101,7 +109,7 @@ namespace Choanji
 			{
 				if (invoker.card != null)
 				{
-					return invoker.card.data.active.name;
+					return invoker.card.data.active.richName;
 				}
 				else
 				{
@@ -138,6 +146,65 @@ namespace Choanji
 		public override List<string> Descript()
 		{
 			return mDescription;
+		}
+	}
+
+	public sealed class ActiveFireDigest : Digest
+	{
+		public ActiveFireDigest(Invoker _invoker)
+			: base(_invoker)
+		{}
+
+		public override List<string> Descript()
+		{
+			return Helper.ToList(battlerName + "은(는) " + activeName + "을(를) 사용했다!");
+		}
+	}
+
+	public sealed class PassiveFireDigest : Digest
+	{
+		public PassiveFireDigest(Invoker _invoker)
+			: base(_invoker)
+		{ }
+
+		public override List<string> Descript()
+		{
+			return Helper.ToList(battlerName + "의 " + cardName + " 효과발동! " + passiveName);
+		}
+	}
+
+	public class PhaserDigest : Digest
+	{
+		public readonly PhaseResult result;
+
+		public PhaserDigest(Invoker _invoker, PhaseResult _result)
+			: base(_invoker)
+		{
+			result = _result;
+		}
+
+		public override List<string> Descript()
+		{
+			string _descript;
+
+			switch (result)
+			{
+				case PhaseResult.PERFORM:
+					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
+					break;
+				case PhaseResult.NO_AP:
+					_descript = battlerName + "은(는) " + activeName + "을(를) 사용하려 했지만 AP가 부족하다!";
+					break;
+				case PhaseResult.DONE:
+					_descript = "턴종료";
+					break;
+				default:
+					L.E("PHASER_UNHANDLED");
+					_descript = "PHASER_UNHANDLED";
+					break;
+			}
+
+			return new List<string> { _descript };
 		}
 	}
 

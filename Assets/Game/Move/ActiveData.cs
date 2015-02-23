@@ -12,6 +12,7 @@ namespace Choanji
 			type = EnumHelper.ParseOrDefault<ActiveType>((string) _data["type"]);
 			name = (string) _data["name"];
 			detail = (string) _data["detail"];
+			theme = _data.StringOrDefault("theme", "ff0000");
 			cost = (AP) (int) _data["cost"];
 			perform = new Battle.TA(_data["perform"]);
 		}
@@ -21,6 +22,9 @@ namespace Choanji
 		public readonly ActiveType type;
 		public readonly string name;
 		public readonly string detail;
+		public readonly string theme;
+
+		public string richName { get { return UIHelper.RichAddColor(name, theme); }}
 
 		public readonly AP cost;
 

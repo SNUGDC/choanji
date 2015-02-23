@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Gem;
 using LitJson;
 using Random = UnityEngine.Random;
@@ -8,6 +8,7 @@ namespace Choanji.Battle
 	public enum ActionType
 	{
 		NONE = 0,
+		LAMBDA,
 		TA,
 		DICE,
 		DMG,
@@ -61,6 +62,26 @@ namespace Choanji.Battle
 		}
 
 		public abstract Digest Invoke(Invoker _invoker, object _arg);
+	}
+
+	public sealed class ActionLambda : Action_
+	{
+		private readonly Func<Invoker, object, Digest> mAction;
+
+		public ActionLambda(Func<Invoker, object, Digest> _action)
+			: base(ActionType.LAMBDA)
+		{
+			mAction = _action;
+		}
+
+		public ActionLambda(Action_ _action)
+			: this(_action.Invoke)
+		{}
+
+		public override Digest Invoke(Invoker _invoker, object _arg)
+		{
+			return mAction(_invoker, _arg);
+		}
 	}
 
 	public sealed class ActionTA : Action_

@@ -11,41 +11,6 @@ namespace Choanji.Battle
 		DONE,
 	}
 
-	public class PhaserDigest : Digest
-	{
-		public readonly PhaseResult result;
-
-		public PhaserDigest(Invoker _invoker, PhaseResult _result)
-			: base(_invoker)
-		{
-			result = _result;
-		}
-
-		public override List<string> Descript()
-		{
-			string _descript;
-			
-			switch (result)
-			{
-				case PhaseResult.PERFORM:
-					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
-					break;
-				case PhaseResult.NO_AP:
-					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
-					break;
-				case PhaseResult.DONE:
-					_descript = "턴종료!";
-					break;
-				default:
-					L.E("PHASER_UNHANDLED");
-					_descript = "PHASER_UNHANDLED";
-					break;
-			}
-
-			return new List<string> {_descript};
-		}
-	}
-
     public class Phaser
     {
 		public bool isRunning { get { return mNext != -1; } }
