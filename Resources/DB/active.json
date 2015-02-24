@@ -81,7 +81,8 @@
 		"cost": 100,
 		"perform": {
 			"trigger": {
-				"when": "BEFORE_START_TURN"
+				"when": "BEFORE_START_TURN",
+				"limit": 1
 			},
 			"action": {
 				"type": "DMG",
