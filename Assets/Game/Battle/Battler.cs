@@ -168,7 +168,7 @@ namespace Choanji.Battle
 
 		public APChangeDigest RegenAP()
 		{
-			ap += CalStat(StatType.AP_REGEN);
+			ap += CalStat(StatType.SPD);
 			return new APChangeDigest(new Invoker(this), ap);
 		}
 

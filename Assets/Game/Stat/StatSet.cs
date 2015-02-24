@@ -17,7 +17,6 @@ namespace Choanji
 		{
 			hp = (HP)_json.IntOrDefault(StatType.HP.ToString());
 			ap = (AP)_json.IntOrDefault(StatType.AP.ToString());
-			apRegen = (AP)_json.IntOrDefault(StatType.AP_REGEN.ToString());
 			apConsume = (AP)_json.IntOrDefault(StatType.AP_CONSUME.ToString());
 			str = (STR)_json.IntOrDefault(StatType.STR.ToString());
 			def = (DEF)_json.IntOrDefault(StatType.DEF.ToString());
@@ -75,7 +74,6 @@ namespace Choanji
 				{
 					case StatType.HP:  return (int)hp;
 					case StatType.AP:  return (int)ap;
-					case StatType.AP_REGEN: return (int)apRegen;
 					case StatType.AP_CONSUME: return (int)apConsume;
 					case StatType.STR: return (int)str;
 					case StatType.DEF: return (int)def;
@@ -93,7 +91,6 @@ namespace Choanji
 				{
 					case StatType.HP:  hp = (HP)value; return;
 					case StatType.AP:  ap = (AP)value; return;
-					case StatType.AP_REGEN: apRegen = (AP)value; return;
 					case StatType.AP_CONSUME: apConsume = (AP)value; return;
 					case StatType.STR: str = (STR)value; return;
 					case StatType.DEF: def = (DEF)value; return;

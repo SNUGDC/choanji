@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Choanji
 {
@@ -7,7 +6,6 @@ namespace Choanji
 	{
 		HP,
 		AP,
-		AP_REGEN,
 		AP_CONSUME,
 
 		STR,
@@ -46,7 +44,6 @@ namespace Choanji
 			{
 				case StatType.HP: return "HP";
 				case StatType.AP: return "AP";
-				case StatType.AP_REGEN:   return "AP 충전량";
 				case StatType.AP_CONSUME: return "AP 소모량";
 				case StatType.STR: return "공격력";
 				case StatType.DEF: return "방어력";
