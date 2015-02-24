@@ -140,14 +140,13 @@ namespace Choanji.Battle
 		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			var _battler = _invoker.battler;
+			var _state = TheBattle.state;
+			var _hitter = _state.Other(_battler);
 
 			if (ActionHelper.Dice(accuracy))
 			{
-				var _state = TheBattle.state;
-
 				var _dmg = _battler.attackBuilder.Build(dmg);
 
-				var _hitter = _state.Other(_battler);
 				_hitter.beforeHit.CheckAndCall(_dmg);
 
 				if (_hitter.blockHitOneTime)
@@ -157,6 +156,7 @@ namespace Choanji.Battle
 					{
 						hit = true,
 						block = true,
+						hpAfter = _hitter.hp,
 					};
 				}
 				else
@@ -168,6 +168,7 @@ namespace Choanji.Battle
 					{
 						hit = true,
 						dmg = _trueDmg,
+						hpAfter = _hitter.hp,
 					};
 				}
 			}
@@ -175,7 +176,8 @@ namespace Choanji.Battle
 			{
 				return new DmgDigest(_invoker)
 				{
-					hit = false
+					hit = false,
+					hpAfter = _hitter.hp,
 				};
 			}
 		}

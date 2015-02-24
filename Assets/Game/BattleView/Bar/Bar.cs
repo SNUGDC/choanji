@@ -16,7 +16,38 @@ namespace Choanji
 
 		protected int textCurSize { private get; set; }
 
-		public void Set(float _val)
+		private float? mTarget;
+
+		void Update()
+		{
+			if (!mTarget.HasValue)
+				return;
+
+			if (Mathf.Abs(val - mTarget.Value) > 0.01f)
+			{
+				DoSet(Mathf.Lerp(val, mTarget.Value, Time.deltaTime));
+			}
+			else
+			{
+				DoSet(mTarget.Value);
+				mTarget = null;
+			}
+		}
+
+		public void Set(float _val, bool _lerp)
+		{
+			if (!_lerp)
+			{
+				mTarget = null;
+				DoSet(_val);
+			}
+			else
+			{
+				mTarget = _val;
+			}
+		}
+
+		private void DoSet(float _val)
 		{
 			if (max == 0)
 			{
@@ -35,9 +66,9 @@ namespace Choanji
 			Resize();
 		}
 
-		public void Full()
+		public void Full(bool _lerp = false)
 		{
-			Set(max);
+			Set(max, _lerp);
 		}
 
 		protected virtual void Resize()

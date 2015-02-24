@@ -9,5 +9,7 @@ namespace Choanji
 		public AudioClip battleDefault;
 
 		public AudioClip choose;
+
+		public AudioClip hit;
 	}
 }

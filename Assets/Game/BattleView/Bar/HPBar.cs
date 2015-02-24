@@ -13,6 +13,11 @@ namespace Choanji.Battle
 			textCurSize = 28;
 		}
 
+		public void Hit(HP _hpAfter)
+		{
+			Set((float)_hpAfter, true);
+		}
+
 		protected override void Resize()
 		{
 			base.Resize();

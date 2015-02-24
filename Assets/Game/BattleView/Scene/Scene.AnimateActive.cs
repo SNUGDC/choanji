@@ -7,6 +7,7 @@ namespace Choanji.Battle
 {
 	public partial class Scene
 	{
+		private const float UNIT = 0.5f;
 		private const float MSG_DELAY = 1;
 
 		private static string BattlerName(Battler _battler)
@@ -18,8 +19,8 @@ namespace Choanji.Battle
 		{
 			if (_digest is TypedDigest)
 			{
-				var _theDigest = (TypedDigest) _digest;
-				switch (_theDigest.type) 
+				var d = (TypedDigest) _digest;
+				switch (d.type) 
 				{
 					case DigestType.TURN_START:
 					{
@@ -28,16 +29,30 @@ namespace Choanji.Battle
 						return _fx.GetComponent<PropertyFloat>().value;
 					}
 					case DigestType.CARD_SELECT:
-						GatherCards(((Action<List<Card>>)_theDigest.arg));
+						GatherCards(((Action<List<Card>>)d.arg));
 						return 0;
 					default:
 						return 0;
 				}
 			}
-			else
+			else if (_digest is DmgDigest)
 			{
-				return AnimateDescript(_digest);
+				AnimateDescript(_digest);
+				var _delay = 0f;
+				var d = (DmgDigest) _digest;
+				if (d.dmg.HasValue)
+				{
+					mTimer.Add(_delay += UNIT, () =>
+					{
+						hp.Hit(d.hpAfter);
+						poper.PopDmg(d.dmg.Value);
+						SoundManager.PlaySFX(SoundDB.g.hit);
+					});
+				}
+				return _delay;
 			}
+
+			return AnimateDescript(_digest);
 		}
 
 		public float AnimateDescript(Digest _digest)
@@ -47,25 +62,6 @@ namespace Choanji.Battle
 				return 0;
 			msg.Push(new MessageView.Message {txts = _descript});
 			return _descript.Count*MSG_DELAY;
-		}
-
-		private float AnimateCommon(Digest _digest)
-		{
-			return 0;
-// 			var _invoker = _digest.invoker;
-// 
-// 			var _delay = 0f;
-// 
-// 			if (_invoker != null)
-// 				_delay += PushMessageUseActive(_invoker, _invoker.card.data.active);
-// 
-// 			if (_digest is DmgDigest)
-// 			{
-// 				var _theResult = (DmgDigest)_digest;
-// 				_delay += PushMessageDamage(_theResult);
-// 			}
-// 
-// 			return _delay;
 		}
 
 		private float AnimateBattler()
@@ -85,7 +81,6 @@ namespace Choanji.Battle
 				if (_theResult.dmg.HasValue)
 				{
 					var _dmg = _theResult.dmg.Value;
-					Timer.g.Add(MSG_DELAY, () => poper.PopDmg(_dmg));
 				}
 				return 0;
 			}
@@ -114,31 +109,6 @@ namespace Choanji.Battle
 
 			if (_popup)
 				_popup.onClose += _onDone;
-		}
-
-		private float PushMessageDamage(DmgDigest _digest)
-		{
-			if (_digest.dmg.HasValue)
-			{
-				var _dmg = _digest.dmg.Value;
-
-				var _ele = ElementDB.Get(_dmg.ele);
-				msg.Push("<size=24>" + _ele.name + "</size> 데미지 <color=#" + _ele.theme.ToHex() + ">" + _dmg.val + "</color>!" );
-			}
-			else if (_digest.block)
-			{
-				// todo: implement
-				// poper.PopText("BLOCK", Color.blue);
-				msg.Push("방어!");
-			}
-			else
-			{
-				// todo: implement
-				// poper.PopText("MISS", Color.red);
-				msg.Push("빗나감!");
-			}
-
-			return MSG_DELAY;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gem;
 using UnityEngine;
 
 namespace Choanji.Battle
@@ -29,6 +30,7 @@ namespace Choanji.Battle
 		public MessageView msg;
 		public Poper poper;
 
+		private readonly Timer mTimer = new Timer();
 		private float mDelay;
 
 		void Start()
@@ -72,10 +74,13 @@ namespace Choanji.Battle
 
 		void Update()
 		{
+			var _dt = Time.deltaTime;
+			mTimer.Update(_dt);
+
 			if (!TheBattle.isSetuped)
 				return;
-				
-			mDelay -= Time.deltaTime;
+
+			mDelay -= _dt;
 
 			if (mDelay > 0)
 				return;

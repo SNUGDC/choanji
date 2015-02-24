@@ -29,8 +29,8 @@ namespace Choanji.Battle
 		void Update()
 		{
 			var _val = Mathf.Abs(Mathf.Sin(Time.time));
-			hp.Set(_val * 50);
-			cost.Set(_val * 50);
+			hp.Set(_val * 50, false);
+			cost.Set(_val * 50, false);
 			sc.sc = (SC) ((int) Time.time%SCHelper.COUNT);
 		}
 	}

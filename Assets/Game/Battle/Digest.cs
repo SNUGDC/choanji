@@ -61,6 +61,22 @@ namespace Choanji.Battle
 			}
 		}
 
+		public string otherName
+		{
+			get
+			{
+				if (invoker.battler != null)
+				{
+					return TheBattle.state.Other(invoker.battler).name;
+				}
+				else
+				{
+					L.E("NO_BATTLER");
+					return "NO_BATTLER";
+				}
+			}
+		}
+
 		public string cardName
 		{
 			get
@@ -237,10 +253,34 @@ namespace Choanji.Battle
 		public bool hit;
 		public bool block;
 		public Damage? dmg;
+		public HP hpAfter;
 
 		public DmgDigest(Invoker _invoker)
 			: base(_invoker)
-		{ }
+		{}
+
+		public override List<string> Descript()
+		{
+			string _descript;
+
+			if (dmg.HasValue)
+			{
+				var _dmg = dmg.Value;
+				var _ele = ElementDB.Get(_dmg.ele);
+				_descript = "<size=16>" + battlerName + "의" + moveName + "</size>, " 
+					+ "<size=24>" + _ele.name + "</size> 데미지 <color=#" + _ele.theme.ToHex() + ">" + _dmg.val + "</color>!";
+			}
+			else if (block)
+			{
+				_descript = otherName + "은(는) " + moveName + "를 <color=#00aa00>방어했다!</color>";
+			}
+			else
+			{
+				_descript = otherName + "은(는) " + moveName + "는 <color=#00aa00>피했다!</color>";
+			}
+
+			return new List<string>{_descript};
+		}
 	}
 
 	public class HealDigest : Digest
