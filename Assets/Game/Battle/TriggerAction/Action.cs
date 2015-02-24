@@ -267,7 +267,7 @@ namespace Choanji.Battle
 			if (type == ActionType.BUFF_ATK)
 			{
 				_invoker.battler.attackModifier[ele] += (int)per;
-				return new StringDigest(_invoker, string.Format("{0} 강화 {1}%", ElementDB.Get(ele).name, per));
+				return new BuffAtkDigest(_invoker, ele, per);
 			}
 
 			return null;
@@ -276,9 +276,9 @@ namespace Choanji.Battle
 
 	public sealed class ActionStatMod : Action_
 	{
-		public readonly int? dur;
 		public readonly TargetType target;
 		public readonly StatSet stat;
+		public readonly int? dur;
 
 		public ActionStatMod(JsonData _data)
 			: base(ActionType.STAT_MOD)
@@ -298,17 +298,11 @@ namespace Choanji.Battle
 		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			var _target = ActionHelper.Choose(target, _invoker.battler);
-
 			if (!dur.HasValue)
-			{
 				_target.dynamicStat += stat;
-				return new StringDigest(_invoker, "스텟 상승");
-			}
 			else
-			{
 				_target.ApplyForDuration(stat, dur.Value);
-				return new StringDigest(_invoker, dur.Value + "턴 동안 스텟 상승");
-			}
+			return new StatModDigest(_invoker, _target, stat, dur);
 		}
 	}
 
@@ -329,7 +323,7 @@ namespace Choanji.Battle
 			if (ActionHelper.Other(_invoker.battler).TryImposeSC(sc, accuracy))
 				return null;
 			else
-				return new StringDigest(_invoker, "상태이상 " + sc + "을(를) 거는데 실패하였다!");
+				return new StringDigest(_invoker, "상태이상 " + SCDB.g[sc].richName + "을(를) 거는데 실패하였다!");
 		}
 	}
 
@@ -346,7 +340,7 @@ namespace Choanji.Battle
 		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
 			_invoker.battler.AddImmune(sc);
-			return new StringDigest(_invoker, "상태이상 " + sc + "에 면역되었다!");
+			return new StringDigest(_invoker, "상태이상 " + SCDB.g[sc].richName + "에 면역되었다!");
 		}
 	}
 

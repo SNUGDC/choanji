@@ -50,6 +50,11 @@ namespace Choanji
 		public readonly Elements resist;
 		public readonly Elements immune;
 
+		public string richName
+		{
+			get { return new RichText(name).AddColor(theme); }
+		}
+
 		private Elements Map(List<string> _raws, Dictionary<string, ElementID> _map)
 		{
 			var _elements = new BitSlot<ElementID, ElementIDConverter>(ElementConst.MAX);

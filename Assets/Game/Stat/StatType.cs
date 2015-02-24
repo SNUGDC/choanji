@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Choanji
 {
@@ -18,9 +19,9 @@ namespace Choanji
 
 	public struct StatRst
 	{
-		public StatRst(ElementID _elem )
+		public StatRst(ElementID _ele )
 		{
-			element = _elem;
+			element = _ele;
 		}
 
 		public readonly ElementID element;
@@ -32,8 +33,32 @@ namespace Choanji
 
 		public static IEnumerable<StatRst> GetEnum()
 		{
-			foreach (var _elem in ElementDB.GetEnum())
-				yield return new StatRst(_elem);
+			foreach (var _ele in ElementDB.GetEnum())
+				yield return new StatRst(_ele);
+		}
+	}
+
+	public static class StatHelper
+	{
+		public static string Name(this StatType _stat)
+		{
+			switch (_stat)
+			{
+				case StatType.HP: return "HP";
+				case StatType.AP: return "AP";
+				case StatType.AP_REGEN:   return "AP 충전량";
+				case StatType.AP_CONSUME: return "AP 소모량";
+				case StatType.STR: return "공격력";
+				case StatType.DEF: return "방어력";
+				case StatType.SPD: return "속";
+				case StatType.RST_SC: return "상태이상 저항력";
+				default: return "UNDEFINED_STAT_" + _stat;
+			}
+		}
+
+		public static string GetRstName(ElementData _ele)
+		{
+			return _ele.name + " 저항력";
 		}
 	}
 }

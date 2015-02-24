@@ -9,7 +9,14 @@ namespace Choanji.Battle
 	public class SCData
 	{
 		public SC type;
+		public string name;
+		public Color theme;
 		public Sprite uiIcon;
+
+		public string richName
+		{
+			get { return new RichText(name).AddColor(theme); }
+		}
 	}
 
 	public class SCDB : MonoBehaviour

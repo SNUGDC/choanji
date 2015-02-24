@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gem;
 using UnityEngine;
 
@@ -304,9 +305,9 @@ namespace Choanji.Battle
 		public override List<string> Descript()
 		{
 			if (val.HasValue)
-				return new List<string> { "회복 +" + val.Value };
+				return new List<string> { moveName + ", 회복 +<color=#32cd32>" + val.Value + "</color>" };
 			else
-				return new List<string> { "회복 " + per.Value + "%" };
+				return new List<string> { moveName + ", 회복 <color=#32cd32>" + per.Value + "%</color>" };
 		}
 	}
 
@@ -339,4 +340,64 @@ namespace Choanji.Battle
 		}
 	}
 
+	public class StatModDigest : Digest
+	{
+		public readonly Battler target;
+		public readonly StatSet stat;
+		public readonly int? dur;
+
+		public StatModDigest(Invoker _invoker, Battler _target, StatSet _stat, int? _dur) 
+			: base(_invoker)
+		{
+			target = _target;
+			stat = _stat;
+			dur = _dur;
+		}
+
+		public override List<string> Descript()
+		{
+			var _descript = new List<string>();
+			var _prefix = target.name + ", ";
+			if (dur.HasValue)
+				_prefix += dur.Value + "턴 동안 ";
+
+			foreach (var _type in EnumHelper.GetValues<StatType>())
+			{
+				var _val = stat[_type];
+				if (_val == 0) continue;
+				var _buffOrNuff = _val > 0 ? "상승" : "하강";
+				_descript.Add(_prefix + _type.Name() + "이(가) " 
+					+ Math.Abs(_val) + " " + _buffOrNuff +"!");
+			}
+
+			foreach (var _ele in ElementDB.GetEnum())
+			{
+				var _rst = stat.GetRst(_ele);
+				if (_rst == 0) continue;
+				var _buffOrNuff = _rst > 0 ? "상승" : "하강";
+				_descript.Add(_prefix + StatHelper.GetRstName(_ele) + "이(가) "
+					+ Math.Abs((int)_rst) + " " + _buffOrNuff + "!");
+			}
+
+			return _descript;
+		}
+	}
+
+	public class BuffAtkDigest : Digest
+	{
+		public readonly ElementID ele;
+		public readonly Percent per;
+
+		public BuffAtkDigest(Invoker _invoker, ElementID _ele, Percent _per) : base(_invoker)
+		{
+			ele = _ele;
+			per = _per;
+		}
+
+		public override List<string> Descript()
+		{
+			var _buffOrNuff = per > 0 ? "강화" : "약화";
+			return Helper.ToList(ElementDB.Get(ele).richName + "의 공격력이 " + per + "% " + _buffOrNuff + "된다.");
+		}
+	}
 }
