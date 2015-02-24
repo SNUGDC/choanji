@@ -117,7 +117,7 @@
 	
 	"RST_MEM": {
 		"name": "암기 저항",
-		"detail": "악기력 공격의 데미지를 적게 입는다.",
+		"detail": "암기력 공격의 데미지를 적게 입는다.",
 		"perform": {
 			"action": {
 				"type": "STAT_MOD",

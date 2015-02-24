@@ -347,7 +347,7 @@
 	"FORTIFY_ANA_01": {
 		"name": "",
 		"type": "SPE",
-		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"detail": "다음 턴 사용하는 분석력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
 			"action": {
@@ -362,7 +362,7 @@
 	"FORTIFY_MEM_01": {
 		"name": "",
 		"type": "SPE",
-		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"detail": "다음 턴 사용하는 암기력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
 			"action": {
@@ -377,7 +377,7 @@
 	"FORTIFY_CRE_01": {
 		"name": "",
 		"type": "SPE",
-		"detail": "다음 턴 사용하는 분석 속성 스킬의 데미지가 증가한다.",
+		"detail": "다음 턴 사용하는 창의력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
 			"action": {
