@@ -42,6 +42,7 @@ MonoBehaviour:
   battleDefault: {fileID: 8300000, guid: 4beb7a32d9f792241a9783cbee326a15, type: 3}
   choose: {fileID: 8300000, guid: b94137756eef53a4499ddd0b712ebe09, type: 3}
   hit: {fileID: 8300000, guid: ed3c5d9f890af2c4db02538ad006b206, type: 3}
+  battleWin: {fileID: 8300000, guid: b62851a7a99a85f4a8cb8d228db1c20f, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

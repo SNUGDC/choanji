@@ -38,34 +38,38 @@ namespace Choanji.Battle
 			}
 			else if (_digest is DmgDigest)
 			{
+				var _isA = TheBattle.state.IsA(_digest.invoker);
 				var _msgDelay = AnimateDescript(_digest);
 
-				if (TheBattle.state.IsB(_digest.invoker))
-					return _msgDelay;
-
-				var _delay = UNIT;
+				var _delay = 0f;
 
 				var d = (DmgDigest) _digest;
 				if (d.dmg.HasValue)
 				{
 					mTimer.Add(_delay += UNIT, () =>
 					{
-						hp.Hit(d.hpAfter);
-						poper.PopDmg(d.dmg.Value);
+						if (_isA)
+							poper.PopDmg(d.dmg.Value); 
+						else
+							hp.Hit(d.hpAfter);
+
 						SoundManager.PlaySFX(SoundDB.g.hit);
 					});
 				}
 				else
 				{
-					_delay = _msgDelay;
+					if (_isA)
+					{
+						_delay = _msgDelay;
 
-					if (d.block)
-					{
-						poper.PopText(new RichText("방어!").AddSize(36).AddColor(Color.blue));
-					}
-					else
-					{
-						poper.PopText(new RichText("회피!").AddSize(36).AddColor(Color.red));
+						if (d.block)
+						{
+							poper.PopText(new RichText("방어!").AddSize(36).AddColor(Color.blue));
+						}
+						else
+						{
+							poper.PopText(new RichText("회피!").AddSize(36).AddColor(Color.red));
+						}
 					}
 				}
 
@@ -111,24 +115,6 @@ namespace Choanji.Battle
 		private float AnimateBattlerB(Digest _result)
 		{
 			return 0;
-		}
-
-		public void AnimateBattleEnd(Result _result, Action _onDone)
-		{
-			Popup _popup = null;
-
-			switch (_result.type)
-			{
-				case ResultType.WIN_A:
-					_popup = ThePopup.Open(Popups.BATTLE_WIN);
-					break;
-				case ResultType.WIN_B:
-					_popup = ThePopup.Open(Popups.BATTLE_LOSE);
-					break;
-			}
-
-			if (_popup)
-				_popup.onClose += _onDone;
 		}
 	}
 }

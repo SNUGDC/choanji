@@ -871,6 +871,8 @@ MonoBehaviour:
   submit: {fileID: 1038320797}
   msg: {fileID: 1023067747}
   poper: {fileID: 23970590}
+  winPopupPrf: {fileID: 11457930, guid: 4f8518235d4ac2446b776ba88fc39e30, type: 2}
+  losePopupPrf: {fileID: 11457930, guid: 4f8518235d4ac2446b776ba88fc39e30, type: 2}
 --- !u!4 &403584989
 Transform:
   m_ObjectHideFlags: 0
@@ -3718,7 +3720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2053337702
 Transform:
   m_ObjectHideFlags: 0

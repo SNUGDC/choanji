@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Choanji.Battle
 {
@@ -30,22 +31,32 @@ namespace Choanji.Battle
 		public MessageView msg;
 		public Poper poper;
 
+		private bool mIsResultOpened;
+		private Result mResult;
+
+		public Popup winPopupPrf;
+		public Popup losePopupPrf;
+
 		private readonly Timer mTimer = new Timer();
 		private float mDelay;
 
 		void Start()
 		{
 			TheBattle.onSetup += Setup;
+			TheBattle.onFinish += OnFinish;
 		}
 
 		void OnDestroy()
 		{
 			TheBattle.onSetup -= Setup;
+			TheBattle.onFinish -= OnFinish;
 		}
 
 		public void Setup(Setup _setup)
 		{
 			mDelay = 0;
+			mResult = null;
+			mIsResultOpened = false;
 
 			var _battlerA = TheBattle.state.battlerA;
 			var _battlerB = TheBattle.state.battlerB;
@@ -89,13 +100,15 @@ namespace Choanji.Battle
 			{
 				mDelay = Animate(TheBattle.digest.Deq());
 			}
-			else if (!TheBattle.isRunning)
+			else if (mResult != null && !mIsResultOpened)
 			{
-				if (mDelay < -3)
+				mIsResultOpened = true;
+
+				mTimer.Add(1, () => OpenResultPopup(() =>
 				{
 					TheChoanji.g.context = ContextType.WORLD;
 					TheBattle.Cleanup();
-				}
+				}));
 			}
 		}
 
@@ -111,6 +124,42 @@ namespace Choanji.Battle
 				_onDone(party.Submit());
 				submit.onClick = null;
 			};
+		}
+
+		private void OnFinish(Result _result)
+		{
+			mResult = _result;
+		}
+
+		private void OpenResultPopup(Action _onClose)
+		{
+			SoundManager.StopMusic();
+
+			Popup _popup;
+			string _label;
+
+			switch (mResult.type)
+			{
+				case ResultType.WIN_A:
+					_popup = winPopupPrf.Instantiate();
+					_label = new RichText("WIN").AddSize(120).AddColor(Color.blue);
+					SoundManager.Play(SoundDB.g.battleWin, true);
+					break;
+				case ResultType.WIN_B:
+					_popup = losePopupPrf.Instantiate();
+					_label = new RichText("LOSE").AddSize(120).AddColor(Color.red);
+					break;
+				default:
+					return;
+			}
+
+			_popup.transform.SetParent(canvas.transform, false);
+
+			var _txt = _popup.transform.FindChild("Text").GetComponent<Text>();
+			_txt.text = _label;
+
+			_popup.onClose = _onClose;
+			_popup.Open(null);
 		}
 	}
 }
