@@ -114,4 +114,6 @@ sysinfo.txt
 /Assets/UnityVS
 /Assets/-tk2d.asset
 /Assets/-tk2d.asset.meta
+/Assets/Plugin
+/Assets/Plugin.meta
 /Resources/Save/test.json
