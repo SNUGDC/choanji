@@ -28,6 +28,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prfDmg: {fileID: 11490086, guid: 37a295283d027b644a75f3d2cc28ca1a, type: 2}
+  prfText: {fileID: 11494794, guid: 09efd1e875a5f2c4c9d75adf488d66b5, type: 2}
 --- !u!224 &22424844
 RectTransform:
   m_ObjectHideFlags: 1

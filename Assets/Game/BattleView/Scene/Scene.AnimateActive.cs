@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Choanji.UI;
 using Gem;
+using UnityEngine;
 
 namespace Choanji.Battle
 {
@@ -37,8 +38,13 @@ namespace Choanji.Battle
 			}
 			else if (_digest is DmgDigest)
 			{
-				AnimateDescript(_digest);
-				var _delay = 0f;
+				var _msgDelay = AnimateDescript(_digest);
+
+				if (TheBattle.state.IsB(_digest.invoker))
+					return _msgDelay;
+
+				var _delay = UNIT;
+
 				var d = (DmgDigest) _digest;
 				if (d.dmg.HasValue)
 				{
@@ -49,6 +55,20 @@ namespace Choanji.Battle
 						SoundManager.PlaySFX(SoundDB.g.hit);
 					});
 				}
+				else
+				{
+					_delay = _msgDelay;
+
+					if (d.block)
+					{
+						poper.PopText(new RichText("방어!").AddSize(36).AddColor(Color.blue));
+					}
+					else
+					{
+						poper.PopText(new RichText("회피!").AddSize(36).AddColor(Color.red));
+					}
+				}
+
 				return _delay;
 			}
 
