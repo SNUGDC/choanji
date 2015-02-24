@@ -7,5 +7,7 @@ namespace Choanji
 		public static SoundDB g;
 
 		public AudioClip battleDefault;
+
+		public AudioClip choose;
 	}
 }

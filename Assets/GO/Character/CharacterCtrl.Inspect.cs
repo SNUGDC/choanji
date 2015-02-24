@@ -58,6 +58,8 @@ namespace Choanji
 			{
 				isInspecting = true;
 
+				SoundManager.PlaySFX(SoundDB.g.choose);
+
 				if (mOnInspectDone == null)
 					mOnInspectDone = new ActionWrap<InspectResponse, IInspectee>
 					{ val = delegate { isInspecting = false; } };
