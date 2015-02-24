@@ -1,4 +1,6 @@
-﻿namespace Choanji.Battle
+﻿using UnityEngine;
+
+namespace Choanji.Battle
 {
 	public class Setup
 	{
@@ -6,6 +8,8 @@
 
 		public EnvType env;
 		public int envIdx;
+
+		public AudioClip bgm;
 
 		public BattlerData battlerA;
 		public BattlerData battlerB;

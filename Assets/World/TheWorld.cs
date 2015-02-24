@@ -69,6 +69,12 @@ namespace Choanji
 
 			meta = JsonMapper.ToObject<WorldMeta>(_data["meta"].ToReader());
 			bluePrint = new WorldBluePrint(_world, _data["bluePrint"]);
+		}
+
+		public static void PlayBGM()
+		{
+			if (meta == null)
+				return;
 
 			if (string.IsNullOrEmpty(meta.bgm))
 			{
@@ -77,9 +83,9 @@ namespace Choanji
 			else
 			{
 				var _clip = R.Snd.BGM(meta.bgm);
-				if (_clip) 
+				if (_clip)
 					SoundManager.Play(_clip, true);
-				else 
+				else
 					SoundManager.StopMusic();
 			}
 		}

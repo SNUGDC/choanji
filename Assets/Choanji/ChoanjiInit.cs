@@ -8,6 +8,7 @@ namespace Choanji
 		public static bool sIsInited;
 
 		public PrefabDB prefab;
+		public SoundDB sound;
 		public TileDB tile;
 		public CharacterSkins skin;
 		public UI.DB ui;
@@ -30,6 +31,7 @@ namespace Choanji
 			Battle.BattlerDB.Load();
 
 			PrefabDB.g = prefab;
+			SoundDB.g = sound;
 			TileDB.g = tile;
 			CharacterSkins.g = skin;
 			UI.DB.g = ui;

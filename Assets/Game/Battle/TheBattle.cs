@@ -38,13 +38,18 @@ namespace Choanji.Battle
 
 			battle = new Battle(_setup.mode, state) { onFinish = Finish };
 
+			if (_setup.bgm)
+				SoundManager.PlayImmediately(_setup.bgm, true);
+			else 
+				SoundManager.PlayImmediately(SoundDB.g.battleDefault);
+
 			onSetup.CheckAndCall(_setup);
 		}
 
 		public static void Start()
 		{
-			onStart.CheckAndCall();
 			battle.StartTurn();
+			onStart.CheckAndCall();
 		}
 
 		public static void Update()

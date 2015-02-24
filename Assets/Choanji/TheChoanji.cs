@@ -27,6 +27,7 @@ namespace Choanji
 						break;
 
 					case ContextType.BATTLE:
+						SoundManager.Play(SoundDB.g.battleDefault);
 						Battle.Scene.g.root.SetActive(false);
 						break;
 				}
@@ -43,6 +44,7 @@ namespace Choanji
 							Cameras.world.transform.SetParent(TheWorld.parent);
 							Cameras.world.gameObject.SetActive(true);
 						}
+						TheWorld.PlayBGM();
 						break;
 
 					case ContextType.BATTLE:
