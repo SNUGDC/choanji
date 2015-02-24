@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gem;
+using UnityEngine;
 
 namespace Choanji.Battle
 {
@@ -23,7 +24,7 @@ namespace Choanji.Battle
 		public readonly Card card;
 		public readonly CardMode? mode;
 
-		public Invoker(Battler _battler, Card _card, CardMode? _mode)
+		public Invoker(Battler _battler = null, Card _card = null, CardMode? _mode = null)
 		{
 			battler = _battler;
 			card = _card;
@@ -308,4 +309,34 @@ namespace Choanji.Battle
 				return new List<string> { "회복 " + per.Value + "%" };
 		}
 	}
+
+	public class APChangeDigest : Digest
+	{
+		public readonly AP after;
+
+		public APChangeDigest(Invoker _invoker, AP _after) 
+			: base(_invoker)
+		{
+			after = _after;
+		}
+	}
+
+	public class APChargeDigest : Digest
+	{
+		public readonly AP charge;
+		public readonly AP after;
+
+		public APChargeDigest(Invoker _invoker, AP _charge, AP _after) 
+			: base(_invoker)
+		{
+			charge = _charge;
+			after = _after;
+		}
+
+		public override List<string> Descript()
+		{
+			return Helper.ToList(moveName + ", AP 충전 <color=#ffa500>" + charge + "</color>");
+		}
+	}
+
 }

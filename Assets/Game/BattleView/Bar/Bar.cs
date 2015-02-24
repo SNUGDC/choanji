@@ -18,14 +18,14 @@ namespace Choanji
 
 		private float? mTarget;
 
-		void Update()
+		protected virtual void Update()
 		{
 			if (!mTarget.HasValue)
 				return;
 
-			if (Mathf.Abs(val - mTarget.Value) > 0.01f)
+			if (Mathf.Abs(val - mTarget.Value) > 1)
 			{
-				DoSet(Mathf.Lerp(val, mTarget.Value, Time.deltaTime));
+				DoSet(Mathf.Lerp(val, mTarget.Value, 2 * Time.deltaTime));
 			}
 			else
 			{

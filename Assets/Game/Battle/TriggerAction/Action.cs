@@ -245,8 +245,8 @@ namespace Choanji.Battle
 
 		public override Digest Invoke(Invoker _invoker, object _arg)
 		{
-			_invoker.battler.ChargeAP(val);
-			return new StringDigest(_invoker, "AP 충전 " + val);
+			var _after = _invoker.battler.ChargeAP(val);
+			return new APChargeDigest(_invoker, val, _after);
 		}
 	}
 

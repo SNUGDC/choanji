@@ -155,9 +155,10 @@ namespace Choanji.Battle
 			return _consumption > 0 ? _consumption : 0;
 		}
 
-		public void ChargeAP(AP _val)
+		public AP ChargeAP(AP _val)
 		{
 			ap += (int)_val;
+			return ap;
 		}
 
 		public void ConsumeAP(AP _val)
@@ -165,9 +166,10 @@ namespace Choanji.Battle
 			ap -= CalConsumption(_val);
 		}
 
-		public void RegenAP()
+		public APChangeDigest RegenAP()
 		{
 			ap += CalStat(StatType.AP_REGEN);
+			return new APChangeDigest(new Invoker(this), ap);
 		}
 
 		public bool IsImmuned(SC _sc)

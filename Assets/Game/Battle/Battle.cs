@@ -128,8 +128,8 @@ namespace Choanji.Battle
 
 		private void EndTurn()
 		{
-			state.battlerA.RegenAP();
-			state.battlerB.RegenAP();
+			TheBattle.digest.Enq(state.battlerA.RegenAP());
+			TheBattle.digest.Enq(state.battlerB.RegenAP());
 			onTurnEnd.CheckAndCall();
 		}
 
@@ -164,6 +164,7 @@ namespace Choanji.Battle
 			var _perform = _active.perform;
 
 			_invoker.battler.ConsumeAP(_active.cost);
+			TheBattle.digest.Enq(new APChangeDigest(_invoker, _invoker.battler.ap));
 
 			if (_perform.trigger == null)
 				TheBattle.trigger.Fire(_invoker, _perform.action, null);

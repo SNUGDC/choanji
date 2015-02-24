@@ -31,8 +31,10 @@ namespace Choanji.Battle
 			textCurSize = 15;
 		}
 
-		void Update()
+		protected override void Update()
 		{
+			base.Update();
+
 			if (isHighlighted)
 			{
 				mHighlightPeriod.Add(Time.deltaTime);
