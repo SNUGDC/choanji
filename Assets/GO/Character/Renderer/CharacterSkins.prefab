@@ -39,6 +39,311 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4961bb32f8ee441a87d7bcb0283234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mSkins:
+  - anim: {fileID: 11474386, guid: de381997a6e87564c84a7442a3403c29, type: 2}
+    mClips:
+    - name: UP
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 12
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 8
+      loopStart: 0
+      wrapMode: 6
+    - name: DOWN
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 0
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 8
+      loopStart: 0
+      wrapMode: 6
+    - name: LEFT
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 4
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 8
+      loopStart: 0
+      wrapMode: 6
+    - name: RIGHT
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 8
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 8
+      loopStart: 0
+      wrapMode: 6
+    - name: WALK_UP
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 12
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 13
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 14
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 15
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 16
+      loopStart: 0
+      wrapMode: 2
+    - name: WALK_DOWN
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 0
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 1
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 2
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 3
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 16
+      loopStart: 0
+      wrapMode: 2
+    - name: WALK_LEFT
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 4
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 5
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 6
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 7
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 16
+      loopStart: 0
+      wrapMode: 2
+    - name: WALK_RIGHT
+      frames:
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 8
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 9
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 10
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      - spriteCollection: {fileID: 11457894, guid: cecde3c53794ad4429f903bfb76075b3,
+          type: 2}
+        spriteId: 11
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 16
+      loopStart: 0
+      wrapMode: 2
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 0}
+    mClips: []
+  - anim: {fileID: 11434738, guid: 2c6d3d5cc6db4634089c776983c3a4d3, type: 2}
+    mClips:
+    - name: UP
+      frames:
+      - spriteCollection: {fileID: 11425090, guid: 19ba4689ebadb3945a79185eccdcb7ff,
+          type: 2}
+        spriteId: 12
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 30
+      loopStart: 0
+      wrapMode: 6
+    - name: DOWN
+      frames:
+      - spriteCollection: {fileID: 11425090, guid: 19ba4689ebadb3945a79185eccdcb7ff,
+          type: 2}
+        spriteId: 0
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 30
+      loopStart: 0
+      wrapMode: 6
+    - name: LEFT
+      frames:
+      - spriteCollection: {fileID: 11425090, guid: 19ba4689ebadb3945a79185eccdcb7ff,
+          type: 2}
+        spriteId: 4
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 30
+      loopStart: 0
+      wrapMode: 6
+    - name: RIGHT
+      frames:
+      - spriteCollection: {fileID: 11425090, guid: 19ba4689ebadb3945a79185eccdcb7ff,
+          type: 2}
+        spriteId: 8
+        triggerEvent: 0
+        eventInfo: 
+        eventInt: 0
+        eventFloat: 0
+      fps: 30
+      loopStart: 0
+      wrapMode: 6
+    - name: Default
+      frames: []
+      fps: 30
+      loopStart: 0
+      wrapMode: 0
+    - name: Default
+      frames: []
+      fps: 30
+      loopStart: 0
+      wrapMode: 0
+    - name: Default
+      frames: []
+      fps: 30
+      loopStart: 0
+      wrapMode: 0
+    - name: Default
+      frames: []
+      fps: 30
+      loopStart: 0
+      wrapMode: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
