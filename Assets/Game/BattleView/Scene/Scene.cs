@@ -96,10 +96,12 @@ namespace Choanji.Battle
 
 		public void GatherCards(Action<List<Card>> _onDone)
 		{
+			submit.Show();
 			submit.onClick = () =>
 			{
 				if (!TheBattle.digest.empty)
 					return;
+				submit.ChooseAndHide();
 				selection.Clear();
 				_onDone(party.Submit());
 				submit.onClick = null;
