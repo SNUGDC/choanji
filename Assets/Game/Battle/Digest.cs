@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Gem;
 
 namespace Choanji.Battle
 {
 	public enum DigestType
 	{
-		BATTLE_TURN_START,
-		BATTLE_CARD_SELECT,
+		TURN_START,
+		CARD_SELECT,
 	}
 
 	public static partial class Helper
@@ -137,11 +136,13 @@ namespace Choanji.Battle
 	public sealed class TypedDigest : Digest
 	{
 		public readonly DigestType type;
+		public readonly object arg;
 
-		public TypedDigest(Invoker _invoker, DigestType _type) 
+		public TypedDigest(Invoker _invoker, DigestType _type, object _arg = null) 
 			: base(_invoker)
 		{
 			type = _type;
+			arg = _arg;
 		}
 
 		public static implicit operator DigestType(TypedDigest _this)

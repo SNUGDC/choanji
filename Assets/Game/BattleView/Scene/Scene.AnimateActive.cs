@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Choanji.UI;
 using Gem;
 
@@ -18,15 +19,19 @@ namespace Choanji.Battle
 			if (_digest is TypedDigest)
 			{
 				var _theDigest = (TypedDigest) _digest;
-				if (_theDigest.type == DigestType.BATTLE_TURN_START)
+				switch (_theDigest.type) 
 				{
-					var _fx = FXDB.g.phaseDone.Instantiate();
-					_fx.transform.SetParent(canvas.transform, false);
-					return _fx.GetComponent<PropertyFloat>().value;
-				}
-				else
-				{
-					return 0;
+					case DigestType.TURN_START:
+					{
+						var _fx = FXDB.g.phaseDone.Instantiate();
+						_fx.transform.SetParent(canvas.transform, false);
+						return _fx.GetComponent<PropertyFloat>().value;
+					}
+					case DigestType.CARD_SELECT:
+						GatherCards(((Action<List<Card>>)_theDigest.arg));
+						return 0;
+					default:
+						return 0;
 				}
 			}
 			else

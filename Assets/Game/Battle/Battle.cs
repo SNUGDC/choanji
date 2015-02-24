@@ -120,7 +120,7 @@ namespace Choanji.Battle
 			}
 
 			onTurnStart.CheckAndCall();
-			TheBattle.digest.Enq(new TypedDigest(null, DigestType.BATTLE_TURN_START));
+			TheBattle.digest.Enq(new TypedDigest(null, DigestType.TURN_START));
 			state.battlerA.AfterTurnEnd();
 			state.battlerB.AfterTurnEnd();
 			SelectCards();

@@ -1,4 +1,7 @@
-﻿namespace Choanji.Battle
+﻿using System;
+using System.Collections.Generic;
+
+namespace Choanji.Battle
 {
 	public class MyAgent : Agent
 	{
@@ -8,7 +11,8 @@
 
 		protected override void DoStartCardSelect()
 		{
-			Scene.g.GatherCards(_cards => EndCardSelect(new CardSelectYield(_cards)));
+			Action<List<Card>> _callback = _cards => EndCardSelect(new CardSelectYield(_cards));
+			TheBattle.digest.Enq(new TypedDigest(null, DigestType.CARD_SELECT, _callback));
 		}
 	}
 }
