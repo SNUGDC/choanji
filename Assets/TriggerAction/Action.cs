@@ -93,10 +93,20 @@ namespace Choanji
 	{
 		private readonly BattlerID mBattler;
 
+		private readonly EnvType? mEnv;
+		private readonly int mEnvIdx;
+
 		public ActionStartBattle(JsonData _data)
 			: base(ActionType.START_BATTLE)
 		{
 			mBattler = BattlerHelper.MakeID((string)_data["battler"]);
+
+			JsonData _env;
+			if (_data.TryGet("env", out _env))
+			{
+				mEnv = EnumHelper.ParseOrDefault<EnvType>((string)_env["key"]);
+				_env.TryGet("idx", out mEnvIdx);
+			}
 		}
 
 		public override void Do(object _data)
@@ -104,7 +114,14 @@ namespace Choanji
 			var _self = Player.MakeBattler();
 			var _battler = BattlerDB.Get(mBattler);
 
-			TheBattle.Setup(new Setup(Mode.PVE, _self, _battler));
+			var _setup = new Setup(Mode.PVE, _self, _battler);
+			if (mEnv.HasValue)
+			{
+				_setup.env = mEnv.Value;
+				_setup.envIdx = mEnvIdx;
+			}
+
+			TheBattle.Setup(_setup);
 			TheBattle.battle.onTurnEnd = TheBattle.battle.StartTurn;
 			TheBattle.Start();
 

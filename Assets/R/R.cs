@@ -53,14 +53,18 @@ namespace Choanji.R
 				return _tex.CreateSpite();
 			}
 
-			public static Sprite FIELD_BG(EnvType _env)
+			public static Sprite FIELD_BG(EnvType _env, int _idx)
 			{
-				return Resources.Load<Sprite>("Battlebacks/BG_" + _env);
+				var _suffix = string.Empty;
+				if (_idx != 0) _suffix = "_" + _idx;
+				return Resources.Load<Sprite>("Battlebacks/BG_" + _env + _suffix);
 			}
 
-			public static Sprite FIELD_BASE(EnvType _env)
+			public static Sprite FIELD_BASE(EnvType _env, int _idx)
 			{
-				return Resources.Load<Sprite>("Battlebacks/BASE_" + _env);
+				var _suffix = string.Empty;
+				if (_idx != 0) _suffix = "_" + _idx;
+				return Resources.Load<Sprite>("Battlebacks/BASE_" + _env + _suffix);
 			}
 
 			public static Sprite BATTLER_FIELD_ILLUST(string _key)

@@ -61,7 +61,7 @@ namespace Choanji.Battle
 			var _battlerA = TheBattle.state.battlerA;
 			var _battlerB = TheBattle.state.battlerB;
 
-			field.env = _setup.env;
+			field.SetEnv(_setup.env, _setup.envIdx);
 			battler.SetBattler(_battlerB.data.key);
 
 			hp.max = (int)_battlerA.hpMax;
