@@ -14,7 +14,7 @@ namespace Choanji.UI
 
 			target.party = Player.party;
 			target.deckTab.deck = Player.deck;
-			target.partyTab.stat = Player.stat;
+			target.partyTab.stat = Player.totalStat;
 		}
 	}
 }

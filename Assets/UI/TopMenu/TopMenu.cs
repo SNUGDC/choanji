@@ -35,7 +35,7 @@ namespace Choanji.UI
 
 		private void RefreshPartyTab(DeckPopup _deck)
 		{
-			_deck.partyTab.stat = Player.stat + Player.party.CalStat();
+			_deck.partyTab.stat = Player.totalStat;
 		}
 
 		public void OnBagClicked()

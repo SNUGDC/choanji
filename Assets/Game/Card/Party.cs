@@ -57,8 +57,10 @@ namespace Choanji
 		public StatSet CalStat()
 		{
 			var _statSet = new StatSet();
-			foreach (var _passive in passives)
-				_statSet += _passive.data.stat;
+			foreach (var _card in passives)
+				_statSet += _card.data.stat;
+			foreach (var _card in actives)
+				_statSet += _card.data.stat;
 			return _statSet;
 		}
 
