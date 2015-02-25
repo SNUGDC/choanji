@@ -61,7 +61,7 @@ namespace Choanji
 		{
 			isHidden = false;
 			card = _card;
-			illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_card.data.key);
+			illust.sprite = R.Spr.CARD_ILLUST_S(_card.data.key);
 			SetModeVisiblity(false, false);
 		}
 

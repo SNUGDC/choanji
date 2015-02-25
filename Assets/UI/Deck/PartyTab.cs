@@ -17,7 +17,7 @@ namespace Choanji.UI
 
 		public RectTransform party1;
 		public RectTransform party2;
-		private readonly List<PartyCell> mCells = new List<PartyCell>(Const.PARTY_MAX);
+		private readonly List<CardView> mCells = new List<CardView>(Const.PARTY_MAX);
 
 		public StatSet stat 
 		{
@@ -50,7 +50,7 @@ namespace Choanji.UI
 			{
 				for (var i = 0; i != Const.PARTY_MAX; ++i)
 				{
-					var _cell = DB.g.partyCellPrf.Instantiate();
+					var _cell = DB.g.cardViewPrf.Instantiate();
 					var _trans = _cell.gameObject.transform;
 					_trans.SetParent(i < Const.PARTY_MAX / 2 ? party1 : party2, false);
 
@@ -71,7 +71,7 @@ namespace Choanji.UI
 			foreach (var _card in mParty)
 			{
 				var _cell = mCells[_idx];
-				_cell.card = _card.first;
+				_cell.SetCard(_card.first, _card.second);
 
 				var _cardCapture = _card.first;
 
@@ -88,7 +88,7 @@ namespace Choanji.UI
 
 			for (; _idx < Const.PARTY_MAX; ++_idx)
 			{
-				mCells[_idx].card = null;
+				mCells[_idx].Clear();
 			}
 		}
 	}

@@ -163,7 +163,7 @@ GameObject:
   - 222: {fileID: 22258084}
   - 114: {fileID: 11458084}
   m_Layer: 5
-  m_Name: ActiveType
+  m_Name: Usage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   illust: {fileID: 11445946}
   name: {fileID: 11475878}
-  activeType: {fileID: 11458084}
+  usage: {fileID: 11458084}
   eleIcon: {fileID: 11458082}
   eleName: {fileID: 11445942}
   detail: {fileID: 11406136}

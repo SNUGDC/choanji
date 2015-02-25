@@ -7,7 +7,7 @@ namespace Choanji.UI
 	{
 		public Image illust;
 		public new Text name;
-		public Image activeType;
+		public Image usage;
 		public Image eleIcon;
 		public Text eleName;
 		public Text detail;
@@ -15,9 +15,16 @@ namespace Choanji.UI
 		public void SetCard(Card _card, CardMode? _mode)
 		{
 			var _data = _card.data;
-			illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_data.key);
+			illust.sprite = R.Spr.CARD_ILLUST_S(_data.key);
 			name.text = _data.name;
-			activeType.sprite = R.BattleUI.Spr.CARD_ACTIVE_TYPE(_data.active.type);
+
+			if (_mode.HasValue)
+			{
+				usage.gameObject.SetActive(true);
+				usage.sprite = R.Spr.CARD_USAGE(_data.GetModeUsage(_mode.Value));
+			}
+			else
+				usage.gameObject.SetActive(false);
 
 			var _ele = ElementDB.Get(_data.ele);
 			eleIcon.sprite = R.Spr.ELE_S(_ele);

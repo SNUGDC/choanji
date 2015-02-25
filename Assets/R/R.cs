@@ -16,6 +16,16 @@ namespace Choanji.R
 			return Resources.Load<Sprite>("Element/ICON_" + _key);
 		}
 
+		public static Sprite CARD_USAGE(CardUsage _type)
+		{
+			return Resources.Load<Sprite>("BattleUI/Active/ICON_" + _type);
+		}
+
+		public static Sprite CARD_ILLUST_S(string _key)
+		{
+			var _tex = TextureCache.Load(new FullPath("Resources/Card/" + _key + "_ILLU_S.png"));
+			return _tex.CreateSpite();
+		}
 	}
 
 	public static class Snd
@@ -42,17 +52,6 @@ namespace Choanji.R
 	{
 		public static class Spr
 		{
-			public static Sprite CARD_ACTIVE_TYPE(ActiveType _type)
-			{
-				return Resources.Load<Sprite>("BattleUI/Active/ICON_" + _type);
-			}
-
-			public static Sprite CARD_ILLUST_S(string _key)
-			{
-				var _tex = TextureCache.Load(new FullPath("Resources/Card/" + _key + "_ILLU_S.png"));
-				return _tex.CreateSpite();
-			}
-
 			public static Sprite FIELD_BG(EnvType _env, int _idx)
 			{
 				var _suffix = string.Empty;

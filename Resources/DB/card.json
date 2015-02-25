@@ -2,6 +2,7 @@
 	"KEYBOARD_WARRIOR": {
 		"name": "키보드워리어링",
 		"detail": "키보드의 용사!",
+		"ele": "NOR",
 		"stat": {
 			"STR": 20,
 			"DEF": 20,
