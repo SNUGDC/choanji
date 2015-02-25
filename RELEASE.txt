@@ -2,3 +2,9 @@
 bgm 추가.
 배틀에서 각종 이펙트 추가.
 상단 메시지바에서 정확하게 메시지가 나오도록 수정.
+
+15.02.26
+UI 리소스 적용.
+카드 리소스 적용.
+world action BATTLE_START env 추가. sample_battle.json 참고.
+
