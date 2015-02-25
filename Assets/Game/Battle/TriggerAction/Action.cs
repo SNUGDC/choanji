@@ -221,13 +221,13 @@ namespace Choanji.Battle
 			var _battler = _invoker.battler;
 			if (val.HasValue)
 			{
-				_battler.Heal(val.Value);
-				return new HealDigest(_invoker, val.Value);
+				var _after = _battler.Heal(val.Value);
+				return new HealDigest(_invoker, _after, val.Value);
 			}
 			else 
 			{
-				_battler.Heal(per.Value);
-				return new HealDigest(_invoker, per.Value);
+				var _after = _battler.Heal(per.Value);
+				return new HealDigest(_invoker, _after, per.Value);
 			}
 		}
 	}
