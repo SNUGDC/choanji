@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Gem;
 using LitJson;
+using UnityEngine;
 
 namespace Choanji
 {
@@ -13,6 +14,8 @@ namespace Choanji
 	[DebuggerDisplay("{key}")]
 	public class CardData
 	{
+		public static readonly Color32 DEFAULT_THEME = new Color32(180, 180, 180, 255);
+
 		private CardData(string _key)
 		{
 			id = CardHelper.MakeID(_key);
@@ -25,7 +28,7 @@ namespace Choanji
 			ele = ElementDB.Search(_data.StringOrDefault("ele", "NOR"));
 			name = (string)_data["name"];
 			detail = (string) _data["detail"];
-			theme = _data.StringOrDefault("theme", "444444");
+			theme = _data.StringOrDefault("theme", DEFAULT_THEME.ToString());
 			stat = new StatSet(_data["stat"]);
 			passive = MoveDB.Get(CardHelper.MakePassiveID((string)_data["passive"]));
 			active = MoveDB.Get(CardHelper.MakeActiveID((string)_data["active"]));
