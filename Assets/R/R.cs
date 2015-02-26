@@ -16,6 +16,16 @@ namespace Choanji.R
 			return Resources.Load<Sprite>("Element/ICON_" + _key);
 		}
 
+		public static Sprite CARD_USAGE(CardUsage _type)
+		{
+			return Resources.Load<Sprite>("BattleUI/Active/ICON_" + _type);
+		}
+
+		public static Sprite CARD_ILLUST_S(string _key)
+		{
+			var _tex = TextureCache.Load(new FullPath("Resources/Card/" + _key + "_ILLU_S.png"));
+			return _tex.CreateSpite();
+		}
 	}
 
 	public static class Snd
@@ -42,25 +52,18 @@ namespace Choanji.R
 	{
 		public static class Spr
 		{
-			public static Sprite CARD_ACTIVE_TYPE(ActiveType _type)
+			public static Sprite FIELD_BG(EnvType _env, int _idx)
 			{
-				return Resources.Load<Sprite>("BattleUI/Active/ICON_" + _type);
+				var _suffix = string.Empty;
+				if (_idx != 0) _suffix = "_" + _idx;
+				return Resources.Load<Sprite>("Battlebacks/BG_" + _env + _suffix);
 			}
 
-			public static Sprite CARD_ILLUST_S(string _key)
+			public static Sprite FIELD_BASE(EnvType _env, int _idx)
 			{
-				var _tex = TextureCache.Load(new FullPath("Resources/Card/" + _key + "_ILLU_S.png"));
-				return _tex.CreateSpite();
-			}
-
-			public static Sprite FIELD_BG(EnvType _env)
-			{
-				return Resources.Load<Sprite>("Battlebacks/BG_" + _env);
-			}
-
-			public static Sprite FIELD_BASE(EnvType _env)
-			{
-				return Resources.Load<Sprite>("Battlebacks/BASE_" + _env);
+				var _suffix = string.Empty;
+				if (_idx != 0) _suffix = "_" + _idx;
+				return Resources.Load<Sprite>("Battlebacks/BASE_" + _env + _suffix);
 			}
 
 			public static Sprite BATTLER_FIELD_ILLUST(string _key)

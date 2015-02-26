@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topMenuPrf: {fileID: 11414538, guid: 58fae46036ad2f040bb86d843fa879e5, type: 2}
   deckPopupPrf: {fileID: 11440694, guid: f0a4c370f723601418c07be2d8d48ba1, type: 2}
-  partyCellPrf: {fileID: 11441014, guid: e17e4a2802732924f99f1676af37560b, type: 2}
+  cardViewPrf: {fileID: 11441014, guid: e17e4a2802732924f99f1676af37560b, type: 2}
   cardDetailPrf: {fileID: 11475876, guid: 3daf93520e449004c9e0dae03e14c5bd, type: 2}
   deckCellPrf: {fileID: 11410594, guid: fade9f122fb1cca44859a14050a6911b, type: 2}
 --- !u!1001 &100100000

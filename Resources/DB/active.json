@@ -1,7 +1,9 @@
 {
 	"SMASH": {
 		"name": "후려치기",
-		"type": "ATK",
+		"theme": "0000ff",
+		"usage": "ATK",
+		"ele": "NOR",
 		"detail": "적에게 무속성 데미지를 입힌다.",
 		"cost": 70,
 		"perform": {
@@ -16,7 +18,7 @@
 	
 	"SHARP_TONGUED": {
 		"name": "날카로운 혀",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "적에게 분석력 데미지를 입힌다.",
 		"cost": 70,
 		"perform": {
@@ -31,7 +33,7 @@
 	
 	"BASIC_VOCA_ATTACK": {
 		"name": "attack",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "적에게 암기력 데미지를 입힌다.",
 		"cost": 70,
 		"perform": {
@@ -46,7 +48,7 @@
 	
 	"BLOCK_TRAP": {
 		"name": "블록 밟게 하기",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "창의력 공격의 데미지를 입힌다.",
 		"cost": 70,
 		"perform": {
@@ -61,7 +63,7 @@
 	
 	"GROWLING": {
 		"name": "그로울링",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "적에게 빗나가기 쉽지만 강력한 위력의 무속성 공격을 가한다.",
 		"cost": 100,
 		"perform": {
@@ -76,7 +78,7 @@
 	
 	"NUCLEAR_508": {
 		"name": "NUCLEAR_508",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "1턴 후 적에게 강력한 위력의 무속성 데미지를 입힌다.",
 		"cost": 100,
 		"perform": {
@@ -95,7 +97,7 @@
 	
 	"ROCK_AND_ROLL": {
 		"name": "연타",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "적에게 약한 위력의 무속성 데미지를 입힌다.",
 		"cost": 50,
 		"perform": {
@@ -110,7 +112,7 @@
 	
 	"GUARD_UP": {
 		"name": "가드 올리기",
-		"type": "DEF",
+		"usage": "DEF",
 		"detail": "적의 공격을 방어한다.",
 		"cost": 70,
 		"perform": {
@@ -124,7 +126,7 @@
 	
 	"GUARD_WITH_BOOK": {
 		"name": "책으로 막기",
-		"type": "DEF",
+		"usage": "DEF",
 		"detail": "적의 분석 속성 공격을 잘 방어한다.",
 		"cost": 70,
 		"perform": {
@@ -139,7 +141,7 @@
 	
 	"FRYING_FAN_UP": {
 		"name": "프라이팬 들기",
-		"type": "DEF",
+		"usage": "DEF",
 		"detail": "적의 암기 속성 공격을 잘 방어한다.",
 		"cost": 70,
 		"perform": {
@@ -154,7 +156,7 @@
 	
 	"DEF_CRE_01": {
 		"name": "DEF_CRE_01",
-		"type": "DEF",
+		"usage": "DEF",
 		"detail": "적의 창의 속성 공격을 잘 방어한다.",
 		"cost": 70,
 		"perform": {
@@ -169,7 +171,7 @@
 	
 	"LICK": {
 		"name": "침바르기",
-		"type": "RST",
+		"usage": "RST",
 		"detail": "체력을 3턴 동안 조금씩 회복한다.",
 		"cost": 70,
 		"perform": {
@@ -186,7 +188,7 @@
 	
 	"FIRST_AID_KIT": {
 		"name": "구급약",
-		"type": "RST",
+		"usage": "RST",
 		"detail": "내 체력을 많이 회복한다.",
 		"cost": 200,
 		"perform": {
@@ -199,7 +201,7 @@
 	
 	"INHALE": {
 		"name": "들숨",
-		"type": "RST",
+		"usage": "RST",
 		"detail": "모든 상태이상을 회복한다.",
 		"cost": 100,
 		"perform": {
@@ -212,7 +214,7 @@
 	
 	"BARBELL": {
 		"name": "아령 들기",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "공격력을 3턴 동안 향상시킨다.",
 		"cost": 70,
 		"perform": {
@@ -226,7 +228,7 @@
 	
 	"SMOOTH": {
 		"name": "살살 맞으면",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "방어력을 3턴 동안 향상시킨다.",
 		"cost": 70,
 		"perform": {
@@ -240,7 +242,7 @@
 	
 	"FOCUS_MIND": {
 		"name": "정신 집중",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "속을 3턴 동안 향상시킨다.",
 		"cost": 70,
 		"perform": {
@@ -254,7 +256,7 @@
 	
 	"CHARMING": {
 		"name": "애교부리기",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적의 공격력을 3턴 동안 떨어뜨린다.",
 		"cost": 100,
 		"perform": {
@@ -269,7 +271,7 @@
 	
 	"LOL": {
 		"name": "박장대소",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적의 방어력을 3턴 동안 떨어뜨린다.",
 		"cost": 100,
 		"perform": {
@@ -284,7 +286,7 @@
 	
 	"SC_MEN_01": { // mental destruction
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적을 멘탈붕괴 상태에 빠뜨린다.",
 		"cost": 100,
 		"perform": {
@@ -298,7 +300,7 @@
 	
 	"SC_SLO_01": { // sloth
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적을 귀차니즘 상태에 빠뜨린다.",
 		"cost": 100,
 		"perform": {
@@ -312,7 +314,7 @@
 	
 	"SC_FAT_01": { // fatigue
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적을 의욕감퇴 상태에 빠뜨린다.",
 		"cost": 100,
 		"perform": {
@@ -326,7 +328,7 @@
 	
 	"S": {
 		"name": "S",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "이번 턴에 적에게 데미지를 입히면 AP가 회복된다.",
 		"cost": 100,
 		"perform": {
@@ -346,7 +348,7 @@
 	
 	"FORTIFY_ANA_01": {
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "다음 턴 사용하는 분석력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
@@ -361,7 +363,7 @@
 	
 	"FORTIFY_MEM_01": {
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "다음 턴 사용하는 암기력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
@@ -376,7 +378,7 @@
 	
 	"FORTIFY_CRE_01": {
 		"name": "",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "다음 턴 사용하는 창의력 속성 스킬의 데미지가 증가한다.",
 		"cost": 100,
 		"perform": {
@@ -391,7 +393,7 @@
 	
 	"CHEATING": {
 		"name": "컨닝",
-		"type": "ATK",
+		"usage": "ATK",
 		"detail": "적에게 무속성 데미지를 입히고 체력을 회복한다.",
 		"cost": 70,
 		"perform": {
@@ -407,7 +409,7 @@
 	
 	"TAX": {
 		"name": "회비 걷기",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "상대의 코스트를 훔친다.",
 		"cost": 100,
 		"perform": {
@@ -420,7 +422,7 @@
 	
 	"FETISH_CATCHER": {
 		"name": "취향 저격",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "다음 턴에 사용하는 공격 스킬은 빗나가지 않는다.",
 		"cost": 0,
 		"perform": {
@@ -435,7 +437,7 @@
 	
 	"TIME_MACHINE": { // 구현불가
 		"name": "시간이 벌써",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적과 나 모두의 지속시간, 발동지연 시간을 1턴 줄인다.",
 		"cost": 50,
 		"perform": {
@@ -447,7 +449,7 @@
 	
 	"WE_ARE_THE_WORLD": {
 		"name": "너도 함께",
-		"type": "SPE",
+		"usage": "SPE",
 		"detail": "적의 공격이 무속성으로 바뀐다.",
 		"cost": 100,
 		"perform": {

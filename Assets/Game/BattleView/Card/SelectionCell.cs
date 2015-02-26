@@ -12,7 +12,7 @@ namespace Choanji.Battle
 
 		public string card
 		{
-			set { renderer_.sprite = R.BattleUI.Spr.CARD_ILLUST_S(value); }
+			set { renderer_.sprite = R.Spr.CARD_ILLUST_S(value); }
 		}
 
 		public void OnClick()

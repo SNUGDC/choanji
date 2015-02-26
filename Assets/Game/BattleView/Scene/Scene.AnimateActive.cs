@@ -74,6 +74,12 @@ namespace Choanji.Battle
 
 				return _delay;
 			}
+			else if (_digest is HealDigest)
+			{
+				var d = (HealDigest)_digest;
+				hp.Heal(d.after);
+				return AnimateDescript(_digest);
+			}
 			else if (_digest is APChangeDigest)
 			{
 				var _isA = TheBattle.state.IsA(_digest.invoker);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gem;
 using UnityEngine;
+using CardView = Choanji.UI.CardView;
 
 namespace Choanji.Battle
 {
@@ -24,28 +25,27 @@ namespace Choanji.Battle
 		public void Setup(Party _party)
 		{
 			var i = 0;
+			var _cardPrf = UI.DB.g.cardViewPrf;
 
 			foreach (var _card in _party.actives)
 			{
-				var _view = PrefabDB.g.activeCardView.Instantiate();
+				var _view = _cardPrf.Instantiate();
 				Position((RectTransform)_view.transform, i);
-				_view.card.Setup(_card);
-				_view.Setup(_card.data.active);
-				mMap.Add(_view.card, _card);
+				_view.SetCard(_card, CardMode.ACTIVE);
+				mMap.Add(_view, _card);
 
-				_view.card.onSelect += () => OnSelect(_view.card);
-				_view.card.onCancel += () => Cancel(_card);
-				_view.card.onPointerOver += _enter => OnPointerOver(_enter, _view.card);
+				_view.onSelect += () => OnSelect(_view);
+				_view.onCancel += () => Cancel(_card);
+				_view.onPointerOver += _enter => OnPointerOver(_enter, _view);
 
 				++i;
 			}
 
 			foreach (var _card in _party.passives)
 			{
-				var _view = PrefabDB.g.passiveCardView.Instantiate();
+				var _view = _cardPrf.Instantiate();
 				Position((RectTransform)_view.transform, i);
-				_view.card.Setup(_card);
-				_view.Setup(_card.data.passive);
+				_view.SetCard(_card, CardMode.PASSIVE);
 				++i;
 			}
 		}

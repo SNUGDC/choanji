@@ -8,13 +8,10 @@ namespace Choanji.Battle
 		public SpriteRenderer base_;
 		public Transform enemyCenter;
 
-		public EnvType env
+		public void SetEnv(EnvType _env, int _idx)
 		{
-			set
-			{
-				bg.sprite = R.BattleUI.Spr.FIELD_BG(value);
-				base_.sprite = R.BattleUI.Spr.FIELD_BASE(value);
-			}
+			bg.sprite = R.BattleUI.Spr.FIELD_BG(_env, _idx);
+			base_.sprite = R.BattleUI.Spr.FIELD_BASE(_env, _idx);
 		}
 	}
 

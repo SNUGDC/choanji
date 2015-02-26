@@ -64,6 +64,18 @@ namespace Choanji.Battle
 		public abstract Digest Invoke(Invoker _invoker, object _arg);
 	}
 
+	public sealed class ActionNone : Action_
+	{
+		public ActionNone() 
+			: base(ActionType.NONE)
+		{}
+
+		public override Digest Invoke(Invoker _invoker, object _arg)
+		{
+			return null;
+		}
+	}
+
 	public sealed class ActionLambda : Action_
 	{
 		private readonly Func<Invoker, object, Digest> mAction;
@@ -209,13 +221,13 @@ namespace Choanji.Battle
 			var _battler = _invoker.battler;
 			if (val.HasValue)
 			{
-				_battler.Heal(val.Value);
-				return new HealDigest(_invoker, val.Value);
+				var _after = _battler.Heal(val.Value);
+				return new HealDigest(_invoker, _after, val.Value);
 			}
 			else 
 			{
-				_battler.Heal(per.Value);
-				return new HealDigest(_invoker, per.Value);
+				var _after = _battler.Heal(per.Value);
+				return new HealDigest(_invoker, _after, per.Value);
 			}
 		}
 	}
@@ -400,7 +412,7 @@ namespace Choanji.Battle
 					return new ActionSCHeal(_data);
 				default:
 					L.W(L.M.CASE_INVALID(_type));
-					return null;
+					return new ActionNone();
 			}
 		}
 	}

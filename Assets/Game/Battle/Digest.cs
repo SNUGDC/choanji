@@ -287,18 +287,21 @@ namespace Choanji.Battle
 
 	public class HealDigest : Digest
 	{
+		public readonly HP after;
 		public readonly HP? val;
 		public readonly Percent? per;
 
-		public HealDigest(Invoker _invoker, HP _hp)
+		public HealDigest(Invoker _invoker, HP _after, HP _hp)
 			: base(_invoker)
 		{
+			after = _after;
 			val = _hp;
 		}
 
-		public HealDigest(Invoker _invoker, Percent? _per)
+		public HealDigest(Invoker _invoker, HP _after, Percent? _per)
 			: base(_invoker)
 		{
+			after = _after;
 			per = _per;
 		}
 

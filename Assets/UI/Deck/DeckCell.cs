@@ -21,10 +21,12 @@ namespace Choanji
 
 		public static DeckCell lastFocus;
 
+		public Image back;
+		public Image hidden;
+
 		public Image illust;
 		public GameObject passive;
 		public new GameObject active;
-		public Sprite hidden;
 
 		public Card card { get; private set; }
 		public CardMode? mode { get; private set; }
@@ -52,16 +54,22 @@ namespace Choanji
 			if (cur == this)
 				cur = null;
 			isHidden = true;
+			hidden.gameObject.SetActive(true);
+			back.color = Color.gray;
 			card = null;
-			illust.sprite = hidden;
+			illust.gameObject.SetActive(false);
+			illust.sprite = null;
 			SetModeVisiblity(false, false);
 		}
 
 		public void Show(Card _card)
 		{
 			isHidden = false;
+			hidden.gameObject.SetActive(false);
 			card = _card;
-			illust.sprite = R.BattleUI.Spr.CARD_ILLUST_S(_card.data.key);
+			back.color = UnityHelper.ColorOrDefault(card.data.theme, CardData.DEFAULT_THEME);
+			illust.gameObject.SetActive(true);
+			illust.sprite = R.Spr.CARD_ILLUST_S(_card.data.key);
 			SetModeVisiblity(false, false);
 		}
 

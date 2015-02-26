@@ -18,6 +18,11 @@ namespace Choanji.Battle
 			Set((float)_hpAfter, true);
 		}
 
+		public void Heal(HP _hpAfter)
+		{
+			Set((float)_hpAfter, true);
+		}
+
 		protected override void Resize()
 		{
 			base.Resize();
