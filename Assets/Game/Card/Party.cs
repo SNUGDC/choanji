@@ -18,24 +18,41 @@ namespace Choanji
 
 		public Party(JsonData _data)
 		{
-			foreach (var _card in _data["passive"].GetListEnum())
-				passives.Add(new Card(_card));
-			foreach (var _card in _data["active"].GetListEnum())
-				actives.Add(new Card(_card));
+			JsonData _cards;
+
+			if (_data.TryGet("passive", out _cards))
+			{
+				foreach (var _card in _cards.GetListEnum())
+					passives.Add(new Card(_card));	
+			}
+
+			if (_data.TryGet("active", out _cards))
+			{
+				foreach (var _card in _cards.GetListEnum())
+					actives.Add(new Card(_card));	
+			}
 		}
 
 		public Party(Deck _deck, JsonData _data)
 		{
-			foreach (var _key in _data["passive"].GetListEnum())
+			JsonData _cards;
+
+			if (_data.TryGet("passive", out _cards))
 			{
-				var _card = _deck.Find(CardHelper.MakeID((string)_key));
-				if (_card != null) passives.Add(_card);
+				foreach (var _key in _cards.GetListEnum())
+				{
+					var _card = _deck.Find(CardHelper.MakeID((string)_key));
+					if (_card != null) passives.Add(_card);
+				}
 			}
 
-			foreach (var _key in _data["active"].GetListEnum())
+			if (_data.TryGet("active", out _cards))
 			{
-				var _card = _deck.Find(CardHelper.MakeID((string) _key));
-				if (_card != null) actives.Add(_card);
+				foreach (var _key in _cards.GetListEnum())
+				{
+					var _card = _deck.Find(CardHelper.MakeID((string)_key));
+					if (_card != null) actives.Add(_card);
+				}
 			}
 		}
 
@@ -43,13 +60,19 @@ namespace Choanji
 		{
 			var _data = new JsonData();
 
-			var _passive = _data["passive"] = new JsonData();
-			foreach (var _card in passives)
-				_passive.Add(_card.data.key);
+			if (!passives.Empty())
+			{
+				var _passive = _data["passive"] = new JsonData();
+				foreach (var _card in passives)
+					_passive.Add(_card.data.key);	
+			}
 
-			var _active = _data["active"] = new JsonData();
-			foreach (var _card in actives)
-				_active.Add(_card.data.key);
+			if (!actives.Empty())
+			{
+				var _active = _data["active"] = new JsonData();
+				foreach (var _card in actives)
+					_active.Add(_card.data.key);
+			}
 
 			return _data;
 		}
