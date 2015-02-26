@@ -5,6 +5,8 @@ namespace Choanji.UI
 {
 	public class CardDetail : MonoBehaviour
 	{
+		public bool empty { get { return illust.sprite == null; } }
+
 		public Image illust;
 		public new Text name;
 		public Image usage;

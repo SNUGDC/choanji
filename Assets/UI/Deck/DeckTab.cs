@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gem;
 using UnityEngine;
 
@@ -127,6 +128,11 @@ namespace Choanji.UI
 
 			foreach (var _card in mParty.actives)
 				mCells[_card.data].Equip(CardMode.ACTIVE);
+
+			if (cardDetail && cardDetail.empty && !mDeck.cards.Empty())
+			{
+				cardDetail.SetCard(mDeck.cards.First().Value, null);
+			}
 		}
 	}
 }
