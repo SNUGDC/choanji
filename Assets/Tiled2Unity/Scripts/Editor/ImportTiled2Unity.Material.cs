@@ -65,7 +65,13 @@ namespace Tiled2Unity
 			string _layerName = null;
 			foreach (var _layer in _layers)
 			{
-				var _meshName = (string) _layer.Element("GameObject").Attribute("copy");
+			    var _elementGO = _layer.Element("GameObject");
+                if (_elementGO == null) continue;
+
+			    var _attrCopy = _elementGO.Attribute("copy");
+                if (_attrCopy == null) continue;
+			    
+				var _meshName = (string) _attrCopy;
 				if (_meshName == meshName)
 				{
 					_layerName = (string) _layer.Attribute("name");
