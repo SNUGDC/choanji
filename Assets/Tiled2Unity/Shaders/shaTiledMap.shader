@@ -22,7 +22,7 @@
         Lighting Off
         ZWrite Off
         Fog { Mode Off }
-        Blend One OneMinusSrcAlpha
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
