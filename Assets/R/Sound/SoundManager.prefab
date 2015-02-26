@@ -20,19 +20,19 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
-  m_ObjectHideFlags: 10
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 452.5, y: 318.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!82 &8200000
 AudioSource:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -90,7 +90,7 @@ AudioSource:
     m_PostInfinity: 2
 --- !u!82 &8200002
 AudioSource:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -161,7 +161,7 @@ MonoBehaviour:
   showInfo: 1
   showDev: 1
   showList: 1
-  showAdd: 0
+  showAdd: 1
   showSFX: 0
   showSFXDetails: 
   groupAddIndex: 0
@@ -183,10 +183,8 @@ MonoBehaviour:
     delay: 5
   - level: load
     isCustomLevel: 0
-    soundsToPlay:
-    - {fileID: 8300000, guid: 1c011228dffa9824eb08ea9bb5faa9f6, type: 3}
-    baseVolumes:
-    - 1
+    soundsToPlay: []
+    baseVolumes: []
     playMethod: 0
     minDelay: 0
     maxDelay: 0
@@ -204,7 +202,7 @@ MonoBehaviour:
     minDelay: 0
     maxDelay: 0
     delay: 0
-  crossDuration: 2
+  crossDuration: 5
   showDebug: 1
   offTheBGM: 0
   isPaused: 0

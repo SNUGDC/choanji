@@ -5,6 +5,12 @@ namespace Choanji
 {
 	public class LoadScene : MonoBehaviour
 	{
+		void Start()
+		{
+			// note: 미구현 바로 world로 넘어감.
+			TransferToWorld();
+		}
+
 		public void TransferToWorld()
 		{
 			Disket.LoadOrDefault("test");
