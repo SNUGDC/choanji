@@ -1,37 +1,36 @@
-﻿using Gem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Choanji
 {
 	public class IntroScene : MonoBehaviour
 	{
-		private InputBind mBind;
+		private bool mIsSplashDone;
+		private bool mIsLevelLoaded;
 
 		void Awake()
 		{
 			TheChoanji.g.context = ContextType.INTRO;
-
-			mBind = new InputBind(InputCode.Y, new InputHandler()
-			{
-				down = OnPressYes,
-			});
 		}
 
-		void OnDestroy()
+		void Update()
 		{
-			TheInput.intro.Unreg(mBind);
+			if (!mIsSplashDone)
+				return;
+
+			if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
+				OnPressYes();
 		}
 
 		private void OnSplashDone()
 		{
-			TheInput.intro.Reg(mBind);
+			mIsSplashDone = true;
 		}
 
-		private bool OnPressYes()
+		private void OnPressYes()
 		{
-			TheInput.intro.Unreg(mBind);
+			if (mIsLevelLoaded) return;
+			mIsLevelLoaded = true;
 			Application.LoadLevel("load");
-			return true;
 		}
 	}
 }
