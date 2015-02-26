@@ -797,7 +797,7 @@ MonoBehaviour:
   showInfo: 1
   showDev: 1
   showList: 1
-  showAdd: 0
+  showAdd: 1
   showSFX: 0
   showSFXDetails: 
   groupAddIndex: 0
@@ -819,10 +819,8 @@ MonoBehaviour:
     delay: 5
   - level: load
     isCustomLevel: 0
-    soundsToPlay:
-    - {fileID: 8300000, guid: 1c011228dffa9824eb08ea9bb5faa9f6, type: 3}
-    baseVolumes:
-    - 1
+    soundsToPlay: []
+    baseVolumes: []
     playMethod: 0
     minDelay: 0
     maxDelay: 0
@@ -840,7 +838,7 @@ MonoBehaviour:
     minDelay: 0
     maxDelay: 0
     delay: 0
-  crossDuration: 2
+  crossDuration: 5
   showDebug: 1
   offTheBGM: 0
   isPaused: 0
