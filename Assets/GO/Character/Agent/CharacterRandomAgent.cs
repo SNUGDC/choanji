@@ -6,8 +6,7 @@ namespace Choanji
 	public class CharacterRandomAgent : MonoBehaviour
 	{
 		private ICharacterInputDelegate mDelegate;
-		private SewValue<float, ArithmeticFloat> mTimer 
-			= new SewValue<float, ArithmeticFloat>(0.6f);
+		private SawFloat mTimer = new SawFloat(0.6f);
 
 		void Start()
 		{

@@ -31,8 +31,8 @@ namespace Choanji
 			}
 		}
 
-		private SewValue<float, ArithmeticFloat> mNextTimer
-			= new SewValue<float, ArithmeticFloat>(STROLL_DELAY);
+		private SawFloat mNextTimer
+			= new SawFloat(STROLL_DELAY);
 
 		private readonly RichTextStroller mStroller 
 			= new RichTextStroller(MAX_LEN);
