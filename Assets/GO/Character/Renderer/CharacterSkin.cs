@@ -13,7 +13,7 @@ namespace Choanji
 		public CharacterSkin(tk2dSpriteAnimation _anim)
 		{
 			anim = _anim;
-			var _keys = Enum.GetValues(typeof (CharacterAnimKey));
+			var _keys = Enum.GetValues(typeof(CharacterAnimList));
 			mClips.Resize(_keys.GetLength(0));
 			foreach (var _key in _keys)
 			{
@@ -31,7 +31,7 @@ namespace Choanji
 		[HideInInspector]
 		private Clips mClips = new Clips();
 
-		public tk2dSpriteAnimationClip this[CharacterAnimKey _key]
+		public tk2dSpriteAnimationClip this[CharacterAnimList _key]
 		{
 			get { return mClips[(int)_key]; }
 		}

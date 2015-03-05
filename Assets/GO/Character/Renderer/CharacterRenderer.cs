@@ -11,6 +11,27 @@ namespace Choanji
 		private CharacterSkins.Key mSkinKey;
 		private CharacterSkin mSkin;
 
+		private Direction mDir = Direction.D;
+
+		private float mStopElapsed = 0;
+
+		private void Update()
+		{
+			if (animator.Playing)
+			{
+				mStopElapsed = 0;
+			}
+			else if (mStopElapsed >= 0)
+			{
+				mStopElapsed += Time.deltaTime;
+				if (mStopElapsed > 0.05f)
+				{ 
+					mStopElapsed = -1;
+					LookAt(mDir);
+				}
+			}
+		}
+
 		public CharacterSkins.Key GetSkinKey()
 		{
 			return mSkinKey;
@@ -20,10 +41,10 @@ namespace Choanji
 		{
 			mSkinKey = _key;
 			mSkin = CharacterSkins.g[_key];
-			Play(CharacterAnimKey.DOWN);
+			LookAt(Direction.D);
 		}
 
-		public void Play(CharacterAnimKey _key)
+		private void Play(CharacterAnimList _key)
 		{
 			if (mSkin == null)
 			{
@@ -43,23 +64,25 @@ namespace Choanji
 
 		public void LookAt(Direction _dir)
 		{
+			mDir = _dir;
 			switch (_dir)
 			{
-				case Direction.L: Play(CharacterAnimKey.LEFT); break;
-				case Direction.R: Play(CharacterAnimKey.RIGHT); break;
-				case Direction.U: Play(CharacterAnimKey.UP); break;
-				case Direction.D: Play(CharacterAnimKey.DOWN); break;
+				case Direction.L: Play(CharacterAnimList.LEFT); break;
+				case Direction.R: Play(CharacterAnimList.RIGHT); break;
+				case Direction.U: Play(CharacterAnimList.UP); break;
+				case Direction.D: Play(CharacterAnimList.DOWN); break;
 			}
 		}
 
 		public void Walk(Direction _dir)
 		{
+			mDir = _dir;
 			switch (_dir)
 			{
-				case Direction.L: Play(CharacterAnimKey.WALK_LEFT); break;
-				case Direction.R: Play(CharacterAnimKey.WALK_RIGHT); break;
-				case Direction.U: Play(CharacterAnimKey.WALK_UP); break;
-				case Direction.D: Play(CharacterAnimKey.WALK_DOWN); break;
+				case Direction.L: Play(CharacterAnimList.WALK_LEFT); break;
+				case Direction.R: Play(CharacterAnimList.WALK_RIGHT); break;
+				case Direction.U: Play(CharacterAnimList.WALK_UP); break;
+				case Direction.D: Play(CharacterAnimList.WALK_DOWN); break;
 			}
 		}
 	}
