@@ -41,7 +41,7 @@ namespace Choanji.Battle
 			if (_setup.bgm)
 				SoundManager.PlayImmediately(_setup.bgm, true);
 			else 
-				SoundManager.PlayImmediately(SoundDB.g.battleDefault);
+				SoundManager.PlayImmediately(SoundDB.g.battleDefault, true);
 
 			onSetup.CheckAndCall(_setup);
 		}

@@ -6,6 +6,7 @@ namespace Choanji.Battle
 	{
 		public SpriteRenderer bg;
 		public SpriteRenderer base_;
+		public Animation enemyParent;
 		public Transform enemyCenter;
 
 		public void SetEnv(EnvType _env, int _idx)

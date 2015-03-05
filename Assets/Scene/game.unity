@@ -1627,7 +1627,7 @@ MonoBehaviour:
     delay: 0
   crossDuration: 5
   showDebug: 0
-  offTheBGM: 0
+  offTheBGM: 1
   isPaused: 0
   movingOnFromSong: 0
   ignoreLevelLoad: 0
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   sfxGroups: []
   clipToGroupKeys: []
   clipToGroupValues: []
-  offTheSFX: 0
+  offTheSFX: 1
   capAmount: 3
   sfxPrePoolAmounts: 
   sfxBaseVolumes: []
@@ -1961,7 +1961,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 409434b5518e3664188cb53998321157, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &688829876
@@ -2008,6 +2008,49 @@ MonoBehaviour:
   delay: 1
   active_: 1
   destroyAfterExecute: 1
+--- !u!1 &697283972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 697283973}
+  - 111: {fileID: 697283974}
+  m_Layer: 0
+  m_Name: EnemyParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &697283973
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697283972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 859471318}
+  m_Father: {fileID: 1975752583}
+  m_RootOrder: 3
+--- !u!111 &697283974
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697283972}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &847708463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,8 +2142,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1975752583}
-  m_RootOrder: 3
+  m_Father: {fileID: 697283973}
+  m_RootOrder: 0
 --- !u!114 &859471319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,7 +2175,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &891647776
@@ -2814,6 +2857,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 192814, guid: f691c659b72f3c74f8fd6c659db98f02, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f691c659b72f3c74f8fd6c659db98f02, type: 2}
   m_RootGameObject: {fileID: 1832051014}
@@ -3171,7 +3218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1832051015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3487,7 +3534,7 @@ Transform:
   - {fileID: 660414131}
   - {fileID: 668949359}
   - {fileID: 2034084254}
-  - {fileID: 859471318}
+  - {fileID: 697283973}
   - {fileID: 1479387734}
   m_Father: {fileID: 2053337702}
   m_RootOrder: 1
@@ -3504,6 +3551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bg: {fileID: 668949360}
   base_: {fileID: 2034084255}
+  enemyParent: {fileID: 697283974}
   enemyCenter: {fileID: 1479387734}
 --- !u!1 &2002444506
 GameObject:
@@ -3637,7 +3685,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 2a6a120d67baf1942a84d57c8fa1acf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2047993947

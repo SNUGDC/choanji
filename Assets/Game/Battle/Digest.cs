@@ -232,8 +232,8 @@ namespace Choanji.Battle
 			switch (result)
 			{
 				case PhaseResult.PERFORM:
-					_descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
-					break;
+					// _descript = battlerName + "은(는) " + activeName + "을(를) 사용했다!";
+					return null;
 				case PhaseResult.NO_AP:
 					_descript = battlerName + "은(는) " + activeName + "을(를) 사용하려 했지만 AP가 부족하다!";
 					break;

@@ -150,7 +150,8 @@ namespace Choanji.Battle
 	    private void Perform(Invoker _invoker)
 	    {
 			TheBattle.digest.Enq(new PhaserDigest(_invoker, PhaseResult.PERFORM));
-		    mPerform(_invoker);
+			TheBattle.digest.Enq(new ActiveFireDigest(_invoker));
+			mPerform(_invoker);
 	    }
 
 		private void Done()

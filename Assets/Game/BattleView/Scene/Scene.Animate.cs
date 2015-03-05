@@ -35,6 +35,12 @@ namespace Choanji.Battle
 						return 0;
 				}
 			}
+			else if (_digest is ActiveFireDigest)
+			{
+				var _msgDelay = AnimateDescript(_digest);
+				var _invoker = _digest.invoker;
+				return AnimateActive(_invoker.battler, _invoker.card.data.active);
+			}
 			else if (_digest is DmgDigest)
 			{
 				var _isA = TheBattle.state.IsA(_digest.invoker);
@@ -45,6 +51,8 @@ namespace Choanji.Battle
 				var d = (DmgDigest) _digest;
 				if (d.dmg.HasValue)
 				{
+					field.enemyParent.Play(FXDB.g.enemyHit);
+
 					mTimer.Add(_delay += UNIT, () =>
 					{
 						if (_isA)
@@ -67,6 +75,8 @@ namespace Choanji.Battle
 						}
 						else
 						{
+							field.enemyParent.Play(FXDB.g.enemyMiss);
+
 							poper.PopText(new RichText("회피!").AddSize(36).AddColor(Color.red));
 						}
 					}

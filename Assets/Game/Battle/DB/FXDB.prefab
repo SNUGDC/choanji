@@ -40,6 +40,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseDone: {fileID: 159416, guid: 47d5e2127b81f5949a0f366b4e1146e6, type: 2}
+  enemyHit: {fileID: 7400000, guid: 145bdcce4df08b14281a828cc7098cfb, type: 2}
+  enemyMiss: {fileID: 7400000, guid: 79c3fe72539c825409b3e35d5f69ba10, type: 2}
+  smash: {fileID: 100004, guid: fb7b0526ade434043b350a180d741cf3, type: 2}
+  sharpTongued: {fileID: 100002, guid: efac55662e02ab74cb013add9f58114c, type: 2}
+  basicVocaAttack: {fileID: 100004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 2}
+  blockTrap: {fileID: 100002, guid: 7e72968192f92a442b1b7dd34ca5b607, type: 2}
+  growling: {fileID: 100000, guid: 48602ed332bcebe43b8728beeacea243, type: 2}
+  nuclear508: {fileID: 100004, guid: e463141fb849fa84eba84b8688640df4, type: 2}
+  rockAndRoll: {fileID: 100006, guid: b395e7b68f27762409b3beae3edfbe36, type: 2}
+  guardUp: {fileID: 100004, guid: 1be4ba41efa75e94bb174025525dd7dd, type: 2}
+  fryingFanUp: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
