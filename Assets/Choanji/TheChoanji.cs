@@ -27,7 +27,7 @@ namespace Choanji
 						break;
 
 					case ContextType.BATTLE:
-						SoundManager.Play(SoundDB.g.battleDefault);
+						SoundManager.Play(SoundDB.g.battleDefault, true);
 						Battle.Scene.g.root.SetActive(false);
 						break;
 				}
