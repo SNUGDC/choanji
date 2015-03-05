@@ -41,6 +41,8 @@ namespace Choanji
 		public void Construct(PRect _rect)
 		{
 			var _rooms = mBluePrint.Overlaps(_rect);
+			if (_rooms == null) return;
+
 			foreach (var _room in _rooms)
 			{
 				if (mRooms.ContainsKey(_room))

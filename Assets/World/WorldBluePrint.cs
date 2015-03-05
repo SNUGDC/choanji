@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Gem;
 using LitJson;
@@ -8,6 +9,7 @@ namespace Choanji
 {
 	public class WorldBluePrint
 	{
+		[DebuggerDisplay("key={key},map={map},rect={rect}")]
 		public class Room
 		{
 			public enum Key {}
@@ -88,7 +90,8 @@ namespace Choanji
 		{
 			mRooms.Add(_room);
 #if UNITY_EDITOR
-			if (!mRectGroup.Overlaps(_room.rect).Empty())
+			var _overlaps = mRectGroup.Overlaps(_room.rect);
+			if (_overlaps != null && !_overlaps.Empty())
 				L.E("overlap detected.");
 #endif
 			mRectGroup.Add(_room.rect);
@@ -106,12 +109,16 @@ namespace Choanji
 
 		public Room Contains(Point _rect)
 		{
-			return mRectGroup.Contains(_rect).Select(_idx => mRooms[_idx]).FirstOrDefault();
+			var _contain = mRectGroup.Contains(_rect);
+			if (_contain == null) return null;
+			return mRooms[_contain.First()];
 		}
 
 		public List<Room> Overlaps(PRect _rect)
 		{
-			return mRectGroup.Overlaps(_rect).Select(_idx => mRooms[_idx]).ToList();
+			var _overlaps = mRectGroup.Overlaps(_rect);
+			if (_overlaps == null || _overlaps.Empty()) return null;
+			return _overlaps.Select(_idx => mRooms[_idx]).ToList();
 		}
 	}
 }
