@@ -52,18 +52,19 @@ namespace Choanji
 
 		private static TransformManipulator.Result DefaultCam(GameObject _go, float _dt)
 		{
-			if (ch && (sLastCamCoor != ch.position))
+			if (!ch
+			    || (!ch.isMoving && (sLastCamCoor == ch.position)))
 			{
-				WorldProgress.SetCamDirty();
-				sLastCamCoor = ch.position;
-
-				return new TransformManipulator.Result
-				{
-					pos = ch.transform.position
-				};
+				return new TransformManipulator.Result();
 			}
 
-			return new TransformManipulator.Result();
+			WorldProgress.SetCamDirty();
+			sLastCamCoor = ch.position;
+
+			return new TransformManipulator.Result
+			{
+				pos = ch.transform.position
+			};
 		}
 
 		private static WorldAddress? mTeleportAddress;
@@ -104,7 +105,7 @@ namespace Choanji
 				return;
 
 			var _localCoor = new LocalCoor(_hasRoomAndMap.Value.Value, _address.coor);
-			if (!ctrl.TrySetPosition(_localCoor))
+			if (!ctrl.TrySetPosition(_localCoor, true))
 				L.E("cannot set position to " + _address);
 		}
 

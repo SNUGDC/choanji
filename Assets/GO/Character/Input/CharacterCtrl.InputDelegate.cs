@@ -1,20 +1,12 @@
 ﻿using Gem;
-using UnityEngine;
 
 namespace Choanji
 {
 
 	public partial class CharacterCtrl : ICharacterInputDelegate
 	{
-		private const float MOVE_INPUT_DELAY = 0.1f;
-
-		private SawFloat mMoveTimer = new SawFloat(MOVE_INPUT_DELAY);
-
 		private void UpdateInput()
-		{
-			if (!mMoveTimer.isDefault)
-				mMoveTimer.Add(Time.deltaTime);
-		}
+		{}
 
 		public void ProcessInputYes()
 		{
@@ -24,12 +16,10 @@ namespace Choanji
 
 		public void ProcessInput(Direction _dir)
 		{
-			if (!mMoveTimer.isDefault)
+			if (!ch.CanMove(_dir))
 				return;
 
-			mMoveTimer.Add(float.Epsilon);
-
-			if (!TryMove(_dir))
+			if (!TryMove(_dir, Character.MoveType.WALK))
 				TryTurn(_dir);
 		}
 	}

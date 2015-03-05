@@ -30,8 +30,8 @@ namespace Choanji
 			}
 
 			var _ch = PrefabDB.g.ch.Instantiate();
-			_ch.position = _data.world.pos;
 			_ch.renderer_.SetSkin(_data.ch.skin);
+			_ch.SetPosition(_data.world.pos, true);
 
 			TheCharacter.ch = _ch;
 			TheWorld.UpdateRect(new PRect(_data.world.pos));

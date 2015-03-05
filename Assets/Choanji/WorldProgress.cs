@@ -2,7 +2,7 @@
 {
 	public static class WorldProgress
 	{
-		public static bool sCamDirty = true;
+		private static bool sCamDirty = true;
 		public static void SetCamDirty() { sCamDirty = true; }
 
 		public static void Update()

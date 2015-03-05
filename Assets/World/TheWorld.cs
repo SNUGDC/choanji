@@ -106,7 +106,7 @@ namespace Choanji
 				org = Coor.Floor((Vector2) _camPos - _camHSize),
 				dst = Coor.Ceiling((Vector2) _camPos + _camHSize),
 			};
-
+			
 			UpdateRect(_rect);
 
 			g.Scissor(new PRect
@@ -123,7 +123,7 @@ namespace Choanji
 
 			if (sPosition == _rect.c)
 			{
-				L.W(L.M.CALL_RETRY("update"));
+				L.D(L.M.CALL_RETRY("update"));
 				return;
 			}
 

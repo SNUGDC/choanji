@@ -1,6 +1,4 @@
-﻿using Gem;
-
-namespace Choanji
+﻿namespace Choanji
 {
 	public enum CharacterAnimKey
 	{

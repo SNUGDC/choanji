@@ -20,12 +20,12 @@ namespace Choanji
 			ch = GetComponent<Character>();
 		}
 
-		public bool TrySetPosition(LocalCoor p)
+		public bool TrySetPosition(LocalCoor p, bool _transform)
 		{
 			var _state = p.FindState();
 			if ((_state == null) || _state.occupied) 
 				return false;
-			SetPosition(p);
+			SetPosition(p, _transform);
 			return true;
 		}
 
@@ -36,13 +36,13 @@ namespace Choanji
 				doTileRetain.val(p);
 		}
 
-		private void SetPosition(LocalCoor p)
+		private void SetPosition(LocalCoor p, bool _transform)
 		{
 			BeforeSetPosition(p);
-			ch.position = (WorldCoor) p;
+			ch.SetPosition((WorldCoor)p, _transform);
 		}
 
-		public bool TryMove(Direction _dir)
+		public bool TryMove(Direction _dir, Character.MoveType _moveType)
 		{
 			if (!ch.CanMove(_dir))
 				return false;
@@ -69,7 +69,7 @@ namespace Choanji
 
 			var _map = _hasMove.Value.map;
 			BeforeSetPosition(_map.Convert(_pos));
-			ch.Move(_dir);
+			ch.Move(_dir, _moveType);
 
 			if (_move.data.door != null)
 			{

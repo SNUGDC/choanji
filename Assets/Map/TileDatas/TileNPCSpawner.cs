@@ -37,7 +37,7 @@ namespace Choanji
 				_inspectee.inspectee = new DialogInspectee { dialog = DialogHelper.MakeProvider(data.dialog) };   
 	        }
 
-			if (!_ctrl.TrySetPosition(_pos))
+			if (!_ctrl.TrySetPosition(_pos, true))
 				D.Assert(false);
 
 			Destroy(gameObject);
