@@ -47,12 +47,6 @@ namespace Choanji
 				return null;
 			}
 
-			if (_tile.inspectee != null)
-			{
-				L.W("tile already has inspectee.");
-				return null;
-			}
-
 			return _tile;
 		}
 
@@ -61,6 +55,8 @@ namespace Choanji
 			base.DoEnable();
 			var _tile = GetTile();
 			if (_tile == null) return;
+			if (_tile.inspectee != null)
+				L.W("tile already has inspectee.");
 			_tile.inspectee = mInspectee;
 		}
 

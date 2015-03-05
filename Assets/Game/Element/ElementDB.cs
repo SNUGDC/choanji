@@ -23,6 +23,7 @@ namespace Choanji
 			Load();
 		}
 
+		public static bool awake { get { return true; } }
 		public static bool isLoaded { get { return sDB.Count > 0; }}
 
 		private static ElementID AllocID(string _key)
@@ -74,7 +75,7 @@ namespace Choanji
 			return _data;
 		}
 
-		public static void Load()
+		private static void Load()
 		{
 			if (isLoaded)
 			{

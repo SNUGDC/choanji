@@ -25,7 +25,7 @@ namespace Choanji
 
 			sIsInited = true;
 
-			ElementDB.Load();
+			var _eleDBAwake = ElementDB.awake;
 			MoveDB.Load();
 			CardDB.Load();
 			Battle.BattlerDB.Load();
